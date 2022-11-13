@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://78imro5a2hwx"]
+[gd_scene load_steps=9 format=3 uid="uid://b58dvk04caev"]
 
 [ext_resource type="PackedScene" uid="uid://bo1e1gvqkrmql" path="res://src/core/tiles/tile_object.tscn" id="1_svfmf"]
-[ext_resource type="Script" path="res://src/core/actors/actor.gd" id="2_bugic"]
+[ext_resource type="Script" path="res://src/core/actor/actor.gd" id="2_bugic"]
 [ext_resource type="Texture2D" uid="uid://bkmm0fi6e46dy" path="res://assets/graphics/actors/hero.png" id="3_tt4ao"]
 
 [sub_resource type="Animation" id="Animation_fjdfb"]

@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://buf2dp7yiitsx"]
+[gd_scene load_steps=5 format=3 uid="uid://chwcwsug6nlf1"]
 
-[ext_resource type="Script" path="res://src/core/maps/map.gd" id="1_c4yc0"]
+[ext_resource type="Script" path="res://src/core/map/map.gd" id="1_c4yc0"]
 [ext_resource type="Texture2D" uid="uid://c3orj5bef7dq7" path="res://assets/graphics/terrain/terrain.png" id="1_hs8yo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_84h4s"]
@@ -41,3 +41,7 @@ script = ExtResource("1_c4yc0")
 tile_set = SubResource("TileSet_48e3j")
 format = 2
 metadata/_edit_lock_ = true
+
+[node name="Actors" type="TileMap" parent="."]
+format = 2
+layer_0/y_sort_enabled = true

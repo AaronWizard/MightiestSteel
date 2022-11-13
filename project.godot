@@ -12,7 +12,7 @@ _global_script_classes=[{
 "base": "TileObject",
 "class": &"Actor",
 "language": &"GDScript",
-"path": "res://src/core/actors/actor.gd"
+"path": "res://src/core/actor/actor.gd"
 }, {
 "base": "RefCounted",
 "class": &"Constants",
@@ -22,12 +22,12 @@ _global_script_classes=[{
 "base": "Node2D",
 "class": &"Map",
 "language": &"GDScript",
-"path": "res://src/core/maps/map.gd"
+"path": "res://src/core/map/map.gd"
 }, {
 "base": "RefCounted",
 "class": &"TerrainData",
 "language": &"GDScript",
-"path": "res://src/core/maps/terrain_data.gd"
+"path": "res://src/core/map/terrain_data.gd"
 }, {
 "base": "Node2D",
 "class": &"TileObject",
