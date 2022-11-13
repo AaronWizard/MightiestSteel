@@ -37,20 +37,13 @@ extends Node2D
 ## The rectangle in cells that the tile object covers.
 var cell_rect: Rect2i:
 	get:
-		var rect_pos := origin_cell + (Vector2i.UP * (cell_size - 1))
-		var rect_size := Vector2i(cell_size, cell_size)
-		return Rect2i(rect_pos, rect_size)
+		return get_cell_rect_at_cell(origin_cell)
 
 
 ## The cells covered by the tile object.
 var covered_cells: Array[Vector2i]:
 	get:
-		var result: Array[Vector2i] = []
-		for x in range(cell_size):
-			for y in range(cell_size):
-				var cell := Vector2i(x, y)
-				result.append(cell)
-		return result
+		return get_covered_cells_at_cell(origin_cell)
 
 
 ## The cell that is at the center of the tile object. May be between grid cells.
@@ -76,6 +69,24 @@ func _draw():
 	var rect_size := Vector2(cell_size, cell_size) * Constants.TILE_SIZE
 	var rect := Rect2(rect_pos, rect_size)
 	draw_rect(rect, Color.MAGENTA, false, 1)
+
+
+## Rect2i that object would cover at given origin cell
+func get_cell_rect_at_cell(cell: Vector2i) -> Rect2i:
+	var rect_pos := cell + (Vector2i.UP * (cell_size - 1))
+	var rect_size := Vector2i(cell_size, cell_size)
+	return Rect2i(rect_pos, rect_size)
+
+
+## Cells that object would cover at given origin cell
+func get_covered_cells_at_cell(cell: Vector2i) -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
+	var rect := get_cell_rect_at_cell(cell)
+	for x in range(rect.position.x, rect.end.x):
+		for y in range(rect.position.y, rect.end.y):
+			var covered_cell := Vector2i(x, y)
+			result.append(covered_cell)
+	return result
 
 
 ## Checks if a cell is covered by the tile object.
