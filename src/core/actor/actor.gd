@@ -5,6 +5,13 @@ extends TileObject
 
 signal attack_hit
 
+## Name of actor instance.
+@export var actor_name := "Actor"
+
+## Faction ID. All factions are hostile to each other.
+@export var faction := 0
+
+@export_group("Animation")
 
 @export var cell_offset_direction := Vector2.ZERO:
 	set(value):
