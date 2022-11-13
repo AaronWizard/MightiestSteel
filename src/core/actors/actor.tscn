@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://78imro5a2hwx"]
+
+[ext_resource type="PackedScene" uid="uid://bo1e1gvqkrmql" path="res://src/core/tiles/tile_object.tscn" id="1_svfmf"]
+[ext_resource type="Script" path="res://src/core/actors/actor.gd" id="2_bugic"]
+[ext_resource type="Texture2D" uid="uid://bkmm0fi6e46dy" path="res://assets/graphics/actors/hero.png" id="3_tt4ao"]
+
+[node name="Actor" instance=ExtResource("1_svfmf")]
+script = ExtResource("2_bugic")
+cell_offset_direction = Vector2(0, 0)
+cell_offset_distance = 0.0
+
+[node name="Offset" type="Node2D" parent="Center" index="0"]
+
+[node name="Sprite" type="Sprite2D" parent="Center/Offset" index="0"]
+texture = ExtResource("3_tt4ao")

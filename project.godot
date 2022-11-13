@@ -9,6 +9,11 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "TileObject",
+"class": &"Actor",
+"language": &"GDScript",
+"path": "res://src/core/actors/actor.gd"
+}, {
 "base": "RefCounted",
 "class": &"Constants",
 "language": &"GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[{
 "path": "res://src/core/tiles/tile_object.gd"
 }]
 _global_script_class_icons={
+"Actor": "",
 "Constants": "",
 "Map": "",
 "TileObject": ""
@@ -40,3 +46,4 @@ config/icon="res://icon.svg"
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/canvas_textures/default_texture_filter=0
