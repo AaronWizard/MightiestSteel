@@ -1,3 +1,7 @@
-[gd_scene format=3 uid="uid://cemebw0446ufi"]
+[gd_scene load_steps=2 format=3 uid="uid://cemebw0446ufi"]
+
+[ext_resource type="PackedScene" uid="uid://yrf8xkuxryds" path="res://src/data/maps/map_0.tscn" id="1_lqsih"]
 
 [node name="Main" type="Node"]
+
+[node name="Map0" parent="." instance=ExtResource("1_lqsih")]
