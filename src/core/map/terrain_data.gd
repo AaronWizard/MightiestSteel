@@ -19,8 +19,8 @@ var slows_walk: bool:
 
 
 ## True if actor gets defence bonus by standing on cell.
-## Large actors need to be covering over half their area of cover cells to get
-## defence bonus.
+## An actor has a defence bonus if over half of the cells it covers are cover
+## tiles.
 var is_cover: bool:
 	get:
 		return _tile_date.get_custom_data("is_cover")
