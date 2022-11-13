@@ -9,13 +9,25 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "RefCounted",
+"class": &"Constants",
+"language": &"GDScript",
+"path": "res://src/core/constants.gd"
+}, {
 "base": "Node2D",
 "class": &"Map",
 "language": &"GDScript",
 "path": "res://src/core/maps/map.gd"
+}, {
+"base": "Node2D",
+"class": &"TileObject",
+"language": &"GDScript",
+"path": "res://src/core/tiles/tile_object.gd"
 }]
 _global_script_class_icons={
-"Map": ""
+"Constants": "",
+"Map": "",
+"TileObject": ""
 }
 
 [application]

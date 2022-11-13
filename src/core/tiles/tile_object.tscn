@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo1e1gvqkrmql"]
+
+[ext_resource type="Script" path="res://src/core/tiles/tile_object.gd" id="1_fau22"]
+
+[node name="TileObject" type="Node2D"]
+position = Vector2(0, 24)
+script = ExtResource("1_fau22")
+
+[node name="Center" type="Marker2D" parent="."]
+position = Vector2(12, -12)
+gizmo_extents = 5.0
