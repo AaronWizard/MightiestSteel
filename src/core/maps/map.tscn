@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://buf2dp7yiitsx"]
+
+[ext_resource type="Texture2D" uid="uid://c3orj5bef7dq7" path="res://assets/graphics/terrain/terrain.png" id="1_hs8yo"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_84h4s"]
+texture = ExtResource("1_hs8yo")
+texture_region_size = Vector2i(24, 24)
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/custom_data_1 = true
+1:0/0/custom_data_2 = true
+1:0/0/custom_data_5 = true
+2:0/0 = 0
+2:0/0/custom_data_0 = true
+2:0/0/custom_data_3 = true
+2:0/0/custom_data_4 = true
+3:0/0 = 0
+3:0/0/custom_data_0 = true
+
+[sub_resource type="TileSet" id="TileSet_48e3j"]
+tile_size = Vector2i(24, 24)
+custom_data_layer_0/name = "blocks_walk"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "slows_walk"
+custom_data_layer_1/type = 1
+custom_data_layer_2/name = "is_cover"
+custom_data_layer_2/type = 1
+custom_data_layer_3/name = "blocks_attack"
+custom_data_layer_3/type = 1
+custom_data_layer_4/name = "blocks_flight"
+custom_data_layer_4/type = 1
+custom_data_layer_5/name = "slows_flight"
+custom_data_layer_5/type = 1
+sources/0 = SubResource("TileSetAtlasSource_84h4s")
+
+[node name="Map" type="Node2D"]
+
+[node name="Ground" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_48e3j")
+format = 2
