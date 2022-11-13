@@ -18,8 +18,34 @@ signal attack_hit
 		_set_offset()
 
 
+var remote_transform: RemoteTransform2D:
+	get:
+		return $Center/Offset/RemoteTransform2D
+
+
+var facing: Vector2:
+	set(value):
+		if value.x < 0:
+			_sprite.flip_h = true
+		elif value.x > 0:
+			_sprite.flip_h = false
+		# else change nothing
+
+
+@onready var _sprite: Sprite2D = $Center/Offset/Sprite
 @onready var _anim: AnimationPlayer = $AnimationPlayer
 @onready var _offset: Node2D = $Center/Offset
+
+
+func move_step(target_cell: Vector2i) -> void:
+	assert((target_cell - origin_cell).length_squared() == 1)
+
+	facing = target_cell
+	cell_offset_direction = target_cell - origin_cell
+	origin_cell = target_cell
+
+	_anim.play("move_step")
+	await _anim.animation_finished
 
 
 func _set_offset() -> void:
