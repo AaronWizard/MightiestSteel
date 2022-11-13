@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://buf2dp7yiitsx"]
+[gd_scene load_steps=5 format=3 uid="uid://buf2dp7yiitsx"]
 
+[ext_resource type="Script" path="res://src/core/maps/map.gd" id="1_c4yc0"]
 [ext_resource type="Texture2D" uid="uid://c3orj5bef7dq7" path="res://assets/graphics/terrain/terrain.png" id="1_hs8yo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_84h4s"]
@@ -34,6 +35,7 @@ custom_data_layer_5/type = 1
 sources/0 = SubResource("TileSetAtlasSource_84h4s")
 
 [node name="Map" type="Node2D"]
+script = ExtResource("1_c4yc0")
 
 [node name="Ground" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_48e3j")

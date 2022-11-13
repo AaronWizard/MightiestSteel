@@ -8,6 +8,16 @@
 
 config_version=5
 
+_global_script_classes=[{
+"base": "Node2D",
+"class": &"Map",
+"language": &"GDScript",
+"path": "res://src/core/maps/map.gd"
+}]
+_global_script_class_icons={
+"Map": ""
+}
+
 [application]
 
 config/name="Mightiest Steel"
