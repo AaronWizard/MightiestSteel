@@ -40,3 +40,4 @@ script = ExtResource("1_c4yc0")
 [node name="Ground" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_48e3j")
 format = 2
+metadata/_edit_lock_ = true
