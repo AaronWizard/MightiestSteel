@@ -1,5 +1,8 @@
 class_name TerrainData
 
+## Terrain properties at a map cell
+
+
 var _tile_date: TileData
 
 

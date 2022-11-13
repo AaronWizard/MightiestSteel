@@ -18,6 +18,15 @@ signal attack_hit
 		_set_offset()
 
 
+var map: Map:
+	set(value):
+		if map and (self in map.actors):
+			push_error("Actor not removed from old map using Map.remove_actor")
+		if value and not (self in value.actors):
+			push_error("Actor not added to new map using Map.add_actor")
+		map = value
+
+
 var remote_transform: RemoteTransform2D:
 	get:
 		return $Center/Offset/RemoteTransform2D
@@ -35,6 +44,10 @@ var facing: Vector2:
 @onready var _sprite: Sprite2D = $Center/Offset/Sprite
 @onready var _anim: AnimationPlayer = $AnimationPlayer
 @onready var _offset: Node2D = $Center/Offset
+
+
+func _exit_tree() -> void:
+	map = null
 
 
 func move_step(target_cell: Vector2i) -> void:
