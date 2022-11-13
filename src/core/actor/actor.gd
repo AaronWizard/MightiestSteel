@@ -5,6 +5,13 @@ extends TileObject
 
 signal attack_hit
 
+@export var sprite_texture: Texture2D:
+	get:
+		return _sprite.texture
+	set(value):
+		if _sprite:
+			_sprite.texture = value
+
 ## Name of actor instance.
 @export var actor_name := "Actor"
 

@@ -118,6 +118,7 @@ _data = {
 
 [node name="Actor" instance=ExtResource("1_svfmf")]
 script = ExtResource("2_bugic")
+sprite_texture = ExtResource("3_tt4ao")
 actor_name = "Actor"
 faction = 0
 cell_offset_direction = Vector2(0, 0)
