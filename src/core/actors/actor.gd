@@ -3,6 +3,9 @@ class_name Actor
 extends TileObject
 
 
+signal attack_hit
+
+
 @export var cell_offset_direction := Vector2.ZERO:
 	set(value):
 		cell_offset_direction = value
@@ -15,6 +18,7 @@ extends TileObject
 		_set_offset()
 
 
+@onready var _anim: AnimationPlayer = $AnimationPlayer
 @onready var _offset: Node2D = $Center/Offset
 
 
