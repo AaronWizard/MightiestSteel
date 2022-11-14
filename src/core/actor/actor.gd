@@ -12,10 +12,11 @@ signal attack_hit
 		if _sprite:
 			_sprite.texture = value
 
-## Name of actor instance.
+## Name of actor instance, independant of actor's node name.
 @export var actor_name := "Actor"
 
 ## Faction ID. All factions are hostile to each other.
+## A faction ID of 0 is controlled by the player.
 @export var faction := 0
 
 @export_group("Animation")
@@ -32,6 +33,9 @@ signal attack_hit
 		_set_offset()
 
 
+## The map the actor is currently on.
+## Not meant to be set directly. Use Map.add_actor and Map.remove_actor to
+## change an actor's map.
 var map: Map:
 	set(value):
 		if map and (self in map.actors):
@@ -41,11 +45,19 @@ var map: Map:
 		map = value
 
 
+## True if the actor is controlled by the player.
+## An actor is player-controlled if its faction is 0.
+var is_player_controlled: bool:
+	get:
+		return faction == 0
+
+
 var remote_transform: RemoteTransform2D:
 	get:
 		return $Center/Offset/RemoteTransform2D
 
 
+## Flip the sprite in the direction of the given vector
 var facing: Vector2:
 	set(value):
 		if value.x < 0:
