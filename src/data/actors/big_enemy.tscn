@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcwt0h6w0y4i"]
+
+[ext_resource type="PackedScene" uid="uid://b58dvk04caev" path="res://src/core/actor/actor.tscn" id="1_2gkrj"]
+[ext_resource type="Texture2D" uid="uid://t0neqgbekhi0" path="res://assets/graphics/actors/enemy_big.png" id="2_k5abh"]
+
+[node name="BigEnemy" instance=ExtResource("1_2gkrj")]
+sprite_texture = ExtResource("2_k5abh")
+faction = 1
+cell_size = 2
+
+[node name="Center" parent="." index="0"]
+position = Vector2(24, -24)
+
+[node name="Sprite" parent="Center/Offset" index="0"]
+texture = ExtResource("2_k5abh")
