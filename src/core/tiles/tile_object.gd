@@ -65,10 +65,11 @@ func _ready():
 
 
 func _draw():
-	var rect_pos := Vector2(0, -cell_size * Constants.TILE_SIZE)
-	var rect_size := Vector2(cell_size, cell_size) * Constants.TILE_SIZE
-	var rect := Rect2(rect_pos, rect_size)
-	draw_rect(rect, Color.MAGENTA, false, 1)
+	if Engine.is_editor_hint():
+		var rect_pos := Vector2(0, -cell_size * Constants.TILE_SIZE)
+		var rect_size := Vector2(cell_size, cell_size) * Constants.TILE_SIZE
+		var rect := Rect2(rect_pos, rect_size)
+		draw_rect(rect, Color.MAGENTA, false, 1)
 
 
 ## Rect2i that object would cover at given origin cell
