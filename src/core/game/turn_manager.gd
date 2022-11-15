@@ -37,7 +37,7 @@ class _Turn:
 
 
 var _turns: Array[_Turn] = []
-var _turn_index := 0
+var _turn_index := -1
 
 
 func _ready() -> void:
@@ -46,16 +46,13 @@ func _ready() -> void:
 
 func roll_initiative(actors: Array[Actor]) -> void:
 	_turns.clear()
-	_turn_index = 0
+	_turn_index = -1
 
 	for a in actors:
 		var turn := _Turn.new(a)
 		_turns.append(turn)
 
 	_turns.sort_custom(Callable(_Turn, "compare"))
-
-	for t in _turns:
-		print("'%s': %d" % [t.actor.name, t.rank])
 
 
 func next_turn() -> void:
