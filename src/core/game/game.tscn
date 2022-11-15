@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b52q8g0lp8s74"]
+[gd_scene load_steps=5 format=3 uid="uid://b52q8g0lp8s74"]
 
 [ext_resource type="Script" path="res://src/core/game/game.gd" id="1_woo5f"]
 [ext_resource type="Script" path="res://src/core/game/turn_manager.gd" id="2_hay57"]
+[ext_resource type="Script" path="res://src/core/game/state/state_machine.gd" id="3_we0as"]
+[ext_resource type="Script" path="res://src/core/game/state/state.gd" id="4_va35s"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_woo5f")
@@ -10,3 +12,10 @@ script = ExtResource("1_woo5f")
 
 [node name="TurnManager" type="Node" parent="."]
 script = ExtResource("2_hay57")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_we0as")
+initial_state = NodePath("State")
+
+[node name="State" type="Node" parent="StateMachine"]
+script = ExtResource("4_va35s")
