@@ -3,6 +3,9 @@ extends GameState
 
 ## Advances to either the game's win/lose condition or to the next actor's turn
 
+@export var player_state: String
+@export var ai_state: String
+
 
 func _ready() -> void:
 	@warning_ignore(return_value_discarded)
@@ -15,6 +18,6 @@ func start(_data: Dictionary) -> void:
 
 func _actor_started_turn(actor: Actor) -> void:
 	if actor.is_player_controlled:
-		pass
+		request_state_change.emit(player_state)
 	else:
-		pass
+		request_state_change.emit(ai_state)
