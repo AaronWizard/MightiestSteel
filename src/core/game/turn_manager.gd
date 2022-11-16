@@ -53,9 +53,10 @@ func roll_initiative(actors: Array[Actor]) -> void:
 
 
 func next_turn() -> void:
+	var is_first_round := _turn_index == -1
 	_turn_index = (_turn_index + 1) % _turns.size()
 	if _turn_index == 0:
-		GameEvents.emit_round_started()
+		GameEvents.emit_round_started(is_first_round)
 
 	var turn := _turns[_turn_index]
 	GameEvents.emit_actor_started_turn(turn.actor)

@@ -24,6 +24,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/game/state/states/actor_control_state.gd"
 }, {
+"base": "Resource",
+"class": &"ActorDefinition",
+"language": &"GDScript",
+"path": "res://src/core/actor/actor_definition.gd"
+}, {
 "base": "RefCounted",
 "class": &"Constants",
 "language": &"GDScript",
@@ -64,6 +69,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/game/state/state_machine.gd"
 }, {
+"base": "Node",
+"class": &"Stats",
+"language": &"GDScript",
+"path": "res://src/core/actor/stats.gd"
+}, {
 "base": "RefCounted",
 "class": &"TerrainData",
 "language": &"GDScript",
@@ -83,6 +93,7 @@ _global_script_class_icons={
 "AIState": "",
 "Actor": "",
 "ActorControlState": "",
+"ActorDefinition": "",
 "Constants": "",
 "Game": "",
 "GameState": "",
@@ -91,6 +102,7 @@ _global_script_class_icons={
 "PlayerState": "",
 "State": "",
 "StateMachine": "",
+"Stats": "",
 "TerrainData": "",
 "TileObject": "",
 "TurnManager": ""

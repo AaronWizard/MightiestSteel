@@ -19,6 +19,8 @@ signal attack_hit
 ## A faction ID of 0 is controlled by the player.
 @export var faction := 0
 
+@export var definition: ActorDefinition
+
 @export_group("Animation")
 
 @export var cell_offset_direction := Vector2.ZERO:
@@ -31,6 +33,12 @@ signal attack_hit
 	set(value):
 		cell_offset_distance = value
 		_set_offset()
+
+
+## The actor's stats
+var stats: Stats:
+	get:
+		return $Stats
 
 
 ## The map the actor is currently on.
@@ -70,6 +78,11 @@ var facing: Vector2:
 @onready var _sprite: Sprite2D = $Center/Offset/Sprite
 @onready var _anim: AnimationPlayer = $AnimationPlayer
 @onready var _offset: Node2D = $Center/Offset
+
+
+func _ready() -> void:
+	if not Engine.is_editor_hint():
+		stats.init_from_definition(definition)
 
 
 func _exit_tree() -> void:
