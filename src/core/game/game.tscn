@@ -30,6 +30,8 @@ ai_state = "AIState"
 
 [node name="PlayerState" type="Node" parent="StateMachine"]
 script = ExtResource("6_i41vg")
+next_turn_state_name = "NextTurnState"
 
 [node name="AIState" type="Node" parent="StateMachine"]
 script = ExtResource("7_f54sm")
+next_turn_state_name = "NextTurnState"

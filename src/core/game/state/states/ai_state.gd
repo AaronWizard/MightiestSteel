@@ -1,5 +1,5 @@
 class_name AIState
-extends GameState
+extends ActorControlState
 
 
 func start(_data: Dictionary) -> void:
