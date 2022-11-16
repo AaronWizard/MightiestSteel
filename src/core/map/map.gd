@@ -3,6 +3,9 @@ extends Node2D
 
 ## A map with terrain and actors.
 
+const _MOVE_COST_CLEAR := 1
+const _MOVE_COST_ROUGH := 2
+
 
 ## Actors on the map
 var actors: Array[Actor]:
@@ -29,6 +32,18 @@ func get_terrain_data(cell: Vector2i) -> TerrainData:
 		var base_data := _ground.get_cell_tile_data(0, cell)
 		if base_data:
 			result = TerrainData.new(base_data)
+			break
+
+	return result
+
+
+func get_cell_move_cost(cell: Vector2i, actor: Actor) -> int:
+	var result := _MOVE_COST_CLEAR
+
+	for covered_cell in actor.get_covered_cells_at_cell(cell):
+		var terrain_data := get_terrain_data(covered_cell)
+		if terrain_data and terrain_data.slows_walk:
+			result = _MOVE_COST_ROUGH
 			break
 
 	return result
