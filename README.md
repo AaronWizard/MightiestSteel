@@ -2,6 +2,10 @@
 
 2022, AaronWizard
 
+Strategy RPG in development.
+
+Based on [Godot 3.5 project](https://github.com/AaronWizard/LegendsOfMajesticSteel).
+
 ## Credits
 
 - Built using Godot 4.0: <https://godotengine.org/>
