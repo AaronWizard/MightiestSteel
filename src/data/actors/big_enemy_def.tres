@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b8limbh5hf70k"]
+
+[ext_resource type="Script" path="res://src/core/actor/actor_definition.gd" id="1_aqqfc"]
+
+[resource]
+script = ExtResource("1_aqqfc")
+stamina = 8.0
+attack = 2.0
+move = 4
+speed = 0
+actions = 2

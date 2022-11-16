@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://43p0qivcb5nv"]
+[gd_scene load_steps=3 format=3 uid="uid://43p0qivcb5nv"]
 
 [ext_resource type="PackedScene" uid="uid://b58dvk04caev" path="res://src/core/actor/actor.tscn" id="1_718qm"]
+[ext_resource type="Resource" uid="uid://ckyo6v0tt0m1h" path="res://src/data/actors/hero_def.tres" id="2_1gvt6"]
 
 [node name="Hero" instance=ExtResource("1_718qm")]
 actor_name = "Hero"
+definition = ExtResource("2_1gvt6")

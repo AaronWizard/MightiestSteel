@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cldxoe0i5d6ge"]
+[gd_scene load_steps=4 format=3 uid="uid://cldxoe0i5d6ge"]
 
 [ext_resource type="PackedScene" uid="uid://b58dvk04caev" path="res://src/core/actor/actor.tscn" id="1_mptds"]
 [ext_resource type="Texture2D" uid="uid://ca3ewe8yymh6t" path="res://assets/graphics/actors/enemy.png" id="2_vixk6"]
+[ext_resource type="Resource" uid="uid://bcs52qeexn5wm" path="res://src/data/actors/enemy_def.tres" id="3_iv4r4"]
 
 [node name="Enemy" instance=ExtResource("1_mptds")]
 sprite_texture = ExtResource("2_vixk6")
 faction = 1
+definition = ExtResource("3_iv4r4")
 
 [node name="Sprite" parent="Center/Offset" index="0"]
 texture = ExtResource("2_vixk6")
