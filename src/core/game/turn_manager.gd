@@ -1,9 +1,6 @@
 class_name TurnManager
 extends Node
 
-@export var game_events: GameEvents = preload(
-		"res://src/core/game/game_events.tres")
-
 
 class _Turn:
 	const SPEED_MOD_MIN := 1
@@ -58,7 +55,7 @@ func roll_initiative(actors: Array[Actor]) -> void:
 func next_turn() -> void:
 	_turn_index = (_turn_index + 1) % _turns.size()
 	if _turn_index == 0:
-		game_events.emit_round_started()
+		GameEvents.emit_round_started()
 
 	var turn := _turns[_turn_index]
-	game_events.emit_actor_started_turn(turn.actor)
+	GameEvents.emit_actor_started_turn(turn.actor)

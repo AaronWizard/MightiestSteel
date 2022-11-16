@@ -24,15 +24,20 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/game/game.gd"
 }, {
-"base": "Resource",
-"class": &"GameEvents",
+"base": "State",
+"class": &"GameState",
 "language": &"GDScript",
-"path": "res://src/core/game/game_events.gd"
+"path": "res://src/core/game/state/states/game_state.gd"
 }, {
 "base": "Node2D",
 "class": &"Map",
 "language": &"GDScript",
 "path": "res://src/core/map/map.gd"
+}, {
+"base": "GameState",
+"class": &"NextTurnState",
+"language": &"GDScript",
+"path": "res://src/core/game/state/states/next_turn_state.gd"
 }, {
 "base": "Node",
 "class": &"State",
@@ -63,8 +68,9 @@ _global_script_class_icons={
 "Actor": "",
 "Constants": "",
 "Game": "",
-"GameEvents": "",
+"GameState": "",
 "Map": "",
+"NextTurnState": "",
 "State": "",
 "StateMachine": "",
 "TerrainData": "",
@@ -78,6 +84,10 @@ config/name="Mightiest Steel"
 run/main_scene="res://src/main.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameEvents="*res://src/core/game/game_events.gd"
 
 [rendering]
 

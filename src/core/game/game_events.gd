@@ -1,5 +1,4 @@
-class_name GameEvents
-extends Resource
+extends Node
 
 signal round_started
 signal actor_started_turn(actor: Actor)
