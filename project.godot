@@ -34,6 +34,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/constants.gd"
 }, {
+"base": "RefCounted",
+"class": &"Directions",
+"language": &"GDScript",
+"path": "res://src/core/map/directions.gd"
+}, {
 "base": "Node",
 "class": &"Game",
 "language": &"GDScript",
@@ -48,6 +53,11 @@ _global_script_classes=[{
 "class": &"Map",
 "language": &"GDScript",
 "path": "res://src/core/map/map.gd"
+}, {
+"base": "RefCounted",
+"class": &"MoveRangeFinder",
+"language": &"GDScript",
+"path": "res://src/core/control/move_range_finder.gd"
 }, {
 "base": "GameState",
 "class": &"NextTurnState",
@@ -95,9 +105,11 @@ _global_script_class_icons={
 "ActorControlState": "",
 "ActorDefinition": "",
 "Constants": "",
+"Directions": "",
 "Game": "",
 "GameState": "",
 "Map": "",
+"MoveRangeFinder": "",
 "NextTurnState": "",
 "PlayerState": "",
 "State": "",
