@@ -17,6 +17,11 @@ var current_actor: Actor:
 		return _current_actor
 
 
+var current_walk_range: WalkRange:
+	get:
+		return get_walk_range(_current_actor)
+
+
 ## The turn manager
 var turn_manager: TurnManager:
 	get:
@@ -24,10 +29,12 @@ var turn_manager: TurnManager:
 
 
 var _current_map: Map = null
-@onready var _map_container := $MapContainer
-
 var _current_actor: Actor = null
 
+# Keys are actors, values are WalkRanges
+var _walk_ranges := {}
+
+@onready var _map_container := $MapContainer
 @onready var _turn_manager: TurnManager = $TurnManager
 
 @onready var _state_machine: StateMachine = $StateMachine
@@ -41,7 +48,7 @@ func _ready() -> void:
 
 
 func load_map(new_map_scene: PackedScene) -> void:
-	_current_actor = null
+	_clear_turn_data()
 
 	if _current_map != null:
 		_unload_current_map()
@@ -53,6 +60,13 @@ func load_map(new_map_scene: PackedScene) -> void:
 	_start_battle.call_deferred()
 
 
+func get_walk_range(actor: Actor) -> WalkRange:
+	if not _walk_ranges.has(actor):
+		_walk_ranges[actor] = WalkRangeFactory.create_walk_range(
+				actor, _current_map)
+	return _walk_ranges[actor]
+
+
 func _unload_current_map() -> void:
 	_map_container.remove_child(_current_map)
 	_current_map.queue_free()
@@ -61,9 +75,16 @@ func _unload_current_map() -> void:
 
 
 func _start_battle() -> void:
-	_turn_manager.roll_initiative(current_map.actors)
+	_turn_manager.roll_initiative(_current_map.actors)
 	_state_machine.change_state(_next_turn_state_name)
 
 
 func _actor_started_turn(actor: Actor) -> void:
+	_clear_turn_data()
 	_current_actor = actor
+	print(current_walk_range.move_range)
+
+
+func _clear_turn_data() -> void:
+	_current_actor = null
+	_walk_ranges.clear()

@@ -98,6 +98,16 @@ _global_script_classes=[{
 "class": &"TurnManager",
 "language": &"GDScript",
 "path": "res://src/core/game/turn_manager.gd"
+}, {
+"base": "RefCounted",
+"class": &"WalkRange",
+"language": &"GDScript",
+"path": "res://src/core/control/walk_range.gd"
+}, {
+"base": "RefCounted",
+"class": &"WalkRangeFactory",
+"language": &"GDScript",
+"path": "res://src/core/control/walk_range_factory.gd"
 }]
 _global_script_class_icons={
 "AIState": "",
@@ -117,7 +127,9 @@ _global_script_class_icons={
 "Stats": "",
 "TerrainData": "",
 "TileObject": "",
-"TurnManager": ""
+"TurnManager": "",
+"WalkRange": "",
+"WalkRangeFactory": ""
 }
 
 [application]
