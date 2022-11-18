@@ -34,7 +34,7 @@ custom_data_layer_5/name = "slows_flight"
 custom_data_layer_5/type = 1
 sources/0 = SubResource("TileSetAtlasSource_84h4s")
 
-[node name="Map" type="Node2D"]
+[node name="Map" type="Node"]
 script = ExtResource("1_c4yc0")
 metadata/_edit_lock_ = true
 

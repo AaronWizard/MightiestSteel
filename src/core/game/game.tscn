@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b52q8g0lp8s74"]
+[gd_scene load_steps=9 format=3 uid="uid://b52q8g0lp8s74"]
 
 [ext_resource type="Script" path="res://src/core/game/game.gd" id="1_woo5f"]
 [ext_resource type="Script" path="res://src/core/game/turn_manager.gd" id="2_hay57"]
+[ext_resource type="PackedScene" uid="uid://d3e0306g77taj" path="res://src/core/ui/map_highlights.tscn" id="2_w0hhy"]
 [ext_resource type="Script" path="res://src/core/game/state/state_machine.gd" id="3_we0as"]
 [ext_resource type="Script" path="res://src/core/game/state/state.gd" id="4_va35s"]
 [ext_resource type="Script" path="res://src/core/game/state/states/next_turn_state.gd" id="5_t06j1"]
@@ -12,6 +13,8 @@
 script = ExtResource("1_woo5f")
 
 [node name="MapContainer" type="Node" parent="."]
+
+[node name="MapHighlights" parent="." instance=ExtResource("2_w0hhy")]
 
 [node name="TurnManager" type="Node" parent="."]
 script = ExtResource("2_hay57")

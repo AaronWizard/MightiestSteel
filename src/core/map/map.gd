@@ -1,5 +1,5 @@
 class_name Map
-extends Node2D
+extends Node
 
 ## A map with terrain and actors.
 
@@ -21,7 +21,7 @@ var actors: Array[Actor]:
 
 
 func _ready() -> void:
-	_init_actors.call_deferred()
+	_init_actors()
 
 
 ## Terrain data at the given cell, or null if no data present

@@ -22,6 +22,11 @@ var current_walk_range: WalkRange:
 		return get_walk_range(_current_actor)
 
 
+var map_highlights: MapHighlights:
+	get:
+		return _map_highlights
+
+
 ## The turn manager
 var turn_manager: TurnManager:
 	get:
@@ -35,6 +40,7 @@ var _current_actor: Actor = null
 var _walk_ranges := {}
 
 @onready var _map_container := $MapContainer
+@onready var _map_highlights := $MapHighlights
 @onready var _turn_manager: TurnManager = $TurnManager
 
 @onready var _state_machine: StateMachine = $StateMachine
@@ -57,7 +63,7 @@ func load_map(new_map_scene: PackedScene) -> void:
 	assert(_current_map != null)
 	_map_container.add_child(_current_map)
 
-	_start_battle.call_deferred()
+	_start_battle()
 
 
 func get_walk_range(actor: Actor) -> WalkRange:
@@ -82,7 +88,8 @@ func _start_battle() -> void:
 func _actor_started_turn(actor: Actor) -> void:
 	_clear_turn_data()
 	_current_actor = actor
-	print(current_walk_range.move_range)
+
+	map_highlights.set_move_range(current_walk_range.visible_move_range)
 
 
 func _clear_turn_data() -> void:
