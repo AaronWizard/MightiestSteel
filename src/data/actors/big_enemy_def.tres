@@ -6,6 +6,6 @@
 script = ExtResource("1_aqqfc")
 stamina = 8.0
 attack = 2.0
-move = 4
+move = 3.0
 speed = 0
 actions = 2
