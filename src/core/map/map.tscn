@@ -36,12 +36,13 @@ sources/0 = SubResource("TileSetAtlasSource_84h4s")
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_c4yc0")
+metadata/_edit_lock_ = true
 
 [node name="Ground" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_48e3j")
 format = 2
 metadata/_edit_lock_ = true
 
-[node name="Actors" type="TileMap" parent="."]
-format = 2
-layer_0/y_sort_enabled = true
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
