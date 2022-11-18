@@ -7,6 +7,11 @@ const _MOVE_COST_CLEAR := 1
 const _MOVE_COST_ROUGH := 2
 
 
+var mouse_cell: Vector2i:
+	get:
+		return _ground.local_to_map(_ground.get_global_mouse_position())
+
+
 ## Actors on the map
 var actors: Array[Actor]:
 	get:

@@ -44,11 +44,15 @@ static func walk_path_point(walk_grid: AStar2D, cell: Vector2) -> int:
 	return result
 
 
+func in_move_range(cell: Vector2i) -> bool:
+	return _true_move_range.has(cell)
+
+
 ## Get path between points within the move range.
 ## If use_visible_move_range is true, start and end may be in the visible move
 ## range instead of the true move range.
 func get_move_path(start: Vector2i, end: Vector2i,
-		use_visible_move_range: bool) -> Array[Vector2i]:
+		use_visible_move_range := false) -> Array[Vector2i]:
 	var result: Array[Vector2i] = []
 
 	var true_end := end
