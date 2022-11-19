@@ -2,9 +2,6 @@ class_name Game
 extends Node
 
 
-@export var initial_map: PackedScene
-
-
 ## The currently loaded map
 var current_map: Map:
 	get:
@@ -50,7 +47,6 @@ var _walk_ranges := {}
 func _ready() -> void:
 	@warning_ignore(return_value_discarded)
 	GameEvents.actor_started_turn.connect(self._actor_started_turn)
-	load_map(initial_map)
 
 
 func load_map(new_map_scene: PackedScene) -> void:

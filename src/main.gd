@@ -2,12 +2,15 @@ extends Node
 
 @export_range(1, 1, 1, "or_greater") var base_screen_size := 180
 
-@onready var game_viewport: SubViewport = $SubViewportContainer/SubViewport
+@export var initial_map: PackedScene
 
+@onready var _game_viewport: SubViewport = $SubViewportContainer/SubViewport
+@onready var _game: Game = $SubViewportContainer/SubViewport/Game
 
 func _ready() -> void:
 	_init_rand()
 	_init_screen()
+	_game.load_map(initial_map)
 
 
 func _init_rand() -> void:
@@ -27,5 +30,4 @@ func _size_changed() -> void:
 	var window_size := get_tree().root.size
 	var min_dimension := mini(window_size.x, window_size.y)
 	var scale := float(base_screen_size) / float(min_dimension)
-	game_viewport.size_2d_override = Vector2i(window_size * scale)
-	print(game_viewport.size_2d_override)
+	_game_viewport.size_2d_override = Vector2i(window_size * scale)
