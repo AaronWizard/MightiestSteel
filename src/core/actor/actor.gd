@@ -94,6 +94,7 @@ func move_step(target_cell: Vector2i) -> void:
 
 	facing = target_cell
 	cell_offset_direction = target_cell - origin_cell
+	cell_offset_distance = -1
 	origin_cell = target_cell
 
 	_anim.play("move_step")
