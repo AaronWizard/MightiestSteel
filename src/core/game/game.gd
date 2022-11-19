@@ -21,13 +21,18 @@ var current_walk_range: WalkRange:
 
 var map_highlights: MapHighlights:
 	get:
-		return _map_highlights
+		return $MapHighlights
 
 
 ## The turn manager
 var turn_manager: TurnManager:
 	get:
-		return _turn_manager
+		return $TurnManager
+
+
+var camera: Camera2D:
+	get:
+		return $Camera2D
 
 
 var _current_map: Map = null
@@ -37,8 +42,6 @@ var _current_actor: Actor = null
 var _walk_ranges := {}
 
 @onready var _map_container := $MapContainer
-@onready var _map_highlights := $MapHighlights
-@onready var _turn_manager: TurnManager = $TurnManager
 
 @onready var _state_machine: StateMachine = $StateMachine
 @onready var _next_turn_state_name: String = $StateMachine/NextTurnState.name
@@ -77,17 +80,19 @@ func _unload_current_map() -> void:
 
 
 func _start_battle() -> void:
-	_turn_manager.roll_initiative(_current_map.actors)
+	turn_manager.roll_initiative(_current_map.actors)
 	_state_machine.change_state(_next_turn_state_name)
 
 
 func _actor_started_turn(actor: Actor) -> void:
 	_clear_turn_data()
 	_current_actor = actor
-
+	_current_actor.remote_transform.remote_path = camera.get_path()
 	map_highlights.set_move_range(current_walk_range.visible_move_range)
 
 
 func _clear_turn_data() -> void:
+	if _current_actor:
+		_current_actor.remote_transform.remote_path = null
 	_current_actor = null
 	_walk_ranges.clear()

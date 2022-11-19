@@ -38,3 +38,7 @@ next_turn_state_name = "NextTurnState"
 [node name="AIState" type="Node" parent="StateMachine"]
 script = ExtResource("7_f54sm")
 next_turn_state_name = "NextTurnState"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+position_smoothing_enabled = true
