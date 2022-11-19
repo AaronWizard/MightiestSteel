@@ -7,6 +7,7 @@ extends Node
 @onready var _game_viewport: SubViewport = $SubViewportContainer/SubViewport
 @onready var _game: Game = $SubViewportContainer/SubViewport/Game
 
+
 func _ready() -> void:
 	_init_rand()
 	_init_screen()
@@ -24,6 +25,8 @@ func _init_screen() -> void:
 	_size_changed()
 	@warning_ignore(return_value_discarded)
 	get_tree().root.size_changed.connect(_size_changed)
+	# Apparently necessary for _size_changed to take effect
+	get_tree().root.size_changed.emit()
 
 
 func _size_changed() -> void:
