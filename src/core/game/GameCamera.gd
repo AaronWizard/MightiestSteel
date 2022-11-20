@@ -2,7 +2,7 @@ class_name GameCamera
 extends Camera2D
 
 
-@onready var _bounds = self.get_viewport().get_visible_rect()
+@onready var _bounds := self.get_viewport().get_visible_rect()
 
 
 func _ready() -> void:
