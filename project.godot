@@ -44,6 +44,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/game/game.gd"
 }, {
+"base": "Camera2D",
+"class": &"GameCamera",
+"language": &"GDScript",
+"path": "res://src/core/game/GameCamera.gd"
+}, {
 "base": "State",
 "class": &"GameState",
 "language": &"GDScript",
@@ -122,6 +127,7 @@ _global_script_class_icons={
 "Constants": "",
 "Directions": "",
 "Game": "",
+"GameCamera": "",
 "GameState": "",
 "Map": "",
 "MapHighlights": "",

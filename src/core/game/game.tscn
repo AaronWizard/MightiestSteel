@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b52q8g0lp8s74"]
+[gd_scene load_steps=10 format=3 uid="uid://b52q8g0lp8s74"]
 
 [ext_resource type="Script" path="res://src/core/game/game.gd" id="1_woo5f"]
 [ext_resource type="Script" path="res://src/core/game/turn_manager.gd" id="2_hay57"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/core/game/state/states/next_turn_state.gd" id="5_t06j1"]
 [ext_resource type="Script" path="res://src/core/game/state/states/player_state.gd" id="6_i41vg"]
 [ext_resource type="Script" path="res://src/core/game/state/states/ai_state.gd" id="7_f54sm"]
+[ext_resource type="Script" path="res://src/core/game/GameCamera.gd" id="9_0csb4"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_woo5f")
@@ -39,6 +40,7 @@ next_turn_state_name = "NextTurnState"
 script = ExtResource("7_f54sm")
 next_turn_state_name = "NextTurnState"
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 current = true
 position_smoothing_enabled = true
+script = ExtResource("9_0csb4")

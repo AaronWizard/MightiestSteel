@@ -30,9 +30,9 @@ var turn_manager: TurnManager:
 		return $TurnManager
 
 
-var camera: Camera2D:
+var camera: GameCamera:
 	get:
-		return $Camera2D
+		return $Camera
 
 
 var _current_map: Map = null
@@ -61,7 +61,7 @@ func load_map(new_map_scene: PackedScene) -> void:
 	_current_map = new_map_scene.instantiate()
 	assert(_current_map != null)
 	_map_container.add_child(_current_map)
-
+	camera.set_bounds(_current_map.pixel_rect)
 	_start_battle()
 
 

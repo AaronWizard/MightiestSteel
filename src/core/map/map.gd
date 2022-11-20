@@ -12,6 +12,14 @@ var mouse_cell: Vector2i:
 		return _ground.local_to_map(_ground.get_global_mouse_position())
 
 
+var pixel_rect: Rect2i:
+	get:
+		var rect := _ground.get_used_rect()
+		var rectpos := Vector2(rect.position * _ground.tile_set.tile_size)
+		var rectsize := Vector2(rect.size * _ground.tile_set.tile_size)
+		return Rect2i(rectpos, rectsize)
+
+
 ## Actors on the map
 var actors: Array[Actor]:
 	get:
