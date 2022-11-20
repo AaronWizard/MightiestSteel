@@ -42,5 +42,5 @@ next_turn_state_name = "NextTurnState"
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
-position_smoothing_enabled = true
+position_smoothing_speed = 8.0
 script = ExtResource("9_0csb4")

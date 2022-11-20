@@ -10,6 +10,8 @@ func _move_actor(cell: Vector2) -> void:
 	for p in path:
 		await _game.current_actor.move_step(p)
 
+	request_state_change.emit(next_turn_state_name)
+
 
 func _wait() -> void:
 	GameEvents.emit_actor_finished_turn(_game.current_actor)

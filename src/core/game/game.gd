@@ -62,7 +62,9 @@ func load_map(new_map_scene: PackedScene) -> void:
 	assert(_current_map != null)
 	_map_container.add_child(_current_map)
 	camera.set_bounds(_current_map.pixel_rect)
-	_start_battle()
+
+	_set_initial_camera_position()
+	_start_battle.call_deferred()
 
 
 func get_walk_range(actor: Actor) -> WalkRange:
@@ -79,6 +81,20 @@ func _unload_current_map() -> void:
 	assert(_map_container.get_child_count() == 0)
 
 
+func _set_initial_camera_position() -> void:
+	var center := Vector2.ZERO
+	var count := 0
+
+	for a in _current_map.get_actors_by_faction(0):
+		center += a.center_cell
+		count += 1
+
+	center /= count
+
+	camera.position_smoothing_enabled = false
+	camera.position = center * Constants.TILE_SIZE
+
+
 func _start_battle() -> void:
 	turn_manager.roll_initiative(_current_map.actors)
 	_state_machine.change_state(_next_turn_state_name)
@@ -87,12 +103,15 @@ func _start_battle() -> void:
 func _actor_started_turn(actor: Actor) -> void:
 	_clear_turn_data()
 	_current_actor = actor
+
+	camera.position_smoothing_enabled = true
 	_current_actor.remote_transform.remote_path = camera.get_path()
+
 	map_highlights.set_move_range(current_walk_range.visible_move_range)
 
 
 func _clear_turn_data() -> void:
 	if _current_actor:
-		_current_actor.remote_transform.remote_path = null
+		_current_actor.remote_transform.remote_path = NodePath()
 	_current_actor = null
 	_walk_ranges.clear()
