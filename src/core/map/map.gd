@@ -80,6 +80,14 @@ func remove_actor(actor: Actor) -> void:
 	actor.map = null
 
 
+func get_actors_by_faction(faction: int) -> Array[Actor]:
+	var result: Array[Actor] = []
+	for a in actors:
+		if a.faction == faction:
+			result.append(a)
+	return result
+
+
 ## Gets actor that covers cell, or null if cell is empty
 func get_actor_on_cell(cell: Vector2i) -> Actor:
 	var result: Actor = null
