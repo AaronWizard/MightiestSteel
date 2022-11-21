@@ -91,7 +91,8 @@ var target_visible: bool:
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
-		stats.init_from_definition(definition)
+		if definition:
+			stats.init_from_definition(definition)
 		_target_cursor.cell_size = cell_size
 
 
