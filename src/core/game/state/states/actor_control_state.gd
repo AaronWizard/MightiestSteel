@@ -7,6 +7,7 @@ const _ACTION_WAIT_TIME := 0.15
 
 
 func _move_actor(cell: Vector2) -> void:
+	_game.current_actor.target_visible = false
 	var path := _game.current_walk_range.get_move_path(
 			_game.current_actor.origin_cell, cell)
 	for p in path:

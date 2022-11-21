@@ -7,8 +7,8 @@ func start(_data: Dictionary) -> void:
 	var cell := _game.current_walk_range.move_range[index]
 
 	if cell != _game.current_actor.origin_cell:
-		await get_tree().create_timer(0.25).timeout
+		await get_tree().create_timer(0.5).timeout
 		_move_actor(cell)
 	else:
-		await get_tree().create_timer(0.25).timeout
+		await get_tree().create_timer(0.5).timeout
 		_wait()

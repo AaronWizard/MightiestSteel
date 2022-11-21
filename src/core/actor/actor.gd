@@ -75,14 +75,24 @@ var facing: Vector2:
 		# else change nothing
 
 
+var target_visible: bool:
+	get:
+		return _target_cursor.visible
+	set(value):
+		_target_cursor.visible = value
+
+
 @onready var _sprite: Sprite2D = $Center/Offset/Sprite
 @onready var _anim: AnimationPlayer = $AnimationPlayer
 @onready var _offset: Node2D = $Center/Offset
+
+@onready var _target_cursor: TileObject = $TargetCursor
 
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		stats.init_from_definition(definition)
+		_target_cursor.cell_size = cell_size
 
 
 func _exit_tree() -> void:
@@ -105,3 +115,9 @@ func _set_offset() -> void:
 	if _offset:
 		_offset.position = cell_offset_direction.normalized() \
 				* cell_offset_distance * Constants.TILE_SIZE
+
+
+func _update_size() -> void:
+	super()
+	if _target_cursor:
+		_target_cursor.cell_size = cell_size

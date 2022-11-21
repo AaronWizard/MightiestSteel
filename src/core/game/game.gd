@@ -106,12 +106,13 @@ func _actor_started_turn(actor: Actor) -> void:
 
 	camera.position_smoothing_enabled = true
 	_current_actor.remote_transform.remote_path = camera.get_path()
-
+	_current_actor.target_visible = true
 	map_highlights.set_move_range(current_walk_range.visible_move_range)
 
 
 func _clear_turn_data() -> void:
 	if _current_actor:
 		_current_actor.remote_transform.remote_path = NodePath()
+		_current_actor.target_visible = false
 	_current_actor = null
 	_walk_ranges.clear()

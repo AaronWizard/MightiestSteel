@@ -8,7 +8,6 @@ extends TileObject
 
 func _update_size() -> void:
 	super()
-	print(cell_rect.position)
 	if _nw_corner:
 		_nw_corner.position = pixel_rect.position
 	if _ne_corner:
