@@ -1,0 +1,177 @@
+[gd_scene load_steps=11 format=3 uid="uid://sog7m5dsfeo1"]
+
+[ext_resource type="PackedScene" uid="uid://bo1e1gvqkrmql" path="res://src/core/tiles/tile_object.tscn" id="1_rl5ib"]
+[ext_resource type="Script" path="res://src/core/tiles/target_cursor.gd" id="2_tgl2b"]
+[ext_resource type="Texture2D" uid="uid://cirnh0bc7kw4t" path="res://assets/graphics/ui/current_turn_border.png" id="3_n202e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02ev8"]
+atlas = ExtResource("3_n202e")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uprij"]
+atlas = ExtResource("3_n202e")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhhhb"]
+atlas = ExtResource("3_n202e")
+region = Rect2(0, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3hb5"]
+atlas = ExtResource("3_n202e")
+region = Rect2(16, 16, 8, 8)
+
+[sub_resource type="Animation" id="Animation_sm68e"]
+resource_name = "target"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NWCorner/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(2, 2), Vector2(1, 1), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NECorner/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-2, 2), Vector2(-1, 1), Vector2(-2, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SWCorner/Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(2, -2), Vector2(1, -1), Vector2(2, -2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SECorner/Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-2, -2), Vector2(-1, -1), Vector2(-2, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_xxg8w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NWCorner/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NECorner/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SWCorner/Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, -2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SECorner/Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, -2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3b31n"]
+_data = {
+"RESET": SubResource("Animation_xxg8w"),
+"target": SubResource("Animation_sm68e")
+}
+
+[node name="TargetCursor" instance=ExtResource("1_rl5ib")]
+script = ExtResource("2_tgl2b")
+
+[node name="NWCorner" type="Marker2D" parent="." index="1"]
+position = Vector2(0, -24)
+gizmo_extents = 3.0
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="NWCorner" index="0"]
+position = Vector2(2, 2)
+z_index = -1
+texture = SubResource("AtlasTexture_02ev8")
+
+[node name="NECorner" type="Marker2D" parent="." index="2"]
+position = Vector2(24, -24)
+gizmo_extents = 3.0
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="NECorner" index="0"]
+position = Vector2(-2, 2)
+z_index = -1
+texture = SubResource("AtlasTexture_uprij")
+
+[node name="SWCorner" type="Marker2D" parent="." index="3"]
+gizmo_extents = 3.0
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="SWCorner" index="0"]
+position = Vector2(2, -2)
+texture = SubResource("AtlasTexture_nhhhb")
+
+[node name="SECorner" type="Marker2D" parent="." index="4"]
+position = Vector2(24, 0)
+gizmo_extents = 3.0
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="SECorner" index="0"]
+position = Vector2(-2, -2)
+texture = SubResource("AtlasTexture_u3hb5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+autoplay = "target"
+libraries = {
+"": SubResource("AnimationLibrary_3b31n")
+}
