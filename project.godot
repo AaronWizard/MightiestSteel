@@ -62,7 +62,7 @@ _global_script_classes=[{
 "base": "Node",
 "class": &"MapHighlights",
 "language": &"GDScript",
-"path": "res://src/core/ui/map_highlights.gd"
+"path": "res://src/core/ui/map/map_highlights.gd"
 }, {
 "base": "RefCounted",
 "class": &"MoveRangeFinder",

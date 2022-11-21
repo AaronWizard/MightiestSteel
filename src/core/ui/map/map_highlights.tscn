@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3e0306g77taj"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://src/core/ui/map_highlights.gd" id="1_3633g"]
+[ext_resource type="Script" path="res://src/core/ui/map/map_highlights.gd" id="1_3633g"]
 [ext_resource type="Texture2D" uid="uid://ct6oj7t5es7yh" path="res://assets/graphics/ui/map_highlights.png" id="2_n7v8u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j4a3m"]
