@@ -15,7 +15,8 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	_current_state.handle_unhandled_input(event)
+	if _current_state.allow_input:
+		_current_state.handle_unhandled_input(event)
 
 
 func change_state(state_name: String, data := {}) -> void:
