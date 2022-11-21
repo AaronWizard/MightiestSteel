@@ -155,6 +155,10 @@ config/icon="res://icon.svg"
 
 GameEvents="*res://src/core/game/game_events.gd"
 
+[gui]
+
+theme/custom="res://src/core/ui/resources/ui_theme.tres"
+
 [input]
 
 click={
