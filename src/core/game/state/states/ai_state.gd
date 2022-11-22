@@ -8,7 +8,8 @@ func start(_data: Dictionary) -> void:
 
 	if cell != _game.current_actor.origin_cell:
 		await get_tree().create_timer(0.5).timeout
-		_move_actor(cell)
+		await _move_actor(cell)
+		_wait()
 	else:
 		await get_tree().create_timer(0.5).timeout
 		_wait()

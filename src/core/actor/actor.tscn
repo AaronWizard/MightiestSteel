@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b58dvk04caev"]
+[gd_scene load_steps=12 format=3 uid="uid://b58dvk04caev"]
 
 [ext_resource type="PackedScene" uid="uid://bo1e1gvqkrmql" path="res://src/core/tiles/tile_object.tscn" id="1_svfmf"]
 [ext_resource type="Script" path="res://src/core/actor/actor.gd" id="2_bugic"]
 [ext_resource type="Texture2D" uid="uid://bkmm0fi6e46dy" path="res://assets/graphics/actors/hero.png" id="3_tt4ao"]
 [ext_resource type="Script" path="res://src/core/actor/stats.gd" id="4_anapf"]
+[ext_resource type="PackedScene" uid="uid://bku5l2cqk214v" path="res://src/core/ui/map/actor_actions_menu.tscn" id="4_lrw8s"]
 [ext_resource type="PackedScene" uid="uid://sog7m5dsfeo1" path="res://src/core/tiles/target_cursor.tscn" id="5_iao12"]
 
 [sub_resource type="Animation" id="Animation_fjdfb"]
@@ -136,6 +137,10 @@ metadata/_edit_group_ = true
 texture = ExtResource("3_tt4ao")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Center/Offset" index="1"]
+
+[node name="ActorActionsMenu" parent="Center" index="1" instance=ExtResource("4_lrw8s")]
+visible = false
+z_index = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 libraries = {

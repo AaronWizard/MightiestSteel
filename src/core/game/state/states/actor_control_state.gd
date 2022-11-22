@@ -13,8 +13,6 @@ func _move_actor(cell: Vector2) -> void:
 	for p in path:
 		await _game.current_actor.move_step(p)
 
-	await _end_turn()
-
 
 func _wait() -> void:
 	_end_turn()

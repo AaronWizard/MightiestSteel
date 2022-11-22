@@ -82,6 +82,11 @@ var target_visible: bool:
 		_target_cursor.visible = value
 
 
+var action_menu: ActorActionsMenu:
+	get:
+		return $Center/ActorActionsMenu
+
+
 @onready var _sprite: Sprite2D = $Center/Offset/Sprite
 @onready var _anim: AnimationPlayer = $AnimationPlayer
 @onready var _offset: Node2D = $Center/Offset
@@ -98,6 +103,16 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	map = null
+
+
+func open_action_menu() -> void:
+	action_menu.visible = true
+	await action_menu.open()
+
+
+func close_action_menu() -> void:
+	await action_menu.close()
+	action_menu.visible = false
 
 
 func move_step(target_cell: Vector2i) -> void:

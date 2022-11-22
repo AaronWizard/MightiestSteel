@@ -30,10 +30,12 @@ const _SKILL_BUTTON_SEPARATION := _BUTTON_WIDTH + 2
 
 func open() -> void:
 	_anim.play("open")
+	await _anim.animation_finished
 
 
 func close() -> void:
 	_anim.play("close")
+	await _anim.animation_finished
 
 
 func _on_attack_button_pressed() -> void:
