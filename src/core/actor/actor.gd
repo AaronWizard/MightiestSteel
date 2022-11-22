@@ -2,8 +2,9 @@
 class_name Actor
 extends TileObject
 
-
+signal moved
 signal attack_hit
+
 
 @export var sprite_texture: Texture2D:
 	get:
@@ -11,6 +12,7 @@ signal attack_hit
 	set(value):
 		if _sprite:
 			_sprite.texture = value
+
 
 ## Name of actor instance, independant of actor's node name.
 @export var actor_name := "Actor"
@@ -23,6 +25,7 @@ signal attack_hit
 
 @export_group("Animation")
 
+
 @export var cell_offset_direction := Vector2.ZERO:
 	set(value):
 		cell_offset_direction = value
@@ -33,6 +36,20 @@ signal attack_hit
 	set(value):
 		cell_offset_distance = value
 		_set_offset()
+
+
+## Change actor's origin cell without changing its visible position nor
+## triggering position-based events. Used for predicting skill effects.
+var virtual_origin_cell: Vector2i:
+	get:
+		var result := origin_cell
+		if _using_virtual_origin_cell:
+			result = _virtual_origin_cell
+		return result
+	set(value):
+		if value != origin_cell:
+			_virtual_origin_cell = value
+			_using_virtual_origin_cell = true
 
 
 ## The actor's stats
@@ -87,6 +104,11 @@ var action_menu: ActorActionsMenu:
 		return $Center/ActorActionsMenu
 
 
+var _virtual_origin_cell := Vector2i.ZERO
+var _using_virtual_origin_cell := false
+
+var _report_moves := true
+
 @onready var _sprite: Sprite2D = $Center/Offset/Sprite
 @onready var _anim: AnimationPlayer = $AnimationPlayer
 @onready var _offset: Node2D = $Center/Offset
@@ -115,6 +137,11 @@ func close_action_menu() -> void:
 	action_menu.visible = false
 
 
+func unset_virtual_origin_cell() -> void:
+	_virtual_origin_cell = Vector2.ZERO
+	_using_virtual_origin_cell = false
+
+
 func move_step(target_cell: Vector2i) -> void:
 	assert((target_cell - origin_cell).length_squared() == 1)
 
@@ -137,3 +164,17 @@ func _update_size() -> void:
 	super()
 	if _target_cursor:
 		_target_cursor.cell_size = cell_size
+
+
+func _get_origin_cell() -> Vector2i:
+	if _using_virtual_origin_cell:
+		return virtual_origin_cell
+	else:
+		return super()
+
+
+func _set_origin_cell(cell: Vector2i) -> void:
+	unset_virtual_origin_cell()
+	super(cell)
+	if _report_moves:
+		moved.emit()

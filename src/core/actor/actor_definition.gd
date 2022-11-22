@@ -15,3 +15,14 @@ extends Resource
 
 ## How many actions (moves, attacks) an actor may take on its turn
 @export_range(1, 1, 1, "or_greater") var actions := 2
+
+@export var attack_skill: Skill
+
+@export var skill0: Skill
+@export var skill1: Skill
+@export var skill2: Skill
+@export var skill3: Skill
+
+var skills: Array[Skill]:
+	get:
+		return [skill0, skill1, skill2, skill3]

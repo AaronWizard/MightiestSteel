@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ocopt1i817ny"]
+
+[ext_resource type="Script" path="res://src/core/skills/skill.gd" id="1_ha1l8"]
+
+[resource]
+script = ExtResource("1_ha1l8")
+name = "Attack"
+description = ""
+cooldown = 0

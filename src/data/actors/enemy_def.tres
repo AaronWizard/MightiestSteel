@@ -1,5 +1,6 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bcs52qeexn5wm"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bcs52qeexn5wm"]
 
+[ext_resource type="Resource" uid="uid://ocopt1i817ny" path="res://src/data/skills/attacK_standard.tres" id="1_loxyy"]
 [ext_resource type="Script" path="res://src/core/actor/actor_definition.gd" id="1_p8nuf"]
 
 [resource]
@@ -9,3 +10,4 @@ attack = 1
 move = 4
 speed = 1.0
 actions = 2
+attack_skill = ExtResource("1_loxyy")

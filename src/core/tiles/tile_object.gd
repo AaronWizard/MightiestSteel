@@ -17,9 +17,9 @@ extends Node2D
 ## the screen.
 @export var origin_cell := Vector2i.ZERO:
 	get:
-		return Vector2i(position / float(Constants.TILE_SIZE)) - Vector2i.DOWN
+		return _get_origin_cell()
 	set(value):
-		position = (value + Vector2i.DOWN) * Constants.TILE_SIZE
+		_set_origin_cell(value)
 
 
 ## The cell size.
@@ -101,3 +101,11 @@ func _update_size() -> void:
 		_center.position = Vector2(1, -1) * Constants.TILE_HALF_SIZE_V \
 				* cell_size
 	queue_redraw()
+
+
+func _get_origin_cell() -> Vector2i:
+	return Vector2i(position / float(Constants.TILE_SIZE)) - Vector2i.DOWN
+
+
+func _set_origin_cell(cell: Vector2i) -> void:
+	position = (cell + Vector2i.DOWN) * Constants.TILE_SIZE
