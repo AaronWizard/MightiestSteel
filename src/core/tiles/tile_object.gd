@@ -82,13 +82,8 @@ func get_cell_rect_at_cell(cell: Vector2i) -> Rect2i:
 
 ## Cells that object would cover at given origin cell
 func get_covered_cells_at_cell(cell: Vector2i) -> Array[Vector2i]:
-	var result: Array[Vector2i] = []
 	var rect := get_cell_rect_at_cell(cell)
-	for x in range(rect.position.x, rect.end.x):
-		for y in range(rect.position.y, rect.end.y):
-			var covered_cell := Vector2i(x, y)
-			result.append(covered_cell)
-	return result
+	return TileGeometry.get_rect_cells(rect)
 
 
 ## Checks if a cell is covered by the tile object.
