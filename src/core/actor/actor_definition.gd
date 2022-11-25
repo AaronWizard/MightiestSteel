@@ -18,6 +18,7 @@ extends Resource
 
 @export var attack_skill: Skill
 
+# Actors only have four skills
 @export var skill0: Skill
 @export var skill1: Skill
 @export var skill2: Skill
@@ -25,4 +26,13 @@ extends Resource
 
 var skills: Array[Skill]:
 	get:
-		return [skill0, skill1, skill2, skill3]
+		var result := []
+		if skill0:
+			result.append(skill0)
+		if skill1:
+			result.append(skill1)
+		if skill2:
+			result.append(skill2)
+		if skill3:
+			result.append(skill3)
+		return result
