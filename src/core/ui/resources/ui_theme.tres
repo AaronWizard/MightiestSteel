@@ -1,8 +1,8 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://ccoexko8msmrh"]
+[gd_resource type="Theme" load_steps=6 format=3]
 
-[ext_resource type="StyleBox" uid="uid://bdnssr6g0qjoj" path="res://src/core/ui/resources/button_stylebox_normal.tres" id="1_hmbb6"]
-[ext_resource type="StyleBox" uid="uid://cvdscbkq82mow" path="res://src/core/ui/resources/button_stylebox_disabled.tres" id="1_xqipt"]
-[ext_resource type="StyleBox" uid="uid://7jwpurvd4rwb" path="res://src/core/ui/resources/button_stylebox_pressed.tres" id="2_b5u58"]
+[ext_resource type="StyleBox" uid="uid://bdnssr6g0qjoj" path="res://src/core/ui/resources/stylebox_button_normal.tres" id="1_hmbb6"]
+[ext_resource type="StyleBox" uid="uid://cvdscbkq82mow" path="res://src/core/ui/resources/stylebox_button_disabled.tres" id="1_xqipt"]
+[ext_resource type="StyleBox" uid="uid://7jwpurvd4rwb" path="res://src/core/ui/resources/stylebox_button_pressed.tres" id="2_b5u58"]
 [ext_resource type="FontFile" uid="uid://3spejj62mtxb" path="res://assets/fonts/TinyPixie2.ttf" id="4_t8kbc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_21iro"]
