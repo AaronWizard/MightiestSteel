@@ -7,6 +7,5 @@ extends TargetRange
 
 
 func _get_full_range(source_actor: Actor) -> Array[Vector2i]:
-	return TileGeometry.cells_in_range_square(
-			source_actor.origin_cell, source_actor.cell_size,
-			min_dist, max_dist, include_diagonals)
+	return TileGeometry.cells_in_range_rect(
+			source_actor.cell_rect, min_dist, max_dist, include_diagonals)
