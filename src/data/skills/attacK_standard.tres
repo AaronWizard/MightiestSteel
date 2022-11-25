@@ -8,7 +8,7 @@ script = ExtResource("2_harn6")
 min_dist = 1
 max_dist = 1
 include_diagonals = true
-target_type = 0
+target_type = 2
 
 [resource]
 script = ExtResource("1_ha1l8")
