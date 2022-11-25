@@ -11,6 +11,7 @@ enum _InnerState
 
 var _inner_state: _InnerState = _InnerState.CHOOSE_MOVE
 
+var _selected_skill: Skill
 var _target_data: SkillTargetsData
 
 
@@ -30,8 +31,10 @@ func end() -> void:
 
 	_game.ui.skill_cancelled.disconnect(_start_skill_ended)
 
+	_selected_skill = null
 	_target_data = null
 
+	_map_highlights.target_cursor.visible = false
 	_game.ui.cancel_skill_visible = false
 
 	super()
@@ -50,6 +53,7 @@ func handle_unhandled_input(_event: InputEvent) -> void:
 
 func _show_move_range() -> void:
 	super()
+	allow_input = true
 	_inner_state = _InnerState.CHOOSE_MOVE
 
 
@@ -65,20 +69,28 @@ func _choose_move_input() -> void:
 
 
 func _start_action_menu() -> void:
-	_current_actor.open_action_menu()
+	allow_input = false
+	await _current_actor.open_action_menu()
 	_inner_state = _InnerState.ACTION_MENU
+	allow_input = true
 
 
 func _action_menu_input() -> void:
+	allow_input = false
 	# Clicked outside of action menu
 	await _current_actor.close_action_menu()
 	_inner_state = _InnerState.CHOOSE_MOVE
+	allow_input = true
 
 
 func _start_choose_target(skill: Skill) -> void:
+	allow_input = false
 	await _current_actor.close_action_menu()
+	allow_input = true
+
 	_current_actor.target_visible = false
 
+	_selected_skill = skill
 	_target_data = skill.get_targeting_data(_current_actor)
 
 	_map_highlights.clear_all()
@@ -93,7 +105,8 @@ func _choose_target_input() -> void:
 	var cell := _game.current_map.mouse_cell
 	if _map_highlights.target_cursor.visible \
 			and (_map_highlights.target_cursor.origin_cell == cell):
-		pass
+		_map_highlights.target_cursor.visible = false
+		_run_skill(_selected_skill, _map_highlights.target_cursor.origin_cell)
 	elif _target_data.is_valid_target(cell):
 		_map_highlights.target_cursor.visible = true
 		_map_highlights.target_cursor.origin_cell = cell
@@ -113,5 +126,6 @@ func _start_skill_ended() -> void:
 
 
 func _wait_selected() -> void:
+	allow_input = false
 	await _current_actor.close_action_menu()
 	_wait()
