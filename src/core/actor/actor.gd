@@ -83,11 +83,12 @@ var remote_transform: RemoteTransform2D:
 
 
 ## Flip the sprite in the direction of the given vector
-var facing: Vector2:
+var facing: Vector2i:
 	set(value):
-		if value.x < 0:
+		var diff := value - origin_cell
+		if diff.x < 0:
 			_sprite.flip_h = true
-		elif value.x > 0:
+		elif diff.x > 0:
 			_sprite.flip_h = false
 		# else change nothing
 
@@ -165,16 +166,17 @@ func unset_virtual_origin_cell() -> void:
 	_using_virtual_origin_cell = false
 
 
-func move_step(target_cell: Vector2i) -> void:
-	assert((target_cell - origin_cell).length_squared() == 1)
+func move_path(path: Array[Vector2i]) -> void:
+	_report_moves = false
+	for next_cell in path:
+		facing = next_cell
+		cell_offset_direction = next_cell - origin_cell
+		cell_offset_distance = -1
+		origin_cell = next_cell
 
-	facing = target_cell
-	cell_offset_direction = target_cell - origin_cell
-	cell_offset_distance = -1
-	origin_cell = target_cell
-
-	_anim.play("move_step")
-	await _anim.animation_finished
+		_anim.play("move_step")
+		await _anim.animation_finished
+	_report_moves = true
 
 
 func cooldown_skills() -> void:

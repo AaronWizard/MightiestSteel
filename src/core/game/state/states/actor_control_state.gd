@@ -10,8 +10,7 @@ func _move_actor(cell: Vector2) -> void:
 	_game.current_actor.target_visible = false
 	var path := _game.current_walk_range.get_move_path(
 			_game.current_actor.origin_cell, cell)
-	for p in path:
-		await _game.current_actor.move_step(p)
+	await _game.current_actor.move_path(path)
 
 
 func _wait() -> void:
