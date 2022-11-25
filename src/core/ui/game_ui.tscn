@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgjgufo2hiapc"]
+
+[ext_resource type="Script" path="res://src/core/ui/game_ui.gd" id="1_nkrwp"]
+[ext_resource type="Texture2D" uid="uid://cuvt1v66hlaec" path="res://assets/graphics/ui/icons/cancel.png" id="1_uuykl"]
+
+[node name="GameUI" type="CanvasLayer"]
+script = ExtResource("1_nkrwp")
+
+[node name="CancelSkill" type="Button" parent="."]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = -4.0
+grow_vertical = 0
+icon = ExtResource("1_uuykl")
+
+[connection signal="pressed" from="CancelSkill" to="." method="_on_cancel_skill_pressed"]
