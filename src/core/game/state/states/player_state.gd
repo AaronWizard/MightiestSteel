@@ -36,9 +36,7 @@ func end() -> void:
 	_selected_skill = null
 	_target_data = null
 
-	_map_highlights.target_cursor.visible = false
 	_game.ui.cancel_skill_visible = false
-
 	_game.camera.dragging_enabled = false
 
 	super()
@@ -76,7 +74,9 @@ func _choose_move_input() -> void:
 func _start_action_menu() -> void:
 	_game.camera.dragging_enabled = false
 	allow_input = false
+
 	await _current_actor.open_action_menu()
+
 	_inner_state = _InnerState.ACTION_MENU
 	allow_input = true
 
@@ -131,6 +131,7 @@ func _skill_selected(skill_index: int) -> void:
 
 func _start_skill_ended() -> void:
 	_game.ui.cancel_skill_visible = false
+	_map_highlights.target_cursor.visible = false
 	_show_move_range()
 
 
