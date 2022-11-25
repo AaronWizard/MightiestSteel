@@ -10,6 +10,7 @@ Based on [Godot 3.5 project](https://github.com/AaronWizard/LegendsOfMajesticSte
 
 - Built using Godot 4.0: <https://godotengine.org/>
 - Graphics made using Aseprite: <https://www.aseprite.org/>
+- Font TinyPixie2 by TinyPixie: <https://nimblebeastscollective.itch.io/nb-pixel-font-bundle>
 
 ## Licensing
 
