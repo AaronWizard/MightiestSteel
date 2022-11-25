@@ -35,6 +35,11 @@ var camera: GameCamera:
 		return $Camera
 
 
+var ui: GameUI:
+	get:
+		return $GameUI
+
+
 var _current_map: Map = null
 var _current_actor: Actor = null
 
