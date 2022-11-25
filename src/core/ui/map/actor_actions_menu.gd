@@ -23,12 +23,21 @@ const _SKILL_BUTTON_SEPARATION := _BUTTON_WIDTH + 2
 		_position_skill_buttons()
 
 
-#@onready var _attack_button: CanvasItem = $AttackButtonPos
+@onready var _attack_button: CanvasItem = $AttackButtonPos
 @onready var _skill_buttons: Node = $SkillButtonsPos
 @onready var _anim: AnimationPlayer = $AnimationPlayer
 
 
-func open() -> void:
+func open(actor: Actor) -> void:
+	_attack_button.visible = actor.attack_skill != null
+
+	assert(actor.all_skills.size() <= _skill_buttons.get_child_count())
+	skill_count = actor.all_skills.size()
+
+	for i in range(skill_count):
+		var button: Button = _skill_buttons.get_child(i).get_child(0)
+		button.disabled = not actor.can_run_skill(i)
+
 	_anim.play("open")
 	await _anim.animation_finished
 

@@ -92,6 +92,7 @@ var facing: Vector2:
 		# else change nothing
 
 
+## Toggle target that highlights actor
 var target_visible: bool:
 	get:
 		return _target_cursor.visible
@@ -104,10 +105,27 @@ var action_menu: ActorActionsMenu:
 		return $Center/ActorActionsMenu
 
 
+## Actor's standard attack. Has no cooldown.
+var attack_skill: Skill:
+	get:
+		return _attack_skill
+
+
+## All non-attack skills regardless of cooldown
+var all_skills: Array[Skill]:
+	get:
+		return _skills.keys()
+
+
 var _virtual_origin_cell := Vector2i.ZERO
 var _using_virtual_origin_cell := false
 
 var _report_moves := true
+
+var _attack_skill: Skill = null
+
+# Keys are Skills. Values are cooldowns. Skill is valid when cooldown is 0.
+var _skills := {}
 
 @onready var _sprite: Sprite2D = $Center/Offset/Sprite
 @onready var _anim: AnimationPlayer = $AnimationPlayer
@@ -120,7 +138,12 @@ func _ready() -> void:
 	if not Engine.is_editor_hint():
 		if definition:
 			stats.init_from_definition(definition)
+			_attack_skill = definition.attack_skill
+			for s in definition.skills:
+				_skills[s] = s.cooldown
 		_target_cursor.cell_size = cell_size
+
+		GameEvents.round_started.connect(_round_started)
 
 
 func _exit_tree() -> void:
@@ -129,7 +152,7 @@ func _exit_tree() -> void:
 
 func open_action_menu() -> void:
 	action_menu.visible = true
-	await action_menu.open()
+	await action_menu.open(self)
 
 
 func close_action_menu() -> void:
@@ -154,10 +177,14 @@ func move_step(target_cell: Vector2i) -> void:
 	await _anim.animation_finished
 
 
-func _set_offset() -> void:
-	if _offset:
-		_offset.position = cell_offset_direction.normalized() \
-				* cell_offset_distance * Constants.TILE_SIZE
+func cooldown_skills() -> void:
+	for s in _skills:
+		if _skills[s] > 0:
+			_skills[s] -= 1
+
+
+func can_run_skill(skill_index: int) -> bool:
+	return _skills[skill_index] == 0
 
 
 func _update_size() -> void:
@@ -178,3 +205,14 @@ func _set_origin_cell(cell: Vector2i) -> void:
 	super(cell)
 	if _report_moves:
 		moved.emit()
+
+
+func _set_offset() -> void:
+	if _offset:
+		_offset.position = cell_offset_direction.normalized() \
+				* cell_offset_distance * Constants.TILE_SIZE
+
+
+func _round_started(is_first_round: bool):
+	if not is_first_round:
+		cooldown_skills()
