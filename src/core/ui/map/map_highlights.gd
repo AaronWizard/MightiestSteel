@@ -11,6 +11,12 @@ const _LAYER_MOVE := 0
 const _LAYER_OTHER := 1
 const _LAYER_TARGET := 2
 
+
+var target_cursor: TileObject:
+	get:
+		return $TargetCursor
+
+
 @onready var _highlights: TileMap = $Highlights
 
 

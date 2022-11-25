@@ -65,12 +65,12 @@ var target_range: Array[Vector2i]:
 ## contains only the origin cells of the actors within range.
 var valid_targets: Array[Vector2i]:
 	get:
-		return _valid_targets
+		return _valid_targets.keys()
 
 
 var _source_cell: Vector2i
 var _target_range: Array[Vector2i]
-var _valid_targets: Array[Vector2i]
+var _valid_targets: Dictionary
 var _target_infos: Dictionary
 
 
@@ -80,8 +80,15 @@ func _init(new_source_cell: Vector2i, new_target_range: Array[Vector2i],
 		-> void:
 	_source_cell = new_source_cell
 	_target_range = new_target_range
-	_valid_targets = new_valid_targets
+
+	for c in new_valid_targets:
+		_valid_targets[c] = true
+
 	_target_infos = new_target_infos
+
+
+func is_valid_target(cell: Vector2i) -> bool:
+	return _valid_targets.has(cell)
 
 
 func get_target_info(target: Vector2i) -> TargetInfo:

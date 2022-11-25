@@ -44,6 +44,8 @@ func handle_unhandled_input(_event: InputEvent) -> void:
 				_choose_move_input()
 			_InnerState.ACTION_MENU:
 				_action_menu_input()
+			_InnerState.CHOOSE_TARGET:
+				_choose_target_input()
 
 
 func _show_move_range() -> void:
@@ -79,12 +81,22 @@ func _start_choose_target(skill: Skill) -> void:
 
 	_target_data = skill.get_targeting_data(_current_actor)
 
-	_game.map_highlights.clear_all()
-	_game.map_highlights.set_target_range(
+	_map_highlights.clear_all()
+	_map_highlights.set_target_range(
 			_target_data.target_range, _target_data.valid_targets)
 	_game.ui.cancel_skill_visible = true
 
 	_inner_state = _InnerState.CHOOSE_TARGET
+
+
+func _choose_target_input() -> void:
+	var cell := _game.current_map.mouse_cell
+	if _map_highlights.target_cursor.visible \
+			and (_map_highlights.target_cursor.origin_cell == cell):
+		pass
+	elif _target_data.is_valid_target(cell):
+		_map_highlights.target_cursor.visible = true
+		_map_highlights.target_cursor.origin_cell = cell
 
 
 func _attack_selected() -> void:

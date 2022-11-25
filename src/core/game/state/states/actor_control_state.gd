@@ -16,8 +16,8 @@ func end() -> void:
 
 func _show_move_range() -> void:
 	_current_actor.target_visible = true
-	_game.map_highlights.clear_all()
-	_game.map_highlights.set_move_range(
+	_map_highlights.clear_all()
+	_map_highlights.set_move_range(
 			_game.current_walk_range.visible_move_range)
 
 
