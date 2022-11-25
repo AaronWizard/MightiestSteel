@@ -91,13 +91,9 @@ func _start_action_menu() -> void:
 	elif rect.end.y > screen_rect.size.y:
 		camera_shift.y = rect.end.y - screen_rect.size.y + 1
 
-	print(_game.camera.position)
-
 	_game.camera.position_smoothing_enabled = true
 	_game.camera.position += camera_shift
-	print(_game.camera.position)
 
-	print(rect)
 	await _current_actor.open_action_menu()
 
 	_inner_state = _InnerState.ACTION_MENU
