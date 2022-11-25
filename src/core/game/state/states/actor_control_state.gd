@@ -22,6 +22,7 @@ func _show_move_range() -> void:
 
 
 func _move_actor(cell: Vector2) -> void:
+	_game.camera.position_smoothing_enabled = true
 	_current_actor.target_visible = false
 	var path := _game.current_walk_range.get_move_path(
 			_current_actor.origin_cell, cell)
@@ -29,6 +30,7 @@ func _move_actor(cell: Vector2) -> void:
 
 
 func _run_skill(skill: Skill, target: Vector2i) -> void:
+	@warning_ignore(redundant_await)
 	await skill.run(_current_actor, target)
 	_end_turn()
 

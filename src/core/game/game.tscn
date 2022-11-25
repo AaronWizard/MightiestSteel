@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bi1nkhinf2noj"]
+[gd_scene load_steps=11 format=3 uid="uid://dkituax7x11o3"]
 
 [ext_resource type="Script" path="res://src/core/game/game.gd" id="1_woo5f"]
 [ext_resource type="PackedScene" uid="uid://b5n6gbsla3f1b" path="res://src/core/ui/map/map_highlights.tscn" id="2_efk31"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://src/core/game/state/states/next_turn_state.gd" id="5_t06j1"]
 [ext_resource type="Script" path="res://src/core/game/state/states/player_state.gd" id="6_i41vg"]
 [ext_resource type="Script" path="res://src/core/game/state/states/ai_state.gd" id="7_f54sm"]
-[ext_resource type="Script" path="res://src/core/game/GameCamera.gd" id="9_0csb4"]
+[ext_resource type="Script" path="res://src/core/game/game_camera.gd" id="9_yaknd"]
 [ext_resource type="PackedScene" uid="uid://cgjgufo2hiapc" path="res://src/core/ui/game_ui.tscn" id="10_bmqpt"]
 
 [node name="Game" type="Node"]
@@ -44,6 +44,6 @@ next_turn_state_name = "NextTurnState"
 [node name="Camera" type="Camera2D" parent="."]
 current = true
 position_smoothing_speed = 8.0
-script = ExtResource("9_0csb4")
+script = ExtResource("9_yaknd")
 
 [node name="GameUI" parent="." instance=ExtResource("10_bmqpt")]

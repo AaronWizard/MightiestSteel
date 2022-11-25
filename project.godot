@@ -62,7 +62,7 @@ _global_script_classes=[{
 "base": "Camera2D",
 "class": &"GameCamera",
 "language": &"GDScript",
-"path": "res://src/core/game/GameCamera.gd"
+"path": "res://src/core/game/game_camera.gd"
 }, {
 "base": "Resource",
 "class": &"GameEffect",
@@ -218,14 +218,6 @@ GameEvents="*res://src/core/game/game_events.gd"
 [gui]
 
 theme/custom="res://src/core/ui/resources/ui_theme.tres"
-
-[input]
-
-click={
-"deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
-]
-}
 
 [rendering]
 

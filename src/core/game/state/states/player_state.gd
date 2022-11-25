@@ -23,6 +23,8 @@ func start(data: Dictionary) -> void:
 	_current_actor.action_menu.wait_selected.connect(_wait_selected)
 	_game.ui.skill_cancelled.connect(_start_skill_ended)
 
+	_game.camera.dragging_enabled = true
+
 
 func end() -> void:
 	_current_actor.action_menu.attack_selected.disconnect(_attack_selected)
@@ -37,11 +39,14 @@ func end() -> void:
 	_map_highlights.target_cursor.visible = false
 	_game.ui.cancel_skill_visible = false
 
+	_game.camera.dragging_enabled = false
+
 	super()
 
 
-func handle_unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_pressed("click", true):
+func handle_unhandled_input(event: InputEvent) -> void:
+	if (event is InputEventMouseButton) \
+			and (event.button_index == MOUSE_BUTTON_LEFT) and not event.pressed:
 		match _inner_state:
 			_InnerState.CHOOSE_MOVE:
 				_choose_move_input()
@@ -69,6 +74,7 @@ func _choose_move_input() -> void:
 
 
 func _start_action_menu() -> void:
+	_game.camera.dragging_enabled = false
 	allow_input = false
 	await _current_actor.open_action_menu()
 	_inner_state = _InnerState.ACTION_MENU
@@ -81,12 +87,15 @@ func _action_menu_input() -> void:
 	await _current_actor.close_action_menu()
 	_inner_state = _InnerState.CHOOSE_MOVE
 	allow_input = true
+	_game.camera.dragging_enabled = true
 
 
 func _start_choose_target(skill: Skill) -> void:
+	_game.camera.dragging_enabled = false
 	allow_input = false
 	await _current_actor.close_action_menu()
 	allow_input = true
+	_game.camera.dragging_enabled = true
 
 	_current_actor.target_visible = false
 
