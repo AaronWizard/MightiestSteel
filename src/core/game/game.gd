@@ -54,7 +54,8 @@ var _walk_ranges := {}
 
 func _ready() -> void:
 	@warning_ignore(return_value_discarded)
-	GameEvents.actor_started_turn.connect(self._actor_started_turn)
+	GameEvents.actor_started_turn.connect(_actor_started_turn)
+	GameEvents.actor_finished_turn.connect(_actor_finished_turn)
 
 
 func load_map(new_map_scene: PackedScene) -> void:
@@ -106,13 +107,16 @@ func _start_battle() -> void:
 
 
 func _actor_started_turn(actor: Actor) -> void:
-	_clear_turn_data()
+	assert(_current_actor == null)
 	_current_actor = actor
 
 	camera.position_smoothing_enabled = true
 	_current_actor.remote_transform.remote_path = camera.get_path()
-	_current_actor.target_visible = true
-	map_highlights.set_move_range(current_walk_range.visible_move_range)
+
+
+func _actor_finished_turn(actor: Actor) -> void:
+	assert(_current_actor == actor)
+	_clear_turn_data()
 
 
 func _clear_turn_data() -> void:

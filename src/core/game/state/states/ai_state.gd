@@ -2,7 +2,9 @@ class_name AIState
 extends ActorControlState
 
 
-func start(_data: Dictionary) -> void:
+func start(data: Dictionary) -> void:
+	super(data)
+
 	var index := randi_range(0, _game.current_walk_range.move_range.size() - 1)
 	var cell := _game.current_walk_range.move_range[index]
 

@@ -6,8 +6,19 @@ const _ACTION_WAIT_TIME := 0.15
 @export var next_turn_state_name: String
 
 
+func start(_data: Dictionary) -> void:
+	_show_move_range()
+
+
+func end() -> void:
+	GameEvents.emit_actor_finished_turn(_current_actor)
+
+
 func _show_move_range() -> void:
-	pass
+	_current_actor.target_visible = true
+	_game.map_highlights.clear_all()
+	_game.map_highlights.set_move_range(
+			_game.current_walk_range.visible_move_range)
 
 
 func _move_actor(cell: Vector2) -> void:
@@ -23,5 +34,4 @@ func _wait() -> void:
 
 func _end_turn() -> void:
 	await get_tree().create_timer(_ACTION_WAIT_TIME).timeout
-	GameEvents.emit_actor_finished_turn(_current_actor)
 	request_state_change.emit(next_turn_state_name)

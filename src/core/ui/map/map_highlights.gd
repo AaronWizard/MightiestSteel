@@ -28,16 +28,8 @@ func set_target_range(cells: Array[Vector2i], valid_cells: Array[Vector2i]) \
 	_set_tiles(valid_cells, _LAYER_TARGET, _TILE_ATLAS_VALID_TARGET, false)
 
 
-func clear_move_range() -> void:
-	_highlights.clear_layer(_LAYER_MOVE)
-
-
 func clear_other_range() -> void:
 	_highlights.clear_layer(_LAYER_OTHER)
-
-
-func clear_target_range() -> void:
-	_highlights.clear_layer(_LAYER_TARGET)
 
 
 func clear_all() -> void:
