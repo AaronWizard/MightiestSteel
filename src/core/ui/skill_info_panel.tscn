@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://3bbfw14jxje2"]
+
+[ext_resource type="Script" path="res://src/core/ui/skill_info_panel.gd" id="1_8lvej"]
+[ext_resource type="Texture2D" uid="uid://cuvt1v66hlaec" path="res://assets/graphics/ui/icons/cancel.png" id="1_s75u3"]
+
+[node name="SkillInfoPanel" type="PanelContainer"]
+offset_right = 68.0
+offset_bottom = 32.0
+script = ExtResource("1_8lvej")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 65.0
+offset_bottom = 29.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+offset_top = 8.0
+offset_right = 35.0
+offset_bottom = 17.0
+size_flags_vertical = 4
+
+[node name="SkillName" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+offset_right = 35.0
+offset_bottom = 9.0
+text = "Skill Name"
+
+[node name="NoValidTargets" type="Label" parent="HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+offset_top = 10.0
+offset_right = 56.0
+offset_bottom = 19.0
+text = "No Valid Targets"
+
+[node name="Cancel" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+offset_left = 36.0
+offset_right = 62.0
+offset_bottom = 26.0
+icon = ExtResource("1_s75u3")
+
+[connection signal="pressed" from="HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

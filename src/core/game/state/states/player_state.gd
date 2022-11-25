@@ -21,7 +21,8 @@ func start(data: Dictionary) -> void:
 	_current_actor.action_menu.attack_selected.connect(_attack_selected)
 	_current_actor.action_menu.skill_selected.connect(_skill_selected)
 	_current_actor.action_menu.wait_selected.connect(_wait_selected)
-	_game.ui.skill_cancelled.connect(_start_skill_ended)
+
+	_game.ui.skill_info_panel.cancelled.connect(_start_skill_ended)
 
 	_game.camera.dragging_enabled = true
 
@@ -31,12 +32,12 @@ func end() -> void:
 	_current_actor.action_menu.skill_selected.disconnect(_skill_selected)
 	_current_actor.action_menu.wait_selected.disconnect(_wait_selected)
 
-	_game.ui.skill_cancelled.disconnect(_start_skill_ended)
+	_game.ui.skill_info_panel.cancelled.disconnect(_start_skill_ended)
 
 	_selected_skill = null
 	_target_data = null
 
-	_game.ui.cancel_skill_visible = false
+	_game.ui.skill_info_panel.visible = false
 	_game.camera.dragging_enabled = false
 
 	super()
@@ -105,7 +106,11 @@ func _start_choose_target(skill: Skill) -> void:
 	_map_highlights.clear_all()
 	_map_highlights.set_target_range(
 			_target_data.target_range, _target_data.valid_targets)
-	_game.ui.cancel_skill_visible = true
+
+	_game.ui.skill_info_panel.skill_name = skill.name
+	_game.ui.skill_info_panel.no_valid_targets = \
+			_target_data.valid_targets.is_empty()
+	_game.ui.skill_info_panel.visible = true
 
 	_inner_state = _InnerState.CHOOSE_TARGET
 
@@ -130,7 +135,7 @@ func _skill_selected(skill_index: int) -> void:
 
 
 func _start_skill_ended() -> void:
-	_game.ui.cancel_skill_visible = false
+	_game.ui.skill_info_panel.visible = false
 	_map_highlights.target_cursor.visible = false
 	_show_move_range()
 
