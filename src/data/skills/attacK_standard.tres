@@ -1,9 +1,18 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ocopt1i817ny"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://ocopt1i817ny"]
 
 [ext_resource type="Script" path="res://src/core/skills/skill.gd" id="1_ha1l8"]
+[ext_resource type="Script" path="res://src/core/skills/cell_distance_range.gd" id="2_harn6"]
+
+[sub_resource type="Resource" id="Resource_5xqt5"]
+script = ExtResource("2_harn6")
+min_dist = 1
+max_dist = 1
+include_diagonals = true
+target_type = 0
 
 [resource]
 script = ExtResource("1_ha1l8")
 name = "Attack"
 description = ""
 cooldown = 0
+target_range = SubResource("Resource_5xqt5")

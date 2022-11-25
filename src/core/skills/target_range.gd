@@ -50,8 +50,8 @@ func get_range(source_actor: Actor) -> TargetRangePair:
 	return TargetRangePair.new(full_range, valid_range)
 
 
-func _get_full_range(source_actor: Actor) \
-		-> Array[Vector2i]:
+## Can be overriden
+func _get_full_range(source_actor: Actor) -> Array[Vector2i]:
 	return source_actor.covered_cells
 
 

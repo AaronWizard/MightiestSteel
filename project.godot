@@ -39,6 +39,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/await_group.gd"
 }, {
+"base": "TargetRange",
+"class": &"CellDistanceRange",
+"language": &"GDScript",
+"path": "res://src/core/skills/cell_distance_range.gd"
+}, {
 "base": "RefCounted",
 "class": &"Constants",
 "language": &"GDScript",
@@ -171,6 +176,7 @@ _global_script_class_icons={
 "ActorControlState": "",
 "ActorDefinition": "",
 "AwaitGroup": "",
+"CellDistanceRange": "",
 "Constants": "",
 "Directions": "",
 "Game": "",
