@@ -17,18 +17,18 @@ func start(_data: Dictionary) -> void:
 	_inner_state = _InnerState.CHOOSE_MOVE
 
 	@warning_ignore(return_value_discarded)
-	_game.current_actor.action_menu.attack_selected.connect(_attack_selected)
+	_current_actor.action_menu.attack_selected.connect(_attack_selected)
 	@warning_ignore(return_value_discarded)
-	_game.current_actor.action_menu.skill_selected.connect(_skill_selected)
+	_current_actor.action_menu.skill_selected.connect(_skill_selected)
 	@warning_ignore(return_value_discarded)
-	_game.current_actor.action_menu.wait_selected.connect(_wait_selected)
+	_current_actor.action_menu.wait_selected.connect(_wait_selected)
 
 
 func end() -> void:
 	assert(not _game.ui.skill_cancelled.is_connected(_start_skill_ended))
-	_game.current_actor.action_menu.attack_selected.disconnect(_attack_selected)
-	_game.current_actor.action_menu.skill_selected.disconnect(_skill_selected)
-	_game.current_actor.action_menu.wait_selected.disconnect(_wait_selected)
+	_current_actor.action_menu.attack_selected.disconnect(_attack_selected)
+	_current_actor.action_menu.skill_selected.disconnect(_skill_selected)
+	_current_actor.action_menu.wait_selected.disconnect(_wait_selected)
 
 
 func handle_unhandled_input(_event: InputEvent) -> void:
@@ -42,8 +42,8 @@ func handle_unhandled_input(_event: InputEvent) -> void:
 
 func _choose_move() -> void:
 	var cell := _game.current_map.mouse_cell
-	if _game.current_actor.is_on_cell(cell):
-		_game.current_actor.open_action_menu()
+	if _current_actor.is_on_cell(cell):
+		_current_actor.open_action_menu()
 		_inner_state = _InnerState.ACTION_MENU
 	elif _game.current_walk_range.in_move_range(cell):
 		allow_input = false
@@ -53,22 +53,22 @@ func _choose_move() -> void:
 
 func _action_menu() -> void:
 	# Clicked outside of action menu
-	await _game.current_actor.close_action_menu()
+	await _current_actor.close_action_menu()
 	_inner_state = _InnerState.CHOOSE_MOVE
 
 
 func _attack_selected() -> void:
-	_start_skill_selected(_game.current_actor.attack_skill)
+	_start_skill_selected(_current_actor.attack_skill)
 
 
 func _skill_selected(skill_index: int) -> void:
-	_start_skill_selected(_game.current_actor.all_skills[skill_index])
+	_start_skill_selected(_current_actor.all_skills[skill_index])
 
 
 func _start_skill_selected(skill: Skill) -> void:
-	await _game.current_actor.close_action_menu()
+	await _current_actor.close_action_menu()
 
-	var targeting_data = skill.get_targeting_data(_game.current_actor)
+	var targeting_data = skill.get_targeting_data(_current_actor)
 
 	_game.map_highlights.clear_all()
 	_game.map_highlights.set_target_range(targeting_data.target_range, targeting_data.valid_targets)
@@ -86,5 +86,5 @@ func _start_skill_ended() -> void:
 
 
 func _wait_selected() -> void:
-	await _game.current_actor.close_action_menu()
+	await _current_actor.close_action_menu()
 	_wait()
