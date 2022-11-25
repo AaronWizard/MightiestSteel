@@ -23,9 +23,28 @@ const _SKILL_BUTTON_SEPARATION := _BUTTON_WIDTH + 2
 		_position_skill_buttons()
 
 
+var rect: Rect2:
+	get:
+		var result := Rect2()
+		if skill_count > 0:
+			result.position = _full_rect.get_screen_position()
+			result.size = _full_rect.size
+		elif _attack_button.visible:
+			result.position = _no_skills_rect.get_screen_position()
+			result.size = _no_skills_rect.size
+		else:
+			result.position = _wait_only_rect.get_screen_position()
+			result.size = _wait_only_rect.size
+		return result
+
+
 @onready var _attack_button: CanvasItem = $AttackButtonPos
 @onready var _skill_buttons: Node = $SkillButtonsPos
 @onready var _anim: AnimationPlayer = $AnimationPlayer
+
+@onready var _full_rect: Control = $FullRect
+@onready var _no_skills_rect: Control = $NoSkillsRect
+@onready var _wait_only_rect: Control = $WaitOnlyRect
 
 
 func open(actor: Actor) -> void:
