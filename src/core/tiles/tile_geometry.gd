@@ -1,6 +1,24 @@
 class_name TileGeometry
 
 
+static func get_line_cells(start: Vector2i, end: Vector2i) -> Array[Vector2i]:
+	var result: Array[Vector2i] = [start]
+
+	if end != start:
+		var diff := (end - start).abs()
+		var diagonal_dist := maxi(diff.x, diff.y)
+
+		var startf := Vector2(start)
+		for i in range(1, diagonal_dist):
+			var weight := float(i) / float(diagonal_dist)
+			var line_point := startf.lerp(end, weight)
+			result.append( Vector2i( line_point.round() ) )
+
+		result.append(end)
+
+	return result
+
+
 static func get_rect_cells(rect: Rect2i) -> Array[Vector2i]:
 	var result: Array[Vector2i] = []
 	for x in range(rect.position.x, rect.end.x):
@@ -12,7 +30,7 @@ static func get_rect_cells(rect: Rect2i) -> Array[Vector2i]:
 
 static func manhattan_distance(start: Vector2i, end: Vector2i) -> int:
 	var diff := (end - start).abs()
-	return int(diff.x + diff.y)
+	return diff.x + diff.y
 
 
 static func cells_in_range_rect(rect: Rect2i, min_dist: int, max_dist: int,
