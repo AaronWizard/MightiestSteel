@@ -181,6 +181,7 @@ func move_path(path: Array[Vector2i]) -> void:
 		_anim.play("move_step")
 		await _anim.animation_finished
 	_report_moves = true
+	moved.emit()
 
 
 func cooldown_skills() -> void:
