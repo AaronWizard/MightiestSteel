@@ -62,12 +62,14 @@ var stats: Stats:
 ## Not meant to be set directly. Use Map.add_actor and Map.remove_actor to
 ## change an actor's map.
 var map: Map:
+	get:
+		return _map
 	set(value):
-		if map and (self in map.actors):
+		if _map and (self in _map.actors):
 			push_error("Actor not removed from old map using Map.remove_actor")
 		if value and not (self in value.actors):
 			push_error("Actor not added to new map using Map.add_actor")
-		map = value
+		_map = value
 
 
 ## True if the actor is controlled by the player.
@@ -118,6 +120,8 @@ var all_skills: Array[Skill]:
 		return _skills.keys()
 
 
+var _map: Map
+
 var _virtual_origin_cell := Vector2i.ZERO
 var _using_virtual_origin_cell := false
 
@@ -148,7 +152,7 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
-	map = null
+	_map = null
 
 
 func open_action_menu() -> void:
