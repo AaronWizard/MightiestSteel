@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 func _init_rand() -> void:
-	var seed_number := 1668745511#int(Time.get_unix_time_from_system())
+	var seed_number := 1669585059#int(Time.get_unix_time_from_system())
 	seed(seed_number)
 	if OS.is_debug_build():
 		print("Random seed: %d" % seed_number)

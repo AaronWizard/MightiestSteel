@@ -52,4 +52,3 @@ func run(source_actor: Actor, target: Vector2i) -> void:
 
 	if source_actor.is_animating:
 		await source_actor.animation_finished
-		print("finished skill")

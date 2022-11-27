@@ -12,7 +12,7 @@ class _Turn:
 
 	var rank: int:
 		get:
-			return speed_mod
+			return speed_mod + actor.stats.speed
 
 
 	func _init(new_actor) -> void:
@@ -20,25 +20,12 @@ class _Turn:
 		speed_mod = randi_range(SPEED_MOD_MIN, SPEED_MOD_MAX)
 
 
-	static func compare(a: _Turn, b: _Turn) -> bool:
-		var result := false
-
-		if a.rank > b.rank:
-			result = true
-		elif (a.rank == b.rank) and a.actor.is_player_controlled \
-				and not b.actor.is_player_controlled:
-			# Player actors go first if all else are equal
-			result = true
-
-		return result
-
-
 var _turns: Array[_Turn] = []
 var _turn_index := -1
 
 
 func _ready() -> void:
-	pass
+	GameEvents.actor_died.connect(_actor_died)
 
 
 func roll_initiative(actors: Array[Actor]) -> void:
@@ -49,14 +36,37 @@ func roll_initiative(actors: Array[Actor]) -> void:
 		var turn := _Turn.new(a)
 		_turns.append(turn)
 
-	_turns.sort_custom(Callable(_Turn, "compare"))
+	_turns.sort_custom(_compare_turns)
 
 
 func next_turn() -> void:
 	var is_first_round := _turn_index == -1
 	_turn_index = (_turn_index + 1) % _turns.size()
 	if _turn_index == 0:
-		GameEvents.emit_round_started(is_first_round)
+		GameEvents.round_started.emit(is_first_round)
 
 	var turn := _turns[_turn_index]
-	GameEvents.emit_actor_started_turn(turn.actor)
+	GameEvents.actor_started_turn.emit(turn.actor)
+
+
+static func _compare_turns(a: _Turn, b: _Turn) -> bool:
+	var compare_rank := a.rank > b.rank
+	var compare_speed := a.actor.stats.speed > b.actor.stats.speed
+	var compare_is_player := a.actor.is_player_controlled \
+			and not b.actor.is_player_controlled
+
+	return compare_rank \
+			or (not compare_rank and compare_speed) \
+			or (not compare_rank and not compare_speed and compare_is_player)
+
+
+func _actor_died(actor: Actor) -> void:
+	var turns_to_remove: Array[_Turn] = []
+	for i in range(_turns.size()):
+		var turn := _turns[i]
+		if turn.actor == actor:
+			turns_to_remove.append(turn)
+			if i < _turn_index:
+				_turn_index -= 1
+	for t in turns_to_remove:
+		_turns.erase(t)

@@ -11,7 +11,7 @@ func start(_data: Dictionary) -> void:
 
 
 func end() -> void:
-	GameEvents.emit_actor_finished_turn(_current_actor)
+	GameEvents.actor_finished_turn.emit(_current_actor)
 
 
 func _show_move_range() -> void:
