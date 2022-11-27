@@ -240,3 +240,8 @@ func _round_started(is_first_round: bool):
 
 func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 	animation_finished.emit()
+
+
+func _on_stats_stamina_changed(old_stamina, new_stamina) -> void:
+	if new_stamina < old_stamina:
+		_anim.play("hit")

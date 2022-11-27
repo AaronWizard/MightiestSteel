@@ -1,7 +1,12 @@
-[gd_resource type="Resource" load_steps=4 format=3]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://bgxfojxbiqf8w"]
 
 [ext_resource type="Script" path="res://src/core/skills/skill.gd" id="1_ha1l8"]
+[ext_resource type="Script" path="res://src/core/skills/skill_effects/attack_actor.gd" id="1_uajm4"]
 [ext_resource type="Script" path="res://src/core/skills/target_ranges/cell_distance_range.gd" id="2_ahphp"]
+
+[sub_resource type="Resource" id="Resource_iou5u"]
+script = ExtResource("1_uajm4")
+start_delay = 0.0
 
 [sub_resource type="Resource" id="Resource_1d2n7"]
 script = ExtResource("2_ahphp")
@@ -16,4 +21,5 @@ name = "Attack"
 description = ""
 cooldown = 0
 target_range = SubResource("Resource_1d2n7")
+effect = SubResource("Resource_iou5u")
 use_attack_anim = true

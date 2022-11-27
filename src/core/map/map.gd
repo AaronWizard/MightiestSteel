@@ -34,7 +34,10 @@ var actors: Array[Actor]:
 
 
 func _ready() -> void:
-	_init_actors()
+	for a in actors:
+		a.map = self
+		a.stats.died.connect(_actor_died.bind(a))
+
 
 
 ## Terrain data at the given cell, or null if no data present
@@ -145,6 +148,7 @@ func actor_has_cover_at_cell(actor: Actor, cell: Vector2i) -> bool:
 	return defensive_tiles > clear_tiles
 
 
-func _init_actors() -> void:
-	for a in actors:
-		a.map = self
+func _actor_died(actor: Actor) -> void:
+	if actor.is_animating:
+		await actor.animation_finished
+	remove_actor(actor)

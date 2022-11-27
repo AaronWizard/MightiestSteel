@@ -7,7 +7,7 @@ extends Resource
 @export_range(1, 1, 1, "or_greater") var cooldown := 0
 
 @export var target_range: TargetRange
-#@export var effect: GameEffect
+@export var effect: SkillEffect
 
 @export var use_attack_anim := true
 
@@ -25,10 +25,13 @@ func get_targeting_data(source_actor: Actor,
 		valid_range = ranges.valid
 
 	var infos_by_target := {}
-#	for target_cell in valid_range:
-#		var target_info := effect.get_skill_target_info(
-#			source_actor.origin_cell, target_cell, source_actor)
-#		infos_by_target[target_cell] = target_info
+	if effect:
+		for target_cell in valid_range:
+			var target_info := effect.get_skill_target_info(
+				source_actor, target_cell, )
+			infos_by_target[target_cell] = target_info
+	else:
+		push_error("No effect set for '%s'" % resource_path)
 
 	source_actor.unset_virtual_origin_cell()
 
@@ -41,9 +44,12 @@ func run(source_actor: Actor, target: Vector2i) -> void:
 	if use_attack_anim:
 		source_actor.animate_attack(target)
 		await source_actor.attack_hit
-		print("attack hit")
+
+	if effect:
+		await effect.run(source_actor, target)
+	else:
+		push_error("No effect set for '%s'" % resource_path)
+
 	if source_actor.is_animating:
 		await source_actor.animation_finished
 		print("finished skill")
-#	await effect.run(source_actor.origin_cell, target, source_actor,
-#			source_actor.get_tree())

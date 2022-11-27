@@ -1,6 +1,11 @@
 class_name Stats
 extends Node
 
+
+signal stamina_changed(old_stamina: int, new_stamina: int)
+signal died
+
+
 enum StatTypes
 {
 	MAX_STAMINA, ## An actor's maximum stamina
@@ -35,6 +40,11 @@ var current_stamina: int:
 		return _current_stamina
 
 
+var is_alive: bool:
+	get:
+		return _current_stamina > 0
+
+
 var max_stamina: int:
 	get:
 		return get_stat(StatTypes.MAX_STAMINA)
@@ -61,8 +71,8 @@ var actions: int:
 
 
 var _base_stats := {}
-
 var _current_stamina: int
+
 
 func _ready() -> void:
 	@warning_ignore(return_value_discarded)
@@ -81,6 +91,21 @@ func init_from_definition(definition: ActorDefinition) -> void:
 
 func get_stat(stat_type: StatTypes) -> int:
 	return _base_stats[stat_type]
+
+
+func predict_damage(attack_power: int) -> int:
+	return attack_power
+
+
+func take_damage(attack_power: int) -> void:
+	var old_stamina := _current_stamina
+
+	var damage := predict_damage(attack_power)
+	_current_stamina -= damage
+
+	stamina_changed.emit(old_stamina, _current_stamina)
+	if not is_alive:
+		died.emit()
 
 
 func _round_started(is_first_round: bool) -> void:

@@ -4,6 +4,7 @@ extends Resource
 @export_range(0.0, 1.0, 0.001, "or_greater") var start_delay := 0.0
 
 
+## Can be overriden
 func get_skill_target_info(_source_actor: Actor, _target_cell: Vector2i) \
 		-> SkillTargetsData.TargetInfo:
 	return SkillTargetsData.TargetInfo.new([], {})
@@ -16,5 +17,6 @@ func run(source_actor: Actor, target_cell: Vector2i) -> void:
 	await _run(source_actor, target_cell)
 
 
+## Can be overriden
 func _run(_source_actor: Actor, _target_cell: Vector2i) -> void:
 	push_warning("GameEffect: Need to implement _run()")
