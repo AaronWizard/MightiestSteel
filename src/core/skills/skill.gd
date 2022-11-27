@@ -9,6 +9,8 @@ extends Resource
 @export var target_range: TargetRange
 #@export var effect: GameEffect
 
+@export var use_attack_anim := true
+
 
 func get_targeting_data(source_actor: Actor,
 		source_cell := source_actor.origin_cell) -> SkillTargetsData:
@@ -36,6 +38,12 @@ func get_targeting_data(source_actor: Actor,
 
 ## Assumes target is within the skill's range
 func run(source_actor: Actor, target: Vector2i) -> void:
-	pass
+	if use_attack_anim:
+		source_actor.animate_attack(target)
+		await source_actor.attack_hit
+		print("attack hit")
+	if source_actor.is_animating:
+		await source_actor.animation_finished
+		print("finished skill")
 #	await effect.run(source_actor.origin_cell, target, source_actor,
 #			source_actor.get_tree())
