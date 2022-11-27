@@ -6,7 +6,8 @@ enum _InnerState
 {
 	CHOOSE_MOVE,
 	ACTION_MENU,
-	CHOOSE_TARGET
+	CHOOSE_TARGET,
+	RUNNING_SKILL
 }
 
 var _inner_state: _InnerState = _InnerState.CHOOSE_MOVE
@@ -137,8 +138,7 @@ func _choose_target_input() -> void:
 	var cell := _game.current_map.mouse_cell
 	if _map_highlights.target_cursor.visible \
 			and (_map_highlights.target_cursor.origin_cell == cell):
-		_map_highlights.target_cursor.visible = false
-		_run_skill(_selected_skill, _map_highlights.target_cursor.origin_cell)
+		_start_run_skill()
 	elif _target_data.is_valid_target(cell):
 		_map_highlights.target_cursor.visible = true
 		_map_highlights.target_cursor.origin_cell = cell
@@ -156,6 +156,14 @@ func _start_skill_ended() -> void:
 	_game.ui.skill_info_panel.visible = false
 	_map_highlights.target_cursor.visible = false
 	_show_move_range()
+
+
+func _start_run_skill() -> void:
+	_inner_state = _InnerState.RUNNING_SKILL
+	_map_highlights.target_cursor.visible = false
+	_map_highlights.clear_all()
+	_game.ui.skill_info_panel.visible = false
+	_run_skill(_selected_skill, _map_highlights.target_cursor.origin_cell)
 
 
 func _wait_selected() -> void:
