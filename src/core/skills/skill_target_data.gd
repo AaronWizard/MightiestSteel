@@ -22,6 +22,7 @@ class TargetInfo:
 		_predicted_damage = new_predicted_damage
 
 
+	## Negative value indicate healing.
 	func get_predicted_damage(actor: Actor) -> int:
 		var result := 0
 		if _predicted_damage.has(actor):
