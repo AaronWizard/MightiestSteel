@@ -5,6 +5,8 @@ extends TileObject
 signal moved
 signal attack_hit
 
+signal animation_finished
+
 
 @export var sprite_texture: Texture2D:
 	get:
@@ -120,6 +122,11 @@ var all_skills: Array[Skill]:
 		return _skills.keys()
 
 
+var is_animating: bool:
+	get:
+		return _anim.is_playing()
+
+
 var _map: Map
 
 var _virtual_origin_cell := Vector2i.ZERO
@@ -184,6 +191,12 @@ func move_path(path: Array[Vector2i]) -> void:
 	moved.emit()
 
 
+func animate_attack(target: Vector2i) -> void:
+	facing = target
+	cell_offset_direction = target - origin_cell
+	_anim.play("attack")
+
+
 func cooldown_skills() -> void:
 	for s in _skills:
 		if _skills[s] > 0:
@@ -223,3 +236,7 @@ func _set_offset() -> void:
 func _round_started(is_first_round: bool):
 	if not is_first_round:
 		cooldown_skills()
+
+
+func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
+	animation_finished.emit()
