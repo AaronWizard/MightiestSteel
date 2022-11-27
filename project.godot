@@ -47,7 +47,7 @@ _global_script_classes=[{
 "base": "TargetRange",
 "class": &"CellDistanceRange",
 "language": &"GDScript",
-"path": "res://src/core/skills/target_range/cell_distance_range.gd"
+"path": "res://src/core/skills/target_ranges/cell_distance_range.gd"
 }, {
 "base": "RefCounted",
 "class": &"Constants",
@@ -69,15 +69,10 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/game/game_camera.gd"
 }, {
-"base": "Resource",
-"class": &"GameEffect",
-"language": &"GDScript",
-"path": "res://src/core/effects/game_effect.gd"
-}, {
-"base": "GameEffect",
+"base": "SkillEffect",
 "class": &"GameEffectGroup",
 "language": &"GDScript",
-"path": "res://src/core/effects/game_effect_group.gd"
+"path": "res://src/core/skills/skill_effects/skill_effect_group.gd"
 }, {
 "base": "State",
 "class": &"GameState",
@@ -118,6 +113,11 @@ _global_script_classes=[{
 "class": &"Skill",
 "language": &"GDScript",
 "path": "res://src/core/skills/skill.gd"
+}, {
+"base": "Resource",
+"class": &"SkillEffect",
+"language": &"GDScript",
+"path": "res://src/core/skills/skill_effect.gd"
 }, {
 "base": "PanelContainer",
 "class": &"SkillInfoPanel",
@@ -197,7 +197,6 @@ _global_script_class_icons={
 "Directions": "",
 "Game": "",
 "GameCamera": "",
-"GameEffect": "",
 "GameEffectGroup": "",
 "GameState": "",
 "GameUI": "",
@@ -207,6 +206,7 @@ _global_script_class_icons={
 "NextTurnState": "",
 "PlayerState": "",
 "Skill": "",
+"SkillEffect": "",
 "SkillInfoPanel": "",
 "SkillTargetsData": "",
 "State": "",
