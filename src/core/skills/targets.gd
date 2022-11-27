@@ -1,4 +1,4 @@
-class_name TargetType
+class_name Targets
 
 
 ## The types of cells that are valid targets.
@@ -26,7 +26,29 @@ enum Type {
 }
 
 
-static func is_valid_target(cell: Vector2i, target_type: Type,
+class TargetRangePair:
+	## The full and valid range of a skill or AOE.
+	##
+	## Paired because the valid range is a subset of the full range.
+
+	var full: Array[Vector2i]
+	var valid: Array[Vector2i]
+
+	func _init(new_full: Array[Vector2i], new_valid: Array[Vector2i]) -> void:
+		full = new_full
+		valid = new_valid
+
+
+static func get_valid_range(full_range: Array[Vector2i], target_type: Type,
+		source_actor: Actor) -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
+	for cell in full_range:
+		if _is_valid_target(cell, target_type, source_actor):
+			result.append(cell)
+	return result
+
+
+static func _is_valid_target(cell: Vector2i, target_type: Type,
 		source_actor: Actor) -> bool:
 	var result := false
 
