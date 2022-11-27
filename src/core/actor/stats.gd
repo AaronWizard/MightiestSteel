@@ -10,7 +10,7 @@ enum StatTypes
 {
 	MAX_STAMINA, ## An actor's maximum stamina
 	ATTACK, ## How much damage an actor's attacks do
-	MOVE, ## The max range in tiles an actor can move as an action
+	MOVE, ## The max range in cells an actor can move as an action
 	SPEED, ## Modifies an actor's turn initiative
 	ACTIONS ## How many actions (moves, attacks) an actor may take on its turn
 }
@@ -35,6 +35,7 @@ const _STAT_TO_MODIFIER := {
 }
 
 
+## An actor's current stamina
 var current_stamina: int:
 	get:
 		return _current_stamina
@@ -45,26 +46,31 @@ var is_alive: bool:
 		return _current_stamina > 0
 
 
+## An actor's maximum stamina
 var max_stamina: int:
 	get:
 		return get_stat(StatTypes.MAX_STAMINA)
 
 
+## How much damage an actor's attacks do
 var attack: int:
 	get:
 		return get_stat(StatTypes.ATTACK)
 
 
+## The max range in cells an actor can move as an action
 var move: int:
 	get:
 		return get_stat(StatTypes.MOVE)
 
 
+## Modifies an actor's turn initiative
 var speed: int:
 	get:
 		return get_stat(StatTypes.SPEED)
 
 
+## How many actions (moves, attacks) an actor may take on its turn
 var actions: int:
 	get:
 		return get_stat(StatTypes.ACTIONS)
