@@ -1,10 +1,10 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://ocopt1i817ny"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://c5xq10oyu8khe"]
 
 [ext_resource type="Script" path="res://src/core/skills/skill.gd" id="1_ha1l8"]
-[ext_resource type="Script" path="res://src/core/skills/cell_distance_range.gd" id="2_harn6"]
+[ext_resource type="Script" path="res://src/core/skills/target_range/cell_distance_range.gd" id="2_ahphp"]
 
 [sub_resource type="Resource" id="Resource_5xqt5"]
-script = ExtResource("2_harn6")
+script = ExtResource("2_ahphp")
 min_dist = 1
 max_dist = 1
 include_diagonals = true

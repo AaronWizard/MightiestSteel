@@ -42,7 +42,7 @@ _global_script_classes=[{
 "base": "TargetRange",
 "class": &"CellDistanceRange",
 "language": &"GDScript",
-"path": "res://src/core/skills/cell_distance_range.gd"
+"path": "res://src/core/skills/target_range/cell_distance_range.gd"
 }, {
 "base": "RefCounted",
 "class": &"Constants",

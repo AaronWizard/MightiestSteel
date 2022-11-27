@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://ckyo6v0tt0m1h"]
 
-[ext_resource type="Resource" uid="uid://ocopt1i817ny" path="res://src/data/skills/attacK_standard.tres" id="1_gcado"]
+[ext_resource type="Resource" uid="uid://c5xq10oyu8khe" path="res://src/data/skills/attacK_standard.tres" id="1_gcado"]
 [ext_resource type="Script" path="res://src/core/actor/actor_definition.gd" id="1_yaa4e"]
 
 [resource]
