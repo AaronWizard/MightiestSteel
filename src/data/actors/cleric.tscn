@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://n6osimqs3byb"]
+
+[ext_resource type="PackedScene" uid="uid://b58dvk04caev" path="res://src/core/actor/actor.tscn" id="1_8l4pn"]
+[ext_resource type="Texture2D" uid="uid://dt8dru7bjbokb" path="res://assets/graphics/actors/cleric.png" id="2_7w6ej"]
+[ext_resource type="Resource" uid="uid://bbyy5bifu0ki" path="res://src/data/actors/cleric_def.tres" id="3_8ikig"]
+
+[node name="s" instance=ExtResource("1_8l4pn")]
+sprite_texture = ExtResource("2_7w6ej")
+actor_name = "Cleric"
+definition = ExtResource("3_8ikig")
+
+[node name="Sprite" parent="Center/Offset" index="0"]
+texture = ExtResource("2_7w6ej")

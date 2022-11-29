@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://ctt11e15firma"]
+
+[ext_resource type="Resource" uid="uid://bgxfojxbiqf8w" path="res://src/data/skills/attack_standard.tres" id="1_1lhw4"]
+[ext_resource type="Script" path="res://src/core/actor/actor_definition.gd" id="1_h1sq8"]
+
+[resource]
+script = ExtResource("1_h1sq8")
+stamina = 4
+attack = 2.0
+move = 3.0
+speed = 0
+actions = 2
+attack_skill = ExtResource("1_1lhw4")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8xxyxdidawvf"]
+
+[ext_resource type="PackedScene" uid="uid://b58dvk04caev" path="res://src/core/actor/actor.tscn" id="1_r1fvh"]
+[ext_resource type="Texture2D" uid="uid://c7nrkwoeae7au" path="res://assets/graphics/actors/mage.png" id="2_dk18l"]
+[ext_resource type="Resource" uid="uid://ctt11e15firma" path="res://src/data/actors/mage_def.tres" id="3_re53c"]
+
+[node name="Mage" instance=ExtResource("1_r1fvh")]
+sprite_texture = ExtResource("2_dk18l")
+actor_name = "Mage"
+definition = ExtResource("3_re53c")
+
+[node name="Sprite" parent="Center/Offset" index="0"]
+texture = ExtResource("2_dk18l")

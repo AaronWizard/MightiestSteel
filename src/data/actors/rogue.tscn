@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkbf8pot4bh2f"]
+
+[ext_resource type="PackedScene" uid="uid://b58dvk04caev" path="res://src/core/actor/actor.tscn" id="1_u2lom"]
+[ext_resource type="Texture2D" uid="uid://de8cpuaeetubl" path="res://assets/graphics/actors/rogue.png" id="2_50vp3"]
+[ext_resource type="Resource" uid="uid://f40jou0xmwrl" path="res://src/data/actors/rogue_def.tres" id="3_qih1f"]
+
+[node name="Rogue" instance=ExtResource("1_u2lom")]
+sprite_texture = ExtResource("2_50vp3")
+actor_name = "Rogue"
+definition = ExtResource("3_qih1f")
+
+[node name="Sprite" parent="Center/Offset" index="0"]
+texture = ExtResource("2_50vp3")
