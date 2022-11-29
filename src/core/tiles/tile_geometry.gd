@@ -33,6 +33,12 @@ static func manhattan_distance(start: Vector2i, end: Vector2i) -> int:
 	return diff.x + diff.y
 
 
+static func cells_in_range(cell: Vector2i, min_dist: int, max_dist: int,
+		include_diagonals := true) -> Array[Vector2i]:
+	var rect := Rect2i(cell, Vector2i.ONE)
+	return cells_in_range_rect(rect, min_dist, max_dist, include_diagonals)
+
+
 static func cells_in_range_rect(rect: Rect2i, min_dist: int, max_dist: int,
 		include_diagonals := true) -> Array[Vector2i]:
 	assert(max_dist >= min_dist)
