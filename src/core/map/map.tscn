@@ -47,3 +47,5 @@ metadata/_edit_lock_ = true
 z_index = 1
 y_sort_enabled = true
 metadata/_edit_lock_ = true
+
+[node name="Effects" type="Node2D" parent="."]

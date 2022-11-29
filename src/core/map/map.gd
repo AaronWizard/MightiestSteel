@@ -31,6 +31,7 @@ var actors: Array[Actor]:
 
 @onready var _ground: TileMap = $Ground
 @onready var _actors: Node = $Actors
+@onready var _effects: Node = $Effects
 
 
 func _ready() -> void:
@@ -63,6 +64,10 @@ func get_cell_move_cost(cell: Vector2i, actor: Actor) -> int:
 			break
 
 	return result
+
+
+func add_effect(effect: Node2D) -> void:
+	_effects.add_child(effect)
 
 
 ## Adds an actor

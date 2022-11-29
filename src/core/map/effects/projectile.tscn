@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu610prekq6yh"]
+
+[ext_resource type="PackedScene" uid="uid://bo1e1gvqkrmql" path="res://src/core/tiles/tile_object.tscn" id="1_fw2b3"]
+[ext_resource type="Script" path="res://src/core/map/effects/projectile.gd" id="1_hs2jm"]
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource("1_hs2jm")
+
+[node name="Start" parent="." instance=ExtResource("1_fw2b3")]
+
+[node name="End" parent="." instance=ExtResource("1_fw2b3")]
+position = Vector2(24, 24)
+origin_cell = Vector2i(1, 0)
+
+[node name="Projectile" type="Node2D" parent="."]

@@ -37,6 +37,7 @@ var cell_rect: Rect2i:
 		return get_cell_rect_at_cell(origin_cell)
 
 
+## Local rectangle in pixels
 var pixel_rect: Rect2i:
 	get:
 		var rect_pos := Vector2i(0, -cell_size * Constants.TILE_SIZE)
@@ -58,6 +59,15 @@ var center_cell: Vector2:
 			var pixel_pos := position + _center.position
 			var cell_pos := pixel_pos / float(Constants.TILE_SIZE)
 			result = cell_pos - Vector2(0.5, 0.5)
+		return result
+
+
+## Pixel position of center
+var center_position: Vector2:
+	get:
+		var result := position
+		if _center:
+			result += _center.position
 		return result
 
 
