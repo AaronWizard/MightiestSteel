@@ -1,5 +1,9 @@
-class_name Targets
+class_name TargetRangeData
 
+## The full and valid range of a skill or AOE, along with affected actors.
+##
+## Combined because the valid range and affected actors are derived from the
+## full range.
 
 ## The types of cells that are valid targets.
 enum Type {
@@ -26,26 +30,42 @@ enum Type {
 }
 
 
-class TargetRangePair:
-	## The full and valid range of a skill or AOE.
-	##
-	## Paired because the valid range is a subset of the full range.
-
-	var full: Array[Vector2i]
-	var valid: Array[Vector2i]
-
-	func _init(new_full: Array[Vector2i], new_valid: Array[Vector2i]) -> void:
-		full = new_full
-		valid = new_valid
+## The full set of cells in range
+var full: Array[Vector2i]:
+	get:
+		return _full
 
 
-static func get_valid_range(full_range: Array[Vector2i], target_type: Type,
-		source_actor: Actor) -> Array[Vector2i]:
-	var result: Array[Vector2i] = []
-	for cell in full_range:
-		if _is_valid_target(cell, target_type, source_actor):
-			result.append(cell)
-	return result
+## The cells in range that will be affected by the target range or AOE
+var valid: Array[Vector2i]:
+	get:
+		return _valid
+
+
+## The actors with in the valid range
+var actors: Array[Actor]:
+	get:
+		return _actors
+
+
+var _full: Array[Vector2i]
+var _valid: Array[Vector2i]
+var _actors: Array[Actor]
+
+
+func _init(full_range: Array[Vector2i], target_type: Type,
+		source_actor: Actor) -> void:
+	_full = full_range
+	_init_valid_range(target_type, source_actor)
+	_actors = source_actor.map.get_actors_in_area(_valid)
+
+
+func _init_valid_range(target_type: Type,
+		source_actor: Actor) -> void:
+	_valid = []
+	for cell in _full:
+		if TargetRangeData._is_valid_target(cell, target_type, source_actor):
+			_valid.append(cell)
 
 
 static func _is_valid_target(cell: Vector2i, target_type: Type,
