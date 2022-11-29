@@ -106,6 +106,14 @@ func get_actor_on_cell(cell: Vector2i) -> Actor:
 	return result
 
 
+func get_actors_in_area(area: Array[Vector2i]) -> Array[Actor]:
+	var result := {}
+	for cell in area:
+		var actor := get_actor_on_cell(cell)
+		result[actor] = true
+	return result.keys()
+
+
 ## Checks if actor can occupy cell (as it's origin cell).
 ## Set ignore_allied_actors to allow actor to pass through allies.
 func actor_can_enter_cell(actor: Actor, cell: Vector2i,
