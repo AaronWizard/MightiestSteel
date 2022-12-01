@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=5 format=3]
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://tfgmp7yhy2nu"]
 
 [ext_resource type="PackedScene" uid="uid://b7ac40ai2p0e3" path="res://src/data/effects/projectile_arrow.tscn" id="1_57r4p"]
 [ext_resource type="Script" path="res://src/data/skills/scripts/attack_standard.gd" id="1_yktvy"]
