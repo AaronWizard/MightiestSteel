@@ -44,6 +44,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/skills/skill_effects/attack_actor.gd"
 }, {
+"base": "Skill",
+"class": &"AttackStandard",
+"language": &"GDScript",
+"path": "res://src/data/skills/scripts/attack_standard.gd"
+}, {
 "base": "RefCounted",
 "class": &"AwaitGroup",
 "language": &"GDScript",
@@ -212,6 +217,7 @@ _global_script_class_icons={
 "ActorControlState": "",
 "ActorDefinition": "",
 "AttackActor": "",
+"AttackStandard": "",
 "AwaitGroup": "",
 "CellDistanceAOE": "",
 "CellDistanceRange": "",

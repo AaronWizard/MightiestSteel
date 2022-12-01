@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://1xuhbji3o4gb"]
+
+[ext_resource type="PackedScene" uid="uid://b542k5ym7u30t" path="res://src/data/effects/projectile_fireball.tscn" id="1_ghb7d"]
+[ext_resource type="Script" path="res://src/data/skills/scripts/attack_standard.gd" id="2_n63yw"]
+[ext_resource type="Script" path="res://src/core/skills/target_ranges/cell_distance_range.gd" id="3_loril"]
+
+[sub_resource type="Resource" id="Resource_gnmbl"]
+script = ExtResource("3_loril")
+min_dist = 1
+max_dist = 2.0
+include_diagonals = true
+target_type = 2
+
+[resource]
+script = ExtResource("2_n63yw")
+projectile_scene = ExtResource("1_ghb7d")
+name = "Attack"
+description = ""
+cooldown = 0
+target_range = SubResource("Resource_gnmbl")
+use_attack_anim = true

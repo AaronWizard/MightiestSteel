@@ -1,5 +1,6 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://lb68sk72rjmv"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://lb68sk72rjmv"]
 
+[ext_resource type="Resource" uid="uid://dfvdy4lo4wq4w" path="res://src/data/skills/resources/attack_melee.tres" id="1_cl2hf"]
 [ext_resource type="Script" path="res://src/core/actor/actor_definition.gd" id="1_nsh0x"]
 
 [resource]
@@ -9,3 +10,4 @@ attack = 3.0
 move = 3.0
 speed = 2.0
 actions = 2
+attack_skill = ExtResource("1_cl2hf")

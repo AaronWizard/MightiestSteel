@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://f40jou0xmwrl"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://f40jou0xmwrl"]
 
 [ext_resource type="Script" path="res://src/core/actor/actor_definition.gd" id="1_4mje6"]
+[ext_resource type="Resource" path="res://src/data/skills/resources/attack_arrow.tres" id="1_451dg"]
 
 [resource]
 script = ExtResource("1_4mje6")
@@ -9,3 +10,4 @@ attack = 2.0
 move = 6.0
 speed = 3.0
 actions = 2
+attack_skill = ExtResource("1_451dg")
