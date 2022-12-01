@@ -7,7 +7,6 @@ extends Resource
 @export_range(1, 1, 1, "or_greater") var cooldown := 0
 
 @export var target_range: TargetRange
-@export var effect: SkillEffect
 
 @export var use_attack_anim := true
 
@@ -25,18 +24,13 @@ func get_targeting_data(source_actor: Actor,
 		valid_range = ranges.valid
 
 	var infos_by_target := {}
-	if effect:
-		for target_cell in valid_range:
-			var target_info := effect.get_skill_target_info(
-				source_actor, target_cell, )
-			infos_by_target[target_cell] = target_info
-	else:
-		push_error("No effect set for '%s'" % resource_path)
+	for target_cell in valid_range:
+		var target_info := _get_skill_target_info(source_actor, target_cell)
+		infos_by_target[target_cell] = target_info
 
 	source_actor.unset_virtual_origin_cell()
 
-	return SkillTargetsData.new(
-			source_cell, full_range, valid_range, infos_by_target)
+	return SkillTargetsData.new(full_range, valid_range, infos_by_target)
 
 
 ## Assumes target is within the skill's range
@@ -45,10 +39,19 @@ func run(source_actor: Actor, target: Vector2i) -> void:
 		source_actor.animate_attack(target)
 		await source_actor.attack_hit
 
-	if effect:
-		await effect.run(source_actor, target)
-	else:
-		push_error("No effect set for '%s'" % resource_path)
+	@warning_ignore(redundant_await)
+	await _run(source_actor, target)
 
 	if source_actor.is_animating:
 		await source_actor.animation_finished
+
+
+## Can be overriden
+func _get_skill_target_info(_source_actor: Actor, _target_cell: Vector2i) \
+		-> SkillTargetsData.TargetInfo:
+	return SkillTargetsData.TargetInfo.new([], {})
+
+
+## Can be overriden
+func _run(_source_actor: Actor, _target: Vector2i) -> void:
+	pass

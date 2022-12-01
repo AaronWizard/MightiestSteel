@@ -4,7 +4,12 @@ class_name SkillTargetsData
 ## skill's target range.
 
 class TargetInfo:
-	## Describe the AOE and predicted damage to any actors of a skill's target.
+	## Describe AOE and predicted damage of a skill's target.
+	##
+	## Gets the following information:
+	## - The full AOE of the target.
+	## - Predicted damage of all actors affected by the skill at this target.
+	##   Negative values are healing.
 
 	var aoe: Array[Vector2i]:
 		get:
@@ -42,13 +47,6 @@ class TargetInfo:
 				_predicted_damage[a] = other._predicted_damage[a]
 
 
-## The origin cell of the actor with the skill this SkillTargetsData is
-## describing.
-var source_cell: Vector2i:
-	get:
-		return _source_cell
-
-
 ## All cells that may potentially be targeted by the skill.
 ## What is shown on the map to the player.
 ##
@@ -69,17 +67,15 @@ var valid_targets: Array[Vector2i]:
 		return _valid_targets.keys()
 
 
-var _source_cell: Vector2i
 var _target_range: Array[Vector2i]
-var _valid_targets: Dictionary
-var _target_infos: Dictionary
+var _valid_targets: Dictionary # Keys are Vector2is.
+var _target_infos: Dictionary # Keys are Vector2is. Values are TargetInfos.
 
 
 ## For target_infos, keys are Vector2is and values are TargetInfos.
-func _init(new_source_cell: Vector2i, new_target_range: Array[Vector2i],
+func _init(new_target_range: Array[Vector2i],
 		new_valid_targets: Array[Vector2i], new_target_infos: Dictionary) \
 		-> void:
-	_source_cell = new_source_cell
 	_target_range = new_target_range
 
 	for c in new_valid_targets:
@@ -88,10 +84,13 @@ func _init(new_source_cell: Vector2i, new_target_range: Array[Vector2i],
 	_target_infos = new_target_infos
 
 
+## Returns true if given target is a valid target
 func is_valid_target(cell: Vector2i) -> bool:
 	return _valid_targets.has(cell)
 
 
+## Gets the TargetInfo of a valid target. TargetInfo describes the AOE and
+## predicted damage to any actors of the target.
 func get_target_info(target: Vector2i) -> TargetInfo:
 	var result: TargetInfo = null
 	if _target_infos.has(target):
