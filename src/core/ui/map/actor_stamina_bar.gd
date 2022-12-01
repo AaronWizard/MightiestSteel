@@ -1,8 +1,6 @@
 class_name ActorStaminaBar
 extends Node2D
 
-signal animations_finished
-
 const _CHANGE_PER_SECOND := 0.1
 const _CHANGE_DELAY := 0.25
 
@@ -53,19 +51,18 @@ func animate_change(delta: int) -> void:
 
 	if delta < 0:
 		_stamina.value = _current_value
-		_animate_bar(_change, old_stamina, _current_value)
+		await _animate_bar(_change, old_stamina, _current_value)
 	else:
 		_change.value = _current_value
-		_animate_bar(_stamina, old_stamina, _current_value)
+		await _animate_bar(_stamina, old_stamina, _current_value)
+
 
 func _animate_bar(bar: Range, old_value: int, new_value: int) -> void:
 	bar.value = old_value
 
 	var time := absf(new_value - old_value) * _CHANGE_PER_SECOND
-	var tween = get_tree().create_tween()
+	var tween := get_tree().create_tween()
 	tween.tween_property(bar, "value", new_value, time) \
 			.set_delay(_CHANGE_DELAY)
 	tween.tween_interval(_CHANGE_DELAY)
 	await tween.finished
-
-	animations_finished.emit()

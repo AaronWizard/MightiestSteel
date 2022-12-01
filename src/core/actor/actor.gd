@@ -143,6 +143,7 @@ var _skills := {}
 @onready var _anim: AnimationPlayer = $AnimationPlayer
 @onready var _offset: Node2D = $Center/Offset
 
+@onready var _stamina_bar: ActorStaminaBar = $Center/Offset/ActorStaminaBar
 @onready var _target_cursor: TileObject = $TargetCursor
 
 
@@ -153,7 +154,10 @@ func _ready() -> void:
 			_attack_skill = definition.attack_skill
 			for s in definition.skills:
 				_skills[s] = s.cooldown
+
 		_target_cursor.cell_size = cell_size
+		_stamina_bar.max_stamina = stats.max_stamina
+		_stamina_bar.set_to_full()
 
 		GameEvents.round_started.connect(_round_started)
 
@@ -211,6 +215,10 @@ func _update_size() -> void:
 	super()
 	if _target_cursor:
 		_target_cursor.cell_size = cell_size
+	if _stamina_bar:
+		_stamina_bar.position = Vector2(
+			0, (-cell_size * Constants.TILE_SIZE_V.y) / 2.0
+		)
 
 
 func _get_origin_cell() -> Vector2i:
@@ -238,13 +246,14 @@ func _round_started(is_first_round: bool):
 		cooldown_skills()
 
 
-func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
-	animation_finished.emit()
-
-
-func _on_stats_stamina_changed(old_stamina, new_stamina) -> void:
+func _on_stats_stamina_changed(old_stamina: int, new_stamina: int) -> void:
 	if new_stamina < old_stamina:
 		_anim.play("hit")
+
+	_stamina_bar.visible = true
+	await _stamina_bar.animate_change(new_stamina - old_stamina)
+	if _anim.is_playing():
+		await  _anim.animation_finished
 
 
 func _on_stats_died() -> void:
