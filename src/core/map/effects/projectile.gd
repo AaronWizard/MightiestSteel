@@ -32,7 +32,7 @@ func start_anim() -> void:
 	var total_time := float(dist) / float(speed)
 
 	if rotate_projectile:
-		_projectile.rotation = end_pos.angle_to_point(start_pos)
+		_projectile.rotation = start_pos.angle_to_point(end_pos)
 
 	await get_tree().create_tween() \
 		.tween_property(_projectile, "position", end_pos, total_time) \
