@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dx7bi5hfis2fp" path="res://assets/graphics/effects/arrow.png" id="2_lslsi"]
 
 [node name="Arrow" instance=ExtResource("1_84jmr")]
+rotate_projectile = true
 
 [node name="Arrow" type="Sprite2D" parent="Projectile" index="0"]
 texture = ExtResource("2_lslsi")
