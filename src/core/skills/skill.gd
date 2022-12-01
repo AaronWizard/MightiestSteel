@@ -53,5 +53,5 @@ func _get_skill_target_info(_source_actor: Actor, _target_cell: Vector2i) \
 
 
 ## Can be overriden
-func _run(_source_actor: Actor, _target: Vector2i) -> void:
+func _run(_source_actor: Actor, _target_cell: Vector2i) -> void:
 	pass
