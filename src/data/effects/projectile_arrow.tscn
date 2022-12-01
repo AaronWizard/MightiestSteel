@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7ac40ai2p0e3"]
+
+[ext_resource type="PackedScene" uid="uid://cu610prekq6yh" path="res://src/core/map/effects/projectile.tscn" id="1_84jmr"]
+[ext_resource type="Texture2D" uid="uid://dx7bi5hfis2fp" path="res://assets/graphics/effects/arrow.png" id="2_lslsi"]
+
+[node name="Arrow" instance=ExtResource("1_84jmr")]
+
+[node name="Arrow" type="Sprite2D" parent="Projectile" index="0"]
+texture = ExtResource("2_lslsi")

@@ -1,0 +1,41 @@
+[gd_scene load_steps=10 format=3 uid="uid://rb875hcy0rf5"]
+
+[ext_resource type="PackedScene" uid="uid://b343ic2rwblth" path="res://src/core/map/effects/tile_effect.tscn" id="1_sag6v"]
+[ext_resource type="Texture2D" uid="uid://ddmgfon6l4wfk" path="res://assets/graphics/effects/warp.png" id="2_ndel1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei1gs"]
+atlas = ExtResource("2_ndel1")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxhgb"]
+atlas = ExtResource("2_ndel1")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw0uj"]
+atlas = ExtResource("2_ndel1")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vhoj"]
+atlas = ExtResource("2_ndel1")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p0qi"]
+atlas = ExtResource("2_ndel1")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xci65"]
+atlas = ExtResource("2_ndel1")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_84dtg"]
+animations = [{
+"frames": [SubResource("AtlasTexture_ei1gs"), SubResource("AtlasTexture_mxhgb"), SubResource("AtlasTexture_nw0uj"), SubResource("AtlasTexture_6vhoj"), SubResource("AtlasTexture_2p0qi"), SubResource("AtlasTexture_xci65")],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="TileWarp" instance=ExtResource("1_sag6v")]
+
+[node name="AnimatedSprite2D" parent="Center" index="0"]
+frames = SubResource("SpriteFrames_84dtg")

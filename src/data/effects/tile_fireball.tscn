@@ -1,0 +1,41 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvf1iih21ot6r"]
+
+[ext_resource type="PackedScene" uid="uid://b343ic2rwblth" path="res://src/core/map/effects/tile_effect.tscn" id="1_3oc42"]
+[ext_resource type="Texture2D" uid="uid://88nlwk6v68sw" path="res://assets/graphics/effects/explosion.png" id="2_5nvcl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0wh7"]
+atlas = ExtResource("2_5nvcl")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkeuh"]
+atlas = ExtResource("2_5nvcl")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htkn8"]
+atlas = ExtResource("2_5nvcl")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5s4b7"]
+atlas = ExtResource("2_5nvcl")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emw68"]
+atlas = ExtResource("2_5nvcl")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xju8b"]
+atlas = ExtResource("2_5nvcl")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tneaw"]
+animations = [{
+"frames": [SubResource("AtlasTexture_i0wh7"), SubResource("AtlasTexture_wkeuh"), SubResource("AtlasTexture_htkn8"), SubResource("AtlasTexture_5s4b7"), SubResource("AtlasTexture_emw68"), SubResource("AtlasTexture_xju8b")],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="TileFireball" instance=ExtResource("1_3oc42")]
+
+[node name="AnimatedSprite2D" parent="Center" index="0"]
+frames = SubResource("SpriteFrames_tneaw")

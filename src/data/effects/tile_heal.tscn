@@ -1,0 +1,41 @@
+[gd_scene load_steps=10 format=3 uid="uid://bsxqsdfy36b07"]
+
+[ext_resource type="PackedScene" uid="uid://b343ic2rwblth" path="res://src/core/map/effects/tile_effect.tscn" id="1_4w7p7"]
+[ext_resource type="Texture2D" uid="uid://cbeibrrdu0elo" path="res://assets/graphics/effects/heal.png" id="2_xlqu0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uf1wl"]
+atlas = ExtResource("2_xlqu0")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_104yk"]
+atlas = ExtResource("2_xlqu0")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vakw"]
+atlas = ExtResource("2_xlqu0")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57bxn"]
+atlas = ExtResource("2_xlqu0")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0lkc"]
+atlas = ExtResource("2_xlqu0")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fgbf"]
+atlas = ExtResource("2_xlqu0")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e8dtw"]
+animations = [{
+"frames": [SubResource("AtlasTexture_uf1wl"), SubResource("AtlasTexture_104yk"), SubResource("AtlasTexture_0vakw"), SubResource("AtlasTexture_57bxn"), SubResource("AtlasTexture_a0lkc"), SubResource("AtlasTexture_4fgbf")],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="TileHeal" instance=ExtResource("1_4w7p7")]
+
+[node name="AnimatedSprite2D" parent="Center" index="0"]
+frames = SubResource("SpriteFrames_e8dtw")

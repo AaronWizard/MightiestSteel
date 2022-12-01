@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://b542k5ym7u30t"]
+
+[ext_resource type="PackedScene" uid="uid://cu610prekq6yh" path="res://src/core/map/effects/projectile.tscn" id="1_82m43"]
+[ext_resource type="Texture2D" uid="uid://88nlwk6v68sw" path="res://assets/graphics/effects/explosion.png" id="2_n1sc3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xud2s"]
+atlas = ExtResource("2_n1sc3")
+region = Rect2(24, 0, 24, 24)
+
+[node name="ProjectileFireball" instance=ExtResource("1_82m43")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Projectile" index="0"]
+texture = SubResource("AtlasTexture_xud2s")
