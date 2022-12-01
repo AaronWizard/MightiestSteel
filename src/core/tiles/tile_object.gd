@@ -76,6 +76,7 @@ var center_position: Vector2:
 
 func _ready():
 	origin_cell = origin_cell # Force snap to grid
+	cell_size = cell_size # Force cell size
 
 
 func _draw():
