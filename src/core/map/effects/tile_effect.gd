@@ -13,4 +13,5 @@ func start_anim() -> void:
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	finished.emit()
-	queue_free()
+	if not Engine.is_editor_hint():
+		queue_free()
