@@ -51,7 +51,7 @@ static func cells_in_range_rect(rect: Rect2i, min_dist: int, max_dist: int,
 
 	var corner_nw := rect.position
 	var corner_ne := rect.position + Vector2i(rect.size.x - 1, 0)
-	var corner_se := rect.end
+	var corner_se := rect.end - Vector2i.ONE
 	var corner_sw := rect.position + Vector2i(0, rect.size.y - 1)
 
 	# Side quadrants
