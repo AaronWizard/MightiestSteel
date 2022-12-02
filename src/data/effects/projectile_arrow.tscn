@@ -7,4 +7,6 @@
 rotate_projectile = true
 
 [node name="Arrow" type="Sprite2D" parent="Projectile" index="0"]
+position = Vector2(-15, -2)
 texture = ExtResource("2_lslsi")
+centered = false
