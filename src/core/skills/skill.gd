@@ -3,7 +3,8 @@ extends Resource
 
 @export var name := "Skill"
 @export var description := ""
-@export var icon: Texture2D
+@export var icon: Texture2D \
+		= preload("res://assets/graphics/ui/icons/attack.png")
 @export_range(1, 1, 1, "or_greater") var cooldown := 0
 
 @export var target_range: TargetRange

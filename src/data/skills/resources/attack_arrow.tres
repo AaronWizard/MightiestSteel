@@ -1,10 +1,11 @@
-[gd_resource type="Resource" load_steps=5 format=3 uid="uid://tfgmp7yhy2nu"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://tfgmp7yhy2nu"]
 
 [ext_resource type="PackedScene" uid="uid://b7ac40ai2p0e3" path="res://src/data/effects/projectile_arrow.tscn" id="1_57r4p"]
+[ext_resource type="Texture2D" uid="uid://c2d7emduicf3y" path="res://assets/graphics/ui/icons/attack.png" id="1_61yog"]
 [ext_resource type="Script" path="res://src/data/skills/scripts/attack_standard.gd" id="1_yktvy"]
 [ext_resource type="Script" path="res://src/core/skills/target_ranges/cell_distance_range.gd" id="3_ylwj4"]
 
-[sub_resource type="Resource" id="Resource_tdrmj"]
+[sub_resource type="Resource" id="Resource_faygc"]
 script = ExtResource("3_ylwj4")
 min_dist = 2.0
 max_dist = 2.0
@@ -16,6 +17,7 @@ script = ExtResource("1_yktvy")
 projectile_scene = ExtResource("1_57r4p")
 name = "Attack"
 description = ""
+icon = ExtResource("1_61yog")
 cooldown = 0
-target_range = SubResource("Resource_tdrmj")
+target_range = SubResource("Resource_faygc")
 use_attack_anim = true
