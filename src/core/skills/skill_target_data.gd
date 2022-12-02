@@ -11,9 +11,19 @@ class TargetInfo:
 	## - Predicted damage of all actors affected by the skill at this target.
 	##   Negative values are healing.
 
+
+	## The full AOE of the target.
 	var aoe: Array[Vector2i]:
 		get:
 			return _aoe
+
+
+	## Predicted damage of all actors affected by the skill at this target.
+	## Keys are Actors, values are ints. Negative values are healing.
+	var predicted_damage: Dictionary:
+		get:
+			return _predicted_damage
+
 
 	var _aoe: Array[Vector2i]
 	var _predicted_damage := {}
@@ -25,14 +35,6 @@ class TargetInfo:
 			-> void:
 		_aoe = new_aoe
 		_predicted_damage = new_predicted_damage
-
-
-	## Negative value indicate healing.
-	func get_predicted_damage(actor: Actor) -> int:
-		var result := 0
-		if _predicted_damage.has(actor):
-			result = _predicted_damage[actor]
-		return result
 
 
 	func add(other: TargetInfo) -> void:
