@@ -39,6 +39,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/actor/actor_definition.gd"
 }, {
+"base": "Control",
+"class": &"ActorPanel",
+"language": &"GDScript",
+"path": "res://src/core/ui/actor_panel.gd"
+}, {
 "base": "Node2D",
 "class": &"ActorStaminaBar",
 "language": &"GDScript",
@@ -221,6 +226,7 @@ _global_script_class_icons={
 "ActorActionsMenu": "",
 "ActorControlState": "",
 "ActorDefinition": "",
+"ActorPanel": "",
 "ActorStaminaBar": "",
 "AttackActor": "",
 "AttackStandard": "",

@@ -54,6 +54,21 @@ var virtual_origin_cell: Vector2i:
 			_using_virtual_origin_cell = true
 
 
+## The actor's portrait
+var portrait: Texture2D:
+	get:
+		var sprite := _sprite.texture
+		if sprite.get_size() != Vector2(Constants.TILE_SIZE_V):
+			var x := (sprite.get_size().x - Constants.TILE_SIZE) / 2
+
+			var result := AtlasTexture.new()
+			result.atlas = sprite
+			result.region = Rect2(Vector2(x, 0), Constants.TILE_SIZE_V)
+			return result
+		else:
+			return sprite
+
+
 ## The actor's stats
 var stats: Stats:
 	get:
