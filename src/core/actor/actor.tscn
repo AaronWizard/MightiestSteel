@@ -140,6 +140,7 @@ texture = ExtResource("3_tt4ao")
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Center/Offset" index="1"]
 
 [node name="ActorStaminaBar" parent="Center/Offset" index="2" instance=ExtResource("4_k1dgp")]
+visible = false
 position = Vector2(0, -12)
 
 [node name="ActorActionsMenu" parent="Center" index="1" instance=ExtResource("4_lrw8s")]

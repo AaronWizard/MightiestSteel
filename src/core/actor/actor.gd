@@ -131,13 +131,14 @@ var _map: Map
 
 var _virtual_origin_cell := Vector2i.ZERO
 var _using_virtual_origin_cell := false
-
 var _report_moves := true
 
 var _attack_skill: Skill = null
 
 # Keys are Skills. Values are cooldowns. Skill is valid when cooldown is 0.
 var _skills := {}
+
+var _is_animating := false
 
 @onready var _sprite: Sprite2D = $Center/Offset/Sprite
 @onready var _anim: AnimationPlayer = $AnimationPlayer
@@ -182,6 +183,8 @@ func unset_virtual_origin_cell() -> void:
 
 
 func move_path(path: Array[Vector2i]) -> void:
+	_is_animating = true
+
 	_report_moves = false
 	for next_cell in path:
 		facing = next_cell
@@ -194,11 +197,20 @@ func move_path(path: Array[Vector2i]) -> void:
 	_report_moves = true
 	moved.emit()
 
+	_is_animating = false
+	animation_finished.emit()
+
 
 func animate_attack(target: Vector2i) -> void:
+	_is_animating = true
+
 	facing = target
 	cell_offset_direction = target - origin_cell
 	_anim.play("attack")
+	await _anim.animation_finished
+
+	_is_animating = false
+	animation_finished.emit()
 
 
 func cooldown_skills() -> void:
@@ -247,13 +259,20 @@ func _round_started(is_first_round: bool):
 
 
 func _on_stats_stamina_changed(old_stamina: int, new_stamina: int) -> void:
+	_is_animating = true
+
 	if new_stamina < old_stamina:
 		_anim.play("hit")
 
 	_stamina_bar.visible = true
 	await _stamina_bar.animate_change(new_stamina - old_stamina)
+	_stamina_bar.visible = false
+
 	if _anim.is_playing():
-		await  _anim.animation_finished
+		await _anim.animation_finished
+
+	_is_animating = false
+	animation_finished.emit()
 
 
 func _on_stats_died() -> void:
