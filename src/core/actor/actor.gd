@@ -120,6 +120,18 @@ var target_visible: bool:
 		_target_cursor.visible = value
 
 
+var stamina_bar_modifier: int:
+	get:
+		var result := 0
+		if _stamina_bar:
+			result = _stamina_bar.modifier
+		return result
+	set(value):
+		if _stamina_bar:
+			_stamina_bar.modifier = value
+			_stamina_bar.visible = value != 0
+
+
 var action_menu: ActorActionsMenu:
 	get:
 		return $Center/ActorActionsMenu
