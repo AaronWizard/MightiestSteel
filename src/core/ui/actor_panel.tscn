@@ -14,35 +14,46 @@ offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i4ofb")
-metadata/_edit_group_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
 offset_left = 32.0
 offset_top = 5.0
 offset_right = 84.0
 offset_bottom = 29.0
 metadata/_edit_group_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 1
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 49.0
+offset_bottom = 21.0
 theme_override_constants/margin_top = 1
-theme_override_constants/margin_bottom = -3
 
-[node name="Name" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+offset_top = 1.0
+offset_right = 46.0
+offset_bottom = 18.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+offset_right = 46.0
+offset_bottom = 7.0
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_bottom = -2
+
+[node name="Name" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
-layout_mode = 2
+offset_left = 1.0
+offset_right = 46.0
+offset_bottom = 9.0
 text = "Actor Name"
 clip_text = true
 
-[node name="Stamina" type="TextureProgressBar" parent="PanelContainer/VBoxContainer"]
+[node name="Stamina" type="TextureProgressBar" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(46, 9)
-layout_mode = 2
+offset_top = 8.0
+offset_right = 46.0
+offset_bottom = 17.0
 value = 100.0
 nine_patch_stretch = true
 stretch_margin_left = 3
@@ -54,7 +65,6 @@ texture_progress = ExtResource("3_hqvu1")
 
 [node name="Portrait" type="Button" parent="."]
 unique_name_in_owner = true
-layout_mode = 2
 offset_right = 34.0
 offset_bottom = 34.0
 icon = ExtResource("1_3amch")
