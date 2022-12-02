@@ -1,8 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkbf8pot4bh2f"]
+[gd_scene load_steps=8 format=3 uid="uid://bkbf8pot4bh2f"]
 
-[ext_resource type="PackedScene" uid="uid://b58dvk04caev" path="res://src/core/actor/actor.tscn" id="1_u2lom"]
+[ext_resource type="PackedScene" path="res://src/core/actor/actor.tscn" id="1_u2lom"]
 [ext_resource type="Texture2D" uid="uid://de8cpuaeetubl" path="res://assets/graphics/actors/rogue.png" id="2_50vp3"]
 [ext_resource type="Resource" uid="uid://f40jou0xmwrl" path="res://src/data/actors/rogue_def.tres" id="3_qih1f"]
+[ext_resource type="Shader" path="res://src/core/shaders/disolve.gdshader" id="4_ob4no"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bku8o"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hsrq7"]
+width = 256
+height = 256
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_bku8o")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e2g42"]
+resource_local_to_scene = true
+shader = ExtResource("4_ob4no")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_hsrq7")
+shader_parameter/dissolve_value = 1.0
 
 [node name="Rogue" instance=ExtResource("1_u2lom")]
 sprite_texture = ExtResource("2_50vp3")
@@ -10,4 +25,5 @@ actor_name = "Rogue"
 definition = ExtResource("3_qih1f")
 
 [node name="Sprite" parent="Center/Offset" index="0"]
+material = SubResource("ShaderMaterial_e2g42")
 texture = ExtResource("2_50vp3")

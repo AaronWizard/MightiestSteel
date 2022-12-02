@@ -1,8 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://coyiiguyj4aft"]
+[gd_scene load_steps=8 format=3 uid="uid://coyiiguyj4aft"]
 
-[ext_resource type="PackedScene" uid="uid://b58dvk04caev" path="res://src/core/actor/actor.tscn" id="1_3x0x2"]
+[ext_resource type="PackedScene" path="res://src/core/actor/actor.tscn" id="1_3x0x2"]
 [ext_resource type="Texture2D" uid="uid://da4qakc3847vo" path="res://assets/graphics/actors/fighter.png" id="2_4p50m"]
 [ext_resource type="Resource" uid="uid://lb68sk72rjmv" path="res://src/data/actors/fighter_def.tres" id="3_cgvm1"]
+[ext_resource type="Shader" path="res://src/core/shaders/disolve.gdshader" id="4_c2rm6"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bku8o"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hsrq7"]
+width = 256
+height = 256
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_bku8o")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fhae4"]
+resource_local_to_scene = true
+shader = ExtResource("4_c2rm6")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_hsrq7")
+shader_parameter/dissolve_value = 1.0
 
 [node name="Fighter" instance=ExtResource("1_3x0x2")]
 sprite_texture = ExtResource("2_4p50m")
@@ -10,4 +25,5 @@ actor_name = "Fighter"
 definition = ExtResource("3_cgvm1")
 
 [node name="Sprite" parent="Center/Offset" index="0"]
+material = SubResource("ShaderMaterial_fhae4")
 texture = ExtResource("2_4p50m")

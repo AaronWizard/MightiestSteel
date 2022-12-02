@@ -1,8 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://n6osimqs3byb"]
+[gd_scene load_steps=8 format=3 uid="uid://n6osimqs3byb"]
 
-[ext_resource type="PackedScene" uid="uid://b58dvk04caev" path="res://src/core/actor/actor.tscn" id="1_8l4pn"]
+[ext_resource type="PackedScene" path="res://src/core/actor/actor.tscn" id="1_8l4pn"]
 [ext_resource type="Texture2D" uid="uid://dt8dru7bjbokb" path="res://assets/graphics/actors/cleric.png" id="2_7w6ej"]
 [ext_resource type="Resource" uid="uid://bbyy5bifu0ki" path="res://src/data/actors/cleric_def.tres" id="3_8ikig"]
+[ext_resource type="Shader" path="res://src/core/shaders/disolve.gdshader" id="4_h0j45"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bku8o"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hsrq7"]
+width = 256
+height = 256
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_bku8o")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q3hhk"]
+resource_local_to_scene = true
+shader = ExtResource("4_h0j45")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_hsrq7")
+shader_parameter/dissolve_value = 1.0
 
 [node name="s" instance=ExtResource("1_8l4pn")]
 sprite_texture = ExtResource("2_7w6ej")
@@ -10,4 +25,5 @@ actor_name = "Cleric"
 definition = ExtResource("3_8ikig")
 
 [node name="Sprite" parent="Center/Offset" index="0"]
+material = SubResource("ShaderMaterial_q3hhk")
 texture = ExtResource("2_7w6ej")
