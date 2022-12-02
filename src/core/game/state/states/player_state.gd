@@ -126,9 +126,8 @@ func _start_choose_target(skill: Skill) -> void:
 	_map_highlights.set_target_range(
 			_target_data.target_range, _target_data.valid_targets)
 
-	_game.ui.skill_info_panel.skill_name = skill.name
-	_game.ui.skill_info_panel.no_valid_targets = \
-			_target_data.valid_targets.is_empty()
+	_game.ui.skill_info_panel.set_skill(
+			skill, not _target_data.valid_targets.is_empty())
 	_game.ui.skill_info_panel.visible = true
 
 	_inner_state = _InnerState.CHOOSE_TARGET

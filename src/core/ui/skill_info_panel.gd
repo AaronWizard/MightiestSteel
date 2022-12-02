@@ -1,27 +1,21 @@
 class_name SkillInfoPanel
-extends PanelContainer
+extends Control
 
 signal cancelled
 
-
-var skill_name: String:
-	get:
-		return _skill_name.text
-	set(value):
-		_skill_name.text = value
+@onready var _skill_button: Button = $%SkillButton
+@onready var _skill_name: Label = $%SkillName
+@onready var _no_valid_targets: Control = $%NoValidTargets
 
 
-var no_valid_targets: bool:
-	get:
-		return _no_valid_targets.visible
-	set(value):
-		_no_valid_targets.visible = value
-		reset_size()
+func set_skill(skill: Skill, have_valid_targets: bool) -> void:
+	_skill_button.icon = skill.icon
+	_skill_name.text = skill.name
+	_no_valid_targets.visible = not have_valid_targets
 
 
-@onready var _skill_name: Label = $HBoxContainer/VBoxContainer/SkillName
-@onready var _no_valid_targets: Control = $HBoxContainer/VBoxContainer \
-		/NoValidTargets
+func _on_skill_button_pressed() -> void:
+	pass # Replace with function body.
 
 
 func _on_cancel_pressed() -> void:
