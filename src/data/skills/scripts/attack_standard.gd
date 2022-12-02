@@ -16,7 +16,7 @@ func _get_skill_target_info(source_actor: Actor, target_cell: Vector2i) \
 				source_actor.stats.attack)
 		result = SkillTargetsData.TargetInfo.new(
 			aoe,
-			{ target_actor: damage  }
+			{ target_actor: damage }
 		)
 
 	return result
