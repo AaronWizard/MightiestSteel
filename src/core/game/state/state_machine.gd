@@ -23,6 +23,7 @@ func change_state(state_name: String, data := {}) -> void:
 	if has_node(state_name):
 		_current_state.end()
 		_current_state = get_node(state_name)
+		_current_state.allow_input = true
 		_current_state.start(data)
 	else:
 		push_warning("State machine '%s' has no state with name '%s'"

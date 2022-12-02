@@ -12,7 +12,7 @@ _global_script_classes=[{
 "base": "ActorControlState",
 "class": &"AIState",
 "language": &"GDScript",
-"path": "res://src/core/game/state/states/ai_state.gd"
+"path": "res://src/core/game/state/states/actorcontrol/ai_state.gd"
 }, {
 "base": "Resource",
 "class": &"AOE",
@@ -32,7 +32,7 @@ _global_script_classes=[{
 "base": "GameState",
 "class": &"ActorControlState",
 "language": &"GDScript",
-"path": "res://src/core/game/state/states/actor_control_state.gd"
+"path": "res://src/core/game/state/states/actorcontrol/actor_control_state.gd"
 }, {
 "base": "Resource",
 "class": &"ActorDefinition",
@@ -130,9 +130,14 @@ _global_script_classes=[{
 "path": "res://src/core/game/state/states/next_turn_state.gd"
 }, {
 "base": "ActorControlState",
-"class": &"PlayerState",
+"class": &"PlayerMoveState",
 "language": &"GDScript",
-"path": "res://src/core/game/state/states/player_state.gd"
+"path": "res://src/core/game/state/states/actorcontrol/player_move_state.gd"
+}, {
+"base": "ActorControlState",
+"class": &"PlayerTargetState",
+"language": &"GDScript",
+"path": "res://src/core/game/state/states/actorcontrol/player_target_state.gd"
 }, {
 "base": "Node2D",
 "class": &"Projectile",
@@ -244,7 +249,8 @@ _global_script_class_icons={
 "MapHighlights": "",
 "MoveRangeFinder": "",
 "NextTurnState": "",
-"PlayerState": "",
+"PlayerMoveState": "",
+"PlayerTargetState": "",
 "Projectile": "",
 "Skill": "",
 "SkillEffect": "",
