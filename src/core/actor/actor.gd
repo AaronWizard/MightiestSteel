@@ -261,14 +261,18 @@ func _round_started(is_first_round: bool):
 func _on_stats_stamina_changed(old_stamina: int, new_stamina: int) -> void:
 	_is_animating = true
 
-	if new_stamina < old_stamina:
-		_anim.play("hit")
+	if stats.is_alive:
+		if new_stamina < old_stamina:
+			_anim.play("hit")
 
-	_stamina_bar.visible = true
-	await _stamina_bar.animate_change(new_stamina - old_stamina)
-	_stamina_bar.visible = false
+		_stamina_bar.visible = true
+		await _stamina_bar.animate_change(new_stamina - old_stamina)
+		_stamina_bar.visible = false
 
-	if _anim.is_playing():
+		if _anim.is_playing():
+			await _anim.animation_finished
+	else:
+		_anim.play("death")
 		await _anim.animation_finished
 
 	_is_animating = false

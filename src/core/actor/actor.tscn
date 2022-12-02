@@ -1,12 +1,27 @@
-[gd_scene load_steps=13 format=3 uid="uid://b58dvk04caev"]
+[gd_scene load_steps=18 format=3 uid="uid://b58dvk04caev"]
 
 [ext_resource type="PackedScene" uid="uid://bo1e1gvqkrmql" path="res://src/core/tiles/tile_object.tscn" id="1_svfmf"]
 [ext_resource type="Script" path="res://src/core/actor/actor.gd" id="2_bugic"]
 [ext_resource type="Texture2D" uid="uid://bkmm0fi6e46dy" path="res://assets/graphics/actors/hero.png" id="3_tt4ao"]
+[ext_resource type="Shader" path="res://src/core/actor/disolve.gdshader" id="4_6fbyk"]
 [ext_resource type="Script" path="res://src/core/actor/stats.gd" id="4_anapf"]
 [ext_resource type="PackedScene" uid="uid://bepmrhgkrymif" path="res://src/core/ui/map/actor_stamina_bar.tscn" id="4_k1dgp"]
 [ext_resource type="PackedScene" uid="uid://bku5l2cqk214v" path="res://src/core/ui/map/actor_actions_menu.tscn" id="4_lrw8s"]
 [ext_resource type="PackedScene" uid="uid://sog7m5dsfeo1" path="res://src/core/tiles/target_cursor.tscn" id="5_iao12"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bku8o"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hsrq7"]
+width = 256
+height = 256
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_bku8o")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t5vni"]
+resource_local_to_scene = true
+shader = ExtResource("4_6fbyk")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_hsrq7")
+shader_parameter/dissolve_value = 1.0
 
 [sub_resource type="Animation" id="Animation_fjdfb"]
 length = 0.001
@@ -45,6 +60,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Center/Offset/Sprite:material:shader_parameter/dissolve_value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_hk3o2"]
@@ -112,10 +139,28 @@ tracks/0/keys = {
 "values": [-1.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_rus08"]
+resource_name = "death"
+length = 0.6
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Center/Offset/Sprite:material:shader_parameter/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nalat"]
 _data = {
 "RESET": SubResource("Animation_fjdfb"),
 "attack": SubResource("Animation_hk3o2"),
+"death": SubResource("Animation_rus08"),
 "hit": SubResource("Animation_gbtt7"),
 "move_step": SubResource("Animation_d87ly")
 }
@@ -135,6 +180,7 @@ metadata/_edit_group_ = true
 [node name="Offset" type="Node2D" parent="Center" index="0"]
 
 [node name="Sprite" type="Sprite2D" parent="Center/Offset" index="0"]
+material = SubResource("ShaderMaterial_t5vni")
 texture = ExtResource("3_tt4ao")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Center/Offset" index="1"]
