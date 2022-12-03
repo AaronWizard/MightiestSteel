@@ -102,16 +102,16 @@ func is_on_cell(cell: Vector2i) -> bool:
 	return cell_rect.has_point(cell)
 
 
-func _update_size() -> void:
-	if _center:
-		_center.position = Vector2(1, -1) * Constants.TILE_HALF_SIZE_V \
-				* cell_size
-	queue_redraw()
-
-
 func _get_origin_cell() -> Vector2i:
 	return Vector2i(position / float(Constants.TILE_SIZE)) - Vector2i.DOWN
 
 
 func _set_origin_cell(cell: Vector2i) -> void:
 	position = (cell + Vector2i.DOWN) * Constants.TILE_SIZE
+
+
+func _update_size() -> void:
+	if _center:
+		_center.position = Vector2(1, -1) * Constants.TILE_HALF_SIZE_V \
+				* cell_size
+	queue_redraw()
