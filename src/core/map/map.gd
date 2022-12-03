@@ -38,8 +38,7 @@ var actors: Array[Actor]:
 
 func _ready() -> void:
 	for a in actors:
-		a.map = self
-		#a.stats.died.connect(_actor_died.bind(a))
+		_setup_added_actor(a)
 
 
 ## Map updates to run when a new round starts
@@ -87,14 +86,14 @@ func add_actor(actor: Actor) -> void:
 		other_map.remove_actor(actor)
 
 	_actors.add_child(actor)
-	actor.map = self
+	_setup_added_actor(actor)
 
 
 ## Removes an actor
 func remove_actor(actor: Actor) -> void:
 	assert(actor in _actors.get_children())
 	_actors.remove_child(actor)
-	actor.map = null
+	_setup_removed_actor(actor)
 
 
 ## Gets all actors belonging to the given faction
@@ -170,6 +169,20 @@ func actor_has_cover_at_cell(actor: Actor, cell: Vector2i) -> bool:
 			clear_tiles += 1
 
 	return defensive_tiles > clear_tiles
+
+
+func _setup_added_actor(actor: Actor) -> void:
+	actor.map = self
+	actor.moved.connect(_actor_moved.bind(actor))
+
+
+func _setup_removed_actor(actor: Actor) -> void:
+	actor.map = null
+	actor.moved.disconnect(_actor_moved)
+
+
+func _actor_moved(_actor: Actor) -> void:
+	pass
 
 
 func _actor_died(actor: Actor) -> void:

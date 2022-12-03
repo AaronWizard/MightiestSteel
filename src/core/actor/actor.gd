@@ -259,6 +259,7 @@ func move_path(path: Array[Vector2i]) -> void:
 	_is_animating = true
 
 	_report_moves = false
+
 	for next_cell in path:
 		facing = next_cell
 		cell_offset_direction = next_cell - origin_cell
@@ -267,8 +268,9 @@ func move_path(path: Array[Vector2i]) -> void:
 
 		_anim.play("move_step")
 		await _anim.animation_finished
+
 	_report_moves = true
-	#moved.emit()
+	moved.emit()
 
 	_is_animating = false
 	animation_finished.emit()
@@ -304,18 +306,6 @@ func start_round(is_first_round: bool) -> void:
 		cooldown_skills()
 
 
-func _update_size() -> void:
-	super()
-	if _target_cursor:
-		_target_cursor.cell_size = cell_size
-	if _other_target_cursor:
-		_other_target_cursor.cell_size = cell_size
-	if _stamina_bar:
-		_stamina_bar.position = Vector2(
-			0, (-cell_size * Constants.TILE_SIZE_V.y) / 2.0
-		)
-
-
 func _get_origin_cell() -> Vector2i:
 	if _using_virtual_origin_cell:
 		return virtual_origin_cell
@@ -326,8 +316,20 @@ func _get_origin_cell() -> Vector2i:
 func _set_origin_cell(cell: Vector2i) -> void:
 	unset_virtual_origin_cell()
 	super(cell)
-	#if _report_moves:
-		#moved.emit()
+	if _report_moves:
+		moved.emit()
+
+
+func _update_size() -> void:
+	super()
+	if _target_cursor:
+		_target_cursor.cell_size = cell_size
+	if _other_target_cursor:
+		_other_target_cursor.cell_size = cell_size
+	if _stamina_bar:
+		_stamina_bar.position = Vector2(
+			0, (-cell_size * Constants.TILE_SIZE_V.y) / 2.0
+		)
 
 
 func _set_offset() -> void:
