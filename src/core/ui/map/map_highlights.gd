@@ -10,6 +10,7 @@ const _TILE_ATLAS_AOE := Vector2i(0, 4)
 const _LAYER_MOVE := 0
 const _LAYER_OTHER := 1
 const _LAYER_TARGET := 2
+const _LAYER_AOE := 3
 
 
 var target_cursor: TileObject:
@@ -32,6 +33,10 @@ func set_target_range(cells: Array[Vector2i], valid_cells: Array[Vector2i]) \
 		-> void:
 	_set_tiles(cells, _LAYER_TARGET, _TILE_ATLAS_TARGET)
 	_set_tiles(valid_cells, _LAYER_TARGET, _TILE_ATLAS_VALID_TARGET, false)
+
+
+func set_aoe(cells: Array[Vector2i]) -> void:
+	_set_tiles(cells, _LAYER_AOE, _TILE_ATLAS_AOE)
 
 
 func clear_other_range() -> void:

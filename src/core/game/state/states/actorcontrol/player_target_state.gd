@@ -57,6 +57,7 @@ func handle_unhandled_input(event: InputEvent) -> void:
 func _set_target(cell: Vector2i) -> void:
 	_map_highlights.target_cursor.visible = true
 	_map_highlights.target_cursor.origin_cell = cell
+	_map_highlights.set_aoe(_target_data.get_target_info(cell).aoe)
 	_show_predicted_damage()
 
 
