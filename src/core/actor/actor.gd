@@ -15,6 +15,9 @@ signal attack_hit
 ## When any animation finishes. Includes movement and stamina bar animations.
 signal animation_finished
 
+## When actor runs out of stamina and has finished its death animation
+signal died
+
 
 const FACTION_PLAYER := 0
 
@@ -306,6 +309,20 @@ func start_round(is_first_round: bool) -> void:
 		cooldown_skills()
 
 
+## Predict how much damage the actor will take.
+## Takes into account attack power and source (i.e. direction) of attack
+func predict_damage(attack_power: int, _source_cell: Vector2i) -> int:
+	# TODO
+	return attack_power
+
+
+## Damage actor.
+## Takes into account attack power and source (i.e. direction) of attack
+func take_damage(attack_power: int, source_cell: Vector2i) -> void:
+	var damage := predict_damage(attack_power, source_cell)
+	stats.current_stamina -= damage
+
+
 func _get_origin_cell() -> Vector2i:
 	if _using_virtual_origin_cell:
 		return virtual_origin_cell
@@ -354,11 +371,7 @@ func _on_stats_stamina_changed(old_stamina: int, new_stamina: int) -> void:
 	else:
 		_anim.play("death")
 		await _anim.animation_finished
+		died.emit()
 
 	_is_animating = false
 	animation_finished.emit()
-
-
-func _on_stats_died() -> void:
-	pass
-	#GameEvents.actor_died.emit(self)

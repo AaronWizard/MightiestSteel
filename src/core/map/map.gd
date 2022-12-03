@@ -174,11 +174,13 @@ func actor_has_cover_at_cell(actor: Actor, cell: Vector2i) -> bool:
 func _setup_added_actor(actor: Actor) -> void:
 	actor.map = self
 	actor.moved.connect(_actor_moved.bind(actor))
+	actor.died.connect(_actor_died.bind(actor))
 
 
 func _setup_removed_actor(actor: Actor) -> void:
 	actor.map = null
 	actor.moved.disconnect(_actor_moved)
+	actor.died.disconnect(_actor_died)
 
 
 func _actor_moved(_actor: Actor) -> void:
@@ -186,6 +188,4 @@ func _actor_moved(_actor: Actor) -> void:
 
 
 func _actor_died(actor: Actor) -> void:
-	if actor.is_animating:
-		await actor.animation_finished
 	remove_actor(actor)

@@ -3,9 +3,7 @@ extends Node
 
 ## An actor's stats
 
-
-#signal stamina_changed(old_stamina: int, new_stamina: int)
-#signal died
+signal stamina_changed(old_stamina: int, new_stamina: int)
 
 ## Each stat type
 enum StatTypes
@@ -16,6 +14,7 @@ enum StatTypes
 	SPEED, ## Modifies an actor's turn initiative
 	ACTIONS ## How many actions (moves, attacks) an actor may take on its turn
 }
+
 
 ## Each modifier type.
 ##
@@ -45,12 +44,16 @@ const _STAT_TO_MODIFIER := {
 var current_stamina: int:
 	get:
 		return _current_stamina
+	set(value):
+		var old_stamina := _current_stamina
+		_current_stamina = value
+		stamina_changed.emit(old_stamina, _current_stamina)
 
 
 ## True if the actor still has stamina left
 var is_alive: bool:
 	get:
-		return _current_stamina > 0
+		return current_stamina > 0
 
 
 ## An actor's maximum stamina
@@ -101,18 +104,3 @@ func init_from_definition(definition: ActorDefinition) -> void:
 ## Get the value of the given type of stat
 func get_stat(stat_type: StatTypes) -> int:
 	return _base_stats[stat_type]
-
-
-func predict_damage(attack_power: int) -> int:
-	return attack_power
-
-
-func take_damage(attack_power: int) -> void:
-	var old_stamina := _current_stamina
-
-	var damage := predict_damage(attack_power)
-	_current_stamina -= damage
-
-	#stamina_changed.emit(old_stamina, _current_stamina)
-	#if not is_alive:
-		#died.emit()

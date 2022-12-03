@@ -12,8 +12,8 @@ func _get_skill_target_info(source_actor: Actor, target_cell: Vector2i) \
 	var target_actor := source_actor.map.get_actor_on_cell(target_cell)
 	if target_actor:
 		var aoe := target_actor.covered_cells
-		var damage := target_actor.stats.predict_damage(
-				source_actor.stats.attack)
+		var damage := target_actor.predict_damage(
+				source_actor.stats.attack, source_actor.center_cell)
 		result = SkillTargetsData.TargetInfo.new(
 			aoe,
 			{ target_actor: damage }
@@ -37,8 +37,7 @@ func _run(source_actor: Actor, target_cell: Vector2i) -> void:
 		source_actor.map.add_effect(projectile)
 		await projectile.start_anim()
 
-	var damage := target_actor.stats.predict_damage(source_actor.stats.attack)
-	target_actor.stats.take_damage(damage)
+	target_actor.take_damage(source_actor.stats.attack, source_actor.center_cell)
 
 	if target_actor.is_animating:
 		await target_actor.animation_finished
