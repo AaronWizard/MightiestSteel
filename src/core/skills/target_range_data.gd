@@ -6,7 +6,7 @@ class_name TargetRangeData
 ## full range.
 
 ## The types of cells that are valid targets.
-enum Type {
+enum TargetType {
 	## Any cells within the skill's full range
 	ANY,
 
@@ -53,40 +53,39 @@ var _valid: Array[Vector2i]
 var _actors: Array[Actor]
 
 
-func _init(full_range: Array[Vector2i], target_type: Type,
+func _init(full_range: Array[Vector2i], target_type: TargetType,
 		source_actor: Actor) -> void:
 	_full = full_range
 	_init_valid_range(target_type, source_actor)
 	_actors = source_actor.map.get_actors_in_area(_valid)
 
 
-func _init_valid_range(target_type: Type,
-		source_actor: Actor) -> void:
+func _init_valid_range(target_type: TargetType, source_actor: Actor) -> void:
 	_valid = []
 	for cell in _full:
 		if TargetRangeData._is_valid_target(cell, target_type, source_actor):
 			_valid.append(cell)
 
 
-static func _is_valid_target(cell: Vector2i, target_type: Type,
+static func _is_valid_target(cell: Vector2i, target_type: TargetType,
 		source_actor: Actor) -> bool:
 	var result := false
 
-	if target_type == Type.ENTERABLE_CELL:
+	if target_type == TargetType.ENTERABLE_CELL:
 		result = source_actor.map.actor_can_enter_cell(source_actor, cell)
 	else:
 		var actor_on_target := source_actor.map.get_actor_on_cell(cell)
 
 		match target_type:
-			Type.EMPTY_CELL:
+			TargetType.EMPTY_CELL:
 				result = actor_on_target == null
-			Type.ENEMY, Type.ALLY, Type.ANY_ACTOR:
+			TargetType.ENEMY, TargetType.ALLY, TargetType.ANY_ACTOR:
 				if actor_on_target:
 					match target_type:
-						Type.ENEMY:
+						TargetType.ENEMY:
 							result = actor_on_target.faction \
 									!= source_actor.faction
-						Type.ALLY:
+						TargetType.ALLY:
 							result = actor_on_target.faction \
 									== source_actor.faction
 						_:
@@ -94,7 +93,7 @@ static func _is_valid_target(cell: Vector2i, target_type: Type,
 				else:
 					result = false
 			_:
-				assert(target_type == Type.ANY)
+				assert(target_type == TargetType.ANY)
 				result = true
 
 	return result

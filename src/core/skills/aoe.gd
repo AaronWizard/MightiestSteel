@@ -3,7 +3,7 @@ extends Resource
 
 ## Gets the cells that in the AOE of a skill's target
 
-@export var target_type := TargetRangeData.Type.ANY
+@export var target_type := TargetRangeData.TargetType.ANY
 
 
 func get_aoe(target_cell: Vector2i, source_actor: Actor) -> TargetRangeData:

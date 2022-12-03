@@ -3,7 +3,7 @@ extends Resource
 
 ## Gets the cells that can be targeted by an actor's a skill.
 
-@export var target_type := TargetRangeData.Type.ANY
+@export var target_type := TargetRangeData.TargetType.ANY
 
 
 func get_range(source_actor: Actor) -> TargetRangeData:
