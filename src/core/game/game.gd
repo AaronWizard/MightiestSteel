@@ -1,6 +1,11 @@
 class_name Game
 extends Node
 
+## Manages the current map and battle.
+##
+## Loads and runs a battle map. Manages turns, keeps track of the current
+## actor, and holds the battle's UI.
+
 
 ## The currently loaded map
 var current_map: Map:
@@ -14,6 +19,7 @@ var current_actor: Actor:
 		return _current_actor
 
 
+## The movement range of the current actor
 var current_walk_range: WalkRange:
 	get:
 		return get_walk_range(_current_actor)
@@ -22,12 +28,6 @@ var current_walk_range: WalkRange:
 var map_highlights: MapHighlights:
 	get:
 		return $MapHighlights
-
-
-## The turn manager
-var turn_manager: TurnManager:
-	get:
-		return $TurnManager
 
 
 var camera: GameCamera:
@@ -46,19 +46,15 @@ var _current_walk_range: WalkRange
 
 @onready var _map_container := $MapContainer
 
+@onready var _turn_manager: TurnManager = $TurnManager
+
 @onready var _state_machine: StateMachine = $StateMachine
 @onready var _next_turn_state_name: String = $StateMachine/NextTurnState.name
 
 
-func _ready() -> void:
-	pass
-	#@warning_ignore(return_value_discarded)
-	#GameEvents.actor_started_turn.connect(_actor_started_turn)
-	#GameEvents.actor_finished_turn.connect(_actor_finished_turn)
-
-
+## Loads the given map scene and starts a battle.
 func load_map(new_map_scene: PackedScene) -> void:
-	_clear_turn_data()
+	_end_current_actor_turn()
 
 	if _current_map != null:
 		_unload_current_map()
@@ -69,7 +65,7 @@ func load_map(new_map_scene: PackedScene) -> void:
 	camera.set_bounds(_current_map.pixel_rect)
 
 	_set_initial_camera_position()
-	_start_battle.call_deferred()
+	_start_battle()
 
 
 func get_walk_range(actor: Actor) -> WalkRange:
@@ -82,6 +78,14 @@ func get_walk_range(actor: Actor) -> WalkRange:
 	else:
 		result = WalkRangeFactory.create_walk_range(actor, _current_map)
 	return result
+
+
+func advance_to_next_turn() -> void:
+	_end_current_actor_turn()
+	_current_actor = _turn_manager.advance_to_next_actor()
+
+	camera.position_smoothing_enabled = true
+	_current_actor.remote_transform.remote_path = camera.get_path()
 
 
 func _unload_current_map() -> void:
@@ -106,24 +110,11 @@ func _set_initial_camera_position() -> void:
 
 
 func _start_battle() -> void:
-	turn_manager.roll_initiative(_current_map.actors)
+	_turn_manager.roll_initiative(_current_map.actors)
 	_state_machine.change_state(_next_turn_state_name)
 
 
-func _actor_started_turn(actor: Actor) -> void:
-	assert(_current_actor == null)
-	_current_actor = actor
-
-	camera.position_smoothing_enabled = true
-	_current_actor.remote_transform.remote_path = camera.get_path()
-
-
-func _actor_finished_turn(actor: Actor) -> void:
-	assert(_current_actor == actor)
-	_clear_turn_data()
-
-
-func _clear_turn_data() -> void:
+func _end_current_actor_turn() -> void:
 	if _current_actor:
 		_current_actor.remote_transform.remote_path = NodePath()
 		_current_actor.target_visible = false

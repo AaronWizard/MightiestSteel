@@ -40,15 +40,10 @@ func roll_initiative(actors: Array[Actor]) -> void:
 	_turns.sort_custom(_compare_turns)
 
 
-func next_turn() -> void:
-	var is_first_round := _turn_index == -1
+func advance_to_next_actor() -> Actor:
 	_turn_index = (_turn_index + 1) % _turns.size()
-	if _turn_index == 0:
-		pass
-		#GameEvents.round_started.emit(is_first_round)
-
 	var turn := _turns[_turn_index]
-	#GameEvents.actor_started_turn.emit(turn.actor)
+	return turn.actor
 
 
 static func _compare_turns(a: _Turn, b: _Turn) -> bool:
