@@ -1,6 +1,7 @@
 class_name PlayerTargetState
 extends ActorControlState
 
+## The name of the state node for player movement
 @export var player_move_state_name: String
 
 
