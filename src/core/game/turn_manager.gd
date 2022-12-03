@@ -24,11 +24,6 @@ var _turns: Array[_Turn] = []
 var _turn_index := -1
 
 
-func _ready() -> void:
-	pass
-	#GameEvents.actor_died.connect(_actor_died)
-
-
 func roll_initiative(actors: Array[Actor]) -> void:
 	_turns.clear()
 	_turn_index = -1
@@ -46,18 +41,7 @@ func advance_to_next_actor() -> Actor:
 	return turn.actor
 
 
-static func _compare_turns(a: _Turn, b: _Turn) -> bool:
-	var compare_rank := a.rank > b.rank
-	var compare_speed := a.actor.stats.speed > b.actor.stats.speed
-	var compare_is_player := a.actor.is_player_controlled \
-			and not b.actor.is_player_controlled
-
-	return compare_rank \
-			or (not compare_rank and compare_speed) \
-			or (not compare_rank and not compare_speed and compare_is_player)
-
-
-func _actor_died(actor: Actor) -> void:
+func remove_actor(actor: Actor) -> void:
 	var turns_to_remove: Array[_Turn] = []
 	for i in range(_turns.size()):
 		var turn := _turns[i]
@@ -67,3 +51,14 @@ func _actor_died(actor: Actor) -> void:
 				_turn_index -= 1
 	for t in turns_to_remove:
 		_turns.erase(t)
+
+
+static func _compare_turns(a: _Turn, b: _Turn) -> bool:
+	var compare_rank := a.rank > b.rank
+	var compare_speed := a.actor.stats.speed > b.actor.stats.speed
+	var compare_is_player := a.actor.is_player_controlled \
+			and not b.actor.is_player_controlled
+
+	return compare_rank \
+			or (not compare_rank and compare_speed) \
+			or (not compare_rank and not compare_speed and compare_is_player)
