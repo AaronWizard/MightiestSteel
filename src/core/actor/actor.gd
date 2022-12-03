@@ -6,10 +6,17 @@ extends TileObject
 ##
 ## Manages its stats, skills, and animations.
 
-#signal moved
+## When the actor's origin cell changes
+signal moved
+
+## When the actor's attack animation reaches its "hit" frame
 signal attack_hit
 
+## When any animation finishes. Includes movement and stamina bar animations.
 signal animation_finished
+
+
+const FACTION_PLAYER := 0
 
 
 @export var sprite_texture: Texture2D:
@@ -20,31 +27,33 @@ signal animation_finished
 			_sprite.texture = value
 
 
-## Name of actor instance, independant of actor's node name.
+## Character name of actor, independant of actor's node name.
 @export var actor_name := "Actor"
 
 ## Faction ID. All factions are hostile to each other.
 ## A faction ID of 0 is controlled by the player.
-@export var faction := 0
+@export var faction := FACTION_PLAYER
 
 @export var definition: ActorDefinition
 
 @export_group("Animation")
 
 
+## Direction to shift actor sprite
 @export var cell_offset_direction := Vector2.ZERO:
 	set(value):
 		cell_offset_direction = value
 		_set_offset()
 
 
+## Distance in cells to shift actor sprite
 @export var cell_offset_distance := 0.0:
 	set(value):
 		cell_offset_distance = value
 		_set_offset()
 
 
-## Change actor's origin cell without changing its visible position nor
+## Change actor's origin cell without either changing its visible position nor
 ## triggering position-based events. Used for predicting skill effects.
 var virtual_origin_cell: Vector2i:
 	get:
@@ -97,9 +106,10 @@ var map: Map:
 ## An actor is player-controlled if its faction is 0.
 var is_player_controlled: bool:
 	get:
-		return faction == 0
+		return faction == FACTION_PLAYER
 
 
+## A RemoteTransform2D attached to the actor's sprite
 var remote_transform: RemoteTransform2D:
 	get:
 		return $Center/Offset/RemoteTransform2D
@@ -116,7 +126,7 @@ var facing: Vector2i:
 		# else change nothing
 
 
-## Toggle target that highlights actor.
+## Toggle target that highlights actor
 var target_visible: bool:
 	get:
 		return _target_cursor.visible
@@ -134,6 +144,7 @@ var other_target_visible: bool:
 		_other_target_cursor.visible = value
 
 
+## The modifier value of the actor's stamina bar
 var stamina_bar_modifier: int:
 	get:
 		var result := 0
@@ -146,6 +157,7 @@ var stamina_bar_modifier: int:
 			_stamina_bar.visible = value != 0
 
 
+## The actor's action menu
 var action_menu: ActorActionsMenu:
 	get:
 		return $Center/ActorActionsMenu
@@ -163,15 +175,30 @@ var all_skills: Array[Skill]:
 		return _skills.keys()
 
 
+## The actor's standard attack plus all skills with zero cooldown
+var active_skills: Array[Skill]:
+	get:
+		var result: Array[Skill] = []
+		if _attack_skill:
+			result.append(_attack_skill)
+		for s in _skills:
+			if _skills[s] == 0:
+				result.append(s)
+		return result
+
+
+## Returns true if actor in the middle of an animation
 var is_animating: bool:
 	get:
-		return _anim.is_playing()
+		return _is_animating
 
 
 var _map: Map
 
 var _virtual_origin_cell := Vector2i.ZERO
+# If true, virtual origin cell reported when accessing origin cell
 var _using_virtual_origin_cell := false
+# If true, actor will send moved signals when origin cell changed
 var _report_moves := true
 
 var _attack_skill: Skill = null
@@ -211,21 +238,25 @@ func _exit_tree() -> void:
 	_map = null
 
 
+## Open's the actor's action menu
 func open_action_menu() -> void:
 	action_menu.visible = true
 	await action_menu.open(self)
 
 
+## Closes the actor's action menu
 func close_action_menu() -> void:
 	await action_menu.close()
 	action_menu.visible = false
 
 
+## Clears the actor's virtual origin cell.
 func unset_virtual_origin_cell() -> void:
 	_virtual_origin_cell = Vector2.ZERO
 	_using_virtual_origin_cell = false
 
 
+## Moves the actor along the given path of cells
 func move_path(path: Array[Vector2i]) -> void:
 	_is_animating = true
 
@@ -245,6 +276,7 @@ func move_path(path: Array[Vector2i]) -> void:
 	animation_finished.emit()
 
 
+## Runs the actor's standard attack animation, aimed at the given target.
 func animate_attack(target: Vector2i) -> void:
 	_is_animating = true
 
@@ -257,12 +289,13 @@ func animate_attack(target: Vector2i) -> void:
 	animation_finished.emit()
 
 
+## Cooldowns all skills
 func cooldown_skills() -> void:
 	for s in _skills:
-		if _skills[s] > 0:
-			_skills[s] -= 1
+		_skills[s] = maxi(_skills[s] - 1, 0)
 
 
+## Returns true if the skill at the given index can be run
 func can_run_skill(skill_index: int) -> bool:
 	return _skills[skill_index] == 0
 
