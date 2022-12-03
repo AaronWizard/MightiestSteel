@@ -2,19 +2,13 @@ class_name GameUI
 extends CanvasLayer
 
 
-var actor_panel: ActorPanel:
-	get:
-		return $ActorPanel
-
-
-var other_actor_panel: ActorPanel:
-	get:
-		return $OtherActorPanel
-
-
 var skill_info_panel: SkillInfoPanel:
 	get:
 		return $SkillInfoPanel
+
+
+@onready var _actor_panel: ActorPanel = $ActorPanel
+@onready var _other_actor_panel: ActorPanel = $OtherActorPanel
 
 
 func _ready() -> void:
@@ -22,11 +16,21 @@ func _ready() -> void:
 	GameEvents.actor_finished_turn.connect(_actor_finished_turn)
 
 
+func show_other_actor(actor: Actor) -> void:
+	_other_actor_panel.set_actor(actor, true)
+	_other_actor_panel.visible = true
+
+
+func hide_other_actor() -> void:
+	_other_actor_panel.clear_actor()
+	_other_actor_panel.visible = false
+
+
 func _actor_started_turn(actor: Actor) -> void:
-	actor_panel.set_actor(actor, actor.is_player_controlled)
-	actor_panel.visible = true
+	_actor_panel.set_actor(actor, actor.is_player_controlled)
+	_actor_panel.visible = true
 
 
 func _actor_finished_turn(_actor: Actor) -> void:
-	actor_panel.clear_actor()
-	actor_panel.visible = false
+	_actor_panel.clear_actor()
+	_actor_panel.visible = false

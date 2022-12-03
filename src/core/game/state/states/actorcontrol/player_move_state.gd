@@ -7,7 +7,10 @@ extends ActorControlState
 @export var menu_events: ActorActionsMenuEvents \
 		= preload("res://src/core/ui/map/actor_actions_menu_events.tres")
 
+## The name of the state node for player skill targeting
 @export var player_target_state_name: String
+
+var _other_actor: Actor
 
 
 func _ready() -> void:
@@ -22,6 +25,9 @@ func start(_data: Dictionary) -> void:
 
 
 func end() -> void:
+	_other_actor = null
+	_game.ui.hide_other_actor()
+
 	_game.ui.skill_info_panel.visible = false
 	_game.camera.dragging_enabled = false
 
@@ -50,6 +56,15 @@ func _choose_move_input() -> void:
 		await _move_actor(cell)
 		_current_actor.target_visible = true
 		allow_input = true
+	else:
+		var other_actor := _game.current_map.get_actor_on_cell(cell)
+		if other_actor and (other_actor != _current_actor) \
+				and (other_actor != _other_actor):
+			_game.ui.show_other_actor(other_actor)
+			_other_actor = other_actor
+		else:
+			_game.ui.hide_other_actor()
+			_other_actor = null
 
 
 func _start_action_menu() -> void:
