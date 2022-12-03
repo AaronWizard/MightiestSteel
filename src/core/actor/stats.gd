@@ -80,12 +80,6 @@ var _base_stats := {}
 var _current_stamina: int
 
 
-func _ready() -> void:
-	pass
-	#@warning_ignore(return_value_discarded)
-	#GameEvents.round_started.connect(self._round_started)
-
-
 func init_from_definition(definition: ActorDefinition) -> void:
 	_base_stats[StatTypes.MAX_STAMINA] = definition.stamina
 	_base_stats[StatTypes.ATTACK] = definition.attack
@@ -113,8 +107,3 @@ func take_damage(attack_power: int) -> void:
 	#stamina_changed.emit(old_stamina, _current_stamina)
 	#if not is_alive:
 		#died.emit()
-
-
-func _round_started(is_first_round: bool) -> void:
-	if is_first_round:
-		_current_stamina = get_stat(StatTypes.MAX_STAMINA)
