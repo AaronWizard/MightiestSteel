@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dcwt0h6w0y4i"]
 
-[ext_resource type="PackedScene" path="res://src/core/actor/actor.tscn" id="1_2gkrj"]
+[ext_resource type="PackedScene" uid="uid://d2tmse3fwy84n" path="res://src/core/actor/actor.tscn" id="1_2gkrj"]
 [ext_resource type="Texture2D" uid="uid://t0neqgbekhi0" path="res://assets/graphics/actors/enemy_big.png" id="2_k5abh"]
 [ext_resource type="Resource" uid="uid://b8limbh5hf70k" path="res://src/data/actors/big_enemy_def.tres" id="3_f2t3s"]
 [ext_resource type="Shader" path="res://src/core/shaders/disolve.gdshader" id="4_62717"]
@@ -33,5 +33,11 @@ position = Vector2(24, -24)
 material = SubResource("ShaderMaterial_po18t")
 texture = ExtResource("2_k5abh")
 
+[node name="ActorStaminaBar" parent="Center/Offset" index="2"]
+position = Vector2(0, -24)
+
 [node name="TargetCursor" parent="." index="3"]
+cell_size = 2
+
+[node name="OtherTargetCursor" parent="." index="4"]
 cell_size = 2

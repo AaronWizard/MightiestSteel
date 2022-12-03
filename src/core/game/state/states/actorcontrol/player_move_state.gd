@@ -25,8 +25,7 @@ func start(_data: Dictionary) -> void:
 
 
 func end() -> void:
-	_other_actor = null
-	_game.ui.hide_other_actor()
+	_clear_other_actor()
 
 	_game.ui.skill_info_panel.visible = false
 	_game.camera.dragging_enabled = false
@@ -53,6 +52,7 @@ func _choose_move_input() -> void:
 		_start_action_menu()
 	elif _game.current_walk_range.in_move_range(cell):
 		allow_input = false
+		_clear_other_actor()
 		await _move_actor(cell)
 		_current_actor.target_visible = true
 		allow_input = true
@@ -60,11 +60,23 @@ func _choose_move_input() -> void:
 		var other_actor := _game.current_map.get_actor_on_cell(cell)
 		if other_actor and (other_actor != _current_actor) \
 				and (other_actor != _other_actor):
-			_game.ui.show_other_actor(other_actor)
-			_other_actor = other_actor
+			_highlight_other_actor(other_actor)
 		else:
-			_game.ui.hide_other_actor()
-			_other_actor = null
+			_clear_other_actor()
+
+
+func _highlight_other_actor(actor: Actor) -> void:
+	_clear_other_actor()
+	_other_actor = actor
+	_game.ui.show_other_actor(_other_actor)
+	_other_actor.other_target_visible = true
+
+
+func _clear_other_actor() -> void:
+	if _other_actor != null:
+		_game.ui.hide_other_actor()
+		_other_actor.other_target_visible = false
+		_other_actor = null
 
 
 func _start_action_menu() -> void:

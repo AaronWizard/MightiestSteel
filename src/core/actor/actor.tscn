@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene load_steps=19 format=3 uid="uid://d2tmse3fwy84n"]
 
 [ext_resource type="PackedScene" uid="uid://bo1e1gvqkrmql" path="res://src/core/tiles/tile_object.tscn" id="1_svfmf"]
 [ext_resource type="Script" path="res://src/core/actor/actor.gd" id="2_bugic"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bepmrhgkrymif" path="res://src/core/ui/map/actor_stamina_bar.tscn" id="4_k1dgp"]
 [ext_resource type="PackedScene" uid="uid://bku5l2cqk214v" path="res://src/core/ui/map/actor_actions_menu.tscn" id="4_lrw8s"]
 [ext_resource type="PackedScene" uid="uid://sog7m5dsfeo1" path="res://src/core/tiles/target_cursor.tscn" id="5_iao12"]
+[ext_resource type="PackedScene" uid="uid://ct42d77xpks3f" path="res://src/core/tiles/other_target_cursor.tscn" id="9_rtcm0"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bku8o"]
 
@@ -105,6 +106,35 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_x2wb0"]
+resource_name = "death"
+length = 0.36
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Center/Offset/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04, 0.08, 0.12, 0.2, 0.28, 0.36),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-4, -4), Vector2(4, 4), Vector2(-4, 0), Vector2(4, 0), Vector2(-4, 4), Vector2(4, -4), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Center/Offset/Sprite:material:shader_parameter/dissolve_value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.36),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
 [sub_resource type="Animation" id="Animation_gbtt7"]
 resource_name = "hit"
 length = 0.36
@@ -137,35 +167,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
 "values": [-1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_x2wb0"]
-resource_name = "death"
-length = 0.36
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Center/Offset/Sprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.02, 0.04, 0.08, 0.12, 0.2, 0.28, 0.36),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(-4, -4), Vector2(4, 4), Vector2(-4, 0), Vector2(4, 0), Vector2(-4, 4), Vector2(4, -4), Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Center/Offset/Sprite:material:shader_parameter/dissolve_value")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.36),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nalat"]
@@ -214,6 +215,11 @@ libraries = {
 script = ExtResource("4_anapf")
 
 [node name="TargetCursor" parent="." index="3" instance=ExtResource("5_iao12")]
+visible = false
+position = Vector2(0, 0)
+origin_cell = Vector2i(0, -1)
+
+[node name="OtherTargetCursor" parent="." index="4" instance=ExtResource("9_rtcm0")]
 visible = false
 position = Vector2(0, 0)
 origin_cell = Vector2i(0, -1)

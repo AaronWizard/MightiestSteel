@@ -112,12 +112,22 @@ var facing: Vector2i:
 		# else change nothing
 
 
-## Toggle target that highlights actor
+## Toggle target that highlights actor.
 var target_visible: bool:
 	get:
 		return _target_cursor.visible
 	set(value):
 		_target_cursor.visible = value
+
+
+## Toggle alternative target that highlights actor.
+## Meant for when another actor is already highlighted with its main target
+## cursor.
+var other_target_visible: bool:
+	get:
+		return _other_target_cursor.visible
+	set(value):
+		_other_target_cursor.visible = value
 
 
 var stamina_bar_modifier: int:
@@ -173,6 +183,7 @@ var _is_animating := false
 
 @onready var _stamina_bar: ActorStaminaBar = $Center/Offset/ActorStaminaBar
 @onready var _target_cursor: TileObject = $TargetCursor
+@onready var _other_target_cursor: TileObject = $OtherTargetCursor
 
 
 func _ready() -> void:
@@ -184,6 +195,8 @@ func _ready() -> void:
 				_skills[s] = s.cooldown
 
 		_target_cursor.cell_size = cell_size
+		_other_target_cursor.cell_size = cell_size
+
 		_stamina_bar.max_stamina = stats.max_stamina
 		_stamina_bar.set_to_full()
 
@@ -254,6 +267,8 @@ func _update_size() -> void:
 	super()
 	if _target_cursor:
 		_target_cursor.cell_size = cell_size
+	if _other_target_cursor:
+		_other_target_cursor.cell_size = cell_size
 	if _stamina_bar:
 		_stamina_bar.position = Vector2(
 			0, (-cell_size * Constants.TILE_SIZE_V.y) / 2.0
