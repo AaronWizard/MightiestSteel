@@ -38,13 +38,6 @@ func handle_unhandled_input(event: InputEvent) -> void:
 			_choose_move_input()
 
 
-func _show_move_range() -> void:
-	_current_actor.target_visible = true
-	_map_highlights.clear_all()
-	_map_highlights.set_move_range(
-			_game.current_walk_range.visible_move_range)
-
-
 func _choose_move_input() -> void:
 	var cell := _game.current_map.mouse_cell
 	if _current_actor.is_on_cell(cell):

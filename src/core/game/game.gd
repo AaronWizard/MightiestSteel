@@ -42,9 +42,7 @@ var ui: GameUI:
 
 var _current_map: Map = null
 var _current_actor: Actor = null
-
-# Keys are actors, values are WalkRanges
-var _walk_ranges := {}
+var _current_walk_range: WalkRange
 
 @onready var _map_container := $MapContainer
 
@@ -74,10 +72,15 @@ func load_map(new_map_scene: PackedScene) -> void:
 
 
 func get_walk_range(actor: Actor) -> WalkRange:
-	if not _walk_ranges.has(actor):
-		_walk_ranges[actor] = WalkRangeFactory.create_walk_range(
-				actor, _current_map)
-	return _walk_ranges[actor]
+	var result: WalkRange
+	if actor == _current_actor:
+		if not _current_walk_range:
+			_current_walk_range = WalkRangeFactory.create_walk_range(
+					_current_actor, _current_map)
+		result = _current_walk_range
+	else:
+		result = WalkRangeFactory.create_walk_range(actor, _current_map)
+	return result
 
 
 func _unload_current_map() -> void:
@@ -124,4 +127,5 @@ func _clear_turn_data() -> void:
 		_current_actor.remote_transform.remote_path = NodePath()
 		_current_actor.target_visible = false
 	_current_actor = null
-	_walk_ranges.clear()
+	_current_walk_range = null
+	map_highlights.clear_all()

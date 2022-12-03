@@ -40,6 +40,7 @@ func clear_other_range() -> void:
 
 func clear_all() -> void:
 	_highlights.clear()
+	target_cursor.visible = false
 
 
 func _set_tiles(cells: Array[Vector2i], layer: int, tile_atlas: Vector2i,

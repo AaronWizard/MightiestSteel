@@ -38,7 +38,6 @@ func start(data: Dictionary) -> void:
 
 func end() -> void:
 	_game.ui.skill_info_panel.visible = false
-	_map_highlights.target_cursor.visible = false
 
 	_clear_predicted_damage()
 
