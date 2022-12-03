@@ -87,6 +87,8 @@ func advance_to_next_turn() -> void:
 	camera.position_smoothing_enabled = true
 	_current_actor.remote_transform.remote_path = camera.get_path()
 
+	ui.start_actor_turn(_current_actor)
+
 
 func _unload_current_map() -> void:
 	_map_container.remove_child(_current_map)
@@ -121,3 +123,4 @@ func _end_current_actor_turn() -> void:
 	_current_actor = null
 	_current_walk_range = null
 	map_highlights.clear_all()
+	ui.end_current_actor_turn()
