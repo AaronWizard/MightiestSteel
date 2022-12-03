@@ -11,12 +11,6 @@ var skill_info_panel: SkillInfoPanel:
 @onready var _other_actor_panel: ActorPanel = $OtherActorPanel
 
 
-func _ready() -> void:
-	pass
-	#GameEvents.actor_started_turn.connect(_actor_started_turn)
-	#GameEvents.actor_finished_turn.connect(_actor_finished_turn)
-
-
 func start_actor_turn(actor: Actor) -> void:
 	_actor_panel.set_actor(actor, actor.is_player_controlled)
 	_actor_panel.visible = true
