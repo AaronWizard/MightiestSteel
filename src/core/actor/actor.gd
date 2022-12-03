@@ -2,7 +2,7 @@
 class_name Actor
 extends TileObject
 
-signal moved
+#signal moved
 signal attack_hit
 
 signal animation_finished
@@ -200,7 +200,7 @@ func _ready() -> void:
 		_stamina_bar.max_stamina = stats.max_stamina
 		_stamina_bar.set_to_full()
 
-		GameEvents.round_started.connect(_round_started)
+		#GameEvents.round_started.connect(_round_started)
 
 
 func _exit_tree() -> void:
@@ -235,7 +235,7 @@ func move_path(path: Array[Vector2i]) -> void:
 		_anim.play("move_step")
 		await _anim.animation_finished
 	_report_moves = true
-	moved.emit()
+	#moved.emit()
 
 	_is_animating = false
 	animation_finished.emit()
@@ -285,8 +285,8 @@ func _get_origin_cell() -> Vector2i:
 func _set_origin_cell(cell: Vector2i) -> void:
 	unset_virtual_origin_cell()
 	super(cell)
-	if _report_moves:
-		moved.emit()
+	#if _report_moves:
+		#moved.emit()
 
 
 func _set_offset() -> void:
@@ -295,9 +295,9 @@ func _set_offset() -> void:
 				* cell_offset_distance * Constants.TILE_SIZE
 
 
-func _round_started(is_first_round: bool):
-	if not is_first_round:
-		cooldown_skills()
+#func _round_started(is_first_round: bool):
+#	if not is_first_round:
+#		cooldown_skills()
 
 
 func _on_stats_stamina_changed(old_stamina: int, new_stamina: int) -> void:
@@ -322,4 +322,5 @@ func _on_stats_stamina_changed(old_stamina: int, new_stamina: int) -> void:
 
 
 func _on_stats_died() -> void:
-	GameEvents.actor_died.emit(self)
+	pass
+	#GameEvents.actor_died.emit(self)

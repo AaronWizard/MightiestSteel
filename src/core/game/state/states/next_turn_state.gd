@@ -8,8 +8,9 @@ extends GameState
 
 
 func _ready() -> void:
-	@warning_ignore(return_value_discarded)
-	GameEvents.actor_started_turn.connect(self._actor_started_turn)
+	pass
+	#@warning_ignore(return_value_discarded)
+	#GameEvents.actor_started_turn.connect(self._actor_started_turn)
 
 
 func start(_data: Dictionary) -> void:

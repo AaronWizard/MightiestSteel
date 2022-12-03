@@ -25,7 +25,8 @@ var _turn_index := -1
 
 
 func _ready() -> void:
-	GameEvents.actor_died.connect(_actor_died)
+	pass
+	#GameEvents.actor_died.connect(_actor_died)
 
 
 func roll_initiative(actors: Array[Actor]) -> void:
@@ -43,10 +44,11 @@ func next_turn() -> void:
 	var is_first_round := _turn_index == -1
 	_turn_index = (_turn_index + 1) % _turns.size()
 	if _turn_index == 0:
-		GameEvents.round_started.emit(is_first_round)
+		pass
+		#GameEvents.round_started.emit(is_first_round)
 
 	var turn := _turns[_turn_index]
-	GameEvents.actor_started_turn.emit(turn.actor)
+	#GameEvents.actor_started_turn.emit(turn.actor)
 
 
 static func _compare_turns(a: _Turn, b: _Turn) -> bool:

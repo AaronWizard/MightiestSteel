@@ -12,8 +12,9 @@ var skill_info_panel: SkillInfoPanel:
 
 
 func _ready() -> void:
-	GameEvents.actor_started_turn.connect(_actor_started_turn)
-	GameEvents.actor_finished_turn.connect(_actor_finished_turn)
+	pass
+	#GameEvents.actor_started_turn.connect(_actor_started_turn)
+	#GameEvents.actor_finished_turn.connect(_actor_finished_turn)
 
 
 func show_other_actor(actor: Actor) -> void:

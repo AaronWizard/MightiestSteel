@@ -223,6 +223,3 @@ origin_cell = Vector2i(0, -1)
 visible = false
 position = Vector2(0, 0)
 origin_cell = Vector2i(0, -1)
-
-[connection signal="died" from="Stats" to="." method="_on_stats_died"]
-[connection signal="stamina_changed" from="Stats" to="." method="_on_stats_stamina_changed"]

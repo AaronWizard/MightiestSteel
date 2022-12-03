@@ -37,7 +37,7 @@ var actors: Array[Actor]:
 func _ready() -> void:
 	for a in actors:
 		a.map = self
-		a.stats.died.connect(_actor_died.bind(a))
+		#a.stats.died.connect(_actor_died.bind(a))
 
 
 

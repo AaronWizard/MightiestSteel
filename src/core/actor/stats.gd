@@ -2,8 +2,8 @@ class_name Stats
 extends Node
 
 
-signal stamina_changed(old_stamina: int, new_stamina: int)
-signal died
+#signal stamina_changed(old_stamina: int, new_stamina: int)
+#signal died
 
 
 enum StatTypes
@@ -81,8 +81,9 @@ var _current_stamina: int
 
 
 func _ready() -> void:
-	@warning_ignore(return_value_discarded)
-	GameEvents.round_started.connect(self._round_started)
+	pass
+	#@warning_ignore(return_value_discarded)
+	#GameEvents.round_started.connect(self._round_started)
 
 
 func init_from_definition(definition: ActorDefinition) -> void:
@@ -109,9 +110,9 @@ func take_damage(attack_power: int) -> void:
 	var damage := predict_damage(attack_power)
 	_current_stamina -= damage
 
-	stamina_changed.emit(old_stamina, _current_stamina)
-	if not is_alive:
-		died.emit()
+	#stamina_changed.emit(old_stamina, _current_stamina)
+	#if not is_alive:
+		#died.emit()
 
 
 func _round_started(is_first_round: bool) -> void:

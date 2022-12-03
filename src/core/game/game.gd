@@ -51,9 +51,10 @@ var _current_walk_range: WalkRange
 
 
 func _ready() -> void:
-	@warning_ignore(return_value_discarded)
-	GameEvents.actor_started_turn.connect(_actor_started_turn)
-	GameEvents.actor_finished_turn.connect(_actor_finished_turn)
+	pass
+	#@warning_ignore(return_value_discarded)
+	#GameEvents.actor_started_turn.connect(_actor_started_turn)
+	#GameEvents.actor_finished_turn.connect(_actor_finished_turn)
 
 
 func load_map(new_map_scene: PackedScene) -> void:
