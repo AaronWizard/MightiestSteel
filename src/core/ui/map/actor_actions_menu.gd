@@ -11,8 +11,7 @@ const _SKILL_BUTTON_SEPARATION := _BUTTON_WIDTH + 2
 ## Multiple individual action menus may use the same events resource to allow
 ## menu events to be detected without connecting to individual menus. Assumes
 ## only one actor action menu is opened at a time.
-@export var menu_events: ActorActionsMenuEvents \
-		= preload("res://src/core/ui/map/actor_actions_menu_events.tres")
+@export var menu_events: ActorActionsMenuEvents
 
 
 ## How many skill buttons are visible. Assumes actors have a meximum of 4

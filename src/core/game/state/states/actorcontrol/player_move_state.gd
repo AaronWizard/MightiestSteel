@@ -4,8 +4,7 @@ extends ActorControlState
 ## The actor actions menu events resource for detecting action menu events
 ## without connecting to any actor's individual menu. Assumes only one actor
 ## action menu is opened at a time.
-@export var menu_events: ActorActionsMenuEvents \
-		= preload("res://src/core/ui/map/actor_actions_menu_events.tres")
+@export var menu_events: ActorActionsMenuEvents
 
 ## The name of the state node for player skill targeting
 @export var player_target_state_name: String

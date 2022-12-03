@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d05c05owf5ytg"]
+[gd_scene load_steps=13 format=3 uid="uid://d05c05owf5ytg"]
 
 [ext_resource type="Script" path="res://src/core/game/game.gd" id="1_woo5f"]
 [ext_resource type="PackedScene" uid="uid://b5n6gbsla3f1b" path="res://src/core/ui/map/map_highlights.tscn" id="2_efk31"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/core/game/state/states/next_turn_state.gd" id="5_t06j1"]
 [ext_resource type="Script" path="res://src/core/game/state/states/actorcontrol/player_move_state.gd" id="7_stft4"]
 [ext_resource type="Script" path="res://src/core/game/state/states/actorcontrol/player_target_state.gd" id="8_ektjb"]
+[ext_resource type="Resource" uid="uid://bkcxle6530nsw" path="res://src/core/ui/map/actor_actions_menu_events.tres" id="8_pk15j"]
 [ext_resource type="Script" path="res://src/core/game/state/states/actorcontrol/ai_state.gd" id="9_ugxjj"]
 [ext_resource type="Script" path="res://src/core/game/game_camera.gd" id="9_yaknd"]
 [ext_resource type="PackedScene" uid="uid://cgjgufo2hiapc" path="res://src/core/ui/game_ui.tscn" id="10_bmqpt"]
@@ -36,6 +37,7 @@ ai_state = "AIState"
 
 [node name="PlayerMoveState" type="Node" parent="StateMachine"]
 script = ExtResource("7_stft4")
+menu_events = ExtResource("8_pk15j")
 player_target_state_name = "PlayerTargetState"
 next_turn_state_name = "NextTurnState"
 

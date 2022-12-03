@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bku5l2cqk214v"]
+[gd_scene load_steps=9 format=3 uid="uid://bku5l2cqk214v"]
 
 [ext_resource type="Script" path="res://src/core/ui/map/actor_actions_menu.gd" id="1_vl1nn"]
+[ext_resource type="Resource" uid="uid://bkcxle6530nsw" path="res://src/core/ui/map/actor_actions_menu_events.tres" id="2_7nqjy"]
 [ext_resource type="Texture2D" uid="uid://c2d7emduicf3y" path="res://assets/graphics/ui/icons/attack.png" id="2_g8uqg"]
 [ext_resource type="Texture2D" uid="uid://bed15s1v72wwf" path="res://assets/graphics/ui/icons/wait.png" id="3_5yy00"]
 
@@ -170,6 +171,7 @@ _data = {
 
 [node name="ActorActionsMenu" type="Node2D"]
 script = ExtResource("1_vl1nn")
+menu_events = ExtResource("2_7nqjy")
 
 [node name="WaitButtonPos" type="Node2D" parent="."]
 metadata/_edit_group_ = true
