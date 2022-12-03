@@ -1,11 +1,13 @@
 class_name Stats
 extends Node
 
+## An actor's stats
+
 
 #signal stamina_changed(old_stamina: int, new_stamina: int)
 #signal died
 
-
+## Each stat type
 enum StatTypes
 {
 	MAX_STAMINA, ## An actor's maximum stamina
@@ -15,6 +17,10 @@ enum StatTypes
 	ACTIONS ## How many actions (moves, attacks) an actor may take on its turn
 }
 
+## Each modifier type.
+##
+## Distinct from stat types as a modifier may affect a value other than a stat,
+## such as defence which modifies incoming damage.
 enum ModifierTypes
 {
 	MAX_STAMINA,
@@ -41,6 +47,7 @@ var current_stamina: int:
 		return _current_stamina
 
 
+## True if the actor still has stamina left
 var is_alive: bool:
 	get:
 		return _current_stamina > 0
@@ -76,10 +83,11 @@ var actions: int:
 		return get_stat(StatTypes.ACTIONS)
 
 
-var _base_stats := {}
+var _base_stats := {} # Keys are StatTypes, values are ints
 var _current_stamina: int
 
 
+## Initializes stat values based on an ActorDefinition
 func init_from_definition(definition: ActorDefinition) -> void:
 	_base_stats[StatTypes.MAX_STAMINA] = definition.stamina
 	_base_stats[StatTypes.ATTACK] = definition.attack
@@ -90,6 +98,7 @@ func init_from_definition(definition: ActorDefinition) -> void:
 	_current_stamina = definition.stamina
 
 
+## Get the value of the given type of stat
 func get_stat(stat_type: StatTypes) -> int:
 	return _base_stats[stat_type]
 
