@@ -231,8 +231,6 @@ func _ready() -> void:
 		_stamina_bar.max_stamina = stats.max_stamina
 		_stamina_bar.set_to_full()
 
-		#GameEvents.round_started.connect(_round_started)
-
 
 func _exit_tree() -> void:
 	_map = null
@@ -300,6 +298,12 @@ func can_run_skill(skill_index: int) -> bool:
 	return _skills[skill_index] == 0
 
 
+## Actor updates to run when a new round starts
+func start_round(is_first_round: bool) -> void:
+	if not is_first_round:
+		cooldown_skills()
+
+
 func _update_size() -> void:
 	super()
 	if _target_cursor:
@@ -330,11 +334,6 @@ func _set_offset() -> void:
 	if _offset:
 		_offset.position = cell_offset_direction.normalized() \
 				* cell_offset_distance * Constants.TILE_SIZE
-
-
-#func _round_started(is_first_round: bool):
-#	if not is_first_round:
-#		cooldown_skills()
 
 
 func _on_stats_stamina_changed(old_stamina: int, new_stamina: int) -> void:

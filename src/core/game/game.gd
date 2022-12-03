@@ -84,9 +84,11 @@ func advance_to_next_turn() -> void:
 	_end_current_actor_turn()
 	_current_actor = _turn_manager.advance_to_next_actor()
 
+	if _turn_manager.current_turn_is_round_start:
+		_start_round()
+
 	camera.position_smoothing_enabled = true
 	_current_actor.remote_transform.remote_path = camera.get_path()
-
 	ui.start_actor_turn(_current_actor)
 
 
@@ -114,6 +116,10 @@ func _set_initial_camera_position() -> void:
 func _start_battle() -> void:
 	_turn_manager.roll_initiative(_current_map.actors)
 	_state_machine.change_state(_next_turn_state_name)
+
+
+func _start_round() -> void:
+	_current_map.start_round(_turn_manager.is_first_round)
 
 
 func _end_current_actor_turn() -> void:

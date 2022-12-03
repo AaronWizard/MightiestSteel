@@ -7,11 +7,13 @@ const _MOVE_COST_CLEAR := 1
 const _MOVE_COST_ROUGH := 2
 
 
+## The cell that the mouse is over
 var mouse_cell: Vector2i:
 	get:
 		return _ground.local_to_map(_ground.get_global_mouse_position())
 
 
+## The size of the map in pixels
 var pixel_rect: Rect2i:
 	get:
 		var rect := _ground.get_used_rect()
@@ -40,6 +42,11 @@ func _ready() -> void:
 		#a.stats.died.connect(_actor_died.bind(a))
 
 
+## Map updates to run when a new round starts
+func start_round(is_first_round: bool) -> void:
+	for a in actors:
+		a.start_round(is_first_round)
+
 
 ## Terrain data at the given cell, or null if no data present
 func get_terrain_data(cell: Vector2i) -> TerrainData:
@@ -54,6 +61,7 @@ func get_terrain_data(cell: Vector2i) -> TerrainData:
 	return result
 
 
+## Gets how many movement points an actor must spend to enter this cell
 func get_cell_move_cost(cell: Vector2i, actor: Actor) -> int:
 	var result := _MOVE_COST_CLEAR
 
@@ -66,6 +74,7 @@ func get_cell_move_cost(cell: Vector2i, actor: Actor) -> int:
 	return result
 
 
+## Adds an effect
 func add_effect(effect: Node2D) -> void:
 	_effects.add_child(effect)
 
@@ -88,6 +97,7 @@ func remove_actor(actor: Actor) -> void:
 	actor.map = null
 
 
+## Gets all actors belonging to the given faction
 func get_actors_by_faction(faction: int) -> Array[Actor]:
 	var result: Array[Actor] = []
 	for a in actors:
@@ -106,6 +116,7 @@ func get_actor_on_cell(cell: Vector2i) -> Actor:
 	return result
 
 
+## Gets all actors that are covered by any cell in the given set of cells
 func get_actors_in_area(area: Array[Vector2i]) -> Array[Actor]:
 	var result := {}
 	for cell in area:
