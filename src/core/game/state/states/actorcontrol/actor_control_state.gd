@@ -38,5 +38,4 @@ func _wait() -> void:
 
 func _end_turn() -> void:
 	await get_tree().create_timer(_ACTION_WAIT_TIME).timeout
-	#GameEvents.actor_finished_turn.emit(_current_actor)
 	request_state_change.emit(next_turn_state_name)
