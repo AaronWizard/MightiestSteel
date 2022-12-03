@@ -2,21 +2,29 @@
 class_name ActorActionsMenu
 extends Node2D
 
-signal attack_selected
-signal skill_selected(skill_index: int)
-signal wait_selected
-
-
 const _BUTTON_WIDTH := 26
 const _SKILL_BUTTON_SEPARATION := _BUTTON_WIDTH + 2
 
 
+## The actor actions menu events resource that will be sent this menu's actions.
+##
+## Multiple individual action menus may use the same events resource to allow
+## menu events to be detected without connecting to individual menus. Assumes
+## only one actor action menu is opened at a time.
+@export var menu_events: ActorActionsMenuEvents \
+		= preload("res://src/core/ui/map/actor_actions_menu_events.tres")
+
+
+## How many skill buttons are visible. Assumes actors have a meximum of 4
+## skills.
 @export_range(0, 4) var skill_count := 4:
 	set(value):
 		skill_count = value
 		_position_skill_buttons()
 
 
+## How much separation is between the skill buttons. Used for the open and close
+## animations.
 @export_range(0, 1) var skill_dist := 0.0:
 	set(value):
 		skill_dist = value
@@ -68,11 +76,12 @@ func close() -> void:
 
 func _on_attack_button_pressed() -> void:
 	if not _anim.is_playing():
-		attack_selected.emit()
+		menu_events.attack_selected.emit()
 
 
 func _on_wait_button_pressed() -> void:
-	wait_selected.emit()
+	if not _anim.is_playing():
+		menu_events.wait_selected.emit()
 
 
 func _on_skill_button_1_pressed() -> void:
@@ -106,4 +115,4 @@ func _position_skill_buttons() -> void:
 
 func _skill_selected(skill_index: int) -> void:
 	if not _anim.is_playing():
-		skill_selected.emit(skill_index)
+		menu_events.skill_selected.emit(skill_index)

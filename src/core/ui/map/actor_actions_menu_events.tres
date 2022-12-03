@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bkcxle6530nsw"]
+
+[ext_resource type="Script" path="res://src/core/ui/map/actor_actions_menu_events.gd" id="1_svwba"]
+
+[resource]
+script = ExtResource("1_svwba")

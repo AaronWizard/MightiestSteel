@@ -15,26 +15,27 @@ var _target_data: SkillTargetsData
 var _predicted_damage_actors: Array[Actor]
 
 
-func start(data: Dictionary) -> void:
+func _ready() -> void:
 	_game.ui.skill_info_panel.cancelled.connect(_start_skill_ended)
 
+
+func start(data: Dictionary) -> void:
 	_selected_skill = data.skill
 	_target_data = _selected_skill.get_targeting_data(_current_actor)
-
-	_game.camera.dragging_enabled = true
-	_current_actor.target_visible = false
-
-	_map_highlights.clear_all()
-	_map_highlights.set_target_range(
-			_target_data.target_range, _target_data.valid_targets)
 
 	_game.ui.skill_info_panel.set_skill(
 			_selected_skill, not _target_data.valid_targets.is_empty())
 	_game.ui.skill_info_panel.visible = true
 
+	_map_highlights.clear_all()
+	_map_highlights.set_target_range(
+			_target_data.target_range, _target_data.valid_targets)
+
+	_game.camera.dragging_enabled = true
+	_current_actor.target_visible = false
+
 
 func end() -> void:
-	_game.ui.skill_info_panel.cancelled.disconnect(_start_skill_ended)
 	_game.ui.skill_info_panel.visible = false
 	_map_highlights.target_cursor.visible = false
 

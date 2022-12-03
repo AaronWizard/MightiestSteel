@@ -29,6 +29,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/ui/map/actor_actions_menu.gd"
 }, {
+"base": "Resource",
+"class": &"ActorActionsMenuEvents",
+"language": &"GDScript",
+"path": "res://src/core/ui/map/actor_actions_menu_events.gd"
+}, {
 "base": "GameState",
 "class": &"ActorControlState",
 "language": &"GDScript",
@@ -229,6 +234,7 @@ _global_script_class_icons={
 "AOE": "",
 "Actor": "",
 "ActorActionsMenu": "",
+"ActorActionsMenuEvents": "",
 "ActorControlState": "",
 "ActorDefinition": "",
 "ActorPanel": "",

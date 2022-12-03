@@ -1,23 +1,27 @@
 class_name PlayerMoveState
 extends ActorControlState
 
+## The actor actions menu events resource for detecting action menu events
+## without connecting to any actor's individual menu. Assumes only one actor
+## action menu is opened at a time.
+@export var menu_events: ActorActionsMenuEvents \
+		= preload("res://src/core/ui/map/actor_actions_menu_events.tres")
+
 @export var player_target_state_name: String
 
 
-func start(_data: Dictionary) -> void:
-	_current_actor.action_menu.attack_selected.connect(_attack_selected)
-	_current_actor.action_menu.skill_selected.connect(_skill_selected)
-	_current_actor.action_menu.wait_selected.connect(_wait_selected)
+func _ready() -> void:
+	menu_events.attack_selected.connect(_attack_selected)
+	menu_events.skill_selected.connect(_skill_selected)
+	menu_events.wait_selected.connect(_wait_selected)
 
+
+func start(_data: Dictionary) -> void:
 	_game.camera.dragging_enabled = true
 	_show_move_range()
 
 
 func end() -> void:
-	_current_actor.action_menu.attack_selected.disconnect(_attack_selected)
-	_current_actor.action_menu.skill_selected.disconnect(_skill_selected)
-	_current_actor.action_menu.wait_selected.disconnect(_wait_selected)
-
 	_game.ui.skill_info_panel.visible = false
 	_game.camera.dragging_enabled = false
 
