@@ -2,6 +2,10 @@
 class_name Actor
 extends TileObject
 
+## An actor.
+##
+## Manages its stats, skills, and animations.
+
 #signal moved
 signal attack_hit
 
