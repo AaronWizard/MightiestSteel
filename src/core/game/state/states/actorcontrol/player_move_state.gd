@@ -67,12 +67,16 @@ func _choose_move_input() -> void:
 func _highlight_other_actor(actor: Actor) -> void:
 	_clear_other_actor()
 	_other_actor = actor
-	_game.ui.show_other_actor(_other_actor)
+
 	_other_actor.other_target_visible = true
+	_game.ui.show_other_actor(_other_actor)
+	_map_highlights.set_other_move_range(
+			_game.get_walk_range(_other_actor).visible_move_range)
 
 
 func _clear_other_actor() -> void:
 	if _other_actor != null:
+		_map_highlights.clear_other_range()
 		_game.ui.hide_other_actor()
 		_other_actor.other_target_visible = false
 		_other_actor = null
