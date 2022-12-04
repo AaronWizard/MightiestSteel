@@ -175,7 +175,7 @@ var attack_skill: Skill:
 ## All non-attack skills regardless of cooldown
 var all_skills: Array[Skill]:
 	get:
-		return _skills.keys()
+		return _skills.duplicate()
 
 
 ## The actor's standard attack plus all skills with zero cooldown
@@ -184,9 +184,11 @@ var active_skills: Array[Skill]:
 		var result: Array[Skill] = []
 		if _attack_skill:
 			result.append(_attack_skill)
-		for s in _skills:
-			if _skills[s] == 0:
-				result.append(s)
+
+		for i in range(_skills.size()):
+			if _skill_cooldowns[i] == 0:
+				result.append(_skills[i])
+
 		return result
 
 
@@ -206,8 +208,8 @@ var _report_moves := true
 
 var _attack_skill: Skill = null
 
-# Keys are Skills. Values are cooldowns. Skill is valid when cooldown is 0.
-var _skills := {}
+var _skills: Array[Skill] = []
+var _skill_cooldowns := {} # Keys are ints, values are ints
 
 var _is_animating := false
 
@@ -225,8 +227,9 @@ func _ready() -> void:
 		if definition:
 			stats.init_from_definition(definition)
 			_attack_skill = definition.attack_skill
-			for s in definition.skills:
-				_skills[s] = s.cooldown
+			_skills = definition.skills
+			for i in range(_skills.size()):
+				_skill_cooldowns[i] = _skills[i].cooldown
 
 		_target_cursor.cell_size = cell_size
 		_other_target_cursor.cell_size = cell_size
@@ -294,13 +297,13 @@ func animate_attack(target: Vector2i) -> void:
 
 ## Cooldowns all skills
 func cooldown_skills() -> void:
-	for s in _skills:
-		_skills[s] = maxi(_skills[s] - 1, 0)
+	for i in _skill_cooldowns:
+		_skill_cooldowns[i] = maxi(_skill_cooldowns[i] - 1, 0)
 
 
 ## Returns true if the skill at the given index can be run
 func can_run_skill(skill_index: int) -> bool:
-	return _skills[skill_index] == 0
+	return _skill_cooldowns[skill_index] == 0
 
 
 ## Actor updates to run when a new round starts
