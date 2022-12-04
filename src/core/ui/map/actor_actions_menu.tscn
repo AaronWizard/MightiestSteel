@@ -209,6 +209,21 @@ grow_horizontal = 2
 grow_vertical = 2
 icon = ExtResource("2_g8uqg")
 
+[node name="RoundsLeft" type="Label" parent="SkillButtonsPos/Pos4/SkillButton4"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -10.0
+offset_right = -4.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "99"
+horizontal_alignment = 2
+
 [node name="Pos3" type="Node2D" parent="SkillButtonsPos"]
 
 [node name="SkillButton3" type="Button" parent="SkillButtonsPos/Pos3"]
@@ -224,6 +239,21 @@ offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 icon = ExtResource("2_g8uqg")
+
+[node name="RoundsLeft" type="Label" parent="SkillButtonsPos/Pos3/SkillButton3"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -10.0
+offset_right = -4.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "99"
+horizontal_alignment = 2
 
 [node name="Pos2" type="Node2D" parent="SkillButtonsPos"]
 
@@ -241,6 +271,21 @@ grow_horizontal = 2
 grow_vertical = 2
 icon = ExtResource("2_g8uqg")
 
+[node name="RoundsLeft" type="Label" parent="SkillButtonsPos/Pos2/SkillButton2"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -10.0
+offset_right = -4.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "99"
+horizontal_alignment = 2
+
 [node name="Pos1" type="Node2D" parent="SkillButtonsPos"]
 
 [node name="SkillButton1" type="Button" parent="SkillButtonsPos/Pos1"]
@@ -256,6 +301,21 @@ offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 icon = ExtResource("2_g8uqg")
+
+[node name="RoundsLeft" type="Label" parent="SkillButtonsPos/Pos1/SkillButton1"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -10.0
+offset_right = -4.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "99"
+horizontal_alignment = 2
 
 [node name="AttackButtonPos" type="Node2D" parent="."]
 metadata/_edit_group_ = true

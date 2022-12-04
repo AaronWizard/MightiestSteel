@@ -62,9 +62,14 @@ func open(actor: Actor) -> void:
 
 	for i in range(skill_count):
 		var node_index := _button_node_index(i)
+
 		var button: Button = _skill_buttons.get_child(node_index).get_child(0)
 		button.disabled = not actor.can_run_skill(i)
 		button.icon = actor.all_skills[i].icon
+
+		var label: Label = button.get_child(0)
+		label.visible = button.disabled
+		label.text = str(actor.get_skill_cooldown(i))
 
 	_anim.play("open")
 	await _anim.animation_finished

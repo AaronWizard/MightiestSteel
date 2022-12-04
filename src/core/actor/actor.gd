@@ -303,7 +303,11 @@ func cooldown_skills() -> void:
 
 ## Returns true if the skill at the given index can be run
 func can_run_skill(skill_index: int) -> bool:
-	return _skill_cooldowns[skill_index] == 0
+	return get_skill_cooldown(skill_index) == 0
+
+
+func get_skill_cooldown(skill_index: int) -> int:
+	return _skill_cooldowns[skill_index]
 
 
 ## Actor updates to run when a new round starts
