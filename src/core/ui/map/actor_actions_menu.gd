@@ -61,8 +61,10 @@ func open(actor: Actor) -> void:
 	skill_count = actor.all_skills.size()
 
 	for i in range(skill_count):
-		var button: Button = _skill_buttons.get_child(i).get_child(0)
+		var node_index := _button_node_index(i)
+		var button: Button = _skill_buttons.get_child(node_index).get_child(0)
 		button.disabled = not actor.can_run_skill(i)
+		button.icon = actor.all_skills[i].icon
 
 	_anim.play("open")
 	await _anim.animation_finished
@@ -103,13 +105,17 @@ func _position_skill_buttons() -> void:
 	var button_shift := (_SKILL_BUTTON_SEPARATION * (skill_count - 1)) / 2.0
 	if _skill_buttons:
 		for i in range(0, _skill_buttons.get_child_count()):
-			var node_index := _skill_buttons.get_child_count() - i - 1
+			var node_index := _button_node_index(i)
 			var button: Node2D = _skill_buttons.get_child(node_index)
 
 			button.visible = i < skill_count
 			var button_x := ((_SKILL_BUTTON_SEPARATION * i) - button_shift) \
 					* skill_dist
 			button.position.x = button_x
+
+
+func _button_node_index(index: int) -> int:
+	return _skill_buttons.get_child_count() - index - 1
 
 
 func _skill_selected(skill_index: int) -> void:
