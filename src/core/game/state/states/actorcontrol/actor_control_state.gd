@@ -27,7 +27,6 @@ func _move_actor(cell: Vector2) -> void:
 
 
 func _run_skill(skill: Skill, target: Vector2i) -> void:
-	@warning_ignore(redundant_await)
 	await skill.run(_current_actor, target)
 	_end_turn()
 
