@@ -1,10 +1,6 @@
 class_name Projectile
 extends Node2D
 
-
-signal finished
-
-
 ## Sprite speed. In cells per second.
 @export_range(0.001, 100, 0.001, "or_greater") var speed := 8
 @export var rotate_projectile := false
@@ -24,7 +20,7 @@ var end: TileObject:
 @onready var _projectile: Node2D = $Projectile
 
 
-func start_anim() -> void:
+func play() -> void:
 	var start_pos := start.center_position
 	var end_pos := end.center_position
 
@@ -40,5 +36,4 @@ func start_anim() -> void:
 		.set_trans(trans_type).set_ease(ease_type) \
 		.finished
 
-	finished.emit()
 	queue_free()

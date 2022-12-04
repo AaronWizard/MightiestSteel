@@ -15,6 +15,7 @@ target_type = 2
 [resource]
 script = ExtResource("1_yktvy")
 projectile_scene = ExtResource("1_57r4p")
+tile_effect_range_type = 0
 name = "Attack"
 description = ""
 icon = ExtResource("1_61yog")

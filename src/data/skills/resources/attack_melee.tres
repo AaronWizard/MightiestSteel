@@ -13,6 +13,7 @@ target_type = 2
 
 [resource]
 script = ExtResource("1_4lqgn")
+tile_effect_range_type = 0
 name = "Attack"
 description = ""
 icon = ExtResource("1_1oc5x")

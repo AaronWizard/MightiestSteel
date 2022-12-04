@@ -2,16 +2,11 @@
 class_name TileEffect
 extends TileObject
 
-signal finished
-
 @onready var _anim: AnimatedSprite2D = $Center/AnimatedSprite2D
 
 
-func start_anim() -> void:
+func play() -> void:
 	_anim.play()
-
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	finished.emit()
+	await _anim.animation_finished
 	if not Engine.is_editor_hint():
 		queue_free()
