@@ -54,11 +54,6 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/ui/map/actor_stamina_bar.gd"
 }, {
-"base": "SkillEffect",
-"class": &"AttackActor",
-"language": &"GDScript",
-"path": "res://src/core/skills/skill_effects/attack_actor.gd"
-}, {
 "base": "Skill",
 "class": &"AttackStandard",
 "language": &"GDScript",
@@ -98,11 +93,6 @@ _global_script_classes=[{
 "class": &"GameCamera",
 "language": &"GDScript",
 "path": "res://src/core/game/game_camera.gd"
-}, {
-"base": "SkillEffect",
-"class": &"GameEffectGroup",
-"language": &"GDScript",
-"path": "res://src/core/skills/skill_effects/skill_effect_group.gd"
 }, {
 "base": "State",
 "class": &"GameState",
@@ -153,11 +143,6 @@ _global_script_classes=[{
 "class": &"Skill",
 "language": &"GDScript",
 "path": "res://src/core/skills/skill.gd"
-}, {
-"base": "Resource",
-"class": &"SkillEffect",
-"language": &"GDScript",
-"path": "res://src/core/skills/skill_effect.gd"
 }, {
 "base": "Control",
 "class": &"SkillInfoPanel",
@@ -239,7 +224,6 @@ _global_script_class_icons={
 "ActorDefinition": "",
 "ActorPanel": "",
 "ActorStaminaBar": "",
-"AttackActor": "",
 "AttackStandard": "",
 "AwaitGroup": "",
 "CellDistanceAOE": "",
@@ -248,7 +232,6 @@ _global_script_class_icons={
 "Directions": "",
 "Game": "",
 "GameCamera": "",
-"GameEffectGroup": "",
 "GameState": "",
 "GameUI": "",
 "Map": "",
@@ -259,7 +242,6 @@ _global_script_class_icons={
 "PlayerTargetState": "",
 "Projectile": "",
 "Skill": "",
-"SkillEffect": "",
 "SkillInfoPanel": "",
 "SkillTargetsData": "",
 "State": "",
