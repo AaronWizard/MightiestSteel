@@ -1,0 +1,38 @@
+[gd_resource type="Resource" load_steps=10 format=3 uid="uid://clrnguprxml05"]
+
+[ext_resource type="Script" path="res://src/core/skills/aoes/cell_distance_aoe.gd" id="1_6o28b"]
+[ext_resource type="Script" path="res://src/data/skills/scripts/attack_standard.gd" id="2_26hgj"]
+[ext_resource type="Texture2D" uid="uid://88nlwk6v68sw" path="res://assets/graphics/effects/explosion.png" id="2_i0ldo"]
+[ext_resource type="PackedScene" uid="uid://b542k5ym7u30t" path="res://src/data/effects/projectile_fireball.tscn" id="3_0g1ha"]
+[ext_resource type="Script" path="res://src/core/skills/target_ranges/cell_distance_range.gd" id="4_afb5p"]
+[ext_resource type="PackedScene" uid="uid://dvf1iih21ot6r" path="res://src/data/effects/tile_fireball.tscn" id="6_87phk"]
+
+[sub_resource type="Resource" id="Resource_e6xei"]
+script = ExtResource("1_6o28b")
+min_dist = 0
+max_dist = 1
+target_type = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulgi7"]
+atlas = ExtResource("2_i0ldo")
+region = Rect2(28, 4, 16, 16)
+
+[sub_resource type="Resource" id="Resource_2rbn0"]
+script = ExtResource("4_afb5p")
+min_dist = 2
+max_dist = 2
+include_diagonals = true
+target_type = 0
+
+[resource]
+script = ExtResource("2_26hgj")
+aoe = SubResource("Resource_e6xei")
+projectile_scene = ExtResource("3_0g1ha")
+tile_effect_scene = ExtResource("6_87phk")
+tile_effect_range_type = 1
+name = "Fireball"
+description = ""
+icon = SubResource("AtlasTexture_ulgi7")
+cooldown = 3
+target_range = SubResource("Resource_2rbn0")
+use_attack_anim = true
