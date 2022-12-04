@@ -3,6 +3,8 @@ extends Node
 
 ## A map with terrain and actors.
 
+signal actor_removed(actor: Actor)
+
 const _MOVE_COST_CLEAR := 1
 const _MOVE_COST_ROUGH := 2
 
@@ -94,6 +96,7 @@ func remove_actor(actor: Actor) -> void:
 	assert(actor in _actors.get_children())
 	_actors.remove_child(actor)
 	_setup_removed_actor(actor)
+	actor_removed.emit(actor)
 
 
 ## Gets all actors belonging to the given faction

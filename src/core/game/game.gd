@@ -62,6 +62,7 @@ func load_map(new_map_scene: PackedScene) -> void:
 	_current_map = new_map_scene.instantiate()
 	assert(_current_map != null)
 	_map_container.add_child(_current_map)
+	_current_map.actor_removed.connect(_turn_manager.remove_actor)
 	camera.set_bounds(_current_map.pixel_rect)
 
 	_set_initial_camera_position()
@@ -94,6 +95,7 @@ func advance_to_next_turn() -> void:
 
 func _unload_current_map() -> void:
 	_map_container.remove_child(_current_map)
+	_current_map.actor_removed.disconnect(_turn_manager.remove_actor)
 	_current_map.queue_free()
 	_current_map = null
 	assert(_map_container.get_child_count() == 0)
