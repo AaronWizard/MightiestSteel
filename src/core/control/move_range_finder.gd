@@ -17,7 +17,7 @@ static func find_move_range(actor: Actor, map: Map) -> Array[Vector2i]:
 		var adjacent := _adjacent_cells(current_cell, actor, map)
 		for adj_cell in adjacent:
 			var adj_cost := map.get_cell_move_cost(adj_cell, actor)
-			adj_cost += costs[current_cell] as int
+			adj_cost += costs[current_cell]
 
 			if adj_cost <= actor.stats.move and ( \
 					not costs.has(adj_cell) or (adj_cost < costs[adj_cell]) ):
@@ -35,7 +35,7 @@ static func _next_cell_index(queue: Array[Vector2i], costs: Dictionary) -> int:
 
 	for i in range(1, queue.size()):
 		var other_cell := queue[i]
-		var other_cost := costs[other_cell] as int
+		var other_cost: int = costs[other_cell]
 
 		if other_cost < result_cost:
 			result = i

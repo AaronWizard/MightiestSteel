@@ -8,7 +8,7 @@ extends Node
 
 func _ready() -> void:
 	for s in get_children():
-		var state := s as State
+		var state: State = s
 		@warning_ignore(return_value_discarded)
 		state.request_state_change.connect(self.change_state)
 	_current_state.start({})
