@@ -1,10 +1,12 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://8pbjo7lde74"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://8pbjo7lde74"]
 
 [ext_resource type="StyleBox" uid="uid://cvdscbkq82mow" path="res://src/core/ui/resources/stylebox_button_disabled.tres" id="1_m5rmy"]
 [ext_resource type="StyleBox" uid="uid://bdnssr6g0qjoj" path="res://src/core/ui/resources/stylebox_button_normal.tres" id="2_cm0ue"]
 [ext_resource type="StyleBox" uid="uid://7jwpurvd4rwb" path="res://src/core/ui/resources/stylebox_button_pressed.tres" id="3_2tt80"]
 [ext_resource type="StyleBox" uid="uid://c47emwxs8emut" path="res://src/core/ui/resources/stylebox_panel.tres" id="4_a3a2w"]
 [ext_resource type="FontFile" uid="uid://3spejj62mtxb" path="res://assets/fonts/TinyPixie2.ttf" id="4_t8kbc"]
+[ext_resource type="StyleBox" uid="uid://dc26yeqk3w1gb" path="res://src/core/ui/resources/scrollbar_grabber_vertical.tres" id="5_2q83i"]
+[ext_resource type="StyleBox" uid="uid://nlhjfr4h2dvq" path="res://src/core/ui/resources/scrollbar_scroll_vertical.tres" id="6_63vwm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_21iro"]
 
@@ -26,3 +28,8 @@ Label/constants/shadow_offset_y = 0
 Label/constants/shadow_outline_size = 2
 Panel/styles/panel = ExtResource("4_a3a2w")
 PanelContainer/styles/panel = ExtResource("4_a3a2w")
+VScrollBar/styles/grabber = ExtResource("5_2q83i")
+VScrollBar/styles/grabber_highlight = ExtResource("5_2q83i")
+VScrollBar/styles/grabber_pressed = ExtResource("5_2q83i")
+VScrollBar/styles/scroll = ExtResource("6_63vwm")
+VScrollBar/styles/scroll_focus = ExtResource("6_63vwm")
