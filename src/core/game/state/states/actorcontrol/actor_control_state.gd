@@ -27,7 +27,7 @@ func _move_actor(cell: Vector2) -> void:
 
 
 func _run_skill(skill: Skill, target: Vector2i) -> void:
-	await skill.run(_current_actor, target)
+	await _current_actor.run_skill(skill, target)
 	_end_turn()
 
 
