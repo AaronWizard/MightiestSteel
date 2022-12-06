@@ -208,6 +208,7 @@ var _report_moves := true
 
 var _attack_skill: Skill = null
 var _skills := {} # Keys are Skills, values are ints
+var _skill_cast_last_round := {} # Keys are Skills, values are ints
 
 var _is_animating := false
 
@@ -295,7 +296,10 @@ func animate_attack(target: Vector2i) -> void:
 ## Cooldowns all skills
 func cooldown_skills() -> void:
 	for s in _skills:
-		_skills[s] = maxi(_skills[s] - 1, 0)
+		if _skill_cast_last_round.has(s):
+			_skill_cast_last_round.erase(s)
+		else:
+			_skills[s] = maxi(_skills[s] - 1, 0)
 
 
 func run_skill(skill: Skill, target_cell: Vector2i) -> void:
@@ -303,6 +307,7 @@ func run_skill(skill: Skill, target_cell: Vector2i) -> void:
 	await skill.run(self, target_cell)
 	if skill != attack_skill:
 		_skills[skill] = skill.cooldown
+		_skill_cast_last_round[skill] = true
 
 
 ## Returns true if the skill can be run
