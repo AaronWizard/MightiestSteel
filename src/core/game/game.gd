@@ -81,6 +81,32 @@ func get_walk_range(actor: Actor) -> WalkRange:
 	return result
 
 
+## Gets a dictionary with the following keys:
+## - targets: The cells the actor could target with any skill
+## - aoe: The combined AOE of every skill the actor has
+func get_threat_range(actor: Actor) -> Dictionary:
+	var walk_range := get_walk_range(actor)
+	var skills := actor.next_turn_skills
+
+	var all_targets := {}
+	var all_aoe := {}
+
+	for cell in walk_range.move_range:
+		for skill in skills:
+			var targetting_data := skill.get_targeting_data(actor, cell)
+			for t in targetting_data.target_range:
+				all_targets[t] = true
+			for t in targetting_data.valid_targets:
+				var skill_aoe := targetting_data.get_target_info(t).aoe
+				for e in skill_aoe:
+					all_aoe[e] = true
+
+	return {
+		targets = all_targets.keys(),
+		aoe = all_aoe.keys()
+	}
+
+
 func advance_to_next_turn() -> void:
 	_end_current_actor_turn()
 	_current_actor = _turn_manager.advance_to_next_actor()

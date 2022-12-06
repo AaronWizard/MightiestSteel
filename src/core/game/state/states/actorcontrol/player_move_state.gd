@@ -63,8 +63,13 @@ func _highlight_other_actor(actor: Actor) -> void:
 
 	_other_actor.other_target_visible = true
 	_game.ui.show_other_actor(_other_actor)
-	_map_highlights.set_other_move_range(
-			_game.get_walk_range(_other_actor).visible_move_range)
+
+	var move := _game.get_walk_range(_other_actor).visible_move_range
+	var threat_range := _game.get_threat_range(_other_actor)
+	var targets: Array[Vector2i] = threat_range.targets
+	var aoe: Array[Vector2i] = threat_range.aoe
+
+	_map_highlights.set_other_range(move, targets, aoe)
 
 
 func _clear_other_actor() -> void:
