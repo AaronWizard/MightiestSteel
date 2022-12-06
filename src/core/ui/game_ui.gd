@@ -7,8 +7,15 @@ var skill_info_panel: SkillInfoPanel:
 		return $SkillInfoPanel
 
 
+var play_area: Rect2:
+	get:
+		return _play_area.get_rect()
+
+
 @onready var _actor_panel: ActorPanel = $ActorPanel
 @onready var _other_actor_panel: ActorPanel = $OtherActorPanel
+
+@onready var _play_area: Control = $PlayArea
 
 
 func start_actor_turn(actor: Actor) -> void:

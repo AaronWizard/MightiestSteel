@@ -82,17 +82,17 @@ func _start_action_menu() -> void:
 	var rect = _current_actor.action_menu.rect
 
 	var camera_shift := Vector2.ZERO
-	var screen_rect := _current_actor.action_menu.get_viewport_rect()
+	var screen_rect := _game.ui.play_area
 
 	if rect.position.x < 0:
-		camera_shift.x = rect.position.x - 2
+		camera_shift.x = rect.position.x - 1
 	elif rect.end.x > screen_rect.size.x:
-		camera_shift.x = rect.end.x - screen_rect.size.x + 1
+		camera_shift.x = rect.end.x - screen_rect.size.x
 
 	if rect.position.y < 0:
-		camera_shift.y = rect.position.y - 2
+		camera_shift.y = rect.position.y
 	elif rect.end.y > screen_rect.size.y:
-		camera_shift.y = rect.end.y - screen_rect.size.y + 1
+		camera_shift.y = rect.end.y - screen_rect.size.y - 1
 
 	_game.camera.position_smoothing_enabled = true
 	_game.camera.position += camera_shift
