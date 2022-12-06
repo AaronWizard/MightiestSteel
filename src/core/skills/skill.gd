@@ -15,6 +15,7 @@ extends Resource
 func get_targeting_data(source_actor: Actor,
 		source_cell := source_actor.origin_cell) -> SkillTargetsData:
 	source_actor.virtual_origin_cell = source_cell
+	assert(source_actor.origin_cell == source_cell)
 
 	var full_range := source_actor.covered_cells
 	var valid_range := source_actor.covered_cells
