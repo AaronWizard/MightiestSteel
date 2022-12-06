@@ -59,15 +59,9 @@ const FACTION_PLAYER := 0
 ## Change actor's origin cell without either changing its visible position nor
 ## triggering position-based events. Used for predicting skill effects.
 var virtual_origin_cell: Vector2i:
-	get:
-		var result := origin_cell
-		if _using_virtual_origin_cell:
-			result = _virtual_origin_cell
-		return result
 	set(value):
-		if value != origin_cell:
-			_virtual_origin_cell = value
-			_using_virtual_origin_cell = true
+		virtual_origin_cell = value
+		_using_virtual_origin_cell = true
 
 
 ## The actor's portrait
@@ -178,17 +172,27 @@ var all_skills: Array[Skill]:
 		return _skills.keys()
 
 
-## The actor's standard attack plus all skills with zero cooldown
+## The actor's standard attack plus all skills that are ready
 var active_skills: Array[Skill]:
 	get:
 		var result: Array[Skill] = []
 		if _attack_skill:
 			result.append(_attack_skill)
-
 		for s in _skills:
 			if _skills[s] == 0:
 				result.append(s)
+		return result
 
+## The actor's standard attack plus all skills that are either ready now or will
+## be ready on its next turn
+var next_turn_skills: Array[Skill]:
+	get:
+		var result: Array[Skill] = []
+		if _attack_skill:
+			result.append(_attack_skill)
+		for s in _skills:
+			if _skills[s] <= 1:
+				result.append(s)
 		return result
 
 
@@ -200,7 +204,6 @@ var is_animating: bool:
 
 var _map: Map
 
-var _virtual_origin_cell := Vector2i.ZERO
 # If true, virtual origin cell reported when accessing origin cell
 var _using_virtual_origin_cell := false
 # If true, actor will send moved signals when origin cell changed
@@ -254,7 +257,6 @@ func close_action_menu() -> void:
 
 ## Clears the actor's virtual origin cell.
 func unset_virtual_origin_cell() -> void:
-	_virtual_origin_cell = Vector2.ZERO
 	_using_virtual_origin_cell = false
 
 
