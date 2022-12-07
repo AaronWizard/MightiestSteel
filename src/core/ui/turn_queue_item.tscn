@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://x4its2shy64e"]
+
+[ext_resource type="Texture2D" uid="uid://da4qakc3847vo" path="res://assets/graphics/actors/fighter.png" id="1_fchms"]
+[ext_resource type="Script" path="res://src/core/ui/turn_queue_item.gd" id="1_qorp7"]
+[ext_resource type="Texture2D" uid="uid://n6j60e3vlfg3" path="res://assets/graphics/ui/turn_queue_current_border.png" id="2_t4v4v"]
+
+[node name="TurnQueueItem" type="Control"]
+custom_minimum_size = Vector2(74, 30)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 74.0
+offset_bottom = 30.0
+script = ExtResource("1_qorp7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(68, 24)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -12.0
+offset_right = 34.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 3
+
+[node name="Portrait" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_fchms")
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Actor Name"
+
+[node name="CurrentTurnBorder" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(74, 30)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -15.0
+offset_right = 37.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_t4v4v")
