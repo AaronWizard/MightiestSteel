@@ -38,6 +38,8 @@ func start(data: Dictionary) -> void:
 
 func end() -> void:
 	_game.ui.skill_info_panel.visible = false
+	_game.ui.turn_queue_button_enabled = false
+	_game.camera.dragging_enabled = false
 
 	_clear_predicted_damage()
 

@@ -20,13 +20,14 @@ func _ready() -> void:
 
 func start(_data: Dictionary) -> void:
 	_game.camera.dragging_enabled = true
+	_game.ui.turn_queue_button_enabled = true
 	_show_move_range()
 
 
 func end() -> void:
 	_clear_other_actor()
 
-	_game.ui.skill_info_panel.visible = false
+	_game.ui.turn_queue_button_enabled = false
 	_game.camera.dragging_enabled = false
 
 

@@ -12,8 +12,20 @@ var play_area: Rect2:
 		return _play_area.get_rect()
 
 
+var turn_queue_button_enabled: bool:
+	get:
+		return not _turn_queue_button.disabled
+	set(value):
+		if not value:
+			_turn_queue_button.button_pressed = false
+		_turn_queue_button.disabled = not value
+
+
 @onready var _actor_panel: ActorPanel = $ActorPanel
 @onready var _other_actor_panel: ActorPanel = $OtherActorPanel
+
+@onready var _turn_queue_button: Button = $TurnQueueButton
+@onready var _turn_queue_container: Control = $TurnQueueContainer
 
 @onready var _play_area: Control = $PlayArea
 
@@ -36,3 +48,7 @@ func show_other_actor(actor: Actor) -> void:
 func hide_other_actor() -> void:
 	_other_actor_panel.clear_actor()
 	_other_actor_panel.visible = false
+
+
+func _on_turn_queue_button_toggled(button_pressed: bool) -> void:
+	_turn_queue_container.visible = button_pressed

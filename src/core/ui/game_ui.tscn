@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgjgufo2hiapc"]
+[gd_scene load_steps=7 format=3 uid="uid://cgjgufo2hiapc"]
 
 [ext_resource type="Script" path="res://src/core/ui/game_ui.gd" id="1_nkrwp"]
 [ext_resource type="PackedScene" uid="uid://3bbfw14jxje2" path="res://src/core/ui/skill_info_panel.tscn" id="2_leakb"]
 [ext_resource type="PackedScene" uid="uid://wu8sbhng3np0" path="res://src/core/ui/actor_panel.tscn" id="3_f7j2b"]
 [ext_resource type="PackedScene" uid="uid://em65dmffrvt1" path="res://src/core/ui/actor_panel_reversed.tscn" id="4_a12g5"]
 [ext_resource type="Texture2D" uid="uid://ct0l0cvqbc3on" path="res://assets/graphics/ui/icons/turn_panel.png" id="5_mww5o"]
+[ext_resource type="PackedScene" uid="uid://dby770p0nloai" path="res://src/core/ui/max_size_scroll_panel.tscn" id="5_ttw4q"]
 
 [node name="GameUI" type="CanvasLayer"]
 script = ExtResource("1_nkrwp")
@@ -58,10 +59,25 @@ offset_bottom = -2.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="TurnQueue" type="Button" parent="."]
+[node name="TurnQueueContainer" parent="." instance=ExtResource("5_ttw4q")]
+visible = false
+custom_minimum_size = Vector2(90, 0)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 26.0
+offset_right = 91.0
+offset_bottom = -1.0
+grow_vertical = 2
+
+[node name="TurnQueueButton" type="Button" parent="."]
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 27.0
 offset_bottom = 27.0
 toggle_mode = true
 icon = ExtResource("5_mww5o")
+
+[connection signal="toggled" from="TurnQueueButton" to="." method="_on_turn_queue_button_toggled"]
+
+[editable path="TurnQueueContainer"]
