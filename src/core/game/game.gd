@@ -62,7 +62,7 @@ func load_map(new_map_scene: PackedScene) -> void:
 	_current_map = new_map_scene.instantiate()
 	assert(_current_map != null)
 	_map_container.add_child(_current_map)
-	_current_map.actor_removed.connect(_turn_manager.remove_actor)
+	_current_map.actor_removed.connect(_actor_removed)
 	camera.set_bounds(_current_map.pixel_rect)
 
 	_set_initial_camera_position()
@@ -110,6 +110,7 @@ func get_threat_range(actor: Actor) -> Dictionary:
 func advance_to_next_turn() -> void:
 	_end_current_actor_turn()
 	_current_actor = _turn_manager.advance_to_next_actor()
+	ui.turn_queue.turn_index = _turn_manager.turn_index
 
 	if _turn_manager.current_turn_is_round_start:
 		_start_round()
@@ -121,7 +122,7 @@ func advance_to_next_turn() -> void:
 
 func _unload_current_map() -> void:
 	_map_container.remove_child(_current_map)
-	_current_map.actor_removed.disconnect(_turn_manager.remove_actor)
+	_current_map.actor_removed.disconnect(_actor_removed)
 	_current_map.queue_free()
 	_current_map = null
 	assert(_map_container.get_child_count() == 0)
@@ -143,6 +144,7 @@ func _set_initial_camera_position() -> void:
 
 func _start_battle() -> void:
 	_turn_manager.roll_initiative(_current_map.actors)
+	ui.turn_queue.set_queue(_turn_manager.actors, 0)
 	_state_machine.change_state(_next_turn_state_name)
 
 
@@ -158,3 +160,8 @@ func _end_current_actor_turn() -> void:
 	_current_walk_range = null
 	map_highlights.clear_all()
 	ui.end_current_actor_turn()
+
+
+func _actor_removed(actor: Actor) -> void:
+	_turn_manager.remove_actor(actor)
+	ui.turn_queue.set_queue(_turn_manager.actors, _turn_manager.turn_index)

@@ -21,11 +21,17 @@ var turn_queue_button_enabled: bool:
 		_turn_queue_button.disabled = not value
 
 
+var turn_queue: TurnQueue:
+	get:
+		return _turn_queue
+
+
 @onready var _actor_panel: ActorPanel = $ActorPanel
 @onready var _other_actor_panel: ActorPanel = $OtherActorPanel
 
 @onready var _turn_queue_button: Button = $TurnQueueButton
 @onready var _turn_queue_container: Control = $TurnQueueContainer
+@onready var _turn_queue: TurnQueue = $%TurnQueue
 
 @onready var _play_area: Control = $PlayArea
 

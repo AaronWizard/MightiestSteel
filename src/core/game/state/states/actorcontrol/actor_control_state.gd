@@ -19,19 +19,30 @@ func _show_move_range() -> void:
 
 
 func _move_actor(cell: Vector2) -> void:
+	_game.camera.dragging_enabled = false
 	_game.camera.position_smoothing_enabled = true
+
 	_current_actor.target_visible = false
+
 	var path := _game.current_walk_range.get_move_path(
 			_current_actor.origin_cell, cell)
 	await _current_actor.move_path(path)
 
 
 func _run_skill(skill: Skill, target: Vector2i) -> void:
+	_game.ui.turn_queue_button_enabled = false
+	_game.camera.dragging_enabled = false
+
+	_current_actor.target_visible = false
+
 	await _current_actor.run_skill(skill, target)
 	_end_turn()
 
 
 func _wait() -> void:
+	_game.ui.turn_queue_button_enabled = false
+	_game.camera.dragging_enabled = false
+
 	_end_turn()
 
 

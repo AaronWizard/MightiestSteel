@@ -21,14 +21,14 @@ func _ready() -> void:
 func start(_data: Dictionary) -> void:
 	_game.camera.dragging_enabled = true
 	_game.ui.turn_queue_button_enabled = true
+
+	_game.ui.turn_queue.actor_clicked.connect(_toggle_other_actor_lighlight)
+
 	_show_move_range()
 
 
 func end() -> void:
 	_clear_other_actor()
-
-	_game.ui.turn_queue_button_enabled = false
-	_game.camera.dragging_enabled = false
 
 
 func handle_unhandled_input(event: InputEvent) -> void:
@@ -44,41 +44,9 @@ func _choose_move_input() -> void:
 	if _current_actor.is_on_cell(cell):
 		_start_action_menu()
 	elif _game.current_walk_range.in_move_range(cell):
-		allow_input = false
-		_clear_other_actor()
-		await _move_actor(cell)
-		_current_actor.target_visible = true
-		allow_input = true
+		_do_move(cell)
 	else:
-		var other_actor := _game.current_map.get_actor_on_cell(cell)
-		if other_actor and (other_actor != _current_actor) \
-				and (other_actor != _other_actor):
-			_highlight_other_actor(other_actor)
-		else:
-			_clear_other_actor()
-
-
-func _highlight_other_actor(actor: Actor) -> void:
-	_clear_other_actor()
-	_other_actor = actor
-
-	_other_actor.other_target_visible = true
-	_game.ui.show_other_actor(_other_actor)
-
-	var move := _game.get_walk_range(_other_actor).visible_move_range
-	var threat_range := _game.get_threat_range(_other_actor)
-	var targets: Array[Vector2i] = threat_range.targets
-	var aoe: Array[Vector2i] = threat_range.aoe
-
-	_map_highlights.set_other_range(move, targets, aoe)
-
-
-func _clear_other_actor() -> void:
-	if _other_actor != null:
-		_map_highlights.clear_other_range()
-		_game.ui.hide_other_actor()
-		_other_actor.other_target_visible = false
-		_other_actor = null
+		_try_select_other_actor(cell)
 
 
 func _start_action_menu() -> void:
@@ -105,6 +73,54 @@ func _start_action_menu() -> void:
 
 	await _current_actor.open_action_menu()
 	allow_input = true # Clicking away from action menu closes it
+
+
+func _do_move(cell: Vector2i) -> void:
+	allow_input = false
+	_clear_other_actor()
+	await _move_actor(cell)
+	_game.camera.dragging_enabled = true
+	_current_actor.target_visible = true
+	allow_input = true
+
+
+func _try_select_other_actor(cell: Vector2i) -> void:
+	var other_actor := _game.current_map.get_actor_on_cell(cell)
+	_toggle_other_actor_lighlight(other_actor)
+
+
+func _toggle_other_actor_lighlight(other_actor: Actor) -> void:
+	if other_actor and (other_actor != _current_actor) \
+			and (other_actor != _other_actor):
+		_highlight_other_actor(other_actor)
+	else:
+		_clear_other_actor()
+
+
+func _highlight_other_actor(actor: Actor) -> void:
+	_clear_other_actor()
+	_other_actor = actor
+
+	_other_actor.other_target_visible = true
+
+	_game.camera.position_smoothing_enabled = true
+	_game.camera.position = _other_actor.center_position
+	_game.ui.show_other_actor(_other_actor)
+
+	var move := _game.get_walk_range(_other_actor).visible_move_range
+	var threat_range := _game.get_threat_range(_other_actor)
+	var targets: Array[Vector2i] = threat_range.targets
+	var aoe: Array[Vector2i] = threat_range.aoe
+
+	_map_highlights.set_other_range(move, targets, aoe)
+
+
+func _clear_other_actor() -> void:
+	if _other_actor != null:
+		_map_highlights.clear_other_range()
+		_game.ui.hide_other_actor()
+		_other_actor.other_target_visible = false
+		_other_actor = null
 
 
 func _action_menu_input() -> void:

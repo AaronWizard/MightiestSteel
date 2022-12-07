@@ -39,17 +39,30 @@ var is_first_round: bool:
 		return _is_first_round
 
 
+var actors: Array[Actor]:
+	get:
+		var result: Array[Actor] = []
+		for t in _turns:
+			result.append(t.actor)
+		return result
+
+
+var turn_index: int:
+	get:
+		return _turn_index
+
+
 var _turns: Array[_Turn] = []
 var _turn_index := -1
 var _is_first_round := true
 
 
-func roll_initiative(actors: Array[Actor]) -> void:
+func roll_initiative(new_actors: Array[Actor]) -> void:
 	_turns.clear()
 	_turn_index = -1
 	_is_first_round = true
 
-	for a in actors:
+	for a in new_actors:
 		var turn := _Turn.new(a)
 		_turns.append(turn)
 
