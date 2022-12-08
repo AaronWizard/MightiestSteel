@@ -16,4 +16,4 @@ Based on [Godot 3.5 project](https://github.com/AaronWizard/LegendsOfMajesticSte
 
 Source code and data files are under the MIT Licence.
 
-All rights reserved on all game assets (art, audio) under the folder *assets* if not explicitly stated otherwise.
+Unless stated otherwise, game assets (art, audio) under the folder *assets* and *raw* are under the the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit <http://creativecommons.org/licenses/by/4.0/> or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
