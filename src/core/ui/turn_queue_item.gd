@@ -25,12 +25,25 @@ var is_current: bool:
 		_current_turn_border.visible = value
 
 
+var is_other: bool:
+	get:
+		return _other_turn_border.visible
+	set(value):
+		_other_turn_border.visible = value
+
+
 @onready var _portrait: TextureRect = $HBoxContainer/Portrait
 @onready var _name: Label = $HBoxContainer/Name
-@onready var _current_turn_border: Control = $CurrentTurnBorder
+
+@onready var _current_turn_border: Control = $BorderCurrent
+@onready var _other_turn_border: Control = $BorderOther
 
 
 func _gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseButton) \
 			and (event.button_index == MOUSE_BUTTON_LEFT) and not event.pressed:
 		clicked.emit()
+
+
+func reset_other_border() -> void:
+	_other_turn_border.visible = false
