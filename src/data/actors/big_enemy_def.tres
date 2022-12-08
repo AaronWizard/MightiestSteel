@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://b8limbh5hf70k"]
 
 [ext_resource type="Script" path="res://src/core/actor/actor_definition.gd" id="1_aqqfc"]
-[ext_resource type="Resource" path="res://src/data/skills/resources/attack_melee.tres" id="1_jxika"]
+[ext_resource type="Resource" uid="uid://dfvdy4lo4wq4w" path="res://src/data/skills/resources/attack_melee.tres" id="1_jxika"]
 
 [resource]
 script = ExtResource("1_aqqfc")

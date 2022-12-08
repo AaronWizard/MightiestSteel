@@ -71,6 +71,20 @@ var center_position: Vector2:
 		return result
 
 
+var center_screen_position: Vector2:
+	get:
+		var result := get_global_transform_with_canvas().origin
+		if _center:
+			result = _center.get_global_transform_with_canvas().origin
+		return result
+
+
+## Returns true if center of tile object on the screen
+var center_on_screen: bool:
+	get:
+		return get_viewport_rect().has_point(center_screen_position)
+
+
 @onready var _center: Node2D = $Center
 
 

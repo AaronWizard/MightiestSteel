@@ -21,10 +21,11 @@ func _ready() -> void:
 
 	_game.ui.turn_queue.clicked.connect(func(actor: Actor):
 		if actor == _current_actor:
-			_game.camera.position_smoothing_enabled = true
-			_game.camera.position = _current_actor.center_position
+			if not actor.center_on_screen:
+				_game.camera.position_smoothing_enabled = true
+				_game.camera.position = _current_actor.center_position
 		else:
-			_toggle_other_actor_lighlight(actor)
+			_toggle_other_actor_lighlight(actor, true)
 	)
 
 
@@ -36,7 +37,7 @@ func start(_data: Dictionary) -> void:
 
 
 func end() -> void:
-	_clear_other_actor()
+	_clear_other_actor(false)
 
 
 func handle_unhandled_input(event: InputEvent) -> void:
@@ -85,7 +86,7 @@ func _start_action_menu() -> void:
 
 func _do_move(cell: Vector2i) -> void:
 	allow_input = false
-	_clear_other_actor()
+	_clear_other_actor(false)
 	await _move_actor(cell)
 	_game.camera.dragging_enabled = true
 	_current_actor.target_visible = true
@@ -94,29 +95,31 @@ func _do_move(cell: Vector2i) -> void:
 
 func _try_select_other_actor(cell: Vector2i) -> void:
 	var other_actor := _game.current_map.get_actor_on_cell(cell)
-	_toggle_other_actor_lighlight(other_actor)
+	_toggle_other_actor_lighlight(other_actor, false)
 
 
-func _toggle_other_actor_lighlight(other_actor: Actor) -> void:
+func _toggle_other_actor_lighlight(other_actor: Actor, move_camera: bool) \
+		-> void:
 	if other_actor and (other_actor != _current_actor) \
 			and (other_actor != _other_actor):
 		_highlight_other_actor(other_actor)
 	else:
-		_clear_other_actor()
+		_clear_other_actor(move_camera)
 
 
 func _highlight_other_actor(actor: Actor) -> void:
 	assert(actor != _current_actor)
-	_clear_other_actor()
+	_clear_other_actor(false)
 	_other_actor = actor
 
 	_other_actor.other_target_visible = true
-
-	_game.camera.position_smoothing_enabled = true
-	_game.camera.position = _other_actor.center_position
 	_game.ui.show_other_actor(_other_actor)
-
 	_game.ui.turn_queue.other_actor_name = _other_actor.name
+
+	if not _other_actor.center_on_screen:
+		_game.camera.position_smoothing_enabled = true
+		_game.camera.position = _other_actor.center_position
+
 
 	var move := _game.get_walk_range(_other_actor).visible_move_range
 	var threat_range := _game.get_threat_range(_other_actor)
@@ -126,13 +129,17 @@ func _highlight_other_actor(actor: Actor) -> void:
 	_map_highlights.set_other_range(move, targets, aoe)
 
 
-func _clear_other_actor() -> void:
+func _clear_other_actor(move_camera: bool) -> void:
 	if _other_actor != null:
 		_map_highlights.clear_other_range()
 		_game.ui.hide_other_actor()
 		_game.ui.turn_queue.other_actor_name = ""
 		_other_actor.other_target_visible = false
 		_other_actor = null
+
+		if move_camera and not _current_actor.center_on_screen:
+			_game.camera.position_smoothing_enabled = true
+			_game.camera.position = _current_actor.center_position
 
 
 func _action_menu_input() -> void:
