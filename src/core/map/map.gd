@@ -127,6 +127,11 @@ func get_actors_in_area(area: Array[Vector2i]) -> Array[Actor]:
 	return result.keys()
 
 
+func get_actor_by_node_name(node_name: String) -> Actor:
+	var actor := _actors.get_node(node_name)
+	return actor
+
+
 ## Checks if actor can occupy cell (as it's origin cell).
 ## Set ignore_allied_actors to allow actor to pass through allies.
 func actor_can_enter_cell(actor: Actor, cell: Vector2i,

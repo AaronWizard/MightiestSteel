@@ -109,7 +109,8 @@ func get_threat_range(actor: Actor) -> Dictionary:
 
 func advance_to_next_turn() -> void:
 	_end_current_actor_turn()
-	_current_actor = _turn_manager.advance_to_next_actor()
+	var current_actor_name := _turn_manager.advance_to_next_actor()
+	_current_actor = _current_map.get_actor_by_node_name(current_actor_name)
 	ui.turn_queue.turn_index = _turn_manager.turn_index
 
 	if _turn_manager.current_turn_is_round_start:
@@ -144,7 +145,7 @@ func _set_initial_camera_position() -> void:
 
 func _start_battle() -> void:
 	_turn_manager.roll_initiative(_current_map.actors)
-	ui.turn_queue.set_queue(_turn_manager.actors, 0)
+	ui.turn_queue.set_queue(_current_map, _turn_manager.ordered_actor_names, 0)
 	_state_machine.change_state(_next_turn_state_name)
 
 
@@ -164,4 +165,5 @@ func _end_current_actor_turn() -> void:
 
 func _actor_removed(actor: Actor) -> void:
 	_turn_manager.remove_actor(actor)
-	ui.turn_queue.set_queue(_turn_manager.actors, _turn_manager.turn_index)
+	ui.turn_queue.set_queue(_current_map, _turn_manager.ordered_actor_names,
+			_turn_manager.turn_index)

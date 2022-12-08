@@ -13,18 +13,22 @@ class _Turn:
 	const SPEED_MOD_MIN := 1
 	const SPEED_MOD_MAX := 20
 
-	var actor: Actor
-	var speed_mod: int
+	var actor_name: String
+	var speed: int
+	var initiative_roll: int
+	var is_player_controlled: bool
 
 
 	var rank: int:
 		get:
-			return speed_mod + actor.stats.speed
+			return initiative_roll + speed
 
 
-	func _init(new_actor) -> void:
-		actor = new_actor
-		speed_mod = randi_range(SPEED_MOD_MIN, SPEED_MOD_MAX)
+	func _init(actor: Actor) -> void:
+		actor_name = actor.name
+		speed = actor.stats.speed
+		is_player_controlled = actor.is_player_controlled
+		initiative_roll = randi_range(SPEED_MOD_MIN, SPEED_MOD_MAX)
 
 
 ## True if the current turn is the first turn in the round
@@ -39,11 +43,11 @@ var is_first_round: bool:
 		return _is_first_round
 
 
-var actors: Array[Actor]:
+var ordered_actor_names: Array[String]:
 	get:
-		var result: Array[Actor] = []
+		var result: Array[String] = []
 		for t in _turns:
-			result.append(t.actor)
+			result.append(t.actor_name)
 		return result
 
 
@@ -70,32 +74,30 @@ func roll_initiative(new_actors: Array[Actor]) -> void:
 
 
 ## Advances to the next turn and get the actor taking this turn
-func advance_to_next_actor() -> Actor:
+func advance_to_next_actor() -> String:
 	if (_turn_index + 1) == _turns.size():
 		_is_first_round = false
 	_turn_index = (_turn_index + 1) % _turns.size()
 	var turn := _turns[_turn_index]
-	return turn.actor
+	return turn.actor_name
 
 
 ## Removes the actor from the turn order. Preseres tracking of the current turn.
 func remove_actor(actor: Actor) -> void:
-	var turns_to_remove: Array[_Turn] = []
 	for i in range(_turns.size()):
 		var turn := _turns[i]
-		if turn.actor == actor:
-			turns_to_remove.append(turn)
+		if turn.actor_name == actor.name:
+			_turns.remove_at(i)
 			if i < _turn_index:
 				_turn_index -= 1
-	for t in turns_to_remove:
-		_turns.erase(t)
+			break
 
 
 static func _compare_turns(a: _Turn, b: _Turn) -> bool:
 	var compare_rank := a.rank > b.rank
-	var compare_speed := a.actor.stats.speed > b.actor.stats.speed
-	var compare_is_player := a.actor.is_player_controlled \
-			and not b.actor.is_player_controlled
+	var compare_speed := a.speed > b.speed
+	var compare_is_player := a.is_player_controlled \
+			and not b.is_player_controlled
 
 	return compare_rank \
 			or (not compare_rank and compare_speed) \

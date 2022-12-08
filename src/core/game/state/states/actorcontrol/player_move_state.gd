@@ -22,7 +22,9 @@ func start(_data: Dictionary) -> void:
 	_game.camera.dragging_enabled = true
 	_game.ui.turn_queue_button_enabled = true
 
-	_game.ui.turn_queue.actor_clicked.connect(_toggle_other_actor_lighlight)
+	if not _game.ui.turn_queue.actor_clicked.is_connected(
+				_toggle_other_actor_lighlight):
+		_game.ui.turn_queue.actor_clicked.connect(_toggle_other_actor_lighlight)
 
 	_show_move_range()
 

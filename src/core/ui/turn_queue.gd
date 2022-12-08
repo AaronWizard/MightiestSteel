@@ -12,13 +12,17 @@ var turn_index: int:
 		_set_item_borders()
 
 
-func set_queue(actors: Array[Actor], index: int) -> void:
+func set_queue(map: Map, ordered_actor_names: Array[String],
+		current_index: int) -> void:
 	clear()
-	turn_index = index
-	for i in range(actors.size()):
-		var actor := actors[i]
+	turn_index = current_index
+	for i in range(ordered_actor_names.size()):
+		var actor_name := ordered_actor_names[i]
+		var actor := map.get_actor_by_node_name(actor_name)
+
 		var queue_item: TurnQueueItem = _TURN_QUEUE_ITEM_SCENE.instantiate()
 		add_child(queue_item)
+
 		queue_item.portrait = actor.portrait
 		queue_item.actor_name = actor.actor_name
 		queue_item.is_current = i == turn_index
