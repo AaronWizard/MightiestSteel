@@ -30,7 +30,7 @@ var turn_queue: TurnQueue:
 @onready var _other_actor_panel: ActorPanel = $OtherActorPanel
 
 @onready var _turn_queue_button: Button = $TurnQueueButton
-@onready var _turn_queue_container: Control = $TurnQueueContainer
+@onready var _turn_queue_container: MaxSizeScrollPanel = $TurnQueueContainer
 @onready var _turn_queue: TurnQueue = $%TurnQueue
 
 @onready var _play_area: Control = $PlayArea
@@ -58,3 +58,16 @@ func hide_other_actor() -> void:
 
 func _on_turn_queue_button_toggled(button_pressed: bool) -> void:
 	_turn_queue_container.visible = button_pressed
+
+
+func _on_turn_queue_turn_index_set() -> void:
+	var turn_item_pos := int(_turn_queue.turn_item_rect.position.y)
+	var turn_item_half_height := int(_turn_queue.turn_item_rect.size.y / 2.0)
+	var scroll_half_size := int(_turn_queue_container.scroll_size.y / 2.0)
+
+	var scroll_pos := turn_item_pos + turn_item_half_height - scroll_half_size
+
+	scroll_pos = maxi(scroll_pos, 0)
+	scroll_pos = mini(scroll_pos, _turn_queue_container.scroll_vertical_max)
+
+	_turn_queue_container.scroll_vertical = scroll_pos
