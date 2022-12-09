@@ -1,9 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkbf8pot4bh2f"]
+[gd_scene load_steps=10 format=3 uid="uid://bkbf8pot4bh2f"]
 
-[ext_resource type="PackedScene" path="res://src/core/actor/actor.tscn" id="1_u2lom"]
+[ext_resource type="PackedScene" uid="uid://d2tmse3fwy84n" path="res://src/core/actor/actor.tscn" id="1_u2lom"]
 [ext_resource type="Texture2D" uid="uid://de8cpuaeetubl" path="res://assets/graphics/actors/rogue.png" id="2_50vp3"]
-[ext_resource type="Resource" uid="uid://f40jou0xmwrl" path="res://src/data/actors/rogue_def.tres" id="3_qih1f"]
+[ext_resource type="Resource" uid="uid://tfgmp7yhy2nu" path="res://src/data/skills/resources/attack_arrow.tres" id="3_rp0g1"]
+[ext_resource type="Script" path="res://src/core/actor/actor_definition.gd" id="4_l7yx1"]
 [ext_resource type="Shader" path="res://src/core/shaders/disolve.gdshader" id="4_ob4no"]
+
+[sub_resource type="Resource" id="Resource_cui07"]
+script = ExtResource("4_l7yx1")
+stats_file = "res://assets/data/player_stats.csv"
+stats_name = "rogue"
+attack_skill = ExtResource("3_rp0g1")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bku8o"]
 
@@ -22,7 +29,7 @@ shader_parameter/dissolve_value = 1.0
 [node name="Rogue" instance=ExtResource("1_u2lom")]
 sprite_texture = ExtResource("2_50vp3")
 actor_name = "Rogue"
-definition = ExtResource("3_qih1f")
+definition = SubResource("Resource_cui07")
 
 [node name="Sprite" parent="Center/Offset" index="0"]
 material = SubResource("ShaderMaterial_e2g42")

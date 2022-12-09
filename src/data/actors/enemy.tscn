@@ -1,9 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://cldxoe0i5d6ge"]
+[gd_scene load_steps=10 format=3 uid="uid://cldxoe0i5d6ge"]
 
-[ext_resource type="PackedScene" path="res://src/core/actor/actor.tscn" id="1_mptds"]
+[ext_resource type="PackedScene" uid="uid://d2tmse3fwy84n" path="res://src/core/actor/actor.tscn" id="1_mptds"]
 [ext_resource type="Texture2D" uid="uid://ca3ewe8yymh6t" path="res://assets/graphics/actors/enemy.png" id="2_vixk6"]
-[ext_resource type="Resource" uid="uid://bcs52qeexn5wm" path="res://src/data/actors/enemy_def.tres" id="3_iv4r4"]
+[ext_resource type="Resource" uid="uid://dfvdy4lo4wq4w" path="res://src/data/skills/resources/attack_melee.tres" id="3_pjfx5"]
 [ext_resource type="Shader" path="res://src/core/shaders/disolve.gdshader" id="4_fbhqj"]
+[ext_resource type="Script" path="res://src/core/actor/actor_definition.gd" id="4_kojhh"]
+
+[sub_resource type="Resource" id="Resource_tqxp2"]
+script = ExtResource("4_kojhh")
+stats_file = "res://assets/data/enemy_stats.csv"
+stats_name = "enemy"
+attack_skill = ExtResource("3_pjfx5")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bku8o"]
 
@@ -23,7 +30,7 @@ shader_parameter/dissolve_value = 1.0
 sprite_texture = ExtResource("2_vixk6")
 actor_name = "Enemy"
 faction = 1
-definition = ExtResource("3_iv4r4")
+definition = SubResource("Resource_tqxp2")
 
 [node name="Sprite" parent="Center/Offset" index="0"]
 material = SubResource("ShaderMaterial_l6l25")

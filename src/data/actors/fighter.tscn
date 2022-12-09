@@ -1,9 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://coyiiguyj4aft"]
+[gd_scene load_steps=10 format=3 uid="uid://coyiiguyj4aft"]
 
-[ext_resource type="PackedScene" path="res://src/core/actor/actor.tscn" id="1_3x0x2"]
+[ext_resource type="PackedScene" uid="uid://d2tmse3fwy84n" path="res://src/core/actor/actor.tscn" id="1_3x0x2"]
 [ext_resource type="Texture2D" uid="uid://da4qakc3847vo" path="res://assets/graphics/actors/fighter.png" id="2_4p50m"]
-[ext_resource type="Resource" uid="uid://lb68sk72rjmv" path="res://src/data/actors/fighter_def.tres" id="3_cgvm1"]
+[ext_resource type="Resource" uid="uid://dfvdy4lo4wq4w" path="res://src/data/skills/resources/attack_melee.tres" id="3_4elo4"]
 [ext_resource type="Shader" path="res://src/core/shaders/disolve.gdshader" id="4_c2rm6"]
+[ext_resource type="Script" path="res://src/core/actor/actor_definition.gd" id="4_qap0u"]
+
+[sub_resource type="Resource" id="Resource_u2ufd"]
+script = ExtResource("4_qap0u")
+stats_file = "res://assets/data/player_stats.csv"
+stats_name = "fighter"
+attack_skill = ExtResource("3_4elo4")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bku8o"]
 
@@ -22,7 +29,7 @@ shader_parameter/dissolve_value = 1.0
 [node name="Fighter" instance=ExtResource("1_3x0x2")]
 sprite_texture = ExtResource("2_4p50m")
 actor_name = "Fighter"
-definition = ExtResource("3_cgvm1")
+definition = SubResource("Resource_u2ufd")
 
 [node name="Sprite" parent="Center/Offset" index="0"]
 material = SubResource("ShaderMaterial_fhae4")
