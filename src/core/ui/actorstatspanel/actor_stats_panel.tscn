@@ -15,51 +15,40 @@ offset_bottom = 60.0
 script = ExtResource("1_0w2br")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
 theme_override_constants/margin_left = -3
 theme_override_constants/margin_top = -3
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/MarginContainer"]
-layout_mode = 2
 
 [node name="Portrait" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer/PanelContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 texture = ExtResource("1_amffk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_bottom = -2
 
 [node name="Name" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 text = "Test"
 
 [node name="StaminaBarContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
 
 [node name="StaminaIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/StaminaBarContainer"]
-layout_mode = 2
 size_flags_vertical = 8
 texture = ExtResource("5_q75ga")
 
 [node name="StaminaBar" type="TextureProgressBar" parent="VBoxContainer/HBoxContainer/VBoxContainer/StaminaBarContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 9)
-layout_mode = 2
 size_flags_horizontal = 3
 value = 100.0
 nine_patch_stretch = true
@@ -71,55 +60,43 @@ texture_under = ExtResource("2_h56f4")
 texture_progress = ExtResource("3_ijpm6")
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_bottom = -2
 
 [node name="StaminaTextContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
-layout_mode = 2
 
 [node name="CurrentStamina" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/StaminaTextContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 size_flags_horizontal = 3
 text = "99"
 horizontal_alignment = 2
 
 [node name="Slash" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/StaminaTextContainer"]
-layout_mode = 2
 text = "/"
 
 [node name="MaxStamina" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/StaminaTextContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 text = "99"
 
 [node name="MaxStaminaMod" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/StaminaTextContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 text = "(+99)"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-layout_mode = 2
 theme_override_constants/margin_left = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
-layout_mode = 2
 
 [node name="Attack" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_p8cs4")]
 unique_name_in_owner = true
-layout_mode = 2
 stat_name = "Attack"
-stat_value = 10
 
 [node name="Move" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_p8cs4")]
 unique_name_in_owner = true
-layout_mode = 2
 icon = ExtResource("7_76kho")
 stat_name = "Move"
 
 [node name="Speed" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_p8cs4")]
 unique_name_in_owner = true
-layout_mode = 2
 icon = ExtResource("8_6jhwu")
 stat_name = "Speed"

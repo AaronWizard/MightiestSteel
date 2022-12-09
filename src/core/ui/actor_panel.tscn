@@ -1,20 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://wu8sbhng3np0"]
+[gd_scene load_steps=6 format=3 uid="uid://wu8sbhng3np0"]
 
 [ext_resource type="Texture2D" uid="uid://da4qakc3847vo" path="res://assets/graphics/actors/fighter.png" id="1_3amch"]
 [ext_resource type="Script" path="res://src/core/ui/actor_panel.gd" id="1_i4ofb"]
+[ext_resource type="PackedScene" uid="uid://cj14wiiapl8dv" path="res://src/core/ui/actorstatspanel/actor_stats_panel.tscn" id="2_43jsj"]
 [ext_resource type="Texture2D" uid="uid://b7kfsrtfml2dl" path="res://assets/graphics/ui/staminabar_background_stretchable.png" id="2_ty4y5"]
 [ext_resource type="Texture2D" uid="uid://c4axt2jd6aws6" path="res://assets/graphics/ui/staminabar_fill_stretchable.png" id="3_hqvu1"]
 
 [node name="ActorPanel" type="Control"]
 custom_minimum_size = Vector2(84, 34)
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
 offset_right = 84.0
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("1_i4ofb")
+
+[node name="ActorStatsPanel" parent="." instance=ExtResource("2_43jsj")]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -91.0
+offset_right = 84.0
+offset_bottom = -26.0
+grow_vertical = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -60,6 +73,7 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_right = 34.0
 offset_bottom = 34.0
+toggle_mode = true
 icon = ExtResource("1_3amch")
 
-[connection signal="pressed" from="Portrait" to="." method="_on_portrait_pressed"]
+[connection signal="toggled" from="Portrait" to="." method="_on_portrait_toggled"]
