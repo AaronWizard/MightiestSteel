@@ -1,6 +1,8 @@
 class_name GameUI
 extends CanvasLayer
 
+const _TURN_QUEUE_SCROLL_TIME := 0.25
+
 
 var skill_info_panel: SkillInfoPanel:
 	get:
@@ -61,13 +63,34 @@ func _on_turn_queue_button_toggled(button_pressed: bool) -> void:
 
 
 func _on_turn_queue_turn_index_set() -> void:
-	var turn_item_pos := int(_turn_queue.turn_item_rect.position.y)
-	var turn_item_half_height := int(_turn_queue.turn_item_rect.size.y / 2.0)
-	var scroll_half_size := int(_turn_queue_container.scroll_size.y / 2.0)
+	_scroll_over_turn_queue_item(_turn_queue.turn_item_rect, true)
 
-	var scroll_pos := turn_item_pos + turn_item_half_height - scroll_half_size
 
-	scroll_pos = maxi(scroll_pos, 0)
-	scroll_pos = mini(scroll_pos, _turn_queue_container.scroll_vertical_max)
+func _on_turn_queue_other_actor_set() -> void:
+	var item_rect: Rect2
+	if _turn_queue.other_actor_name.is_empty():
+		item_rect = _turn_queue.turn_item_rect
+	else:
+		item_rect = _turn_queue.other_actor_item_rect
 
-	_turn_queue_container.scroll_vertical = scroll_pos
+	if not _turn_queue_container.visible_scroll_child_rect.encloses(item_rect):
+		_scroll_over_turn_queue_item(
+				item_rect, not _turn_queue_container.visible)
+
+
+func _scroll_over_turn_queue_item(item_rect: Rect2, instant: bool) -> void:
+	var item_y = item_rect.position.y
+	var item_half_height := item_rect.size.y / 2.0
+	var scroll_half_height := _turn_queue_container.scroll_size.y / 2.0
+
+	var scroll_y := int(item_y + item_half_height - scroll_half_height)
+	scroll_y = maxi(scroll_y, 0)
+	scroll_y = mini(scroll_y, _turn_queue_container.scroll_vertical_max)
+
+	if instant:
+		_turn_queue_container.scroll_vertical = scroll_y
+	else:
+		get_tree().create_tween().tween_property(
+			_turn_queue_container, "scroll_vertical", scroll_y,
+			_TURN_QUEUE_SCROLL_TIME
+		).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)

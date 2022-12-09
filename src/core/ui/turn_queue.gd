@@ -2,7 +2,7 @@ class_name TurnQueue
 extends VBoxContainer
 
 signal turn_index_set
-
+signal other_actor_set
 signal clicked(actor: Actor)
 
 const _TURN_QUEUE_ITEM_SCENE = preload("res://src/core/ui/turn_queue_item.tscn")
@@ -25,9 +25,12 @@ var turn_item_rect: Rect2:
 
 ## The name of the actor node set as the selected other actor
 var other_actor_name: String:
+	get:
+		return _other_actor_name
 	set(value):
-		other_actor_name = value
+		_other_actor_name = value
 		_set_item_borders()
+		other_actor_set.emit()
 
 
 ## The control rect of the item representing the selected other actor
@@ -35,6 +38,9 @@ var other_actor_item_rect: Rect2:
 	get:
 		var turn_item: Control = get_node(other_actor_name)
 		return turn_item.get_rect()
+
+
+var _other_actor_name: String
 
 
 func set_queue(map: Map, ordered_actor_names: Array[String],
@@ -61,7 +67,7 @@ func clear() -> void:
 		var child := get_child(0)
 		remove_child(child)
 		child.queue_free()
-	other_actor_name = ""
+	_other_actor_name = "" # Don't emit other_actor_set
 
 
 func _set_item_borders() -> void:

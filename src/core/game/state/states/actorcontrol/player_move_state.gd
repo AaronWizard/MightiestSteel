@@ -37,7 +37,7 @@ func start(_data: Dictionary) -> void:
 
 
 func end() -> void:
-	_clear_other_actor(false)
+	_clear_other_actor(false, true)
 
 
 func handle_unhandled_input(event: InputEvent) -> void:
@@ -86,7 +86,7 @@ func _start_action_menu() -> void:
 
 func _do_move(cell: Vector2i) -> void:
 	allow_input = false
-	_clear_other_actor(false)
+	_clear_other_actor(false, true)
 	await _move_actor(cell)
 	_game.camera.dragging_enabled = true
 	_current_actor.target_visible = true
@@ -104,12 +104,12 @@ func _toggle_other_actor_lighlight(other_actor: Actor, move_camera: bool) \
 			and (other_actor != _other_actor):
 		_highlight_other_actor(other_actor)
 	else:
-		_clear_other_actor(move_camera)
+		_clear_other_actor(move_camera, true)
 
 
 func _highlight_other_actor(actor: Actor) -> void:
 	assert(actor != _current_actor)
-	_clear_other_actor(false)
+	_clear_other_actor(false, false)
 	_other_actor = actor
 
 	_other_actor.other_target_visible = true
@@ -129,11 +129,15 @@ func _highlight_other_actor(actor: Actor) -> void:
 	_map_highlights.set_other_range(move, targets, aoe)
 
 
-func _clear_other_actor(move_camera: bool) -> void:
+func _clear_other_actor(move_camera: bool, clear_turn_queue: bool) -> void:
 	if _other_actor != null:
 		_map_highlights.clear_other_range()
 		_game.ui.hide_other_actor()
-		_game.ui.turn_queue.other_actor_name = ""
+
+		if clear_turn_queue:
+			# Will scroll turn queue to current turn actor
+			_game.ui.turn_queue.other_actor_name = ""
+
 		_other_actor.other_target_visible = false
 		_other_actor = null
 
