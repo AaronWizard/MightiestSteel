@@ -13,9 +13,6 @@ extends Resource
 ## Modifies an actor's turn initiative
 @export_range(0, 1, 1, "or_greater") var speed := 0
 
-## How many actions (moves, attacks) an actor may take on its turn
-@export_range(1, 1, 1, "or_greater") var actions := 2
-
 @export var attack_skill: Skill
 
 # Actors only have four skills

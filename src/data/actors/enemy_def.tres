@@ -5,9 +5,8 @@
 
 [resource]
 script = ExtResource("1_p8nuf")
-stamina = 6.0
+stamina = 4
 attack = 1
 move = 4
-speed = 2.0
-actions = 2
+speed = 0
 attack_skill = ExtResource("1_txho6")

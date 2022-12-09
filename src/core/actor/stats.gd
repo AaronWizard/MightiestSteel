@@ -11,8 +11,7 @@ enum StatTypes
 	MAX_STAMINA, ## An actor's maximum stamina
 	ATTACK, ## How much damage an actor's attacks do
 	MOVE, ## The max range in cells an actor can move as an action
-	SPEED, ## Modifies an actor's turn initiative
-	ACTIONS ## How many actions (moves, attacks) an actor may take on its turn
+	SPEED ## Modifies an actor's turn initiative
 }
 
 
@@ -26,7 +25,6 @@ enum ModifierTypes
 	ATTACK,
 	MOVE,
 	SPEED,
-	ACTIONS,
 	DEFENCE ## Reduces the amount of damage an actor takes
 }
 
@@ -36,7 +34,6 @@ const _STAT_TO_MODIFIER := {
 	StatTypes.ATTACK: ModifierTypes.ATTACK,
 	StatTypes.MOVE: ModifierTypes.MOVE,
 	StatTypes.SPEED: ModifierTypes.SPEED,
-	StatTypes.ACTIONS: ModifierTypes.ACTIONS
 }
 
 
@@ -96,7 +93,6 @@ func init_from_definition(definition: ActorDefinition) -> void:
 	_base_stats[StatTypes.ATTACK] = definition.attack
 	_base_stats[StatTypes.MOVE] = definition.move
 	_base_stats[StatTypes.SPEED] = definition.speed
-	_base_stats[StatTypes.ACTIONS] = definition.actions
 
 	_current_stamina = definition.stamina
 
