@@ -7,7 +7,7 @@ enum VAlign { TOP, CENTER, BOTTOM, STRETCH }
 
 const _PANEL_BORDER_SIZE := 6
 const _PANEL_BORDER_SIZE_V := Vector2(_PANEL_BORDER_SIZE, _PANEL_BORDER_SIZE)
-const _SCROLL_SIZE := 10
+const _SCROLLBAR_SIZE := 10
 
 ## The horizontal alignment of the panel
 @export var halign := HAlign.LEFT:
@@ -79,6 +79,15 @@ const _SCROLL_SIZE := 10
 			_scroll.scroll_vertical = value
 
 
+## The size of the scroll container
+var scroll_size: Vector2:
+	get:
+		var result := Vector2.ZERO
+		if _scroll:
+			result = _scroll.size
+		return result
+
+
 ## The max horizontal scroll value.
 var scroll_horizontal_max: int:
 	get:
@@ -136,12 +145,12 @@ func _resize_scroll_container() -> void:
 			_panel.size = scroll_child.get_minimum_size() + _PANEL_BORDER_SIZE_V
 		else:
 			_panel.size = _PANEL_BORDER_SIZE_V \
-					+ Vector2(_SCROLL_SIZE, _SCROLL_SIZE)
+					+ Vector2(_SCROLLBAR_SIZE, _SCROLLBAR_SIZE)
 
 		if _panel.size.x > size.x:
-			_panel.size.y += _SCROLL_SIZE
+			_panel.size.y += _SCROLLBAR_SIZE
 		if _panel.size.y > size.y:
-			_panel.size.x += _SCROLL_SIZE
+			_panel.size.x += _SCROLLBAR_SIZE
 
 		if halign == HAlign.STRETCH:
 			_panel.size.x = size.x
