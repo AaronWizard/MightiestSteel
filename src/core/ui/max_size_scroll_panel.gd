@@ -61,6 +61,9 @@ const _SCROLL_SIZE := 10
 		if _scroll:
 			result = _scroll.scroll_horizontal
 		return result
+	set(value):
+		if _scroll:
+			_scroll.scroll_horizontal = value
 
 
 ## The current vertical scroll value.
@@ -71,6 +74,9 @@ const _SCROLL_SIZE := 10
 		if _scroll:
 			result = _scroll.scroll_vertical
 		return result
+	set(value):
+		if _scroll:
+			_scroll.scroll_vertical = value
 
 
 ## The max horizontal scroll value.

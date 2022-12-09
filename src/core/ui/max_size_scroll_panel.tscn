@@ -14,12 +14,10 @@ scroll_vertical = 0
 metadata/_edit_group_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer"]
-layout_mode = 2
 
 [connection signal="resized" from="." to="." method="_on_resized"]
 [connection signal="sort_children" from="PanelContainer/ScrollContainer" to="." method="_on_scroll_container_sort_children"]
