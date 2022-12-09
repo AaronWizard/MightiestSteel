@@ -111,13 +111,13 @@ var scroll_vertical_max: int:
 
 
 ## The visible region of the scroll container's child
-var visible_child_rect: Rect2i:
+var visible_scroll_child_rect: Rect2i:
 	get:
 		return Rect2i(
 			scroll_horizontal,
 			scroll_vertical,
-			scroll_horizontal + int(_scroll.size.x),
-			scroll_vertical + int(_scroll.size.y)
+			int(_scroll.size.x),
+			int(_scroll.size.y)
 		)
 
 
