@@ -1,4 +1,5 @@
 @tool
+class_name MaxSizeScrollPanel
 extends Control
 
 enum HAlign { LEFT, CENTER, RIGHT, STRETCH }
@@ -8,24 +9,29 @@ const _PANEL_BORDER_SIZE := 6
 const _PANEL_BORDER_SIZE_V := Vector2(_PANEL_BORDER_SIZE, _PANEL_BORDER_SIZE)
 const _SCROLL_SIZE := 10
 
-
+## The horizontal alignment of the panel
 @export var halign := HAlign.LEFT:
 	set(value):
 		halign = value
 		_resize_scroll_container()
 
+
+## The vertical alignment of the panel
 @export var valign := VAlign.TOP:
 	set(value):
 		valign = value
 		_resize_scroll_container()
 
 
+## The horizontal scroll mode.
+## Corresponds to ScrollContainer.horizontal_scroll_mode.
 @export var horizontal_scroll_mode \
 		:= ScrollContainer.ScrollMode.SCROLL_MODE_AUTO:
 	get:
 		var result := ScrollContainer.ScrollMode.SCROLL_MODE_AUTO
 		if _scroll:
-			result = _scroll.horizontal_scroll_mode
+			result = _scroll.horizontal_scroll_mode \
+					as ScrollContainer.ScrollMode
 		return result
 	set(value):
 		if _scroll:
@@ -33,11 +39,13 @@ const _SCROLL_SIZE := 10
 			_resize_scroll_container()
 
 
+## The vertical scroll mode.
+## Corresponds to ScrollContainer.vertical_scroll_mode.
 @export var vertical_scroll_mode := ScrollContainer.ScrollMode.SCROLL_MODE_AUTO:
 	get:
 		var result := ScrollContainer.ScrollMode.SCROLL_MODE_AUTO
 		if _scroll:
-			result = _scroll.vertical_scroll_mode
+			result = _scroll.vertical_scroll_mode as ScrollContainer.ScrollMode
 		return result
 	set(value):
 		if _scroll:
@@ -45,8 +53,61 @@ const _SCROLL_SIZE := 10
 			_resize_scroll_container()
 
 
+## The current horizontal scroll value.
+## Corresponds to ScrollContainer.scroll_horizontal.
+@export var scroll_horizontal: int:
+	get:
+		var result := 0
+		if _scroll:
+			result = _scroll.scroll_horizontal
+		return result
+
+
+## The current vertical scroll value.
+## Corresponds to ScrollContainer.scroll_vertical.
+@export var scroll_vertical: int:
+	get:
+		var result := 0
+		if _scroll:
+			result = _scroll.scroll_vertical
+		return result
+
+
+## The max horizontal scroll value.
+var scroll_horizontal_max: int:
+	get:
+		var result := 0
+		if _scroll:
+			var child: Control = _scroll.get_child(0)
+			if child:
+				result = maxi(0, int(child.size.x - _scroll.size.x))
+		return result
+
+
+## The max vertical scroll value.
+var scroll_vertical_max: int:
+	get:
+		var result := 0
+		if _scroll:
+			var child: Control = _scroll.get_child(0)
+			if child:
+				result = maxi(0, int(child.size.y - _scroll.size.y))
+		return result
+
+
+## The visible region of the scroll container's child
+var visible_child_rect: Rect2i:
+	get:
+		return Rect2i(
+			scroll_horizontal,
+			scroll_vertical,
+			scroll_horizontal + int(_scroll.size.x),
+			scroll_vertical + int(_scroll.size.y)
+		)
+
+
 @onready var _panel: Control = $PanelContainer
-@onready var _scroll: Control = $PanelContainer/ScrollContainer
+@onready var _scroll: ScrollContainer = $PanelContainer/ScrollContainer
 
 
 func _draw() -> void:
