@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bvgrhacdeom6e"]
 
 [ext_resource type="Texture2D" uid="uid://c2d7emduicf3y" path="res://assets/graphics/ui/icons/attack.png" id="1_lsrlg"]
-[ext_resource type="Script" path="res://src/core/ui/actorstatspanel/actor_stats_panel_skill_button.gd" id="2_dtplo"]
+[ext_resource type="Script" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel_skill_button.gd" id="2_dtplo"]
 
 [node name="ActorStatsPanelSkillButton" type="Button"]
 icon = ExtResource("1_lsrlg")

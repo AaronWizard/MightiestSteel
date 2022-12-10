@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://cgjgufo2hiapc"]
 
-[ext_resource type="Script" path="res://src/core/ui/game_ui.gd" id="1_nkrwp"]
-[ext_resource type="PackedScene" uid="uid://3bbfw14jxje2" path="res://src/core/ui/skill_info_panel.tscn" id="2_leakb"]
-[ext_resource type="PackedScene" uid="uid://wu8sbhng3np0" path="res://src/core/ui/actor_panel.tscn" id="3_f7j2b"]
-[ext_resource type="PackedScene" uid="uid://em65dmffrvt1" path="res://src/core/ui/actor_panel_reversed.tscn" id="4_a12g5"]
+[ext_resource type="Script" path="res://src/core/ui/game/game_ui.gd" id="1_nkrwp"]
+[ext_resource type="PackedScene" uid="uid://3bbfw14jxje2" path="res://src/core/ui/game/skill_info_panel.tscn" id="2_leakb"]
+[ext_resource type="PackedScene" uid="uid://wu8sbhng3np0" path="res://src/core/ui/game/actor_panel.tscn" id="3_f7j2b"]
+[ext_resource type="PackedScene" uid="uid://em65dmffrvt1" path="res://src/core/ui/game/actor_panel_reversed.tscn" id="4_a12g5"]
 [ext_resource type="Texture2D" uid="uid://ct0l0cvqbc3on" path="res://assets/graphics/ui/icons/turn_panel.png" id="5_mww5o"]
 [ext_resource type="PackedScene" uid="uid://dby770p0nloai" path="res://src/core/ui/max_size_scroll_panel.tscn" id="5_ttw4q"]
-[ext_resource type="Script" path="res://src/core/ui/turn_queue.gd" id="6_wb35a"]
+[ext_resource type="Script" path="res://src/core/ui/game/turn_queue.gd" id="6_wb35a"]
 
 [node name="GameUI" type="CanvasLayer"]
 script = ExtResource("1_nkrwp")

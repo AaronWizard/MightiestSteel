@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://3bbfw14jxje2"]
 
-[ext_resource type="Script" path="res://src/core/ui/skill_info_panel.gd" id="1_8lvej"]
+[ext_resource type="Script" path="res://src/core/ui/game/skill_info_panel.gd" id="1_8lvej"]
 [ext_resource type="Texture2D" uid="uid://cuvt1v66hlaec" path="res://assets/graphics/ui/icons/cancel.png" id="1_s75u3"]
 [ext_resource type="Texture2D" uid="uid://c2d7emduicf3y" path="res://assets/graphics/ui/icons/attack.png" id="2_v4us4"]
 [ext_resource type="PackedScene" uid="uid://dby770p0nloai" path="res://src/core/ui/max_size_scroll_panel.tscn" id="4_c155m"]

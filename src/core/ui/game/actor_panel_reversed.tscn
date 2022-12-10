@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://em65dmffrvt1"]
 
-[ext_resource type="PackedScene" uid="uid://wu8sbhng3np0" path="res://src/core/ui/actor_panel.tscn" id="1_1btxe"]
+[ext_resource type="PackedScene" uid="uid://wu8sbhng3np0" path="res://src/core/ui/game/actor_panel.tscn" id="1_1btxe"]
 
 [node name="ActorPanelReversed" instance=ExtResource("1_1btxe")]
 

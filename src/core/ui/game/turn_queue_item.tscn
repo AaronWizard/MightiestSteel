@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://7lsp4vqg1ojg"]
 
 [ext_resource type="Texture2D" uid="uid://da4qakc3847vo" path="res://assets/graphics/actors/fighter.png" id="1_fchms"]
-[ext_resource type="Script" path="res://src/core/ui/turn_queue_item.gd" id="1_qorp7"]
+[ext_resource type="Script" path="res://src/core/ui/game/turn_queue_item.gd" id="1_qorp7"]
 [ext_resource type="Texture2D" uid="uid://n6j60e3vlfg3" path="res://assets/graphics/ui/turn_queue_border_current.png" id="3_q2hku"]
 [ext_resource type="Texture2D" uid="uid://bnlg2duqxodjc" path="res://assets/graphics/ui/turn_queue_border_other.png" id="4_r1hef"]
 

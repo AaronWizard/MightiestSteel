@@ -5,7 +5,7 @@ signal turn_index_set
 signal other_actor_set
 signal clicked(actor: Actor)
 
-const _TURN_QUEUE_ITEM_SCENE = preload("res://src/core/ui/turn_queue_item.tscn")
+const _TURN_QUEUE_ITEM_SCENE = preload("res://src/core/ui/game/turn_queue_item.tscn")
 
 
 ## The index of the item set as the current turn actor

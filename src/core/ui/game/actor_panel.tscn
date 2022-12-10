@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://wu8sbhng3np0"]
 
 [ext_resource type="Texture2D" uid="uid://da4qakc3847vo" path="res://assets/graphics/actors/fighter.png" id="1_3amch"]
-[ext_resource type="Script" path="res://src/core/ui/actor_panel.gd" id="1_i4ofb"]
-[ext_resource type="PackedScene" uid="uid://cj14wiiapl8dv" path="res://src/core/ui/actorstatspanel/actor_stats_panel.tscn" id="2_43jsj"]
+[ext_resource type="Script" path="res://src/core/ui/game/actor_panel.gd" id="1_i4ofb"]
+[ext_resource type="PackedScene" uid="uid://cj14wiiapl8dv" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel.tscn" id="2_43jsj"]
 [ext_resource type="Texture2D" uid="uid://b7kfsrtfml2dl" path="res://assets/graphics/ui/staminabar_background_stretchable.png" id="2_ty4y5"]
 [ext_resource type="Texture2D" uid="uid://c4axt2jd6aws6" path="res://assets/graphics/ui/staminabar_fill_stretchable.png" id="3_hqvu1"]
 

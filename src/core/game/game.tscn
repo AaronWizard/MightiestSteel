@@ -1,17 +1,17 @@
 [gd_scene load_steps=13 format=3 uid="uid://d05c05owf5ytg"]
 
 [ext_resource type="Script" path="res://src/core/game/game.gd" id="1_woo5f"]
-[ext_resource type="PackedScene" uid="uid://b5n6gbsla3f1b" path="res://src/core/ui/map/map_highlights.tscn" id="2_efk31"]
+[ext_resource type="PackedScene" uid="uid://b5n6gbsla3f1b" path="res://src/core/ui/game/map/map_highlights.tscn" id="2_efk31"]
 [ext_resource type="Script" path="res://src/core/game/turn_manager.gd" id="2_hay57"]
 [ext_resource type="Script" path="res://src/core/game/state/state_machine.gd" id="3_we0as"]
 [ext_resource type="Script" path="res://src/core/game/state/state.gd" id="4_va35s"]
 [ext_resource type="Script" path="res://src/core/game/state/states/next_turn_state.gd" id="5_t06j1"]
 [ext_resource type="Script" path="res://src/core/game/state/states/actorcontrol/player_move_state.gd" id="7_stft4"]
 [ext_resource type="Script" path="res://src/core/game/state/states/actorcontrol/player_target_state.gd" id="8_ektjb"]
-[ext_resource type="Resource" uid="uid://bkcxle6530nsw" path="res://src/core/ui/map/actor_actions_menu_events.tres" id="8_pk15j"]
+[ext_resource type="Resource" uid="uid://bkcxle6530nsw" path="res://src/core/ui/game/map/actor_actions_menu_events.tres" id="8_pk15j"]
 [ext_resource type="Script" path="res://src/core/game/state/states/actorcontrol/ai_state.gd" id="9_ugxjj"]
 [ext_resource type="Script" path="res://src/core/game/game_camera.gd" id="9_yaknd"]
-[ext_resource type="PackedScene" uid="uid://cgjgufo2hiapc" path="res://src/core/ui/game_ui.tscn" id="10_bmqpt"]
+[ext_resource type="PackedScene" uid="uid://cgjgufo2hiapc" path="res://src/core/ui/game/game_ui.tscn" id="10_bmqpt"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_woo5f")

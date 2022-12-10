@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cbuigcku4gwba"]
 
 [ext_resource type="Texture2D" uid="uid://i8e1aeitbmgb" path="res://assets/graphics/ui/icons/stats/attack.png" id="1_3xwum"]
-[ext_resource type="Script" path="res://src/core/ui/actorstatspanel/actor_stats_panel_stat.gd" id="1_odeen"]
+[ext_resource type="Script" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel_stat.gd" id="1_odeen"]
 
 [node name="ActorStatsPanelStat" type="HBoxContainer"]
 offset_right = 53.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b5n6gbsla3f1b"]
 
-[ext_resource type="Script" path="res://src/core/ui/map/map_highlights.gd" id="1_3633g"]
+[ext_resource type="Script" path="res://src/core/ui/game/map/map_highlights.gd" id="1_3633g"]
 [ext_resource type="Texture2D" uid="uid://ct6oj7t5es7yh" path="res://assets/graphics/ui/map_highlights.png" id="2_n7v8u"]
 [ext_resource type="PackedScene" uid="uid://sog7m5dsfeo1" path="res://src/core/tiles/target_cursor.tscn" id="3_7jkba"]
 

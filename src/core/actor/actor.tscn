@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://bkmm0fi6e46dy" path="res://assets/graphics/actors/hero.png" id="3_tt4ao"]
 [ext_resource type="Shader" path="res://src/core/shaders/disolve.gdshader" id="4_6fbyk"]
 [ext_resource type="Script" path="res://src/core/actor/stats.gd" id="4_anapf"]
-[ext_resource type="PackedScene" uid="uid://bepmrhgkrymif" path="res://src/core/ui/map/actor_stamina_bar.tscn" id="4_k1dgp"]
-[ext_resource type="PackedScene" uid="uid://bku5l2cqk214v" path="res://src/core/ui/map/actor_actions_menu.tscn" id="4_lrw8s"]
+[ext_resource type="PackedScene" uid="uid://bepmrhgkrymif" path="res://src/core/ui/game/map/actor_stamina_bar.tscn" id="4_k1dgp"]
+[ext_resource type="PackedScene" uid="uid://bku5l2cqk214v" path="res://src/core/ui/game/map/actor_actions_menu.tscn" id="4_lrw8s"]
 [ext_resource type="PackedScene" uid="uid://sog7m5dsfeo1" path="res://src/core/tiles/target_cursor.tscn" id="5_iao12"]
 [ext_resource type="PackedScene" uid="uid://ct42d77xpks3f" path="res://src/core/tiles/other_target_cursor.tscn" id="9_rtcm0"]
 

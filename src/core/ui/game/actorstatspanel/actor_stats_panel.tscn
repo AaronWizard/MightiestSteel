@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://cj14wiiapl8dv"]
 
-[ext_resource type="Script" path="res://src/core/ui/actorstatspanel/actor_stats_panel.gd" id="1_0w2br"]
+[ext_resource type="Script" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel.gd" id="1_0w2br"]
 [ext_resource type="Texture2D" uid="uid://dt8dru7bjbokb" path="res://assets/graphics/actors/cleric.png" id="1_amffk"]
 [ext_resource type="Texture2D" uid="uid://2223efso7qsf" path="res://assets/graphics/ui/icons/stats/max_stamina.png" id="5_q75ga"]
-[ext_resource type="PackedScene" uid="uid://cbuigcku4gwba" path="res://src/core/ui/actorstatspanel/actor_stats_panel_stat.tscn" id="6_p8cs4"]
+[ext_resource type="PackedScene" uid="uid://cbuigcku4gwba" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel_stat.tscn" id="6_p8cs4"]
 [ext_resource type="Texture2D" uid="uid://dbgx6qddsmjjk" path="res://assets/graphics/ui/icons/stats/move.png" id="7_76kho"]
 [ext_resource type="Texture2D" uid="uid://f750xm7qlt7v" path="res://assets/graphics/ui/icons/stats/speed.png" id="8_6jhwu"]
-[ext_resource type="PackedScene" uid="uid://bvgrhacdeom6e" path="res://src/core/ui/actorstatspanel/actor_stats_panel_skill_button.tscn" id="9_cr17r"]
+[ext_resource type="PackedScene" uid="uid://bvgrhacdeom6e" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel_skill_button.tscn" id="9_cr17r"]
 
 [node name="ActorStatsPanel" type="PanelContainer"]
 offset_right = 75.0
