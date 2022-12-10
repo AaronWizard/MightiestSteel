@@ -210,7 +210,7 @@ var _using_virtual_origin_cell := false
 var _report_moves := true
 
 var _attack_skill: Skill = null
-var _skills := {} # Keys are Skills, values are ints
+var _skills := {} # Keys are Skills, values are ints representing cooldowns
 var _skill_cast_last_round := {} # Keys are Skills, values are ints
 
 var _is_animating := false
@@ -317,6 +317,7 @@ func can_run_skill(skill: Skill) -> bool:
 	return get_skill_cooldown(skill) == 0
 
 
+## Get the current cooldown of the skill
 func get_skill_cooldown(skill: Skill) -> int:
 	return _skills[skill]
 
