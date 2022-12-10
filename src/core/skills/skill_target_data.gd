@@ -1,7 +1,6 @@
 class_name SkillTargetsData
 
-## Describe the AOE and predicted damage to any actors of all targets within a
-## skill's target range.
+## Describe the range, AOE, and predicted damage of a skill.
 
 class TargetInfo:
 	## Describe AOE and predicted damage of a skill's target.
