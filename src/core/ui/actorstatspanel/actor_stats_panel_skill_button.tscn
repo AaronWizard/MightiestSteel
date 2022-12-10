@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvgrhacdeom6e"]
+
+[ext_resource type="Texture2D" uid="uid://c2d7emduicf3y" path="res://assets/graphics/ui/icons/attack.png" id="1_lsrlg"]
+[ext_resource type="Script" path="res://src/core/ui/actorstatspanel/actor_stats_panel_skill_button.gd" id="2_dtplo"]
+
+[node name="ActorStatsPanelSkillButton" type="Button"]
+icon = ExtResource("1_lsrlg")
+script = ExtResource("2_dtplo")
+
+[node name="Cooldown" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -10.0
+offset_right = -4.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "3"
+horizontal_alignment = 2
+
+[node name="Ready" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -10.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Ready!"
+horizontal_alignment = 2
