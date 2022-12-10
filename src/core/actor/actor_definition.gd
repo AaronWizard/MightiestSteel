@@ -56,7 +56,7 @@ var _have_stats := false
 
 var skills: Array[Skill]:
 	get:
-		var result := []
+		var result: Array[Skill] = []
 		if skill0:
 			result.append(skill0)
 		if skill1:
