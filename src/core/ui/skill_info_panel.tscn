@@ -1,62 +1,108 @@
-[gd_scene load_steps=4 format=3 uid="uid://3bbfw14jxje2"]
+[gd_scene load_steps=5 format=3 uid="uid://3bbfw14jxje2"]
 
 [ext_resource type="Script" path="res://src/core/ui/skill_info_panel.gd" id="1_8lvej"]
 [ext_resource type="Texture2D" uid="uid://cuvt1v66hlaec" path="res://assets/graphics/ui/icons/cancel.png" id="1_s75u3"]
 [ext_resource type="Texture2D" uid="uid://c2d7emduicf3y" path="res://assets/graphics/ui/icons/attack.png" id="2_v4us4"]
+[ext_resource type="PackedScene" uid="uid://dby770p0nloai" path="res://src/core/ui/max_size_scroll_panel.tscn" id="4_c155m"]
 
 [node name="SkillInfoPanel" type="Control"]
-custom_minimum_size = Vector2(111, 26)
+custom_minimum_size = Vector2(111, 60)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 111.0
-offset_bottom = 26.0
+offset_bottom = 60.0
 mouse_filter = 2
 script = ExtResource("1_8lvej")
 
+[node name="DescriptionPanel" parent="." instance=ExtResource("4_c155m")]
+visible = false
+offset_right = 111.0
+offset_bottom = 38.0
+halign = 3
+valign = 2
+
+[node name="PanelContainer" parent="DescriptionPanel" index="0"]
+offset_top = 24.0
+offset_right = 111.0
+offset_bottom = 38.0
+
+[node name="ScrollContainer" parent="DescriptionPanel/PanelContainer" index="0"]
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 108.0
+offset_bottom = 11.0
+
+[node name="MarginContainer" type="MarginContainer" parent="DescriptionPanel/PanelContainer/ScrollContainer" index="0"]
+offset_right = 105.0
+offset_bottom = 6.0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_bottom = -1
+
+[node name="Description" type="Label" parent="DescriptionPanel/PanelContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 105.0
+offset_bottom = 7.0
+autowrap_mode = 2
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(65, 24)
-layout_mode = 0
 offset_left = 23.0
-offset_top = 1.0
-offset_right = 87.0
-offset_bottom = 25.0
+offset_top = 35.0
+offset_right = 88.0
+offset_bottom = 59.0
 metadata/_edit_group_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
-layout_mode = 2
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 62.0
+offset_bottom = 21.0
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = -2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
-layout_mode = 2
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 58.0
+offset_bottom = 20.0
 size_flags_vertical = 4
 
 [node name="SkillName" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
+offset_right = 56.0
+offset_bottom = 9.0
 text = "Skill Name"
 clip_text = true
 
 [node name="NoValidTargets" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
+offset_top = 10.0
+offset_right = 56.0
+offset_bottom = 19.0
 text = "No Valid Targets"
 
 [node name="SkillButton" type="Button" parent="."]
 unique_name_in_owner = true
-layout_mode = 1
+offset_top = 34.0
 offset_right = 26.0
-offset_bottom = 26.0
+offset_bottom = 60.0
+toggle_mode = true
 icon = ExtResource("2_v4us4")
 
 [node name="Cancel" type="Button" parent="."]
-layout_mode = 2
 offset_left = 85.0
+offset_top = 34.0
 offset_right = 111.0
-offset_bottom = 26.0
+offset_bottom = 60.0
 icon = ExtResource("1_s75u3")
 
-[connection signal="pressed" from="SkillButton" to="." method="_on_skill_button_pressed"]
+[connection signal="toggled" from="SkillButton" to="." method="_on_skill_button_toggled"]
 [connection signal="pressed" from="Cancel" to="." method="_on_cancel_pressed"]
+
+[editable path="DescriptionPanel"]
