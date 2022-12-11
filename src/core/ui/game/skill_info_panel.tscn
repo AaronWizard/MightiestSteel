@@ -56,5 +56,4 @@ text = "No Valid Targets"
 layout_mode = 2
 icon = ExtResource("1_s75u3")
 
-[connection signal="pressed" from="SkillButton" to="." method="_on_skill_button_pressed"]
 [connection signal="pressed" from="Cancel" to="." method="_on_cancel_pressed"]

@@ -39,6 +39,10 @@ var turn_queue: TurnQueue:
 		= $StatPopups/CurrentActorStats
 @onready var _other_actor_stats: ActorStatsPanel = $StatPopups/OtherActorStats
 
+@onready var _skill_popup: Control = $SkillPopup
+@onready var _skill_description: SkillDescriptionPanel \
+		= $SkillPopup/SkillDescriptionPanel
+
 @onready var _play_area: Control = $PlayArea
 
 
@@ -112,6 +116,7 @@ func _show_stat_popup(control: Control) -> void:
 	for c in _stat_popups.get_children():
 		var child: Control = c
 		child.visible = child == control
+	control.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
 	_stat_popups.visible = true
 
 
@@ -121,3 +126,25 @@ func _on_current_actor_stats_cancelled() -> void:
 
 func _on_other_actor_stats_cancelled() -> void:
 	_stat_popups.visible = false
+
+
+func _on_current_actor_stats_skill_selected(skill: Skill) -> void:
+	_show_skill_description(skill, true)
+
+
+func _on_other_actor_stats_skill_selected(skill: Skill) -> void:
+	_show_skill_description(skill, true)
+
+
+func _on_skill_info_panel_icon_pressed(skill: Skill, need_cooldown) -> void:
+	_show_skill_description(skill, need_cooldown)
+
+
+func _show_skill_description(skill: Skill, need_cooldown: bool) -> void:
+	_skill_description.set_skill(skill, need_cooldown)
+	_skill_description.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	_skill_popup.visible = true
+
+
+func _on_skill_description_panel_cancelled() -> void:
+	_skill_popup.visible = false

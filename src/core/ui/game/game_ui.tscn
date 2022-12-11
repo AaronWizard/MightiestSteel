@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b407lnf1842p4"]
+[gd_scene load_steps=9 format=3 uid="uid://b407lnf1842p4"]
 
 [ext_resource type="Script" path="res://src/core/ui/game/game_ui.gd" id="1_nkrwp"]
 [ext_resource type="PackedScene" uid="uid://3bbfw14jxje2" path="res://src/core/ui/game/skill_info_panel.tscn" id="2_leakb"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dby770p0nloai" path="res://src/core/ui/max_size_scroll_panel.tscn" id="5_ttw4q"]
 [ext_resource type="Script" path="res://src/core/ui/game/turn_queue.gd" id="6_wb35a"]
 [ext_resource type="PackedScene" uid="uid://cj14wiiapl8dv" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel.tscn" id="7_gmto7"]
+[ext_resource type="PackedScene" uid="uid://c1no3sh5sxyt3" path="res://src/core/ui/game/skill_description_panel.tscn" id="8_lwd20"]
 
 [node name="GameUI" type="CanvasLayer"]
 script = ExtResource("1_nkrwp")
@@ -129,12 +130,39 @@ offset_bottom = 30.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="SkillPopup" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillDescriptionPanel" parent="SkillPopup" instance=ExtResource("8_lwd20")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -45.5
+offset_right = 50.0
+offset_bottom = 45.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="icon_pressed" from="SkillInfoPanel" to="." method="_on_skill_info_panel_icon_pressed"]
 [connection signal="portrait_pressed" from="CurrentActorInfo" to="." method="_on_current_actor_info_portrait_pressed"]
 [connection signal="portrait_pressed" from="OtherActorInfo" to="." method="_on_other_actor_info_portrait_pressed"]
 [connection signal="other_actor_set" from="TurnQueueContainer/PanelContainer/ScrollContainer/TurnQueue" to="." method="_on_turn_queue_other_actor_set"]
 [connection signal="turn_index_set" from="TurnQueueContainer/PanelContainer/ScrollContainer/TurnQueue" to="." method="_on_turn_queue_turn_index_set"]
 [connection signal="toggled" from="TurnQueueButton" to="." method="_on_turn_queue_button_toggled"]
 [connection signal="cancelled" from="StatPopups/CurrentActorStats" to="." method="_on_current_actor_stats_cancelled"]
+[connection signal="skill_selected" from="StatPopups/CurrentActorStats" to="." method="_on_current_actor_stats_skill_selected"]
 [connection signal="cancelled" from="StatPopups/OtherActorStats" to="." method="_on_other_actor_stats_cancelled"]
+[connection signal="skill_selected" from="StatPopups/OtherActorStats" to="." method="_on_other_actor_stats_skill_selected"]
+[connection signal="cancelled" from="SkillPopup/SkillDescriptionPanel" to="." method="_on_skill_description_panel_cancelled"]
 
 [editable path="TurnQueueContainer"]
