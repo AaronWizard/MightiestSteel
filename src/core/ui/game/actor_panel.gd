@@ -63,9 +63,11 @@ func set_actor(actor: Actor, enable_portrait: bool) -> void:
 	_stats.set_actor(actor)
 
 
-func clear_actor() -> void:
+func clear_actor(close_stats: bool) -> void:
 	_portrait.icon = null
 	_portrait.disabled = true
+	if close_stats:
+		_portrait.button_pressed = false
 
 
 func _on_portrait_toggled(button_pressed: bool) -> void:

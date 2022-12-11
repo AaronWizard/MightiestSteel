@@ -47,7 +47,7 @@ func start_actor_turn(actor: Actor) -> void:
 
 
 func end_current_actor_turn() -> void:
-	_actor_panel.clear_actor()
+	_actor_panel.clear_actor(true)
 	_actor_panel.visible = false
 
 
@@ -56,8 +56,8 @@ func show_other_actor(actor: Actor) -> void:
 	_other_actor_panel.visible = true
 
 
-func hide_other_actor() -> void:
-	_other_actor_panel.clear_actor()
+func hide_other_actor(close_stats: bool) -> void:
+	_other_actor_panel.clear_actor(close_stats)
 	_other_actor_panel.visible = false
 
 
