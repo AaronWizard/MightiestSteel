@@ -1,12 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://cgjgufo2hiapc"]
+[gd_scene load_steps=9 format=3 uid="uid://cgjgufo2hiapc"]
 
 [ext_resource type="Script" path="res://src/core/ui/game/game_ui.gd" id="1_nkrwp"]
 [ext_resource type="PackedScene" uid="uid://3bbfw14jxje2" path="res://src/core/ui/game/skill_info_panel.tscn" id="2_leakb"]
 [ext_resource type="PackedScene" uid="uid://wu8sbhng3np0" path="res://src/core/ui/game/actor_panel.tscn" id="3_f7j2b"]
-[ext_resource type="PackedScene" uid="uid://em65dmffrvt1" path="res://src/core/ui/game/actor_panel_reversed.tscn" id="4_a12g5"]
 [ext_resource type="Texture2D" uid="uid://ct0l0cvqbc3on" path="res://assets/graphics/ui/icons/turn_panel.png" id="5_mww5o"]
 [ext_resource type="PackedScene" uid="uid://dby770p0nloai" path="res://src/core/ui/max_size_scroll_panel.tscn" id="5_ttw4q"]
 [ext_resource type="Script" path="res://src/core/ui/game/turn_queue.gd" id="6_wb35a"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_rs1vg"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_my3ue"]
 
 [node name="GameUI" type="CanvasLayer"]
 script = ExtResource("1_nkrwp")
@@ -18,35 +21,40 @@ anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 28.0
 offset_right = -1.0
-offset_bottom = -37.0
+offset_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
 [node name="SkillInfoPanel" parent="." instance=ExtResource("2_leakb")]
 visible = false
-offset_left = 2.0
-offset_top = -97.0
-offset_right = 113.0
-offset_bottom = -37.0
+offset_left = 1.0
+offset_top = -62.0
+offset_right = 112.0
+offset_bottom = -36.0
 
 [node name="ActorPanel" parent="." instance=ExtResource("3_f7j2b")]
 visible = false
-offset_left = 2.0
-offset_top = -36.0
-offset_right = 86.0
-offset_bottom = -2.0
+z_index = 1
+offset_left = 1.0
+offset_top = -35.0
+offset_right = 81.0
+offset_bottom = -1.0
+skill_button_group = SubResource("ButtonGroup_rs1vg")
 
-[node name="OtherActorPanel" parent="." instance=ExtResource("4_a12g5")]
+[node name="OtherActorPanel" parent="." instance=ExtResource("3_f7j2b")]
 visible = false
+z_index = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -86.0
-offset_top = -36.0
-offset_right = -2.0
-offset_bottom = -2.0
+offset_left = -81.0
+offset_top = -35.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 0
+skill_button_group = SubResource("ButtonGroup_my3ue")
+reversed = true
 
 [node name="TurnQueueContainer" parent="." instance=ExtResource("5_ttw4q")]
 visible = false
@@ -60,11 +68,16 @@ offset_bottom = -1.0
 grow_vertical = 2
 
 [node name="PanelContainer" parent="TurnQueueContainer" index="0"]
+layout_mode = 0
 offset_right = 6.0
 offset_bottom = 6.0
 
+[node name="ScrollContainer" parent="TurnQueueContainer/PanelContainer" index="0"]
+layout_mode = 2
+
 [node name="TurnQueue" type="VBoxContainer" parent="TurnQueueContainer/PanelContainer/ScrollContainer" index="0"]
 unique_name_in_owner = true
+layout_mode = 2
 script = ExtResource("6_wb35a")
 
 [node name="TurnQueueButton" type="Button" parent="."]

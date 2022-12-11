@@ -2,6 +2,7 @@ class_name ActorStatsPanel
 extends PanelContainer
 
 @export var skill_button_scene: PackedScene
+@export var skill_button_group: ButtonGroup
 
 @onready var _portrait: TextureRect = $%Portrait
 @onready var _name: Label = $%Name
@@ -38,6 +39,7 @@ func set_actor(actor: Actor) -> void:
 
 		button.icon = s.icon
 		button.cooldown = actor.get_skill_cooldown(s)
+		button.button_group = skill_button_group
 
 
 func _clear() -> void:
