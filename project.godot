@@ -45,9 +45,9 @@ _global_script_classes=[{
 "path": "res://src/core/actor/actor_definition.gd"
 }, {
 "base": "HBoxContainer",
-"class": &"ActorPanel",
+"class": &"ActorInfoPanel",
 "language": &"GDScript",
-"path": "res://src/core/ui/game/actor_panel.gd"
+"path": "res://src/core/ui/game/actor_info_panel.gd"
 }, {
 "base": "Node2D",
 "class": &"ActorStaminaBar",
@@ -164,7 +164,12 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/skills/skill.gd"
 }, {
-"base": "VBoxContainer",
+"base": "PanelContainer",
+"class": &"SkillDescriptionPanel",
+"language": &"GDScript",
+"path": "res://src/core/ui/game/skill_description_panel.gd"
+}, {
+"base": "HBoxContainer",
 "class": &"SkillInfoPanel",
 "language": &"GDScript",
 "path": "res://src/core/ui/game/skill_info_panel.gd"
@@ -252,7 +257,7 @@ _global_script_class_icons={
 "ActorActionsMenuEvents": "",
 "ActorControlState": "",
 "ActorDefinition": "",
-"ActorPanel": "",
+"ActorInfoPanel": "",
 "ActorStaminaBar": "",
 "ActorStatsPanel": "",
 "ActorStatsPanelSkillButton": "",
@@ -276,6 +281,7 @@ _global_script_class_icons={
 "PlayerTargetState": "",
 "Projectile": "",
 "Skill": "",
+"SkillDescriptionPanel": "",
 "SkillInfoPanel": "",
 "SkillTargetsData": "",
 "State": "",

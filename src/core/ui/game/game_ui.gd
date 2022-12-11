@@ -17,10 +17,6 @@ var play_area: Rect2:
 var panels_enabled: bool:
 	set(value):
 		panels_enabled = value
-
-		_actor_panel.enabled = panels_enabled
-		_other_actor_panel.enabled = panels_enabled
-
 		if not panels_enabled:
 			_turn_queue_button.button_pressed = false
 		_turn_queue_button.disabled = not panels_enabled
@@ -31,8 +27,8 @@ var turn_queue: TurnQueue:
 		return _turn_queue
 
 
-@onready var _actor_panel: ActorPanel = $ActorPanel
-@onready var _other_actor_panel: ActorPanel = $OtherActorPanel
+@onready var _current_actor_info: ActorInfoPanel = $CurrentActorInfo
+@onready var _other_actor_panel: ActorInfoPanel = $OtherActorInfo
 
 @onready var _turn_queue_button: Button = $TurnQueueButton
 @onready var _turn_queue_container: MaxSizeScrollPanel = $TurnQueueContainer
@@ -42,17 +38,12 @@ var turn_queue: TurnQueue:
 
 
 func start_actor_turn(actor: Actor) -> void:
-	_actor_panel.set_actor(actor, actor.is_player_controlled)
-	_actor_panel.visible = true
-
-
-func hide_current_actor_stats() -> void:
-	_actor_panel.portrait_toggled = false
+	_current_actor_info.set_actor(actor, actor.is_player_controlled)
+	_current_actor_info.visible = true
 
 
 func end_current_actor_turn() -> void:
-	_actor_panel.clear_actor(true)
-	_actor_panel.visible = false
+	_current_actor_info.visible = false
 
 
 func show_other_actor(actor: Actor) -> void:
@@ -60,8 +51,7 @@ func show_other_actor(actor: Actor) -> void:
 	_other_actor_panel.visible = true
 
 
-func hide_other_actor(close_stats: bool) -> void:
-	_other_actor_panel.clear_actor(close_stats)
+func hide_other_actor() -> void:
 	_other_actor_panel.visible = false
 
 
@@ -101,3 +91,11 @@ func _scroll_over_turn_queue_item(item_rect: Rect2, instant: bool) -> void:
 			_turn_queue_container, "scroll_vertical", scroll_y,
 			_TURN_QUEUE_SCROLL_TIME
 		).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+
+func _on_current_actor_info_portrait_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_other_actor_info_portrait_pressed() -> void:
+	pass # Replace with function body.

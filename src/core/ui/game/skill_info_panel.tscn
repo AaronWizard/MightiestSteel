@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cuvt1v66hlaec" path="res://assets/graphics/ui/icons/cancel.png" id="1_s75u3"]
 [ext_resource type="Texture2D" uid="uid://c2d7emduicf3y" path="res://assets/graphics/ui/icons/attack.png" id="2_v4us4"]
 
-[node name="SkillInfoPanel" type="VBoxContainer"]
+[node name="SkillInfoPanel" type="HBoxContainer"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -15,89 +15,46 @@ mouse_filter = 2
 alignment = 2
 script = ExtResource("1_8lvej")
 
-[node name="DescriptionContainer" type="MarginContainer" parent="."]
-unique_name_in_owner = true
-visible = false
-z_index = -1
-layout_mode = 2
-theme_override_constants/margin_bottom = -5
-
-[node name="PanelContainer" type="PanelContainer" parent="DescriptionContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="DescriptionContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 1
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_bottom = -1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DescriptionContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="CooldownHeader" type="HBoxContainer" parent="DescriptionContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SkillButton" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
-
-[node name="Label" type="Label" parent="DescriptionContainer/PanelContainer/MarginContainer/VBoxContainer/CooldownHeader"]
-layout_mode = 2
-text = "Cooldown:"
-
-[node name="Cooldown" type="Label" parent="DescriptionContainer/PanelContainer/MarginContainer/VBoxContainer/CooldownHeader"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-text = "1"
-
-[node name="Description" type="Label" parent="DescriptionContainer/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever q since the 1500s."
-autowrap_mode = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="SkillButton" type="Button" parent="HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-toggle_mode = true
 icon = ExtResource("2_v4us4")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 z_index = -1
 layout_mode = 2
 theme_override_constants/margin_left = -5
 theme_override_constants/margin_right = -5
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
 layout_mode = 2
 metadata/_edit_group_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = -2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="SkillName" type="Label" parent="HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="SkillName" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Skill Name"
 
-[node name="NoValidTargets" type="Label" parent="HBoxContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="NoValidTargets" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "No Valid Targets"
 
-[node name="Cancel" type="Button" parent="HBoxContainer"]
+[node name="Cancel" type="Button" parent="."]
 layout_mode = 2
 icon = ExtResource("1_s75u3")
 
-[connection signal="toggled" from="HBoxContainer/SkillButton" to="." method="_on_skill_button_toggled"]
-[connection signal="pressed" from="HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="SkillButton" to="." method="_on_skill_button_pressed"]
+[connection signal="pressed" from="Cancel" to="." method="_on_cancel_pressed"]

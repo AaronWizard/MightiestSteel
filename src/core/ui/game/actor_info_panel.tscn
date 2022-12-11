@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://wu8sbhng3np0"]
+
+[ext_resource type="Texture2D" uid="uid://da4qakc3847vo" path="res://assets/graphics/actors/fighter.png" id="1_m2863"]
+[ext_resource type="Script" path="res://src/core/ui/game/actor_info_panel.gd" id="1_smghp"]
+[ext_resource type="Texture2D" uid="uid://b7kfsrtfml2dl" path="res://assets/graphics/ui/staminabar_background_stretchable.png" id="2_kq2ku"]
+[ext_resource type="Texture2D" uid="uid://c4axt2jd6aws6" path="res://assets/graphics/ui/staminabar_fill_stretchable.png" id="3_humfj"]
+
+[node name="ActorInfoPanel" type="HBoxContainer"]
+offset_right = 79.0
+offset_bottom = 34.0
+script = ExtResource("1_smghp")
+
+[node name="PortraitMargin" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+offset_right = 31.0
+offset_bottom = 34.0
+theme_override_constants/margin_right = -3
+
+[node name="Portrait" type="Button" parent="PortraitMargin"]
+unique_name_in_owner = true
+offset_right = 34.0
+offset_bottom = 34.0
+icon = ExtResource("1_m2863")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+z_index = -1
+offset_left = 32.0
+offset_top = 4.0
+offset_right = 79.0
+offset_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 44.0
+offset_bottom = 23.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+offset_right = 41.0
+offset_bottom = 10.0
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+
+[node name="Name" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 41.0
+offset_bottom = 10.0
+text = "Actor Name"
+
+[node name="Stamina" type="TextureProgressBar" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 9)
+offset_top = 11.0
+offset_right = 41.0
+offset_bottom = 20.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+texture_under = ExtResource("2_kq2ku")
+texture_progress = ExtResource("3_humfj")
+
+[connection signal="pressed" from="PortraitMargin/Portrait" to="." method="_on_portrait_pressed"]
