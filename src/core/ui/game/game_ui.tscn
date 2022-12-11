@@ -28,6 +28,7 @@ mouse_filter = 2
 
 [node name="SkillInfoPanel" parent="." instance=ExtResource("2_leakb")]
 visible = false
+z_index = -1
 offset_left = 1.0
 offset_top = -62.0
 offset_right = 112.0
@@ -35,7 +36,6 @@ offset_bottom = -36.0
 
 [node name="ActorPanel" parent="." instance=ExtResource("3_f7j2b")]
 visible = false
-z_index = 1
 offset_left = 1.0
 offset_top = -35.0
 offset_right = 81.0
@@ -44,7 +44,6 @@ skill_button_group = SubResource("ButtonGroup_rs1vg")
 
 [node name="OtherActorPanel" parent="." instance=ExtResource("3_f7j2b")]
 visible = false
-z_index = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_right = 1.0
@@ -58,6 +57,7 @@ reversed = true
 
 [node name="TurnQueueContainer" parent="." instance=ExtResource("5_ttw4q")]
 visible = false
+z_index = 1
 custom_minimum_size = Vector2(90, 0)
 anchors_preset = 9
 anchor_bottom = 1.0
