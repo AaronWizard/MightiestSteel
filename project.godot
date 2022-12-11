@@ -179,6 +179,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/skills/skill_target_data.gd"
 }, {
+"base": "Resource",
+"class": &"StatModifier",
+"language": &"GDScript",
+"path": "res://src/core/statuseffects/stat_modifier.gd"
+}, {
 "base": "Node",
 "class": &"State",
 "language": &"GDScript",
@@ -193,6 +198,11 @@ _global_script_classes=[{
 "class": &"Stats",
 "language": &"GDScript",
 "path": "res://src/core/actor/stats.gd"
+}, {
+"base": "Node",
+"class": &"StatusEffect",
+"language": &"GDScript",
+"path": "res://src/core/statuseffects/status_effect.gd"
 }, {
 "base": "Resource",
 "class": &"TargetRange",
@@ -284,9 +294,11 @@ _global_script_class_icons={
 "SkillDescriptionPanel": "",
 "SkillInfoPanel": "",
 "SkillTargetsData": "",
+"StatModifier": "",
 "State": "",
 "StateMachine": "",
 "Stats": "",
+"StatusEffect": "",
 "TargetRange": "",
 "TargetRangeData": "",
 "TerrainData": "",
