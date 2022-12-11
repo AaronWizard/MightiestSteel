@@ -48,12 +48,12 @@ func run(source_actor: Actor, target: Vector2i) -> void:
 		await source_actor.animation_finished
 
 
-## Can be overriden
+# Can be overriden
 func _get_skill_target_info(_source_actor: Actor, _target_cell: Vector2i) \
 		-> SkillTargetsData.TargetInfo:
 	return SkillTargetsData.TargetInfo.new([], {})
 
 
-## Can be overriden
+# Can be overriden
 func _run(_source_actor: Actor, _target_cell: Vector2i) -> void:
 	pass
