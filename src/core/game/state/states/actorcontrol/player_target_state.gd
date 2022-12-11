@@ -26,6 +26,7 @@ func start(data: Dictionary) -> void:
 
 	var has_cooldown: bool = data.has_cooldown
 
+	_game.ui.hide_current_actor_stats()
 	_game.ui.skill_info_panel.set_skill(_selected_skill, has_cooldown,
 			not _target_data.valid_targets.is_empty())
 	_game.ui.skill_info_panel.visible = true

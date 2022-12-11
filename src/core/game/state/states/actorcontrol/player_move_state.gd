@@ -60,6 +60,7 @@ func _choose_move_input() -> void:
 
 func _start_action_menu() -> void:
 	_game.camera.dragging_enabled = false
+	_game.ui.hide_current_actor_stats()
 	allow_input = false
 
 	var rect = _current_actor.action_menu.rect

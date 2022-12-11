@@ -26,12 +26,19 @@ const _PORTRAIT_MARGIN_SIDE := -3
 					"margin_right", _PORTRAIT_MARGIN_SIDE)
 
 
+var portrait_toggled: bool:
+	get:
+		return _portrait.button_pressed
+	set(value):
+		_portrait.button_pressed = value
+
+
 var enabled: bool:
 	get:
 		return not _portrait.disabled
 	set(value):
 		if not value:
-			_portrait.button_pressed = false
+			portrait_toggled = false
 		_portrait.disabled = not value
 
 
@@ -67,7 +74,7 @@ func clear_actor(close_stats: bool) -> void:
 	_portrait.icon = null
 	_portrait.disabled = true
 	if close_stats:
-		_portrait.button_pressed = false
+		portrait_toggled = false
 
 
 func _on_portrait_toggled(button_pressed: bool) -> void:

@@ -46,6 +46,10 @@ func start_actor_turn(actor: Actor) -> void:
 	_actor_panel.visible = true
 
 
+func hide_current_actor_stats() -> void:
+	_actor_panel.portrait_toggled = false
+
+
 func end_current_actor_turn() -> void:
 	_actor_panel.clear_actor(true)
 	_actor_panel.visible = false
