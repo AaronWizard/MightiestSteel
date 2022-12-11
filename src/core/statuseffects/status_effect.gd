@@ -63,6 +63,7 @@ func _exit_tree() -> void:
 	_actor = null
 
 
+## When a new round has started
 func start_round() -> void:
 	if time_type == TimeType.ROUNDS:
 		rounds_left -= 1
@@ -70,16 +71,19 @@ func start_round() -> void:
 			finished.emit()
 
 
+## When the effect's actor has started its turn
 func start_turn() -> void:
 	if time_type == TimeType.NEXT_TURN_START:
 		finished.emit()
 
 
+## When the effect's actor has ended its turn
 func end_turn() -> void:
 	if time_type == TimeType.NEXT_TURN_END:
 		finished.emit()
 
 
+## When the effect's actor has moved
 func moved() -> void:
 	if time_type == TimeType.POSITION:
 		finished.emit()
