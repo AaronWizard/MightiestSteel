@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://c2d7emduicf3y" path="res://assets/graphics/ui/icons/attack.png" id="2_v4us4"]
 
 [node name="SkillInfoPanel" type="VBoxContainer"]
-custom_minimum_size = Vector2(111, 0)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
