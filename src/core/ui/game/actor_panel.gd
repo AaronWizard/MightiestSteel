@@ -26,11 +26,13 @@ const _PORTRAIT_MARGIN_SIDE := -3
 					"margin_right", _PORTRAIT_MARGIN_SIDE)
 
 
-var stats_visible: bool:
+var enabled: bool:
 	get:
-		return _portrait.button_pressed
+		return not _portrait.disabled
 	set(value):
-		_portrait.button_pressed = value
+		if not value:
+			_portrait.button_pressed = false
+		_portrait.disabled = not value
 
 
 @onready var _main_panel: Control = $%MainPanel
@@ -56,7 +58,7 @@ func set_actor(actor: Actor, enable_portrait: bool) -> void:
 	_stamina.max_value = actor.stats.max_stamina
 	_stamina.value = actor.stats.current_stamina
 
-	_portrait.disabled = not enable_portrait
+	enabled = enable_portrait
 
 	_stats.set_actor(actor)
 

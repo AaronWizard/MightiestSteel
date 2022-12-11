@@ -14,13 +14,16 @@ var play_area: Rect2:
 		return _play_area.get_rect()
 
 
-var turn_queue_button_enabled: bool:
-	get:
-		return not _turn_queue_button.disabled
+var panels_enabled: bool:
 	set(value):
-		if not value:
+		panels_enabled = value
+
+		_actor_panel.enabled = panels_enabled
+		_other_actor_panel.enabled = panels_enabled
+
+		if not panels_enabled:
 			_turn_queue_button.button_pressed = false
-		_turn_queue_button.disabled = not value
+		_turn_queue_button.disabled = not panels_enabled
 
 
 var turn_queue: TurnQueue:

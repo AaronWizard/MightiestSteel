@@ -31,7 +31,7 @@ func _ready() -> void:
 
 func start(_data: Dictionary) -> void:
 	_game.camera.dragging_enabled = true
-	_game.ui.turn_queue_button_enabled = true
+	_game.ui.panels_enabled = true
 
 	_show_move_range()
 

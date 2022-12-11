@@ -30,7 +30,7 @@ func _move_actor(cell: Vector2) -> void:
 
 
 func _run_skill(skill: Skill, target: Vector2i) -> void:
-	_game.ui.turn_queue_button_enabled = false
+	_game.ui.panels_enabled = false
 	_game.camera.dragging_enabled = false
 
 	_current_actor.target_visible = false
@@ -40,7 +40,7 @@ func _run_skill(skill: Skill, target: Vector2i) -> void:
 
 
 func _wait() -> void:
-	_game.ui.turn_queue_button_enabled = false
+	_game.ui.panels_enabled = false
 	_game.camera.dragging_enabled = false
 
 	_end_turn()
