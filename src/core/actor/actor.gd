@@ -376,7 +376,7 @@ func take_damage(attack_power: int, source_cell: Vector2i) -> void:
 func add_status_effect(effect: StatusEffect) -> void:
 	assert(not effect in _status_effects.get_children())
 	if effect.actor:
-		push_warning("Can't transfer status effects between actors")
+		push_error("Can't transfer status effects between actors")
 	else:
 		_status_effects.add_child(effect)
 		effect.actor = self
