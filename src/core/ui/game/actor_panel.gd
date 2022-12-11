@@ -1,6 +1,6 @@
 @tool
 class_name ActorPanel
-extends VBoxContainer
+extends HBoxContainer
 
 const _PORTRAIT_MARGIN_SIDE := -3
 
@@ -45,13 +45,14 @@ var enabled: bool:
 @onready var _main_panel: Control = $%MainPanel
 @onready var _portrait_margin: MarginContainer = $%PortraitMargin
 
-
 @onready var _portrait: Button = $%Portrait
 @onready var _name: Label = $%Name
 @onready var _stamina: Range = $%Stamina
 
 @onready var _stats_container: Control = $%StatsContainer
 @onready var _stats: ActorStatsPanel = $%StatsPanel
+
+@onready var _skill_description_container: Control = $%SkillDescriptionContainer
 
 
 func _ready() -> void:
@@ -78,4 +79,14 @@ func clear_actor(close_stats: bool) -> void:
 
 
 func _on_portrait_toggled(button_pressed: bool) -> void:
+	if not button_pressed and skill_button_group.get_pressed_button():
+		skill_button_group.get_pressed_button().button_pressed = false
 	_stats_container.visible = button_pressed
+
+
+func _on_stats_panel_skill_selected(skill: Skill) -> void:
+	_skill_description_container.visible = true
+
+
+func _on_stats_panel_skill_cleared() -> void:
+	_skill_description_container.visible = false

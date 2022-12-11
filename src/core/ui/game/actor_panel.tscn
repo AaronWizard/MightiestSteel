@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://wu8sbhng3np0"]
+[gd_scene load_steps=7 format=3 uid="uid://wu8sbhng3np0"]
 
 [ext_resource type="Texture2D" uid="uid://da4qakc3847vo" path="res://assets/graphics/actors/fighter.png" id="1_3amch"]
 [ext_resource type="Script" path="res://src/core/ui/game/actor_panel.gd" id="1_i4ofb"]
 [ext_resource type="PackedScene" uid="uid://cj14wiiapl8dv" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel.tscn" id="2_43jsj"]
 [ext_resource type="Texture2D" uid="uid://b7kfsrtfml2dl" path="res://assets/graphics/ui/staminabar_background_stretchable.png" id="2_ty4y5"]
 [ext_resource type="Texture2D" uid="uid://c4axt2jd6aws6" path="res://assets/graphics/ui/staminabar_fill_stretchable.png" id="3_hqvu1"]
+[ext_resource type="PackedScene" uid="uid://c1no3sh5sxyt3" path="res://src/core/ui/game/skill_description_panel.tscn" id="6_55m2t"]
 
-[node name="ActorPanel" type="VBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
+[node name="ActorPanel" type="HBoxContainer"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -15,74 +15,65 @@ offset_top = -34.0
 offset_right = 80.0
 grow_vertical = 0
 mouse_filter = 2
-alignment = 2
 script = ExtResource("1_i4ofb")
 
-[node name="StatsContainer" type="MarginContainer" parent="."]
+[node name="OuterMainPanel" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+alignment = 2
+
+[node name="StatsContainer" type="MarginContainer" parent="OuterMainPanel"]
 unique_name_in_owner = true
 visible = false
 z_index = -1
+layout_mode = 2
 theme_override_constants/margin_bottom = -8
 
-[node name="StatsPanel" parent="StatsContainer" instance=ExtResource("2_43jsj")]
+[node name="StatsPanel" parent="OuterMainPanel/StatsContainer" instance=ExtResource("2_43jsj")]
 unique_name_in_owner = true
+layout_mode = 2
 
-[node name="MainPanel" type="HBoxContainer" parent="."]
+[node name="MainPanel" type="HBoxContainer" parent="OuterMainPanel"]
 unique_name_in_owner = true
 layout_direction = 2
-offset_right = 80.0
-offset_bottom = 34.0
+layout_mode = 2
 
-[node name="PortraitMargin" type="MarginContainer" parent="MainPanel"]
+[node name="PortraitMargin" type="MarginContainer" parent="OuterMainPanel/MainPanel"]
 unique_name_in_owner = true
-offset_right = 31.0
-offset_bottom = 34.0
+layout_mode = 2
 theme_override_constants/margin_right = -3
 
-[node name="Portrait" type="Button" parent="MainPanel/PortraitMargin"]
+[node name="Portrait" type="Button" parent="OuterMainPanel/MainPanel/PortraitMargin"]
 unique_name_in_owner = true
-offset_right = 34.0
-offset_bottom = 34.0
+layout_mode = 2
 toggle_mode = true
 icon = ExtResource("1_3amch")
 
-[node name="PanelContainer" type="PanelContainer" parent="MainPanel"]
+[node name="PanelContainer" type="PanelContainer" parent="OuterMainPanel/MainPanel"]
 z_index = -1
 layout_direction = 2
-offset_left = 32.0
-offset_top = 4.0
-offset_right = 80.0
-offset_bottom = 30.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 metadata/_edit_group_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/PanelContainer"]
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 45.0
-offset_bottom = 23.0
+[node name="VBoxContainer" type="VBoxContainer" parent="OuterMainPanel/MainPanel/PanelContainer"]
+layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MainPanel/PanelContainer/VBoxContainer"]
-offset_right = 42.0
-offset_bottom = 10.0
+[node name="MarginContainer" type="MarginContainer" parent="OuterMainPanel/MainPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_constants/margin_left = 1
 theme_override_constants/margin_top = 1
 
-[node name="Name" type="Label" parent="MainPanel/PanelContainer/VBoxContainer/MarginContainer"]
+[node name="Name" type="Label" parent="OuterMainPanel/MainPanel/PanelContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 42.0
-offset_bottom = 10.0
+layout_mode = 2
 text = "Actor Name"
 
-[node name="Stamina" type="TextureProgressBar" parent="MainPanel/PanelContainer/VBoxContainer"]
+[node name="Stamina" type="TextureProgressBar" parent="OuterMainPanel/MainPanel/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 9)
-offset_top = 11.0
-offset_right = 42.0
-offset_bottom = 20.0
+layout_mode = 2
 value = 100.0
 nine_patch_stretch = true
 stretch_margin_left = 3
@@ -92,4 +83,20 @@ stretch_margin_bottom = 3
 texture_under = ExtResource("2_ty4y5")
 texture_progress = ExtResource("3_hqvu1")
 
-[connection signal="toggled" from="MainPanel/PortraitMargin/Portrait" to="." method="_on_portrait_toggled"]
+[node name="SkillDescriptionContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = -2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/margin_left = -4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 4
+
+[node name="SkillDescriptionPanel" parent="SkillDescriptionContainer" instance=ExtResource("6_55m2t")]
+layout_mode = 2
+
+[connection signal="skill_cleared" from="OuterMainPanel/StatsContainer/StatsPanel" to="." method="_on_stats_panel_skill_cleared"]
+[connection signal="skill_selected" from="OuterMainPanel/StatsContainer/StatsPanel" to="." method="_on_stats_panel_skill_selected"]
+[connection signal="toggled" from="OuterMainPanel/MainPanel/PortraitMargin/Portrait" to="." method="_on_portrait_toggled"]
