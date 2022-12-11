@@ -71,16 +71,11 @@ offset_bottom = -1.0
 grow_vertical = 2
 
 [node name="PanelContainer" parent="TurnQueueContainer" index="0"]
-layout_mode = 0
 offset_right = 6.0
 offset_bottom = 6.0
 
-[node name="ScrollContainer" parent="TurnQueueContainer/PanelContainer" index="0"]
-layout_mode = 2
-
 [node name="TurnQueue" type="VBoxContainer" parent="TurnQueueContainer/PanelContainer/ScrollContainer" index="0"]
 unique_name_in_owner = true
-layout_mode = 2
 script = ExtResource("6_wb35a")
 
 [node name="TurnQueueButton" type="Button" parent="."]
@@ -102,7 +97,6 @@ grow_vertical = 2
 
 [node name="CurrentActorStats" parent="StatPopups" instance=ExtResource("7_gmto7")]
 visible = false
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -117,7 +111,6 @@ grow_vertical = 2
 
 [node name="OtherActorStats" parent="StatPopups" instance=ExtResource("7_gmto7")]
 visible = false
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -140,7 +133,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SkillDescriptionPanel" parent="SkillPopup" instance=ExtResource("8_lwd20")]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
