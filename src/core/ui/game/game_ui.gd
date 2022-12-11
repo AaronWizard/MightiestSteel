@@ -34,11 +34,17 @@ var turn_queue: TurnQueue:
 @onready var _turn_queue_container: MaxSizeScrollPanel = $TurnQueueContainer
 @onready var _turn_queue: TurnQueue = $%TurnQueue
 
+@onready var _stat_popups: Control = $StatPopups
+@onready var _current_actor_stats: ActorStatsPanel \
+		= $StatPopups/CurrentActorStats
+@onready var _other_actor_stats: ActorStatsPanel = $StatPopups/OtherActorStats
+
 @onready var _play_area: Control = $PlayArea
 
 
 func start_actor_turn(actor: Actor) -> void:
 	_current_actor_info.set_actor(actor, actor.is_player_controlled)
+	_current_actor_stats.set_actor(actor)
 	_current_actor_info.visible = true
 
 
@@ -48,6 +54,7 @@ func end_current_actor_turn() -> void:
 
 func show_other_actor(actor: Actor) -> void:
 	_other_actor_panel.set_actor(actor, true)
+	_other_actor_stats.set_actor(actor)
 	_other_actor_panel.visible = true
 
 
@@ -94,8 +101,23 @@ func _scroll_over_turn_queue_item(item_rect: Rect2, instant: bool) -> void:
 
 
 func _on_current_actor_info_portrait_pressed() -> void:
-	pass # Replace with function body.
+	_show_stat_popup(_current_actor_stats)
 
 
 func _on_other_actor_info_portrait_pressed() -> void:
-	pass # Replace with function body.
+	_show_stat_popup(_other_actor_stats)
+
+
+func _show_stat_popup(control: Control) -> void:
+	for c in _stat_popups.get_children():
+		var child: Control = c
+		child.visible = child == control
+	_stat_popups.visible = true
+
+
+func _on_current_actor_stats_cancelled() -> void:
+	_stat_popups.visible = false
+
+
+func _on_other_actor_stats_cancelled() -> void:
+	_stat_popups.visible = false

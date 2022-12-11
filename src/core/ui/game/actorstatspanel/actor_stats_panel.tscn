@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cj14wiiapl8dv"]
+[gd_scene load_steps=9 format=3 uid="uid://cj14wiiapl8dv"]
 
 [ext_resource type="Script" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel.gd" id="1_0w2br"]
 [ext_resource type="Texture2D" uid="uid://dt8dru7bjbokb" path="res://assets/graphics/actors/cleric.png" id="1_amffk"]
+[ext_resource type="Texture2D" uid="uid://cuvt1v66hlaec" path="res://assets/graphics/ui/icons/cancel.png" id="5_fb57a"]
 [ext_resource type="Texture2D" uid="uid://2223efso7qsf" path="res://assets/graphics/ui/icons/stats/max_stamina.png" id="5_q75ga"]
 [ext_resource type="PackedScene" uid="uid://cbuigcku4gwba" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel_stat.tscn" id="6_p8cs4"]
 [ext_resource type="Texture2D" uid="uid://dbgx6qddsmjjk" path="res://assets/graphics/ui/icons/stats/move.png" id="7_76kho"]
@@ -9,39 +10,34 @@
 [ext_resource type="PackedScene" uid="uid://bvgrhacdeom6e" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel_skill_button.tscn" id="9_cr17r"]
 
 [node name="ActorStatsPanel" type="PanelContainer"]
-offset_right = 75.0
-offset_bottom = 66.0
+offset_right = 99.0
+offset_bottom = 61.0
 script = ExtResource("1_0w2br")
 skill_button_scene = ExtResource("9_cr17r")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 3.0
 offset_top = 3.0
-offset_right = 72.0
-offset_bottom = 63.0
-theme_override_constants/margin_bottom = 5
+offset_right = 96.0
+offset_bottom = 58.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-offset_right = 69.0
-offset_bottom = 55.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-offset_right = 69.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+offset_right = 93.0
 offset_bottom = 27.0
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
 offset_right = 27.0
 offset_bottom = 27.0
 theme_override_constants/margin_left = -3
 theme_override_constants/margin_top = -3
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/MarginContainer"]
 offset_left = -3.0
 offset_top = -3.0
 offset_right = 27.0
 offset_bottom = 27.0
 
-[node name="Portrait" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer"]
+[node name="Portrait" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer/PanelContainer"]
 unique_name_in_owner = true
 offset_left = 3.0
 offset_top = 3.0
@@ -49,126 +45,142 @@ offset_right = 27.0
 offset_bottom = 27.0
 texture = ExtResource("1_amffk")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 offset_left = 28.0
 offset_right = 69.0
 offset_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 offset_right = 41.0
 offset_bottom = 8.0
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_bottom = -2
 
-[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="Name" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 offset_top = 1.0
 offset_right = 41.0
 offset_bottom = 10.0
 text = "Test"
 
-[node name="StaminaBarContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="StaminaBarContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 offset_top = 9.0
 offset_right = 41.0
 offset_bottom = 17.0
 
-[node name="StaminaIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StaminaBarContainer"]
+[node name="StaminaIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/StaminaBarContainer"]
 offset_right = 8.0
 offset_bottom = 8.0
 size_flags_vertical = 0
 texture = ExtResource("5_q75ga")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StaminaBarContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/StaminaBarContainer"]
 offset_left = 9.0
 offset_right = 37.0
 offset_bottom = 8.0
 theme_override_constants/margin_bottom = -4
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StaminaBarContainer/MarginContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/StaminaBarContainer/MarginContainer"]
 offset_top = 1.0
 offset_right = 28.0
 offset_bottom = 10.0
 text = "Stamina:"
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 offset_top = 18.0
 offset_right = 41.0
 offset_bottom = 26.0
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_bottom = -2
 
-[node name="StaminaTextContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
+[node name="StaminaTextContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
 offset_top = 1.0
 offset_right = 41.0
 offset_bottom = 10.0
 alignment = 1
 
-[node name="CurrentStamina" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/StaminaTextContainer"]
+[node name="CurrentStamina" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/StaminaTextContainer"]
 unique_name_in_owner = true
 offset_right = 8.0
 offset_bottom = 9.0
 text = "99"
 horizontal_alignment = 2
 
-[node name="Slash" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/StaminaTextContainer"]
+[node name="Slash" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/StaminaTextContainer"]
 offset_left = 9.0
 offset_right = 13.0
 offset_bottom = 9.0
 text = "/"
 
-[node name="MaxStamina" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/StaminaTextContainer"]
+[node name="MaxStamina" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/StaminaTextContainer"]
 unique_name_in_owner = true
 offset_left = 14.0
 offset_right = 22.0
 offset_bottom = 9.0
 text = "99"
 
-[node name="MaxStaminaMod" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/StaminaTextContainer"]
+[node name="MaxStaminaMod" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2/StaminaTextContainer"]
 unique_name_in_owner = true
 offset_left = 23.0
 offset_right = 41.0
 offset_bottom = 9.0
 text = "(+99)"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+offset_left = 70.0
+offset_right = 93.0
+offset_bottom = 23.0
+size_flags_vertical = 0
+theme_override_constants/margin_top = -3
+theme_override_constants/margin_right = -3
+
+[node name="Cancel" type="Button" parent="VBoxContainer/HBoxContainer/MarginContainer2"]
+offset_top = -3.0
+offset_right = 26.0
+offset_bottom = 23.0
+icon = ExtResource("5_fb57a")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 offset_top = 28.0
-offset_right = 69.0
+offset_right = 93.0
 offset_bottom = 54.0
 theme_override_constants/margin_left = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
 offset_left = 1.0
-offset_right = 69.0
+offset_right = 93.0
 offset_bottom = 26.0
 
-[node name="Attack" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_p8cs4")]
+[node name="Attack" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_p8cs4")]
 unique_name_in_owner = true
-offset_right = 68.0
+offset_right = 92.0
 stat_name = "Attack"
 
-[node name="Move" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_p8cs4")]
+[node name="Move" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_p8cs4")]
 unique_name_in_owner = true
 offset_top = 9.0
-offset_right = 68.0
+offset_right = 92.0
 offset_bottom = 17.0
 icon = ExtResource("7_76kho")
 stat_name = "Move"
 
-[node name="Speed" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_p8cs4")]
+[node name="Speed" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_p8cs4")]
 unique_name_in_owner = true
 offset_top = 18.0
-offset_right = 68.0
+offset_right = 92.0
 offset_bottom = 26.0
 icon = ExtResource("8_6jhwu")
 stat_name = "Speed"
 
-[node name="SkillsGrid" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+[node name="SkillsGrid" type="GridContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
-offset_left = 34.0
+offset_left = 46.0
 offset_top = 55.0
-offset_right = 34.0
+offset_right = 46.0
 offset_bottom = 55.0
 size_flags_horizontal = 4
 columns = 2
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/MarginContainer2/Cancel" to="." method="_on_cancel_pressed"]

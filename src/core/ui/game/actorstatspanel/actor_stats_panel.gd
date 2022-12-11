@@ -2,10 +2,9 @@ class_name ActorStatsPanel
 extends PanelContainer
 
 signal skill_selected(skill: Skill)
-signal skill_cleared
+signal cancelled
 
 @export var skill_button_scene: PackedScene
-@export var skill_button_group: ButtonGroup
 
 @onready var _portrait: TextureRect = $%Portrait
 @onready var _name: Label = $%Name
@@ -19,8 +18,6 @@ signal skill_cleared
 @onready var _speed: ActorStatsPanelStat = $%Speed
 
 @onready var _skills_grid: Control = $%SkillsGrid
-
-var last_pressed_button: Button = null
 
 
 func set_actor(actor: Actor) -> void:
@@ -44,26 +41,16 @@ func set_actor(actor: Actor) -> void:
 
 		button.icon = skill.icon
 		button.cooldown = actor.get_skill_cooldown(skill)
-		button.button_group = skill_button_group
 
-		button.toggled.connect(func(button_pressed: bool):
-			if last_pressed_button == button:
-				button.set_pressed_no_signal(false)
-				last_pressed_button = null
-			else:
-				last_pressed_button = button
-
-			var group_button := skill_button_group.get_pressed_button()
-			if not group_button:
-				skill_cleared.emit()
-			elif group_button == button:
-				skill_selected.emit(skill)
-		)
+		button.pressed.connect(func(): skill_selected.emit(skill))
 
 
 func _clear() -> void:
-	last_pressed_button = null
 	while _skills_grid.get_child_count() > 0:
 		var child := _skills_grid.get_child(0)
 		_skills_grid.remove_child(child)
 		child.queue_free()
+
+
+func _on_cancel_pressed() -> void:
+	cancelled.emit()

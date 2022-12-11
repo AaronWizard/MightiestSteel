@@ -4,7 +4,6 @@
 [ext_resource type="Script" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel_skill_button.gd" id="2_dtplo"]
 
 [node name="ActorStatsPanelSkillButton" type="Button"]
-toggle_mode = true
 icon = ExtResource("1_lsrlg")
 script = ExtResource("2_dtplo")
 
