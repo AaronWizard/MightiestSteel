@@ -214,12 +214,14 @@ libraries = {
 [node name="Stats" type="Node" parent="." index="2"]
 script = ExtResource("4_anapf")
 
-[node name="TargetCursor" parent="." index="3" instance=ExtResource("5_iao12")]
+[node name="StatusEffects" type="Node" parent="." index="3"]
+
+[node name="TargetCursor" parent="." index="4" instance=ExtResource("5_iao12")]
 visible = false
 position = Vector2(0, 0)
 origin_cell = Vector2i(0, -1)
 
-[node name="OtherTargetCursor" parent="." index="4" instance=ExtResource("9_rtcm0")]
+[node name="OtherTargetCursor" parent="." index="5" instance=ExtResource("9_rtcm0")]
 visible = false
 position = Vector2(0, 0)
 origin_cell = Vector2i(0, -1)

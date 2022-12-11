@@ -7,7 +7,7 @@ extends TileObject
 ## Manages its stats, skills, and animations.
 
 ## When the actor's origin cell changes
-signal moved
+signal moved(old_origin_cell: Vector2i)
 
 ## When the actor's attack animation reaches its "hit" frame
 signal attack_hit
@@ -83,6 +83,16 @@ var portrait: Texture2D:
 var stats: Stats:
 	get:
 		return $Stats
+
+
+## The actor's current status effects
+var status_effects: Array[StatusEffect]:
+	get:
+		var result: Array[StatusEffect] = []
+		if _status_effects:
+			for s in _status_effects.get_children():
+				result.append(s)
+		return result
 
 
 ## The map the actor is currently on.
@@ -223,6 +233,8 @@ var _is_animating := false
 @onready var _target_cursor: TileObject = $TargetCursor
 @onready var _other_target_cursor: TileObject = $OtherTargetCursor
 
+@onready var _status_effects: Node = $StatusEffects
+
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
@@ -262,6 +274,8 @@ func unset_virtual_origin_cell() -> void:
 
 ## Moves the actor along the given path of cells
 func move_path(path: Array[Vector2i]) -> void:
+	var old_cell := origin_cell
+
 	_is_animating = true
 
 	_report_moves = false
@@ -276,7 +290,7 @@ func move_path(path: Array[Vector2i]) -> void:
 		await _anim.animation_finished
 
 	_report_moves = true
-	moved.emit()
+	_move_done(old_cell)
 
 	_is_animating = false
 	animation_finished.emit()
@@ -324,8 +338,24 @@ func get_skill_cooldown(skill: Skill) -> int:
 
 ## Actor updates to run when a new round starts
 func start_round(is_first_round: bool) -> void:
+	for s in status_effects:
+		s.start_round()
 	if not is_first_round:
 		cooldown_skills()
+
+
+## Updates to run when an actor starts its turn
+func start_turn() -> void:
+	print(self.actor_name, " start turn")
+	for s in status_effects:
+		s.start_turn()
+
+
+## Updates to run when an actor ends its turn
+func end_turn() -> void:
+	print(self.actor_name, " end turn")
+	for s in status_effects:
+		s.end_turn()
 
 
 ## Predict how much damage the actor will take.
@@ -342,6 +372,25 @@ func take_damage(attack_power: int, source_cell: Vector2i) -> void:
 	stats.current_stamina -= damage
 
 
+## Adds a status effect
+func add_status_effect(effect: StatusEffect) -> void:
+	assert(not effect in _status_effects.get_children())
+	if effect.actor:
+		push_warning("Can't transfer status effects between actors")
+	else:
+		_status_effects.add_child(effect)
+		effect.actor = self
+		effect.finished.connect(remove_status_effect.bind(effect))
+
+
+## Removes and frees a status effect
+func remove_status_effect(effect: StatusEffect) -> void:
+	assert(effect in _status_effects.get_children())
+	_status_effects.remove_child(effect)
+	effect.actor = null
+	effect.queue_free()
+
+
 func _get_origin_cell() -> Vector2i:
 	if _using_virtual_origin_cell:
 		return virtual_origin_cell
@@ -351,9 +400,9 @@ func _get_origin_cell() -> Vector2i:
 
 func _set_origin_cell(cell: Vector2i) -> void:
 	unset_virtual_origin_cell()
+	var old_cell := origin_cell
 	super(cell)
-	if _report_moves:
-		moved.emit()
+	_move_done(old_cell)
 
 
 func _update_size() -> void:
@@ -372,6 +421,14 @@ func _set_offset() -> void:
 	if _offset:
 		_offset.position = cell_offset_direction.normalized() \
 				* cell_offset_distance * Constants.TILE_SIZE
+
+
+func _move_done(old_origin_cell: Vector2i) -> void:
+	for s in status_effects:
+		s.moved()
+
+	if _report_moves:
+		moved.emit(old_origin_cell)
 
 
 func _on_stats_stamina_changed(old_stamina: int, new_stamina: int) -> void:

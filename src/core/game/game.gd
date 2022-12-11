@@ -111,11 +111,11 @@ func advance_to_next_turn() -> void:
 	_end_current_actor_turn()
 	var current_actor_name := _turn_manager.advance_to_next_actor()
 	_current_actor = _current_map.get_actor_by_node_name(current_actor_name)
-	ui.turn_queue.turn_index = _turn_manager.turn_index
-
 	if _turn_manager.current_turn_is_round_start:
-		_start_round()
+		_current_map.start_round(_turn_manager.is_first_round)
+	_current_actor.start_turn()
 
+	ui.turn_queue.turn_index = _turn_manager.turn_index
 	camera.position_smoothing_enabled = true
 	_current_actor.remote_transform.remote_path = camera.get_path()
 	ui.start_actor_turn(_current_actor)
@@ -149,12 +149,9 @@ func _start_battle() -> void:
 	_state_machine.change_state(_next_turn_state_name)
 
 
-func _start_round() -> void:
-	_current_map.start_round(_turn_manager.is_first_round)
-
-
 func _end_current_actor_turn() -> void:
 	if _current_actor:
+		_current_actor.end_turn()
 		_current_actor.remote_transform.remote_path = NodePath()
 		_current_actor.target_visible = false
 	_current_actor = null

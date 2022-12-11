@@ -41,6 +41,28 @@ var can_dispell: bool:
 				and (time_type != TimeType.POSITION)
 
 
+## The actor this status effect is affecting.
+## Not meant ot be set directly. Use Actor.add_status_effect and
+## Actor.remove_status_effect.
+var actor: Actor:
+	get:
+		return _actor
+	set(value):
+		if value and _actor:
+			push_error("Status effect already part of an actor")
+		elif value and not (self in value.status_effects):
+			push_error("Status effect not added using Actor.add_status_effect")
+		else:
+			_actor = value
+
+
+var _actor: Actor = null
+
+
+func _exit_tree() -> void:
+	_actor = null
+
+
 func start_round() -> void:
 	if time_type == TimeType.ROUNDS:
 		rounds_left -= 1

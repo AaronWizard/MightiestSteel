@@ -191,7 +191,7 @@ func _setup_removed_actor(actor: Actor) -> void:
 	actor.died.disconnect(_actor_died)
 
 
-func _actor_moved(_actor: Actor) -> void:
+func _actor_moved(_old_origin_cell: Vector2i, _actor: Actor) -> void:
 	pass
 
 
