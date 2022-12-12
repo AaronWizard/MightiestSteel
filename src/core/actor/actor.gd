@@ -361,8 +361,8 @@ func end_turn() -> void:
 ## Predict how much damage the actor will take.
 ## Takes into account attack power and source (i.e. direction) of attack
 func predict_damage(attack_power: int, _source_cell: Vector2i) -> int:
-	# TODO
-	return attack_power
+	var defence_mod := stats.get_modifier(Stats.ModifierTypes.DEFENCE)
+	return StatModifier.value_with_modifier(attack_power, -defence_mod)
 
 
 ## Damage actor.

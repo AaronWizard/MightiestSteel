@@ -99,7 +99,7 @@ func get_stat(stat_type: StatTypes) -> int:
 	var base: int = _base_stats[stat_type]
 	var modifier_type: ModifierTypes = _STAT_TO_MODIFIER[stat_type]
 	var mod := get_modifier(modifier_type)
-	var result = int(float(base) * (1.0 + mod))
+	var result = StatModifier.value_with_modifier(base, mod)
 	return result
 
 
