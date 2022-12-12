@@ -109,6 +109,11 @@ var map: Map:
 		_map = value
 
 
+var has_cover: bool:
+	get:
+		return _map.actor_has_cover(self)
+
+
 ## True if the actor is controlled by the player.
 ## An actor is player-controlled if its faction is 0.
 var is_player_controlled: bool:
@@ -346,14 +351,12 @@ func start_round(is_first_round: bool) -> void:
 
 ## Updates to run when an actor starts its turn
 func start_turn() -> void:
-	print(self.actor_name, " start turn")
 	for s in status_effects:
 		s.start_turn()
 
 
 ## Updates to run when an actor ends its turn
 func end_turn() -> void:
-	print(self.actor_name, " end turn")
 	for s in status_effects:
 		s.end_turn()
 
@@ -362,6 +365,8 @@ func end_turn() -> void:
 ## Takes into account attack power and source (i.e. direction) of attack
 func predict_damage(attack_power: int, _source_cell: Vector2i) -> int:
 	var defence_mod := stats.get_modifier(Stats.ModifierTypes.DEFENCE)
+	if has_cover:
+		defence_mod += Map.COVER_DEFENCE_BONUS
 	return StatModifier.value_with_modifier(attack_power, -defence_mod)
 
 

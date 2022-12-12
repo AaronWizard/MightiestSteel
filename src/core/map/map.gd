@@ -5,6 +5,9 @@ extends Node
 
 signal actor_removed(actor: Actor)
 
+## The defence bonus an actor gets when its position has cover
+const COVER_DEFENCE_BONUS := 0.25
+
 const _MOVE_COST_CLEAR := 1
 const _MOVE_COST_ROUGH := 2
 
@@ -162,7 +165,14 @@ func actor_can_enter_cell(actor: Actor, cell: Vector2i,
 	return result
 
 
-## Checks if actor has defence bonus at cell.
+## Checks if actor has defence bonus at its current cell.
+## An actor has a defence bonus if over half of the cells it covers are cover
+## tiles.
+func actor_has_cover(actor: Actor) -> bool:
+	return actor_has_cover_at_cell(actor, actor.origin_cell)
+
+
+## Checks if actor has defence bonus at given cell.
 ## An actor has a defence bonus if over half of the cells it covers are cover
 ## tiles.
 func actor_has_cover_at_cell(actor: Actor, cell: Vector2i) -> bool:
