@@ -27,11 +27,11 @@ enum TimeType
 
 
 ## Determines when and how status effect will end
-var time_type: TimeType
+@export var time_type := TimeType.ROUNDS
 
 ## The number of rounds until the status effect ends. Only applies if time_type
 ## is TimeType.ROUNDS
-var rounds_left: int
+@export_range(1, 1, 1, "or_greater") var rounds_left: int
 
 
 ## True if the status effect can be removed by skills.
