@@ -53,13 +53,20 @@ var actor: Actor:
 		elif value and not (self in value.status_effects):
 			push_error("Status effect not added using Actor.add_status_effect")
 		else:
+			if not value:
+				_removing_from_actor()
+
 			_actor = value
+
+			if _actor:
+				_added_to_actor()
 
 
 var _actor: Actor = null
 
 
 func _exit_tree() -> void:
+	_removing_from_actor()
 	_actor = null
 
 
@@ -87,3 +94,13 @@ func end_turn() -> void:
 func moved() -> void:
 	if time_type == TimeType.POSITION:
 		finished.emit()
+
+
+# Can be overriden
+func _added_to_actor() -> void:
+	pass
+
+
+# Can be overriden
+func _removing_from_actor() -> void:
+	pass
