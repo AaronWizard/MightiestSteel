@@ -3,8 +3,6 @@ extends Node
 
 ## An actor's stats
 
-signal stamina_changed(old_stamina: int, new_stamina: int)
-
 ## Each stat type
 enum StatTypes
 {
@@ -27,6 +25,10 @@ enum ModifierTypes
 	SPEED,
 	DEFENCE ## Reduces the amount of damage an actor takes
 }
+
+
+signal stamina_changed(old_stamina: int, new_stamina: int)
+signal stat_mod_changed(mod_type: ModifierTypes)
 
 
 const _STAT_TO_MODIFIER := {
@@ -77,14 +79,9 @@ var speed: int:
 		return get_stat(StatTypes.SPEED)
 
 
-## How many actions (moves, attacks) an actor may take on its turn
-var actions: int:
-	get:
-		return get_stat(StatTypes.ACTIONS)
-
-
-var _base_stats := {} # Keys are StatTypes, values are ints
 var _current_stamina: int
+var _base_stats := {} # Keys are StatTypes, values are ints
+var _modifiers: Array[StatModifier] = []
 
 
 ## Initializes stat values based on an ActorDefinition
@@ -99,4 +96,29 @@ func init_from_definition(definition: ActorDefinition) -> void:
 
 ## Get the value of the given type of stat
 func get_stat(stat_type: StatTypes) -> int:
-	return _base_stats[stat_type]
+	var base: int = _base_stats[stat_type]
+	var modifier_type: ModifierTypes = _STAT_TO_MODIFIER[stat_type]
+	var mod := get_modifier(modifier_type)
+	var result = int(float(base) * (1.0 + mod))
+	return result
+
+
+func get_modifier(modifier_type: ModifierTypes) -> float:
+	var result := 0.0
+	for m in _modifiers:
+		if m.mod_type == modifier_type:
+			result += m.mod_value
+	return result
+
+
+func add_modifier(modifier: StatModifier) -> void:
+	if not modifier in _modifiers:
+		_modifiers.append(modifier)
+		stat_mod_changed.emit(modifier.mod_type)
+	else:
+		push_warning("Stat already has modifier '%s'" % modifier.resource_path)
+
+
+func remove_modifier(modifier: StatModifier) -> void:
+	_modifiers.erase(modifier)
+	stat_mod_changed.emit(modifier.mod_type)
