@@ -112,11 +112,8 @@ func get_modifier(modifier_type: ModifierTypes) -> float:
 
 
 func add_modifier(modifier: StatModifier) -> void:
-	if not modifier in _modifiers:
-		_modifiers.append(modifier)
-		stat_mod_changed.emit(modifier.mod_type)
-	else:
-		push_warning("Stat already has modifier '%s'" % modifier.resource_path)
+	_modifiers.append(modifier)
+	stat_mod_changed.emit(modifier.mod_type)
 
 
 func remove_modifier(modifier: StatModifier) -> void:
