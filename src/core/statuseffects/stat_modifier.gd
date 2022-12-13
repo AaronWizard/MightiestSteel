@@ -7,7 +7,7 @@ extends Resource
 # https://github.com/godotengine/godot/issues/41183
 
 ## The percentage to add for the modifier
-@export_range(0.0, 1.0, 0.01, "or_greater", "or_less", "hide_slider") \
+@export_range(0.0, 1.0, 0.05, "or_greater", "or_less", "hide_slider") \
 		var mod_value := 0.0
 
 
