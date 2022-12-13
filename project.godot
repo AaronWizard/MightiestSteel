@@ -154,6 +154,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/game/state/states/actorcontrol/player_target_state.gd"
 }, {
+"base": "StatusEffect",
+"class": &"PoisonStatusEffect",
+"language": &"GDScript",
+"path": "res://src/data/statuseffects/scripts/poison_status_effect.gd"
+}, {
 "base": "Node2D",
 "class": &"Projectile",
 "language": &"GDScript",
@@ -294,6 +299,7 @@ _global_script_class_icons={
 "NextTurnState": "",
 "PlayerMoveState": "",
 "PlayerTargetState": "",
+"PoisonStatusEffect": "",
 "Projectile": "",
 "Skill": "",
 "SkillDescriptionPanel": "",
