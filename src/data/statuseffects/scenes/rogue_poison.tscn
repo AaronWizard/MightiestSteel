@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://vbu6vlgy7ms8"]
+
+[ext_resource type="Script" path="res://src/data/statuseffects/scripts/poison_status_effect.gd" id="1_uwi5c"]
+[ext_resource type="PackedScene" uid="uid://5dpfsvjpyrb" path="res://src/data/effects/tile_poison.tscn" id="2_8sklf"]
+
+[node name="rogue_poison" type="Node"]
+script = ExtResource("1_uwi5c")
+magnitude = 0.2
+tile_effect_scene = ExtResource("2_8sklf")
+rounds_left = 5
