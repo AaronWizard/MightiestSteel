@@ -1,22 +1,16 @@
-[gd_resource type="Resource" load_steps=5 format=3 uid="uid://dfvdy4lo4wq4w"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dfvdy4lo4wq4w"]
 
 [ext_resource type="Texture2D" uid="uid://c2d7emduicf3y" path="res://assets/graphics/ui/icons/attack.png" id="1_1oc5x"]
 [ext_resource type="Script" path="res://src/data/skills/scripts/attack_standard.gd" id="1_4lqgn"]
-[ext_resource type="Script" path="res://src/core/skills/target_ranges/cell_distance_range.gd" id="2_wk3tp"]
-
-[sub_resource type="Resource" id="Resource_glu0d"]
-script = ExtResource("2_wk3tp")
-min_dist = 1
-max_dist = 1
-include_diagonals = true
-target_type = 2
+[ext_resource type="Resource" uid="uid://dnevxelwku3c6" path="res://src/data/skills/ranges/melee_attack_range.tres" id="3_4huj3"]
 
 [resource]
 script = ExtResource("1_4lqgn")
 tile_effect_range_type = 0
+status_effect_scenes = null
 name = "Attack"
 description = "Attack the target enemy."
 icon = ExtResource("1_1oc5x")
 cooldown = 0
-target_range = SubResource("Resource_glu0d")
+target_range = ExtResource("3_4huj3")
 use_attack_anim = true

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dnevxelwku3c6"]
+
+[ext_resource type="Script" path="res://src/core/skills/target_ranges/cell_distance_range.gd" id="1_m4fol"]
+
+[resource]
+script = ExtResource("1_m4fol")
+min_dist = 1
+max_dist = 1
+include_diagonals = true
+target_type = 2
