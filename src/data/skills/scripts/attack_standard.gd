@@ -30,7 +30,6 @@ func _get_skill_target_info(source_actor: Actor, target_cell: Vector2i) \
 func _run(source_actor: Actor, target_cell: Vector2i) -> void:
 	var aoe_data := _get_aoe_data(target_cell, source_actor)
 
-
 	if projectile_scene:
 		var projectile: Projectile = projectile_scene.instantiate()
 
@@ -49,29 +48,32 @@ func _run(source_actor: Actor, target_cell: Vector2i) -> void:
 
 	var animations: Array[Callable] = []
 
-	if tile_effect_scene \
-			and not tile_effect_range_type == TileEffectRangeType.ACTORS:
-		var effect_range: Array[Vector2i]
-		if tile_effect_range_type == TileEffectRangeType.FULL:
-			effect_range = aoe_data.full
-		else:
-			assert(tile_effect_range_type == TileEffectRangeType.VALID_ONLY)
-			effect_range = aoe_data.valid
-		for c in effect_range:
-			var tile_effect := _create_tile_effect(c)
-			source_actor.map.add_effect(tile_effect)
-			animations.append(tile_effect.play)
-
+	var actor_covered_cells := {}
 	for a in aoe_data.actors:
+		a.take_damage(source_actor.stats.attack, source_actor.center_cell)
+		animations.append(_wait_for_actor_animation.bind(a))
+
 		if tile_effect_scene \
 				and tile_effect_range_type == TileEffectRangeType.ACTORS:
 			for c in a.covered_cells:
-				var tile_effect := _create_tile_effect(c)
-				source_actor.map.add_effect(tile_effect)
-				animations.append(tile_effect.play)
+				actor_covered_cells[c] = true
 
-		a.take_damage(source_actor.stats.attack, source_actor.center_cell)
-		animations.append(_wait_for_actor_animation.bind(a))
+	if tile_effect_scene:
+		var tile_effect_cells: Array[Vector2i] = []
+		match tile_effect_range_type:
+			TileEffectRangeType.FULL:
+				tile_effect_cells = aoe_data.full
+			TileEffectRangeType.VALID_ONLY:
+				tile_effect_cells = aoe_data.valid
+			_:
+				assert(not actor_covered_cells.is_empty())
+				tile_effect_cells = actor_covered_cells.keys()
+
+		for c in tile_effect_cells:
+			var tile_effect: TileEffect = tile_effect_scene.instantiate()
+			tile_effect.origin_cell = c
+			source_actor.map.add_effect(tile_effect)
+			animations.append(tile_effect.play)
 
 	await AwaitGroup.wait(animations)
 
