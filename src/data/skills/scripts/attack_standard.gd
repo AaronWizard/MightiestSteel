@@ -13,6 +13,7 @@ enum TileEffectRangeType
 @export var projectile_scene: PackedScene
 @export var tile_effect_scene: PackedScene
 @export var tile_effect_range_type := TileEffectRangeType.FULL
+@export var status_effect_scenes: Array[PackedScene]
 
 
 func _get_skill_target_info(source_actor: Actor, target_cell: Vector2i) \
@@ -51,12 +52,16 @@ func _run(source_actor: Actor, target_cell: Vector2i) -> void:
 	var actor_covered_cells := {}
 	for a in aoe_data.actors:
 		a.take_damage(source_actor.stats.attack, source_actor.center_cell)
-		animations.append(_wait_for_actor_animation.bind(a))
+		animations.append(a.wait_for_animation)
 
 		if tile_effect_scene \
 				and tile_effect_range_type == TileEffectRangeType.ACTORS:
 			for c in a.covered_cells:
 				actor_covered_cells[c] = true
+
+		for s in status_effect_scenes:
+			var status_effect: StatusEffect = s.instantiate()
+			a.add_status_effect(status_effect)
 
 	if tile_effect_scene:
 		var tile_effect_cells: Array[Vector2i] = []
@@ -86,8 +91,3 @@ func _get_aoe_data(target_cell: Vector2i, source_actor: Actor) \
 		result = TargetRangeData.new(
 				[target_cell], TargetRangeData.TargetType.ENEMY, source_actor)
 	return result
-
-
-static func _wait_for_actor_animation(actor: Actor) -> void:
-	if actor.is_animating:
-		await actor.animation_finished

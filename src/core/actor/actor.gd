@@ -277,6 +277,11 @@ func unset_virtual_origin_cell() -> void:
 	_using_virtual_origin_cell = false
 
 
+func wait_for_animation() -> void:
+	if is_animating:
+		await animation_finished
+
+
 ## Moves the actor along the given path of cells
 func move_path(path: Array[Vector2i]) -> void:
 	var old_cell := origin_cell
