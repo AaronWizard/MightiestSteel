@@ -69,11 +69,10 @@ func _run(source_actor: Actor, target_cell: Vector2i) -> void:
 				assert(not actor_covered_cells.is_empty())
 				tile_effect_cells = actor_covered_cells.keys()
 
-		for c in tile_effect_cells:
-			var tile_effect: TileEffect = tile_effect_scene.instantiate()
-			tile_effect.origin_cell = c
-			source_actor.map.add_effect(tile_effect)
-			animations.append(tile_effect.play)
+		animations.append(
+			Callable(TileEffect, "play_on_field").bind(
+				tile_effect_scene, source_actor.map, tile_effect_cells)
+		)
 
 	await AwaitGroup.wait(animations)
 
@@ -86,12 +85,6 @@ func _get_aoe_data(target_cell: Vector2i, source_actor: Actor) \
 	else:
 		result = TargetRangeData.new(
 				[target_cell], TargetRangeData.TargetType.ENEMY, source_actor)
-	return result
-
-
-func _create_tile_effect(cell: Vector2i) -> TileEffect:
-	var result: TileEffect = tile_effect_scene.instantiate()
-	result.origin_cell = cell
 	return result
 
 
