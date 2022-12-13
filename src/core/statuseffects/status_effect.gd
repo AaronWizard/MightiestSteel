@@ -72,10 +72,14 @@ func _exit_tree() -> void:
 
 ## When a new round has started
 func start_round() -> void:
+	var active := true
 	if time_type == TimeType.ROUNDS:
 		rounds_left -= 1
 		if rounds_left == 0:
+			active = false
 			finished.emit()
+	if active:
+		_round_started()
 
 
 ## When the effect's actor has started its turn
@@ -103,4 +107,9 @@ func _added_to_actor() -> void:
 
 # Can be overriden
 func _removing_from_actor() -> void:
+	pass
+
+
+# Can be overriden
+func _round_started() -> void:
 	pass
