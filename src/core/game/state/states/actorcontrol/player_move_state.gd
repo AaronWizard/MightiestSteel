@@ -154,20 +154,21 @@ func _action_menu_input() -> void:
 	_game.camera.dragging_enabled = true
 
 
-func _start_choose_target(skill: Skill) -> void:
+func _start_choose_target(skill: Skill, need_cooldown: bool) -> void:
 	_game.camera.dragging_enabled = false
 	allow_input = false
 	await _current_actor.close_action_menu()
 
-	request_state_change.emit(player_target_state_name, {skill = skill})
+	request_state_change.emit(player_target_state_name,
+			{skill = skill, need_cooldown = need_cooldown})
 
 
 func _attack_selected() -> void:
-	_start_choose_target(_current_actor.attack_skill)
+	_start_choose_target(_current_actor.attack_skill, false)
 
 
 func _skill_selected(skill_index: int) -> void:
-	_start_choose_target(_current_actor.all_skills[skill_index])
+	_start_choose_target(_current_actor.all_skills[skill_index], true)
 
 
 func _wait_selected() -> void:

@@ -24,7 +24,9 @@ func start(data: Dictionary) -> void:
 	_selected_skill = data.skill
 	_target_data = _selected_skill.get_targeting_data(_current_actor)
 
-	_game.ui.skill_info_panel.set_skill(_selected_skill,
+	var need_cooldown: bool = data.need_cooldown
+
+	_game.ui.skill_info_panel.set_skill(_selected_skill, need_cooldown,
 			not _target_data.valid_targets.is_empty())
 	_game.ui.skill_info_panel.visible = true
 
