@@ -65,6 +65,7 @@ func _init(new_effect: StatusEffect, new_actor: Actor) -> void:
 	_effect = new_effect
 	_actor = new_actor
 	_rounds_left = _effect.rounds
+	effect.added_to_actor(_actor)
 
 
 func _exit_tree() -> void:
