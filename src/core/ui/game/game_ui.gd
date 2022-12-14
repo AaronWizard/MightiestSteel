@@ -40,7 +40,8 @@ var turn_queue: TurnQueue:
 @onready var _other_actor_stats: ActorStatsPanel = $StatPopups/OtherActorStats
 
 @onready var _status_effect_popup: Control = $StatusEffectPopup
-@onready var _status_effects: StatusEffectsPanel = $StatusEffectPopup/StatusEffectsPanel
+@onready var _status_effects: StatusEffectsPanel \
+		= $StatusEffectPopup/StatusEffectsPanel
 
 @onready var _skill_popup: Control = $SkillPopup
 @onready var _skill_description: SkillDescriptionPanel \

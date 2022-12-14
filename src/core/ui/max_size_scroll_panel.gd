@@ -6,7 +6,9 @@ enum HAlign { LEFT, CENTER, RIGHT, STRETCH }
 enum VAlign { TOP, CENTER, BOTTOM, STRETCH }
 
 const _PANEL_BORDER_SIZE := 6
-const _PANEL_BORDER_SIZE_V := Vector2(_PANEL_BORDER_SIZE, _PANEL_BORDER_SIZE)
+const _PANEL_BORDER_SIZE_SIDES := _PANEL_BORDER_SIZE + 4
+const _PANEL_BORDER_SIZE_V := Vector2(
+		_PANEL_BORDER_SIZE_SIDES, _PANEL_BORDER_SIZE + 1)
 const _SCROLLBAR_SIZE := 10
 
 ## The horizontal alignment of the panel
@@ -121,8 +123,9 @@ var visible_scroll_child_rect: Rect2i:
 		)
 
 
-@onready var _panel: Control = $PanelContainer
-@onready var _scroll: ScrollContainer = $PanelContainer/ScrollContainer
+@onready var _panel: Control = $%PanelContainer
+@onready var _header: Control = $%Header
+@onready var _scroll: ScrollContainer = $%ScrollContainer
 
 
 func _draw() -> void:
@@ -142,7 +145,7 @@ func _resize_scroll_container() -> void:
 	if _scroll:
 		if _scroll.get_child_count() > 0:
 			var scroll_child = _scroll.get_child(0) # Assumes only one child
-			_panel.size = scroll_child.get_minimum_size() + _PANEL_BORDER_SIZE_V
+			_panel.size = _header.get_minimum_size() + scroll_child.get_minimum_size() + _PANEL_BORDER_SIZE_V
 		else:
 			_panel.size = _PANEL_BORDER_SIZE_V \
 					+ Vector2(_SCROLLBAR_SIZE, _SCROLLBAR_SIZE)
