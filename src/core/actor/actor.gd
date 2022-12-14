@@ -399,7 +399,7 @@ func add_status_effect(effect: StatusEffect) -> void:
 	_status_effects.add_child(effect_node)
 	effect_node.finished.connect(remove_status_effect_node.bind(effect_node))
 
-	#_status_effect_icons.update_icons(self)
+	_status_effect_icons.update_icons(self)
 	status_effect_added.emit()
 
 
@@ -410,7 +410,7 @@ func remove_status_effect_node(effect_node: StatusEffectNode) -> void:
 	effect_node.actor = null
 	effect_node.queue_free()
 
-	#_status_effect_icons.update_icons(self)
+	_status_effect_icons.update_icons(self)
 	status_effect_removed.emit()
 
 
