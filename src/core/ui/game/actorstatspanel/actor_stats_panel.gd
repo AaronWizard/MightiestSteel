@@ -5,8 +5,6 @@ signal skill_selected(skill: Skill)
 signal status_effects_selected(actor: Actor)
 signal cancelled
 
-@export var skill_button_scene: PackedScene
-
 @onready var _portrait: TextureRect = $%Portrait
 @onready var _name: Label = $%Name
 
@@ -21,50 +19,65 @@ signal cancelled
 @onready var _skills_grid: Control = $%SkillsGrid
 @onready var _status_effects: Button = $%StatusEffects
 
-func set_actor(actor: Actor) -> void:
-	_clear()
+var _actor: Actor
 
-	_portrait.texture = actor.portrait
-	_name.text = actor.actor_name
-	_max_stamina.text = str(actor.stats.max_stamina)
-	_current_stamina.text = str(actor.stats.current_stamina)
+
+func set_actor(actor: Actor) -> void:
+	clear()
+	_actor = actor
+
+	_portrait.texture = _actor.portrait
+	_name.text = _actor.actor_name
+	_max_stamina.text = str(_actor.stats.max_stamina)
+	_current_stamina.text = str(_actor.stats.current_stamina)
 
 	_max_stamina_mod.text = ""
 
-	_attack.stat_value = actor.stats.attack
-	_move.stat_value = actor.stats.move
-	_speed.stat_value = actor.stats.speed
+	_attack.stat_value = _actor.stats.attack
+	_move.stat_value = _actor.stats.move
+	_speed.stat_value = _actor.stats.speed
 
-	for skill in actor.all_skills:
-		var button: ActorStatsPanelSkillButton \
-				= skill_button_scene.instantiate()
-		_skills_grid.add_child(button)
+	assert(_skills_grid.get_child_count() >= _actor.all_skills.size())
+	for i in range(_skills_grid.get_child_count()):
+		var button: ActorStatsPanelSkillButton = _skills_grid.get_child(i)
+		button.visible = i < _actor.all_skills.size()
+		if button.visible:
+			var skill := _actor.all_skills[i]
+			button.icon = skill.icon
+			button.cooldown = _actor.get_skill_cooldown(skill)
 
-		button.icon = skill.icon
-		button.cooldown = actor.get_skill_cooldown(skill)
-
-		button.pressed.connect(func(): skill_selected.emit(skill))
-
-	UIUtils.remove_signal_connections(_status_effects.pressed)
-	if actor.has_cover or actor.status_effect_nodes.size() > 0:
-		_status_effects.visible = true
-		_status_effects.pressed.connect(
-			func(): status_effects_selected.emit(actor)
-		)
-	else:
-		_status_effects.visible = false
+	_status_effects.visible = _actor.has_cover \
+			or _actor.status_effect_nodes.size() > 0
 
 
-func _clear() -> void:
-	while _skills_grid.get_child_count() > 0:
-		var child := _skills_grid.get_child(0)
-		_skills_grid.remove_child(child)
-		child.queue_free()
+func clear() -> void:
+	_actor = null
 
 
 func _on_cancel_pressed() -> void:
+	clear()
 	cancelled.emit()
 
 
+func _on_actor_stats_panel_skill_button_1_pressed() -> void:
+	_skill_button_pressed(0)
+
+
+func _on_actor_stats_panel_skill_button_2_pressed() -> void:
+	_skill_button_pressed(1)
+
+
+func _on_actor_stats_panel_skill_button_3_pressed() -> void:
+	_skill_button_pressed(2)
+
+
+func _on_actor_stats_panel_skill_button_4_pressed() -> void:
+	_skill_button_pressed(3)
+
+
+func _skill_button_pressed(index: int) -> void:
+	skill_selected.emit(_actor.all_skills[index])
+
+
 func _on_status_effects_pressed() -> void:
-	status_effects_selected.emit()
+	status_effects_selected.emit(_actor)

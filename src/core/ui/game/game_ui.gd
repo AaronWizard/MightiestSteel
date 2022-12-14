@@ -34,10 +34,8 @@ var turn_queue: TurnQueue:
 @onready var _turn_queue_container: MaxSizeScrollPanel = $TurnQueueContainer
 @onready var _turn_queue: TurnQueue = $%TurnQueue
 
-@onready var _stat_popups: Control = $StatPopups
-@onready var _current_actor_stats: ActorStatsPanel \
-		= $StatPopups/CurrentActorStats
-@onready var _other_actor_stats: ActorStatsPanel = $StatPopups/OtherActorStats
+@onready var _actor_stats_popup: Control = $ActorStatsPopup
+@onready var _actor_stats: ActorStatsPanel = $ActorStatsPopup/ActorStats
 
 @onready var _status_effects_popup: Control = $StatusEffectsPopup
 @onready var _status_effects: StatusEffectsPanel \
@@ -50,23 +48,35 @@ var turn_queue: TurnQueue:
 @onready var _play_area: Control = $PlayArea
 
 
+var _current_actor: Actor
+var _other_actor: Actor
+
+
 func start_actor_turn(actor: Actor) -> void:
-	_current_actor_info.set_actor(actor, actor.is_player_controlled)
-	_current_actor_stats.set_actor(actor)
+	_current_actor = actor
+	_other_actor = null
+
+	_current_actor_info.set_actor(
+			_current_actor, _current_actor.is_player_controlled)
 	_current_actor_info.visible = true
 
 
 func end_current_actor_turn() -> void:
+	_current_actor = null
+	_other_actor = null
+
 	_current_actor_info.visible = false
 
 
 func show_other_actor(actor: Actor) -> void:
-	_other_actor_panel.set_actor(actor, true)
-	_other_actor_stats.set_actor(actor)
+	_other_actor = actor
+
+	_other_actor_panel.set_actor(_other_actor, true)
 	_other_actor_panel.visible = true
 
 
 func hide_other_actor() -> void:
+	_other_actor = null
 	_other_actor_panel.visible = false
 
 
@@ -109,37 +119,33 @@ func _scroll_over_turn_queue_item(item_rect: Rect2, instant: bool) -> void:
 
 
 func _on_current_actor_info_portrait_pressed() -> void:
-	_show_stat_popup(_current_actor_stats)
+	_show_stats_popup(_current_actor)
 
 
 func _on_other_actor_info_portrait_pressed() -> void:
-	_show_stat_popup(_other_actor_stats)
+	_show_stats_popup(_other_actor)
 
 
-func _show_stat_popup(control: Control) -> void:
-	for c in _stat_popups.get_children():
-		var child: Control = c
-		child.visible = child == control
-	GameUI._show_popup(control, _stat_popups)
+func _show_stats_popup(actor: Actor) -> void:
+	_actor_stats.set_actor(actor)
+	GameUI._show_popup(_actor_stats, _actor_stats_popup)
 
 
-func _on_current_actor_stats_cancelled() -> void:
-	_stat_popups.visible = false
-
-
-func _on_other_actor_stats_cancelled() -> void:
-	_stat_popups.visible = false
-
-
-func _on_current_actor_stats_skill_selected(skill: Skill) -> void:
+func _on_actor_stats_skill_selected(skill: Skill) -> void:
 	_show_skill_description(skill, true)
 
 
-func _on_other_actor_stats_skill_selected(skill: Skill) -> void:
-	_show_skill_description(skill, true)
+func _on_actor_stats_status_effects_selected(actor: Actor) -> void:
+	_status_effects.set_actor(actor)
+	GameUI._show_popup(_status_effects, _status_effects_popup, false)
 
 
-func _on_skill_info_panel_icon_pressed(skill: Skill, need_cooldown) -> void:
+func _on_actor_stats_cancelled() -> void:
+	_actor_stats_popup.visible = false
+
+
+func _on_skill_info_panel_icon_pressed(skill: Skill, need_cooldown: bool) \
+		-> void:
 	_show_skill_description(skill, need_cooldown)
 
 
@@ -150,19 +156,6 @@ func _show_skill_description(skill: Skill, need_cooldown: bool) -> void:
 
 func _on_skill_description_panel_cancelled() -> void:
 	_skill_popup.visible = false
-
-
-func _on_current_actor_stats_status_effects_selected(actor: Actor) -> void:
-	_show_status_effects(actor)
-
-
-func _on_other_actor_stats_status_effects_selected(actor: Actor) -> void:
-	_show_status_effects(actor)
-
-
-func _show_status_effects(actor: Actor) -> void:
-	_status_effects.set_actor(actor)
-	GameUI._show_popup(_status_effects, _status_effects_popup, false)
 
 
 func _on_status_effects_panel_cancelled() -> void:

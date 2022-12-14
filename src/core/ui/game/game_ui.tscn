@@ -93,7 +93,7 @@ offset_bottom = 27.0
 toggle_mode = true
 icon = ExtResource("5_mww5o")
 
-[node name="StatPopups" type="Control" parent="."]
+[node name="ActorStatsPopup" type="Control" parent="."]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -102,23 +102,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CurrentActorStats" parent="StatPopups" instance=ExtResource("7_gmto7")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -49.5
-offset_top = -30.5
-offset_right = 49.5
-offset_bottom = 30.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="OtherActorStats" parent="StatPopups" instance=ExtResource("7_gmto7")]
-visible = false
+[node name="ActorStats" parent="ActorStatsPopup" instance=ExtResource("7_gmto7")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -188,12 +172,9 @@ grow_vertical = 2
 [connection signal="other_actor_set" from="TurnQueueContainer/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/TurnQueue" to="." method="_on_turn_queue_other_actor_set"]
 [connection signal="turn_index_set" from="TurnQueueContainer/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer/TurnQueue" to="." method="_on_turn_queue_turn_index_set"]
 [connection signal="toggled" from="TurnQueueButton" to="." method="_on_turn_queue_button_toggled"]
-[connection signal="cancelled" from="StatPopups/CurrentActorStats" to="." method="_on_current_actor_stats_cancelled"]
-[connection signal="skill_selected" from="StatPopups/CurrentActorStats" to="." method="_on_current_actor_stats_skill_selected"]
-[connection signal="status_effects_selected" from="StatPopups/CurrentActorStats" to="." method="_on_current_actor_stats_status_effects_selected"]
-[connection signal="cancelled" from="StatPopups/OtherActorStats" to="." method="_on_other_actor_stats_cancelled"]
-[connection signal="skill_selected" from="StatPopups/OtherActorStats" to="." method="_on_other_actor_stats_skill_selected"]
-[connection signal="status_effects_selected" from="StatPopups/OtherActorStats" to="." method="_on_other_actor_stats_status_effects_selected"]
+[connection signal="cancelled" from="ActorStatsPopup/ActorStats" to="." method="_on_actor_stats_cancelled"]
+[connection signal="skill_selected" from="ActorStatsPopup/ActorStats" to="." method="_on_actor_stats_skill_selected"]
+[connection signal="status_effects_selected" from="ActorStatsPopup/ActorStats" to="." method="_on_actor_stats_status_effects_selected"]
 [connection signal="cancelled" from="StatusEffectsPopup/StatusEffectsPanel" to="." method="_on_status_effects_panel_cancelled"]
 [connection signal="cancelled" from="SkillPopup/SkillDescriptionPanel" to="." method="_on_skill_description_panel_cancelled"]
 
