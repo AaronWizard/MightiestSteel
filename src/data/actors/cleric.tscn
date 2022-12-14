@@ -1,16 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://n6osimqs3byb"]
+[gd_scene load_steps=11 format=3 uid="uid://n6osimqs3byb"]
 
 [ext_resource type="PackedScene" uid="uid://d2tmse3fwy84n" path="res://src/core/actor/actor.tscn" id="1_8l4pn"]
 [ext_resource type="Texture2D" uid="uid://dt8dru7bjbokb" path="res://assets/graphics/actors/cleric.png" id="2_7w6ej"]
 [ext_resource type="Resource" uid="uid://dfvdy4lo4wq4w" path="res://src/data/skills/resources/attack_melee.tres" id="3_mh7w1"]
 [ext_resource type="Script" path="res://src/core/actor/actor_definition.gd" id="3_swprw"]
 [ext_resource type="Shader" path="res://src/core/shaders/disolve.gdshader" id="4_h0j45"]
+[ext_resource type="Resource" uid="uid://bvef8nc6uufud" path="res://src/data/skills/resources/boost.tres" id="5_uptq2"]
 
 [sub_resource type="Resource" id="Resource_cjis5"]
 script = ExtResource("3_swprw")
 stats_file = "res://assets/data/player_stats.csv"
 stats_name = "cleric"
 attack_skill = ExtResource("3_mh7w1")
+skill0 = ExtResource("5_uptq2")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bku8o"]
 

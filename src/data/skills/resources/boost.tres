@@ -1,0 +1,53 @@
+[gd_resource type="Resource" load_steps=13 format=3 uid="uid://bvef8nc6uufud"]
+
+[ext_resource type="Texture2D" uid="uid://cbeibrrdu0elo" path="res://assets/graphics/effects/heal.png" id="1_xm6s7"]
+[ext_resource type="Script" path="res://src/data/skills/scripts/aoe_skill.gd" id="2_r7ket"]
+[ext_resource type="PackedScene" uid="uid://bsxqsdfy36b07" path="res://src/data/effects/tile_heal.tscn" id="3_lam6s"]
+[ext_resource type="Script" path="res://src/core/skills/target_ranges/cell_distance_range.gd" id="3_uhvi0"]
+[ext_resource type="Script" path="res://src/core/statuseffects/stat_modifier.gd" id="3_v1iyi"]
+[ext_resource type="Script" path="res://src/core/statuseffects/statuseffects/stat_mod_effect.gd" id="4_kn8wc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qp64t"]
+atlas = ExtResource("1_xm6s7")
+region = Rect2(28, 4, 16, 16)
+
+[sub_resource type="Resource" id="Resource_c032n"]
+script = ExtResource("3_v1iyi")
+mod_type = 1
+mod_value = 0.5
+
+[sub_resource type="Resource" id="Resource_hudyb"]
+script = ExtResource("4_kn8wc")
+modifier = SubResource("Resource_c032n")
+time_type = 0
+rounds = 3
+
+[sub_resource type="Resource" id="Resource_k6qvv"]
+script = ExtResource("3_v1iyi")
+mod_type = 4
+mod_value = 0.5
+
+[sub_resource type="Resource" id="Resource_exbfj"]
+script = ExtResource("4_kn8wc")
+modifier = SubResource("Resource_k6qvv")
+time_type = 0
+rounds = 3
+
+[sub_resource type="Resource" id="Resource_vkwt3"]
+script = ExtResource("3_uhvi0")
+min_dist = 0
+max_dist = 2
+include_diagonals = true
+target_type = 3
+
+[resource]
+script = ExtResource("2_r7ket")
+tile_effect_scene = ExtResource("3_lam6s")
+tile_effect_range_type = 2
+status_effects = [SubResource("Resource_hudyb"), SubResource("Resource_exbfj")]
+name = "Boost"
+description = "Boost the ally's attack and defence by 50% for 3 rounds."
+icon = SubResource("AtlasTexture_qp64t")
+cooldown = 0
+target_range = SubResource("Resource_vkwt3")
+use_attack_anim = true
