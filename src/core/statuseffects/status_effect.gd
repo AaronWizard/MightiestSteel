@@ -23,6 +23,9 @@ enum TimeType
 }
 
 
+@export var icon: Texture2D
+
+
 ## Determines when and how status effect will end
 @export var time_type := TimeType.ROUNDS
 ## The number of rounds until the status effect ends. Only applies if time_type

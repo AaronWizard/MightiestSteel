@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=9 format=3 uid="uid://cmemc73vael4w"]
+[gd_resource type="Resource" load_steps=10 format=3 uid="uid://cmemc73vael4w"]
 
 [ext_resource type="Texture2D" uid="uid://cat4uyeq3472n" path="res://assets/graphics/effects/poison.png" id="1_85cfr"]
 [ext_resource type="PackedScene" uid="uid://b7ac40ai2p0e3" path="res://src/data/effects/projectile_arrow.tscn" id="2_2nlk8"]
@@ -11,10 +11,15 @@
 atlas = ExtResource("1_85cfr")
 region = Rect2(28, 4, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8d2t"]
+atlas = ExtResource("1_85cfr")
+region = Rect2(8, 8, 8, 8)
+
 [sub_resource type="Resource" id="Resource_873nn"]
 script = ExtResource("4_hys7t")
 magnitude = 0.2
 tile_effect_scene = ExtResource("4_swt1b")
+icon = SubResource("AtlasTexture_a8d2t")
 time_type = 0
 rounds = 3
 

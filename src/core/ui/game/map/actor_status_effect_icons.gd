@@ -14,6 +14,9 @@ func update_icons(actor: Actor) -> void:
 	for t in Constants.STAT_MODS:
 		_add_stat_mod_icon(actor, t)
 
+	for s in actor.status_effect_nodes:
+		_add_status_effect_icon(s.effect)
+
 	if get_child_count() > 1:
 		_icon_index = (GlobalActorIconTimer.index % get_child_count()) - 1
 	else:
@@ -32,6 +35,13 @@ func _add_stat_mod_icon(actor: Actor, mod_type: Stats.ModifierTypes) -> void:
 			icon.texture = Constants.STAT_MODS[mod_type].up
 		else:
 			icon.texture = Constants.STAT_MODS[mod_type].down
+		add_child(icon)
+
+
+func _add_status_effect_icon(effect: StatusEffect) -> void:
+	if effect.icon and not effect is StatModEffect:
+		var icon := Sprite2D.new()
+		icon.texture = effect.icon
 		add_child(icon)
 
 
