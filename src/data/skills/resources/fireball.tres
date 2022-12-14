@@ -26,8 +26,8 @@ target_type = 0
 
 [resource]
 script = ExtResource("2_26hgj")
-aoe = SubResource("Resource_e6xei")
 projectile_scene = ExtResource("3_0g1ha")
+aoe = SubResource("Resource_e6xei")
 tile_effect_scene = ExtResource("6_87phk")
 tile_effect_range_type = 1
 status_effects = null
