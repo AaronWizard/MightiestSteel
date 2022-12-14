@@ -1,11 +1,13 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://8pbjo7lde74"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://8pbjo7lde74"]
 
 [ext_resource type="StyleBox" uid="uid://cvdscbkq82mow" path="res://src/core/ui/resources/stylebox_button_disabled.tres" id="1_m5rmy"]
 [ext_resource type="StyleBox" uid="uid://bdnssr6g0qjoj" path="res://src/core/ui/resources/stylebox_button_normal.tres" id="2_cm0ue"]
 [ext_resource type="StyleBox" uid="uid://7jwpurvd4rwb" path="res://src/core/ui/resources/stylebox_button_pressed.tres" id="3_2tt80"]
 [ext_resource type="StyleBox" uid="uid://c47emwxs8emut" path="res://src/core/ui/resources/stylebox_panel.tres" id="4_a3a2w"]
+[ext_resource type="StyleBox" uid="uid://c5txphk2rugyt" path="res://src/core/ui/resources/scrollbar_grabber_horizontal.tres" id="4_s8c5v"]
 [ext_resource type="FontFile" uid="uid://3spejj62mtxb" path="res://assets/fonts/TinyPixie2.ttf" id="4_t8kbc"]
 [ext_resource type="StyleBox" uid="uid://dc26yeqk3w1gb" path="res://src/core/ui/resources/scrollbar_grabber_vertical.tres" id="5_2q83i"]
+[ext_resource type="StyleBox" uid="uid://t1nmmo4aunxm" path="res://src/core/ui/resources/scrollbar_scroll_horizontal.tres" id="5_uckhm"]
 [ext_resource type="StyleBox" uid="uid://nlhjfr4h2dvq" path="res://src/core/ui/resources/scrollbar_scroll_vertical.tres" id="6_63vwm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_21iro"]
@@ -22,6 +24,11 @@ Button/styles/focus = SubResource("StyleBoxEmpty_21iro")
 Button/styles/hover = ExtResource("2_cm0ue")
 Button/styles/normal = ExtResource("2_cm0ue")
 Button/styles/pressed = ExtResource("3_2tt80")
+HScrollBar/styles/grabber = ExtResource("4_s8c5v")
+HScrollBar/styles/grabber_highlight = ExtResource("4_s8c5v")
+HScrollBar/styles/grabber_pressed = ExtResource("4_s8c5v")
+HScrollBar/styles/scroll = ExtResource("5_uckhm")
+HScrollBar/styles/scroll_focus = ExtResource("5_uckhm")
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
 Label/constants/shadow_offset_x = 0
 Label/constants/shadow_offset_y = 0
