@@ -219,7 +219,7 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/statuseffects/status_effect_node.gd"
 }, {
-"base": "PanelContainer",
+"base": "MaxSizeScrollPanel",
 "class": &"StatusEffectsPanel",
 "language": &"GDScript",
 "path": "res://src/core/ui/game/status_effects_panel.gd"

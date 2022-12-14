@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dby770p0nloai" path="res://src/core/ui/max_size_scroll_panel.tscn" id="5_ttw4q"]
 [ext_resource type="Script" path="res://src/core/ui/game/turn_queue.gd" id="6_wb35a"]
 [ext_resource type="PackedScene" uid="uid://cj14wiiapl8dv" path="res://src/core/ui/game/actorstatspanel/actor_stats_panel.tscn" id="7_gmto7"]
-[ext_resource type="PackedScene" uid="uid://bjyfhnj7jxgc4" path="res://src/core/ui/game/status_effects_panel.tscn" id="8_236wo"]
+[ext_resource type="PackedScene" uid="uid://dqodeeqn5o0w5" path="res://src/core/ui/game/status_effects_panel.tscn" id="8_236wo"]
 [ext_resource type="PackedScene" uid="uid://c1no3sh5sxyt3" path="res://src/core/ui/game/skill_description_panel.tscn" id="8_lwd20"]
 
 [node name="GameUI" type="CanvasLayer"]
@@ -78,33 +78,11 @@ grow_vertical = 2
 [node name="PanelContainer" parent="TurnQueueContainer" index="0"]
 layout_mode = 3
 offset_right = 11.0
-offset_bottom = 7.0
-
-[node name="VBoxContainer" parent="TurnQueueContainer/PanelContainer" index="0"]
-layout_mode = 3
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 8.0
-offset_bottom = 4.0
-
-[node name="Header" parent="TurnQueueContainer/PanelContainer/VBoxContainer" index="0"]
-layout_mode = 3
-offset_right = 5.0
-offset_bottom = 1.0
-
-[node name="MarginContainer" parent="TurnQueueContainer/PanelContainer/VBoxContainer" index="1"]
-layout_mode = 3
-offset_top = 1.0
-offset_right = 5.0
-offset_bottom = 1.0
-
-[node name="ScrollContainer" parent="TurnQueueContainer/PanelContainer/VBoxContainer/MarginContainer" index="0"]
-layout_mode = 3
-offset_left = 1.0
-offset_right = 4.0
+offset_bottom = 8.0
 
 [node name="TurnQueue" type="VBoxContainer" parent="TurnQueueContainer/PanelContainer/VBoxContainer/MarginContainer/ScrollContainer" index="0"]
 unique_name_in_owner = true
+layout_mode = 2
 script = ExtResource("6_wb35a")
 
 [node name="TurnQueueButton" type="Button" parent="."]
@@ -126,6 +104,7 @@ grow_vertical = 2
 
 [node name="CurrentActorStats" parent="StatPopups" instance=ExtResource("7_gmto7")]
 visible = false
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -140,6 +119,7 @@ grow_vertical = 2
 
 [node name="OtherActorStats" parent="StatPopups" instance=ExtResource("7_gmto7")]
 visible = false
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -152,7 +132,7 @@ offset_bottom = 30.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StatusEffectPopup" type="Control" parent="."]
+[node name="StatusEffectsPopup" type="Control" parent="."]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -161,19 +141,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StatusEffectsPanel" parent="StatusEffectPopup" instance=ExtResource("8_236wo")]
-custom_minimum_size = Vector2(90, 90)
-anchors_preset = 8
-anchor_left = 0.5
+[node name="StatusEffectsPanel" parent="StatusEffectsPopup" instance=ExtResource("8_236wo")]
+custom_minimum_size = Vector2(120, 90)
+layout_mode = 1
+anchors_preset = -1
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -45.0
-offset_top = -45.0
-offset_right = 45.0
-offset_bottom = 45.0
+offset_left = 30.0
+offset_top = -50.0
+offset_right = -30.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
+halign = 1
+valign = 1
+horizontal_scroll_mode = 0
+scroll_horizontal = 0
+scroll_vertical = 0
 
 [node name="SkillPopup" type="Control" parent="."]
 visible = false
@@ -185,6 +170,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SkillDescriptionPanel" parent="SkillPopup" instance=ExtResource("8_lwd20")]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -209,7 +195,7 @@ grow_vertical = 2
 [connection signal="cancelled" from="StatPopups/OtherActorStats" to="." method="_on_other_actor_stats_cancelled"]
 [connection signal="skill_selected" from="StatPopups/OtherActorStats" to="." method="_on_other_actor_stats_skill_selected"]
 [connection signal="status_effects_selected" from="StatPopups/OtherActorStats" to="." method="_on_other_actor_stats_status_effects_selected"]
-[connection signal="cancelled" from="StatusEffectPopup/StatusEffectsPanel" to="." method="_on_status_effects_panel_cancelled"]
+[connection signal="cancelled" from="StatusEffectsPopup/StatusEffectsPanel" to="." method="_on_status_effects_panel_cancelled"]
 [connection signal="cancelled" from="SkillPopup/SkillDescriptionPanel" to="." method="_on_skill_description_panel_cancelled"]
 
 [editable path="TurnQueueContainer"]

@@ -1,9 +1,11 @@
+@tool
 class_name StatusEffectsPanel
-extends PanelContainer
+extends MaxSizeScrollPanel
 
 signal cancelled
 
-@onready var _effects_list: Control = $%StatusEffectsList
+@onready var _effects_list: Control = $%EffectsList
+
 
 func set_actor(actor: Actor) -> void:
 	_clear()
