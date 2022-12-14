@@ -156,11 +156,13 @@ func _resize_scroll_container() -> void:
 			_panel.size.x += _SCROLLBAR_SIZE
 
 		if halign == HAlign.STRETCH:
+			_panel.position.x = 0
 			_panel.size.x = size.x
 		else:
 			_panel.size.x = minf(_panel.size.x, size.x)
 
 		if valign == VAlign.STRETCH:
+			_panel.position.y = 0
 			_panel.size.y = size.y
 		else:
 			_panel.size.y = minf(_panel.size.y, size.y)
