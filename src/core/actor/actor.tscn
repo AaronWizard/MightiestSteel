@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d2tmse3fwy84n"]
+[gd_scene load_steps=20 format=3 uid="uid://d2tmse3fwy84n"]
 
 [ext_resource type="PackedScene" uid="uid://bo1e1gvqkrmql" path="res://src/core/tiles/tile_object.tscn" id="1_svfmf"]
 [ext_resource type="Script" path="res://src/core/actor/actor.gd" id="2_bugic"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bepmrhgkrymif" path="res://src/core/ui/game/map/actor_stamina_bar.tscn" id="4_k1dgp"]
 [ext_resource type="PackedScene" uid="uid://bku5l2cqk214v" path="res://src/core/ui/game/map/actor_actions_menu.tscn" id="4_lrw8s"]
 [ext_resource type="PackedScene" uid="uid://sog7m5dsfeo1" path="res://src/core/tiles/target_cursor.tscn" id="5_iao12"]
+[ext_resource type="Script" path="res://src/core/ui/game/map/actor_status_effect_icons.gd" id="6_ovas0"]
 [ext_resource type="PackedScene" uid="uid://ct42d77xpks3f" path="res://src/core/tiles/other_target_cursor.tscn" id="9_rtcm0"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bku8o"]
@@ -201,6 +202,11 @@ texture = ExtResource("3_tt4ao")
 [node name="ActorStaminaBar" parent="Center/Offset" index="2" instance=ExtResource("4_k1dgp")]
 visible = false
 position = Vector2(0, -12)
+
+[node name="ActorStatusEffectIcons" type="Node2D" parent="Center/Offset" index="3"]
+z_index = 1
+position = Vector2(-8, 8)
+script = ExtResource("6_ovas0")
 
 [node name="ActorActionsMenu" parent="Center" index="1" instance=ExtResource("4_lrw8s")]
 visible = false

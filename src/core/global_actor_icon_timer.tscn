@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7a6gtevd4iag"]
+
+[ext_resource type="Script" path="res://src/core/global_actor_icon_timer.gd" id="1_fvvsv"]
+
+[node name="GlobalActorIconTimer" type="Node"]
+script = ExtResource("1_fvvsv")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

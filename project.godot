@@ -69,6 +69,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/ui/game/actorstatspanel/actor_stats_panel_stat.gd"
 }, {
+"base": "Node2D",
+"class": &"ActorStatusEffectIcons",
+"language": &"GDScript",
+"path": "res://src/core/ui/game/map/actor_status_effect_icons.gd"
+}, {
 "base": "Skill",
 "class": &"AttackStandard",
 "language": &"GDScript",
@@ -297,6 +302,7 @@ _global_script_class_icons={
 "ActorStatsPanel": "",
 "ActorStatsPanelSkillButton": "",
 "ActorStatsPanelStat": "",
+"ActorStatusEffectIcons": "",
 "AttackStandard": "",
 "AwaitGroup": "",
 "CellDistanceAOE": "",
@@ -348,6 +354,10 @@ config/name="Mightiest Steel"
 run/main_scene="res://src/main.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalActorIconTimer="*res://src/core/global_actor_icon_timer.tscn"
 
 [display]
 

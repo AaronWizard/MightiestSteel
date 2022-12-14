@@ -15,6 +15,12 @@ signal attack_hit
 ## When any animation finishes. Includes movement and stamina bar animations.
 signal animation_finished
 
+## When a status effect is added
+signal status_effect_added
+
+## When a status effect is removed
+signal status_effect_removed
+
 ## When actor runs out of stamina and has finished its death animation
 signal died
 
@@ -107,6 +113,8 @@ var map: Map:
 		if value and not (self in value.actors):
 			push_error("Actor not added to new map using Map.add_actor")
 		_map = value
+
+		_status_effect_icons.update_icons(self)
 
 
 var has_cover: bool:
@@ -235,6 +243,9 @@ var _is_animating := false
 @onready var _offset: Node2D = $Center/Offset
 
 @onready var _stamina_bar: ActorStaminaBar = $Center/Offset/ActorStaminaBar
+@onready var _status_effect_icons: ActorStatusEffectIcons \
+		= $Center/Offset/ActorStatusEffectIcons
+
 @onready var _target_cursor: TileObject = $TargetCursor
 @onready var _other_target_cursor: TileObject = $OtherTargetCursor
 
@@ -388,6 +399,9 @@ func add_status_effect(effect: StatusEffect) -> void:
 	_status_effects.add_child(effect_node)
 	effect_node.finished.connect(remove_status_effect_node.bind(effect_node))
 
+	#_status_effect_icons.update_icons(self)
+	status_effect_added.emit()
+
 
 ## Removes and frees a status effect node
 func remove_status_effect_node(effect_node: StatusEffectNode) -> void:
@@ -395,6 +409,9 @@ func remove_status_effect_node(effect_node: StatusEffectNode) -> void:
 	_status_effects.remove_child(effect_node)
 	effect_node.actor = null
 	effect_node.queue_free()
+
+	#_status_effect_icons.update_icons(self)
+	status_effect_removed.emit()
 
 
 func _get_origin_cell() -> Vector2i:
@@ -432,6 +449,9 @@ func _set_offset() -> void:
 func _move_done(old_origin_cell: Vector2i) -> void:
 	for s in status_effect_nodes:
 		s.moved()
+
+	if _map:
+		_status_effect_icons.update_icons(self)
 
 	if _report_moves:
 		moved.emit(old_origin_cell)
