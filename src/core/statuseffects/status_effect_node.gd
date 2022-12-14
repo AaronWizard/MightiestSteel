@@ -74,14 +74,12 @@ func _exit_tree() -> void:
 
 ## When a new round has started
 func start_round() -> void:
-	var active := true
+	effect.round_started(actor)
+
 	if effect.time_type == StatusEffect.TimeType.ROUNDS:
 		_rounds_left -= 1
 		if _rounds_left == 0:
-			active = false
 			finished.emit()
-	if active:
-		effect.round_started(actor)
 
 
 ## When the effect's actor has started its turn
