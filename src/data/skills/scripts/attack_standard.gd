@@ -13,7 +13,7 @@ enum TileEffectRangeType
 @export var projectile_scene: PackedScene
 @export var tile_effect_scene: PackedScene
 @export var tile_effect_range_type := TileEffectRangeType.FULL
-@export var status_effect_scenes: Array[PackedScene]
+@export var status_effects: Array[StatusEffect]
 
 
 func _get_skill_target_info(source_actor: Actor, target_cell: Vector2i) \
@@ -59,9 +59,8 @@ func _run(source_actor: Actor, target_cell: Vector2i) -> void:
 			for c in a.covered_cells:
 				actor_covered_cells[c] = true
 
-		for s in status_effect_scenes:
-			var status_effect: StatusEffect = s.instantiate()
-			a.add_status_effect(status_effect)
+		for s in status_effects:
+			a.add_status_effect(s)
 
 	if tile_effect_scene:
 		var tile_effect_cells: Array[Vector2i] = []

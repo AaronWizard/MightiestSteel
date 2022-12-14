@@ -30,6 +30,7 @@ aoe = SubResource("Resource_e6xei")
 projectile_scene = ExtResource("3_0g1ha")
 tile_effect_scene = ExtResource("6_87phk")
 tile_effect_range_type = 1
+status_effects = null
 name = "Fireball"
 description = "Damage all enemies in the area around the target."
 icon = SubResource("AtlasTexture_ulgi7")

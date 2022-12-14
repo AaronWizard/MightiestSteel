@@ -9,7 +9,7 @@ extends StatusEffect
 @export var tile_effect_scene: PackedScene
 
 
-func _round_started() -> void:
+func round_started(actor: Actor) -> void:
 	var animations: Array[Callable] = []
 	if tile_effect_scene:
 		animations.append(Callable(TileEffect, "play_on_field").bind(

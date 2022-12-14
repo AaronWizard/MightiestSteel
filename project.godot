@@ -209,10 +209,15 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/actor/stats.gd"
 }, {
-"base": "Node",
+"base": "Resource",
 "class": &"StatusEffect",
 "language": &"GDScript",
 "path": "res://src/core/statuseffects/status_effect.gd"
+}, {
+"base": "Node",
+"class": &"StatusEffectNode",
+"language": &"GDScript",
+"path": "res://src/core/statuseffects/status_effect_node.gd"
 }, {
 "base": "Resource",
 "class": &"TargetRange",
@@ -311,6 +316,7 @@ _global_script_class_icons={
 "StateMachine": "",
 "Stats": "",
 "StatusEffect": "",
+"StatusEffectNode": "",
 "TargetRange": "",
 "TargetRangeData": "",
 "TerrainData": "",

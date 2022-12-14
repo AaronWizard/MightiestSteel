@@ -85,10 +85,10 @@ var stats: Stats:
 		return $Stats
 
 
-## The actor's current status effects
-var status_effects: Array[StatusEffect]:
+## The actor's current status effect nodes
+var status_effect_nodes: Array[StatusEffectNode]:
 	get:
-		var result: Array[StatusEffect] = []
+		var result: Array[StatusEffectNode] = []
 		if _status_effects:
 			for s in _status_effects.get_children():
 				result.append(s)
@@ -348,7 +348,7 @@ func get_skill_cooldown(skill: Skill) -> int:
 
 ## Actor updates to run when a new round starts
 func start_round(is_first_round: bool) -> void:
-	for s in status_effects:
+	for s in status_effect_nodes:
 		s.start_round()
 	if not is_first_round:
 		cooldown_skills()
@@ -356,13 +356,13 @@ func start_round(is_first_round: bool) -> void:
 
 ## Updates to run when an actor starts its turn
 func start_turn() -> void:
-	for s in status_effects:
+	for s in status_effect_nodes:
 		s.start_turn()
 
 
 ## Updates to run when an actor ends its turn
 func end_turn() -> void:
-	for s in status_effects:
+	for s in status_effect_nodes:
 		s.end_turn()
 
 
@@ -384,21 +384,17 @@ func take_damage(attack_power: int, source_cell: Vector2i) -> void:
 
 ## Adds a status effect
 func add_status_effect(effect: StatusEffect) -> void:
-	assert(not effect in _status_effects.get_children())
-	if effect.actor:
-		push_error("Can't transfer status effects between actors")
-	else:
-		_status_effects.add_child(effect)
-		effect.actor = self
-		effect.finished.connect(remove_status_effect.bind(effect))
+	var effect_node := StatusEffectNode.new(effect, self)
+	_status_effects.add_child(effect_node)
+	effect_node.finished.connect(remove_status_effect_node.bind(effect_node))
 
 
-## Removes and frees a status effect
-func remove_status_effect(effect: StatusEffect) -> void:
-	assert(effect in _status_effects.get_children())
-	_status_effects.remove_child(effect)
-	effect.actor = null
-	effect.queue_free()
+## Removes and frees a status effect node
+func remove_status_effect_node(effect_node: StatusEffectNode) -> void:
+	assert(effect_node in _status_effects.get_children())
+	_status_effects.remove_child(effect_node)
+	effect_node.actor = null
+	effect_node.queue_free()
 
 
 func _get_origin_cell() -> Vector2i:
@@ -434,7 +430,7 @@ func _set_offset() -> void:
 
 
 func _move_done(old_origin_cell: Vector2i) -> void:
-	for s in status_effects:
+	for s in status_effect_nodes:
 		s.moved()
 
 	if _report_moves:

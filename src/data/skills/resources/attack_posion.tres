@@ -1,22 +1,29 @@
-[gd_resource type="Resource" load_steps=8 format=3 uid="uid://cmemc73vael4w"]
+[gd_resource type="Resource" load_steps=9 format=3 uid="uid://cmemc73vael4w"]
 
 [ext_resource type="Texture2D" uid="uid://cat4uyeq3472n" path="res://assets/graphics/effects/poison.png" id="1_85cfr"]
 [ext_resource type="PackedScene" uid="uid://b7ac40ai2p0e3" path="res://src/data/effects/projectile_arrow.tscn" id="2_2nlk8"]
 [ext_resource type="Script" path="res://src/data/skills/scripts/attack_standard.gd" id="3_a2dbl"]
-[ext_resource type="PackedScene" uid="uid://vbu6vlgy7ms8" path="res://src/data/statuseffects/scenes/rogue_poison.tscn" id="4_ap8rc"]
 [ext_resource type="Resource" uid="uid://bkno2abfkllsv" path="res://src/data/skills/ranges/ranged_attack_range.tres" id="4_fung7"]
+[ext_resource type="Script" path="res://src/data/statuseffects/scripts/poison_status_effect.gd" id="4_hys7t"]
 [ext_resource type="PackedScene" uid="uid://5dpfsvjpyrb" path="res://src/data/effects/tile_poison.tscn" id="4_swt1b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_clxcl"]
 atlas = ExtResource("1_85cfr")
 region = Rect2(28, 4, 16, 16)
 
+[sub_resource type="Resource" id="Resource_873nn"]
+script = ExtResource("4_hys7t")
+magnitude = 0.2
+tile_effect_scene = ExtResource("4_swt1b")
+time_type = 0
+rounds = 3
+
 [resource]
 script = ExtResource("3_a2dbl")
 projectile_scene = ExtResource("2_2nlk8")
 tile_effect_scene = ExtResource("4_swt1b")
 tile_effect_range_type = 2
-status_effect_scenes = [ExtResource("4_ap8rc")]
+status_effects = [SubResource("Resource_873nn")]
 name = "Poison Shot"
 description = "Poison the target, damaging 20% of their max stamina for 5 rounds."
 icon = SubResource("AtlasTexture_clxcl")
