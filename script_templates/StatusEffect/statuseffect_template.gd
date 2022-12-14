@@ -2,7 +2,7 @@
 extends StatusEffect
 
 
-func description() -> String:
+func get_description() -> String:
 	return ""
 
 

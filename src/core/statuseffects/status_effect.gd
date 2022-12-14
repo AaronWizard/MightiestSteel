@@ -32,7 +32,7 @@ enum TimeType
 
 ## A description string of the status effect.
 ## Can be overriden.
-func description() -> String:
+func get_description() -> String:
 	return ""
 
 

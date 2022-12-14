@@ -5,7 +5,7 @@ extends StatusEffect
 @export var modifier: StatModifier
 
 
-func description() -> String:
+func get_description() -> String:
 	var result := ""
 	if modifier.mod_value > 0:
 		result = "+"

@@ -9,7 +9,7 @@ extends StatusEffect
 @export var tile_effect_scene: PackedScene
 
 
-func description() -> String:
+func get_description() -> String:
 	return "poison"
 
 
