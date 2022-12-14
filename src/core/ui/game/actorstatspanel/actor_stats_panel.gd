@@ -2,6 +2,7 @@ class_name ActorStatsPanel
 extends PanelContainer
 
 signal skill_selected(skill: Skill)
+signal status_effects_selected(actor: Actor)
 signal cancelled
 
 @export var skill_button_scene: PackedScene
@@ -18,7 +19,7 @@ signal cancelled
 @onready var _speed: ActorStatsPanelStat = $%Speed
 
 @onready var _skills_grid: Control = $%SkillsGrid
-
+@onready var _status_effects: Button = $%StatusEffects
 
 func set_actor(actor: Actor) -> void:
 	_clear()
@@ -44,6 +45,15 @@ func set_actor(actor: Actor) -> void:
 
 		button.pressed.connect(func(): skill_selected.emit(skill))
 
+	UIUtils.remove_signal_connections(_status_effects.pressed)
+	if actor.has_cover or actor.status_effect_nodes.size() > 0:
+		_status_effects.visible = true
+		_status_effects.pressed.connect(
+			func(): status_effects_selected.emit(actor)
+		)
+	else:
+		_status_effects.visible = false
+
 
 func _clear() -> void:
 	while _skills_grid.get_child_count() > 0:
@@ -54,3 +64,7 @@ func _clear() -> void:
 
 func _on_cancel_pressed() -> void:
 	cancelled.emit()
+
+
+func _on_status_effects_pressed() -> void:
+	status_effects_selected.emit()

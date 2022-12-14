@@ -39,6 +39,9 @@ var turn_queue: TurnQueue:
 		= $StatPopups/CurrentActorStats
 @onready var _other_actor_stats: ActorStatsPanel = $StatPopups/OtherActorStats
 
+@onready var _status_effect_popup: Control = $StatusEffectPopup
+@onready var _status_effects: StatusEffectsPanel = $StatusEffectPopup/StatusEffectsPanel
+
 @onready var _skill_popup: Control = $SkillPopup
 @onready var _skill_description: SkillDescriptionPanel \
 		= $SkillPopup/SkillDescriptionPanel
@@ -116,8 +119,7 @@ func _show_stat_popup(control: Control) -> void:
 	for c in _stat_popups.get_children():
 		var child: Control = c
 		child.visible = child == control
-	control.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	_stat_popups.visible = true
+	GameUI._show_popup(control, _stat_popups)
 
 
 func _on_current_actor_stats_cancelled() -> void:
@@ -142,9 +144,30 @@ func _on_skill_info_panel_icon_pressed(skill: Skill, need_cooldown) -> void:
 
 func _show_skill_description(skill: Skill, need_cooldown: bool) -> void:
 	_skill_description.set_skill(skill, need_cooldown)
-	_skill_description.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	_skill_popup.visible = true
+	GameUI._show_popup(_skill_description, _skill_popup)
 
 
 func _on_skill_description_panel_cancelled() -> void:
 	_skill_popup.visible = false
+
+
+func _on_current_actor_stats_status_effects_selected(actor: Actor) -> void:
+	_show_status_effects(actor)
+
+
+func _on_other_actor_stats_status_effects_selected(actor: Actor) -> void:
+	_show_status_effects(actor)
+
+
+func _show_status_effects(actor: Actor) -> void:
+	_status_effects.set_actor(actor)
+	GameUI._show_popup(_status_effects, _status_effect_popup)
+
+
+func _on_status_effects_panel_cancelled() -> void:
+	_status_effect_popup.visible = false
+
+
+static func _show_popup(panel: Control, popup: Control) -> void:
+	panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	popup.visible = true

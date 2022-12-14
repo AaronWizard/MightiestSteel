@@ -219,6 +219,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/statuseffects/status_effect_node.gd"
 }, {
+"base": "PanelContainer",
+"class": &"StatusEffectsPanel",
+"language": &"GDScript",
+"path": "res://src/core/ui/game/status_effects_panel.gd"
+}, {
 "base": "Resource",
 "class": &"TargetRange",
 "language": &"GDScript",
@@ -263,6 +268,11 @@ _global_script_classes=[{
 "class": &"TurnQueueItem",
 "language": &"GDScript",
 "path": "res://src/core/ui/game/turn_queue_item.gd"
+}, {
+"base": "RefCounted",
+"class": &"UIUtils",
+"language": &"GDScript",
+"path": "res://src/core/ui/ui_utils.gd"
 }, {
 "base": "RefCounted",
 "class": &"WalkRange",
@@ -317,6 +327,7 @@ _global_script_class_icons={
 "Stats": "",
 "StatusEffect": "",
 "StatusEffectNode": "",
+"StatusEffectsPanel": "",
 "TargetRange": "",
 "TargetRangeData": "",
 "TerrainData": "",
@@ -326,6 +337,7 @@ _global_script_class_icons={
 "TurnManager": "",
 "TurnQueue": "",
 "TurnQueueItem": "",
+"UIUtils": "",
 "WalkRange": "",
 "WalkRangeFactory": ""
 }

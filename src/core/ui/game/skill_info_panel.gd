@@ -15,12 +15,7 @@ func set_skill(skill: Skill, need_cooldown: bool, have_valid_targets: bool) \
 	_skill_name.text = skill.name
 	_no_valid_targets.visible = not have_valid_targets
 
-	while not _skill_button.pressed.get_connections().is_empty():
-		var connection_data: Dictionary \
-				= _skill_button.pressed.get_connections()[0]
-		var callable: Callable = connection_data.callable
-		_skill_button.pressed.disconnect(callable)
-
+	UIUtils.remove_signal_connections(_skill_button.pressed)
 	_skill_button.pressed.connect(
 		func(): icon_pressed.emit(skill, need_cooldown)
 	)
