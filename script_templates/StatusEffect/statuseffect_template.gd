@@ -2,13 +2,17 @@
 extends StatusEffect
 
 
-func added_to_actor(actor: Actor) -> void:
+func description() -> String:
+	return ""
+
+
+func added_to_actor(_actor: Actor) -> void:
 	pass
 
 
-func removing_from_actor(actor: Actor) -> void:
+func removing_from_actor(_actor: Actor) -> void:
 	pass
 
 
-func round_started(actor: Actor) -> void:
+func round_started(_actor: Actor) -> void:
 	pass

@@ -30,6 +30,12 @@ enum TimeType
 @export_range(1, 1, 1, "or_greater") var rounds := 1
 
 
+## A description string of the status effect.
+## Can be overriden.
+func description() -> String:
+	return ""
+
+
 ## When the status effect is first added to the actor.
 ## Can be overriden.
 func added_to_actor(_actor: Actor) -> void:

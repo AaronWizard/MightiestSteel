@@ -9,6 +9,10 @@ extends StatusEffect
 @export var tile_effect_scene: PackedScene
 
 
+func description() -> String:
+	return "poison"
+
+
 func round_started(actor: Actor) -> void:
 	var animations: Array[Callable] = []
 	if tile_effect_scene:

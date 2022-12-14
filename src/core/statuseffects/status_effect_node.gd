@@ -26,7 +26,7 @@ var actor: Actor:
 
 ## The number of rounds until the status effect ends. Only applies if time_type
 ## is StatusEffect.TimeType.ROUNDS.
-var rounds_left:
+var rounds_left: int:
 	get:
 		return _rounds_left
 
@@ -36,6 +36,24 @@ var can_dispell: bool:
 	get:
 		return (effect.time_type != StatusEffect.TimeType.PASSIVE) \
 				and (effect.time_type != StatusEffect.TimeType.POSITION)
+
+
+var time_left_description: String:
+	get:
+		var result := ""
+		match effect.time_type:
+			StatusEffect.TimeType.ROUNDS:
+				var round_plural := ""
+				if rounds_left > 1:
+					round_plural += "s"
+				result = "for %d more round%s" % [rounds_left, round_plural]
+			StatusEffect.TimeType.NEXT_TURN_START:
+				result = "until start of next turn"
+			StatusEffect.TimeType.NEXT_TURN_END:
+				result = "until end of next turn"
+			StatusEffect.TimeType.POSITION:
+				result = "at this position"
+		return result
 
 
 var _effect: StatusEffect
