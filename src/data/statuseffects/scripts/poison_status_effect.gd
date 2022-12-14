@@ -10,7 +10,8 @@ extends StatusEffect
 
 
 func get_description() -> String:
-	return "poison"
+	var percent := roundi(magnitude * 100)
+	return "%d%% poison damage" % percent
 
 
 func round_started(actor: Actor) -> void:

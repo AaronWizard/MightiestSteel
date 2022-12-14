@@ -11,7 +11,7 @@ func get_description() -> String:
 		result = "+"
 
 	var percent := roundi(modifier.mod_value * 100)
-	result += "%d " % percent
+	result += "%d%% " % percent
 
 	match modifier.mod_type:
 		Stats.ModifierTypes.MAX_STAMINA:
