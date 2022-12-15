@@ -69,11 +69,6 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/ui/game/actorstatspanel/actor_stats_panel_skill_button.gd"
 }, {
-"base": "HBoxContainer",
-"class": &"ActorStatsPanelStat",
-"language": &"GDScript",
-"path": "res://src/core/ui/game/actorstatspanel/actor_stats_panel_stat.gd"
-}, {
 "base": "Node2D",
 "class": &"ActorStatusEffectIcons",
 "language": &"GDScript",
@@ -307,7 +302,6 @@ _global_script_class_icons={
 "ActorStaminaBar": "",
 "ActorStatsPanel": "",
 "ActorStatsPanelSkillButton": "",
-"ActorStatsPanelStat": "",
 "ActorStatusEffectIcons": "",
 "AttackStandard": "",
 "AwaitGroup": "",

@@ -103,6 +103,12 @@ func get_stat(stat_type: StatTypes) -> int:
 	return result
 
 
+## Gets how much the given stat type is modified
+func get_stat_mod_value(stat_type: StatTypes) -> int:
+	return get_stat(stat_type) - _base_stats[stat_type]
+
+
+## Gets the stat modifier percentage value for the given modifier type
 func get_modifier(modifier_type: ModifierTypes) -> float:
 	var result := 0.0
 	for m in _modifiers:
@@ -111,11 +117,13 @@ func get_modifier(modifier_type: ModifierTypes) -> float:
 	return result
 
 
+## Adds a stat modifier
 func add_modifier(modifier: StatModifier) -> void:
 	_modifiers.append(modifier)
 	stat_mod_changed.emit(modifier.mod_type)
 
 
+## Removes a stat modifier
 func remove_modifier(modifier: StatModifier) -> void:
 	_modifiers.erase(modifier)
 	stat_mod_changed.emit(modifier.mod_type)
