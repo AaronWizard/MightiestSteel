@@ -9,8 +9,6 @@ offset_right = 87.0
 offset_bottom = 72.0
 script = ExtResource("1_are16")
 halign = 3
-scroll_horizontal = null
-scroll_vertical = null
 
 [node name="PanelContainer" parent="." index="0"]
 layout_mode = 3
@@ -23,7 +21,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/Header/HBoxContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Status Effects"
+text = "Status Effects:"
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/Header/HBoxContainer" index="1"]
 layout_mode = 2

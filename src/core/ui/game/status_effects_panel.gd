@@ -11,18 +11,31 @@ func set_actor(actor: Actor) -> void:
 	_clear()
 
 	if actor.has_cover:
-		_add_label("+%d%% defence from cover"
-				% roundi(Map.COVER_DEFENCE_BONUS * 100))
+		_add_line(
+			Constants.STAT_MODS[Stats.ModifierTypes.DEFENCE].up,
+			"+%d%% defence from cover" % roundi(Map.COVER_DEFENCE_BONUS * 100)
+		)
 
 	for s in actor.status_effect_nodes:
 		var text := "%s %s" \
 				% [s.effect.get_description(), s.time_left_description]
-		_add_label(text)
+		_add_line(s.effect.icon, text)
 
 
-func _add_label(text: String) -> void:
-	var line := Label.new()
-	line.text = text
+func _add_line(icon_texture: Texture2D, text: String) -> void:
+	var line := HBoxContainer.new()
+
+	if icon_texture:
+		var icon:= TextureRect.new()
+		icon.texture = icon_texture
+		icon.stretch_mode = TextureRect.STRETCH_KEEP
+		line.add_child(icon)
+
+	var description := Label.new()
+	description.text = text
+	description.size_flags_horizontal = Control.SizeFlags.SIZE_EXPAND_FILL
+	line.add_child(description)
+
 	_effects_list.add_child(line)
 
 
