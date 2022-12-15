@@ -34,3 +34,19 @@ func added_to_actor(actor: Actor) -> void:
 
 func removing_from_actor(actor: Actor) -> void:
 	actor.stats.remove_modifier(modifier)
+
+
+func _set_icon(_value: Texture2D) -> void:
+	pass
+
+
+func _get_icon() -> Texture2D:
+	var result: Texture2D = null
+
+	var icon_dict: Dictionary = Constants.STAT_MODS[modifier.mod_type]
+	if modifier.mod_value > 0:
+		result = icon_dict.up
+	else:
+		result = icon_dict.down
+
+	return result

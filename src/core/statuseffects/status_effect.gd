@@ -23,7 +23,11 @@ enum TimeType
 }
 
 
-@export var icon: Texture2D
+@export var icon: Texture2D:
+	get:
+		return _get_icon()
+	set(value):
+		_set_icon(value)
 
 
 ## Determines when and how status effect will end
@@ -31,6 +35,9 @@ enum TimeType
 ## The number of rounds until the status effect ends. Only applies if time_type
 ## is TimeType.ROUNDS.
 @export_range(1, 1, 1, "or_greater") var rounds := 1
+
+
+var _icon: Texture2D
 
 
 ## A description string of the status effect.
@@ -55,3 +62,13 @@ func removing_from_actor(_actor: Actor) -> void:
 ## Can be overriden.
 func round_started(_actor: Actor) -> void:
 	pass
+
+
+## Can be overriden.
+func _set_icon(value: Texture2D) -> void:
+	_icon = value
+
+
+## Can be overriden.
+func _get_icon() -> Texture2D:
+	return _icon
