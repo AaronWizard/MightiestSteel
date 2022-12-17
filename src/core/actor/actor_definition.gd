@@ -15,11 +15,17 @@ enum _Columns
 
 @export var attack_skill: Skill
 
-# Actors only have four skills
+# Actors only have up to four skills
 @export var skill0: Skill
 @export var skill1: Skill
 @export var skill2: Skill
 @export var skill3: Skill
+
+# Actors only have up to four passives
+@export var passive0: PassiveStatusEffect
+@export var passive1: PassiveStatusEffect
+@export var passive2: PassiveStatusEffect
+@export var passive3: PassiveStatusEffect
 
 
 var stamina: int:
@@ -65,6 +71,20 @@ var skills: Array[Skill]:
 			result.append(skill2)
 		if skill3:
 			result.append(skill3)
+		return result
+
+
+var passives: Array[PassiveStatusEffect]:
+	get:
+		var result: Array[PassiveStatusEffect] = []
+		if passive0:
+			result.append(passive0)
+		if passive1:
+			result.append(passive1)
+		if passive2:
+			result.append(passive2)
+		if passive3:
+			result.append(passive3)
 		return result
 
 

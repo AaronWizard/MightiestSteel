@@ -84,6 +84,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/await_group.gd"
 }, {
+"base": "Resource",
+"class": &"BaseStatusEffect",
+"language": &"GDScript",
+"path": "res://src/core/statuseffects/base_status_effect.gd"
+}, {
 "base": "AOE",
 "class": &"CellDistanceAOE",
 "language": &"GDScript",
@@ -148,6 +153,11 @@ _global_script_classes=[{
 "class": &"NextTurnState",
 "language": &"GDScript",
 "path": "res://src/core/game/state/states/next_turn_state.gd"
+}, {
+"base": "BaseStatusEffect",
+"class": &"PassiveStatusEffect",
+"language": &"GDScript",
+"path": "res://src/core/statuseffects/passive_status_effect.gd"
 }, {
 "base": "ActorControlState",
 "class": &"PlayerMoveState",
@@ -214,7 +224,7 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/actor/stats.gd"
 }, {
-"base": "Resource",
+"base": "BaseStatusEffect",
 "class": &"StatusEffect",
 "language": &"GDScript",
 "path": "res://src/core/statuseffects/status_effect.gd"
@@ -305,6 +315,7 @@ _global_script_class_icons={
 "ActorStatusEffectIcons": "",
 "AttackStandard": "",
 "AwaitGroup": "",
+"BaseStatusEffect": "",
 "CellDistanceAOE": "",
 "CellDistanceRange": "",
 "Constants": "",
@@ -318,6 +329,7 @@ _global_script_class_icons={
 "MaxSizeScrollPanel": "",
 "MoveRangeFinder": "",
 "NextTurnState": "",
+"PassiveStatusEffect": "",
 "PlayerMoveState": "",
 "PlayerTargetState": "",
 "PoisonStatusEffect": "",

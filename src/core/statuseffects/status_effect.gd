@@ -1,5 +1,7 @@
 class_name StatusEffect
-extends Resource
+extends BaseStatusEffect
+
+## Temporary status effect on actor.
 
 enum TimeType
 {
@@ -16,14 +18,12 @@ enum TimeType
 	POSITION,
 
 	## Lasts until removed by anything that can remove status effects
-	UNTIL_DISPELLED,
-
-	## Does not end
-	PASSIVE
+	UNTIL_DISPELLED
 }
 
 
 ## The effect's icon in an actor's status effects panel. Assumed to be 8x8.
+## Can be dynamic.
 @export var icon: Texture2D:
 	get:
 		return _get_icon()
@@ -41,7 +41,7 @@ enum TimeType
 var _icon: Texture2D
 
 
-## A description string of the status effect.
+## A description string of the status effect. Can be dynamic.
 ## Can be overriden.
 func get_description() -> String:
 	return ""
@@ -56,12 +56,6 @@ func added_to_actor(_actor: Actor) -> void:
 ## When the status effect is being removed from the actor.
 ## Can be overriden.
 func removing_from_actor(_actor: Actor) -> void:
-	pass
-
-
-## When a new round has started.
-## Can be overriden.
-func round_started(_actor: Actor) -> void:
 	pass
 
 

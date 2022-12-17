@@ -31,13 +31,6 @@ var rounds_left: int:
 		return _rounds_left
 
 
-## True if the status effect can be removed by skills.
-var can_dispell: bool:
-	get:
-		return (effect.time_type != StatusEffect.TimeType.PASSIVE) \
-				and (effect.time_type != StatusEffect.TimeType.POSITION)
-
-
 var time_left_description: String:
 	get:
 		var result := ""
