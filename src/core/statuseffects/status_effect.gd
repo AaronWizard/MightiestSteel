@@ -23,6 +23,7 @@ enum TimeType
 }
 
 
+## The effect's icon in an actor's status effects panel. Assumed to be 8x8.
 @export var icon: Texture2D:
 	get:
 		return _get_icon()
