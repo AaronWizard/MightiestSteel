@@ -47,7 +47,7 @@ func get_description() -> String:
 	return ""
 
 
-## When the status effect is being removed from the actor.
+## When the status effect is removed from the actor.
 ## Can be overriden.
 func removed_from_actor(_affected_actor: Actor) -> void:
 	pass
