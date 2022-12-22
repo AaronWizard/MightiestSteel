@@ -119,7 +119,10 @@ var map: Map:
 
 var has_cover: bool:
 	get:
-		return _map.actor_has_cover(self)
+		var result := false
+		if map:
+			result = map.actor_has_cover(self)
+		return result
 
 
 ## True if the actor is controlled by the player.
