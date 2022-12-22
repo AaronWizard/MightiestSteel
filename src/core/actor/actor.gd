@@ -252,6 +252,7 @@ var _is_animating := false
 @onready var _target_cursor: TileObject = $TargetCursor
 @onready var _other_target_cursor: TileObject = $OtherTargetCursor
 
+@onready var _passives: Node = $Passives
 @onready var _status_effects: Node = $StatusEffects
 
 
@@ -259,9 +260,14 @@ func _ready() -> void:
 	if not Engine.is_editor_hint():
 		if definition:
 			stats.init_from_definition(definition)
+
 			_attack_skill = definition.attack_skill
 			for s in definition.skills:
 				_skills[s] = s.cooldown
+
+			for p in definition.passives:
+				var passive_node := StatusEffectNode.new(p, self)
+				_passives.add_child(passive_node)
 
 		_target_cursor.cell_size = cell_size
 		_other_target_cursor.cell_size = cell_size
@@ -396,7 +402,7 @@ func take_damage(attack_power: int, source_cell: Vector2i) -> void:
 	stats.current_stamina -= damage
 
 
-## Adds a status effect
+## Adds a temporary status effect
 func add_status_effect(effect: StatusEffect) -> void:
 	var effect_node := TemporaryStatusEffectNode.new(effect, self)
 	_status_effects.add_child(effect_node)
