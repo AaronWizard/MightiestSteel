@@ -48,9 +48,8 @@ func _init(new_effect: StatusEffect, new_actor: Actor) -> void:
 	tree_exited.connect(func(): new_effect.removed_from_actor(new_actor))
 
 
-## When a new round has started
-func start_round() -> void:
-	effect.round_started(actor)
+func round_started() -> void:
+	super()
 
 	if _time_type == StatusEffect.TimeType.ROUNDS:
 		_rounds_left -= 1
@@ -58,19 +57,25 @@ func start_round() -> void:
 			finished.emit()
 
 
-## When the effect's actor has started its turn
-func start_turn() -> void:
-	if _time_type == StatusEffect.TimeType.NEXT_TURN_START:
+func actor_started_turn(starting_actor: Actor) -> void:
+	super(starting_actor)
+
+	if (actor == starting_actor) \
+			and (_time_type == StatusEffect.TimeType.NEXT_TURN_START):
 		finished.emit()
 
 
-## When the effect's actor has ended its turn
-func end_turn() -> void:
-	if _time_type == StatusEffect.TimeType.NEXT_TURN_END:
+func actor_moved(moved_actor: Actor) -> void:
+	super(moved_actor)
+
+	if (actor == moved_actor) \
+			and (_time_type == StatusEffect.TimeType.POSITION):
 		finished.emit()
 
 
-## When the effect's actor has moved
-func moved() -> void:
-	if _time_type == StatusEffect.TimeType.POSITION:
+func actor_ended_turn(ending_actor: Actor) -> void:
+	super(ending_actor)
+
+	if (actor == ending_actor) \
+			and (_time_type == StatusEffect.TimeType.NEXT_TURN_END):
 		finished.emit()

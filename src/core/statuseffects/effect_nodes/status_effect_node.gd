@@ -29,3 +29,19 @@ func _init(new_effect: BaseStatusEffect, new_actor: Actor) -> void:
 
 func _exit_tree() -> void:
 	_actor = null
+
+
+func round_started() -> void:
+	effect.round_started(actor)
+
+
+func actor_started_turn(starting_actor: Actor) -> void:
+	effect.actor_started_turn(actor, starting_actor)
+
+
+func actor_moved(moved_actor: Actor) -> void:
+	effect.actor_moved(actor, moved_actor)
+
+
+func actor_ended_turn(ending_actor: Actor) -> void:
+	effect.actor_ended_turn(actor, ending_actor)
