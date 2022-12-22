@@ -2,6 +2,9 @@ class_name StatModEffect
 extends StatusEffect
 
 
+## Temporary stat modifier
+
+
 @export var modifier: StatModifier
 
 

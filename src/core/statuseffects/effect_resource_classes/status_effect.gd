@@ -47,15 +47,9 @@ func get_description() -> String:
 	return ""
 
 
-## When the status effect is first added to the actor.
-## Can be overriden.
-func added_to_actor(_actor: Actor) -> void:
-	pass
-
-
 ## When the status effect is being removed from the actor.
 ## Can be overriden.
-func removing_from_actor(_actor: Actor) -> void:
+func removing_from_actor(_affected_actor: Actor) -> void:
 	pass
 
 

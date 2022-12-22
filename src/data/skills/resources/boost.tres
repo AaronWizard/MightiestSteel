@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/data/skills/scripts/aoe_skill.gd" id="2_r7ket"]
 [ext_resource type="PackedScene" uid="uid://bsxqsdfy36b07" path="res://src/data/effects/tile_heal.tscn" id="3_lam6s"]
 [ext_resource type="Script" path="res://src/core/skills/target_ranges/cell_distance_range.gd" id="3_uhvi0"]
-[ext_resource type="Script" path="res://src/core/statuseffects/stat_modifier.gd" id="3_v1iyi"]
+[ext_resource type="Script" path="res://src/core/statuseffects/effect_resource_classes/stat_modifier.gd" id="3_v1iyi"]
 [ext_resource type="Script" path="res://src/core/statuseffects/statuseffects/stat_mod_effect.gd" id="4_kn8wc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qp64t"]

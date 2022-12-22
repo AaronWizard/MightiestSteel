@@ -395,7 +395,7 @@ func take_damage(attack_power: int, source_cell: Vector2i) -> void:
 
 ## Adds a status effect
 func add_status_effect(effect: StatusEffect) -> void:
-	var effect_node := StatusEffectNode.new(effect, self)
+	var effect_node := TemporaryStatusEffectNode.new(effect, self)
 	_status_effects.add_child(effect_node)
 	effect_node.finished.connect(remove_status_effect_node.bind(effect_node))
 
@@ -403,8 +403,8 @@ func add_status_effect(effect: StatusEffect) -> void:
 	status_effect_added.emit()
 
 
-## Removes and frees a status effect node
-func remove_status_effect_node(effect_node: StatusEffectNode) -> void:
+## Removes and frees a temporary status effect node
+func remove_status_effect_node(effect_node: TemporaryStatusEffectNode) -> void:
 	assert(effect_node in _status_effects.get_children())
 	_status_effects.remove_child(effect_node)
 	effect_node.actor = null
