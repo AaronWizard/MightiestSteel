@@ -21,7 +21,7 @@ var rounds_left: int:
 var time_left_description: String:
 	get:
 		var result := ""
-		match effect.time_type:
+		match _time_type:
 			StatusEffect.TimeType.ROUNDS:
 				var round_plural := ""
 				if rounds_left > 1:
@@ -45,13 +45,14 @@ func _init(new_effect: StatusEffect, new_actor: Actor) -> void:
 	_time_type = new_effect.time_type
 	_rounds_left = new_effect.rounds
 
+	tree_exited.connect(func(): new_effect.removed_from_actor(new_actor))
 
 
 ## When a new round has started
 func start_round() -> void:
 	effect.round_started(actor)
 
-	if effect.time_type == StatusEffect.TimeType.ROUNDS:
+	if _time_type == StatusEffect.TimeType.ROUNDS:
 		_rounds_left -= 1
 		if _rounds_left == 0:
 			finished.emit()
@@ -59,17 +60,17 @@ func start_round() -> void:
 
 ## When the effect's actor has started its turn
 func start_turn() -> void:
-	if effect.time_type == StatusEffect.TimeType.NEXT_TURN_START:
+	if _time_type == StatusEffect.TimeType.NEXT_TURN_START:
 		finished.emit()
 
 
 ## When the effect's actor has ended its turn
 func end_turn() -> void:
-	if effect.time_type == StatusEffect.TimeType.NEXT_TURN_END:
+	if _time_type == StatusEffect.TimeType.NEXT_TURN_END:
 		finished.emit()
 
 
 ## When the effect's actor has moved
 func moved() -> void:
-	if effect.time_type == StatusEffect.TimeType.POSITION:
+	if _time_type == StatusEffect.TimeType.POSITION:
 		finished.emit()

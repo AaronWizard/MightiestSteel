@@ -6,13 +6,10 @@ extends Node
 ## Not meant to be used in the scene editor.
 
 
-var effect: StatusEffect:
+var effect: BaseStatusEffect:
 	get:
 		return _effect
 
-
-# ToDo: Determine whether or not status effect node needs an internal actor
-# reference vs having the actor passed in its methods.
 
 ## The actor the status effect is affecting
 var actor: Actor:
@@ -31,5 +28,4 @@ func _init(new_effect: BaseStatusEffect, new_actor: Actor) -> void:
 
 
 func _exit_tree() -> void:
-	effect.removing_from_actor(_actor)
 	_actor = null
