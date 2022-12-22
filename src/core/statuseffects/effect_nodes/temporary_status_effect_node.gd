@@ -43,6 +43,7 @@ var _rounds_left: int
 func _init(new_effect: StatusEffect, new_actor: Actor) -> void:
 	super(new_effect, new_actor)
 	_time_type = new_effect.time_type
+	_rounds_left = new_effect.rounds
 
 
 
