@@ -8,7 +8,7 @@ extends GameState
 
 
 func start(_data: Dictionary) -> void:
-	_game.advance_to_next_turn()
+	await _game.advance_to_next_turn()
 
 	if _current_actor.is_player_controlled:
 		request_state_change.emit(player_state)

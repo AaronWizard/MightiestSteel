@@ -6,6 +6,8 @@ extends Node
 ## Loads and runs a battle map. Manages turns, keeps track of the current
 ## actor, and holds the battle's UI.
 
+@export var status_effect_events: StatusEffectEvents
+
 
 ## The currently loaded map
 var current_map: Map:
@@ -54,7 +56,7 @@ var _current_walk_range: WalkRange
 
 ## Loads the given map scene and starts a battle.
 func load_map(new_map_scene: PackedScene) -> void:
-	_end_current_actor_turn()
+	_end_current_actor_turn(true)
 
 	if _current_map != null:
 		_unload_current_map()
@@ -108,17 +110,19 @@ func get_threat_range(actor: Actor) -> Dictionary:
 
 
 func advance_to_next_turn() -> void:
-	_end_current_actor_turn()
+	await _end_current_actor_turn(false)
 	var current_actor_name := _turn_manager.advance_to_next_actor()
 	_current_actor = _current_map.get_actor_by_node_name(current_actor_name)
 	if _turn_manager.current_turn_is_round_start:
 		_current_map.start_round(_turn_manager.is_first_round)
-	_current_actor.start_turn()
+		await status_effect_events.round_started()
 
 	ui.turn_queue.turn_index = _turn_manager.turn_index
 	camera.position_smoothing_enabled = true
 	_current_actor.remote_transform.remote_path = camera.get_path()
 	ui.start_actor_turn(_current_actor)
+
+	await status_effect_events.actor_started_turn(_current_actor)
 
 
 func _unload_current_map() -> void:
@@ -149,11 +153,12 @@ func _start_battle() -> void:
 	_state_machine.change_state(_next_turn_state_name)
 
 
-func _end_current_actor_turn() -> void:
+func _end_current_actor_turn(loading_new_map: bool) -> void:
 	if _current_actor:
-		_current_actor.end_turn()
 		_current_actor.remote_transform.remote_path = NodePath()
 		_current_actor.target_visible = false
+		if not loading_new_map:
+			await status_effect_events.actor_ended_turn(_current_actor)
 	_current_actor = null
 	_current_walk_range = null
 	map_highlights.clear_all()

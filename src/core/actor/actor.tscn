@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://d2tmse3fwy84n"]
+[gd_scene load_steps=21 format=3 uid="uid://d2tmse3fwy84n"]
 
 [ext_resource type="PackedScene" uid="uid://bo1e1gvqkrmql" path="res://src/core/tiles/tile_object.tscn" id="1_svfmf"]
 [ext_resource type="Script" path="res://src/core/actor/actor.gd" id="2_bugic"]
+[ext_resource type="Resource" uid="uid://b53tsx1etcfq6" path="res://src/core/statuseffects/status_effect_events.tres" id="3_2cko5"]
 [ext_resource type="Texture2D" uid="uid://bkmm0fi6e46dy" path="res://assets/graphics/actors/hero.png" id="3_tt4ao"]
 [ext_resource type="Shader" path="res://src/core/shaders/disolve.gdshader" id="4_6fbyk"]
 [ext_resource type="Script" path="res://src/core/actor/stats.gd" id="4_anapf"]
@@ -181,6 +182,7 @@ _data = {
 
 [node name="Actor" instance=ExtResource("1_svfmf")]
 script = ExtResource("2_bugic")
+status_effect_events = ExtResource("3_2cko5")
 sprite_texture = ExtResource("3_tt4ao")
 actor_name = "Actor"
 faction = 0

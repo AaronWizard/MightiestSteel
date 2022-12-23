@@ -27,6 +27,7 @@ signal died
 
 const FACTION_PLAYER := 0
 
+@export var status_effect_events: StatusEffectEvents
 
 @export var sprite_texture: Texture2D:
 	get:
@@ -267,7 +268,8 @@ func _ready() -> void:
 				_skills[s] = s.cooldown
 
 			for p in definition.passives:
-				var passive_node := PassiveStatusEffectNode.new(p, self)
+				var passive_node := PassiveStatusEffectNode.new(
+						p, self, status_effect_events)
 				_passives.add_child(passive_node)
 
 		_target_cursor.cell_size = cell_size
@@ -369,22 +371,8 @@ func get_skill_cooldown(skill: Skill) -> int:
 
 ## Actor updates to run when a new round starts
 func start_round(is_first_round: bool) -> void:
-	for s in status_effect_nodes:
-		s.start_round()
 	if not is_first_round:
 		cooldown_skills()
-
-
-## Updates to run when an actor starts its turn
-func start_turn() -> void:
-	for s in status_effect_nodes:
-		s.start_turn()
-
-
-## Updates to run when an actor ends its turn
-func end_turn() -> void:
-	for s in status_effect_nodes:
-		s.end_turn()
 
 
 ## Predict how much damage the actor will take.
@@ -405,7 +393,7 @@ func take_damage(attack_power: int, source_cell: Vector2i) -> void:
 
 ## Adds a status effect
 func add_status_effect(effect: StatusEffect) -> void:
-	var effect_node := StatusEffectNode.new(effect, self)
+	var effect_node := StatusEffectNode.new(effect, self, status_effect_events)
 	_status_effects.add_child(effect_node)
 	effect_node.finished.connect(remove_status_effect_node.bind(effect_node))
 
@@ -457,14 +445,11 @@ func _set_offset() -> void:
 
 
 func _move_done(old_origin_cell: Vector2i) -> void:
-	for s in status_effect_nodes:
-		s.moved()
-
 	if _map:
+		status_effect_events.actor_moved(self)
 		_status_effect_icons.update_icons(self)
-
-	if _report_moves:
-		moved.emit(old_origin_cell)
+		if _report_moves:
+			moved.emit(old_origin_cell)
 
 
 func _on_stats_stamina_changed(old_stamina: int, new_stamina: int) -> void:
