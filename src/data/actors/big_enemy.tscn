@@ -23,8 +23,8 @@ noise = SubResource("FastNoiseLite_bku8o")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_po18t"]
 resource_local_to_scene = true
 shader = ExtResource("4_62717")
-shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_hsrq7")
 shader_parameter/dissolve_value = 1.0
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_hsrq7")
 
 [node name="BigEnemy" instance=ExtResource("1_2gkrj")]
 sprite_texture = ExtResource("2_k5abh")
@@ -43,8 +43,8 @@ texture = ExtResource("2_k5abh")
 [node name="ActorStaminaBar" parent="Center/Offset" index="2"]
 position = Vector2(0, -24)
 
-[node name="TargetCursor" parent="." index="3"]
+[node name="TargetCursor" parent="." index="5"]
 cell_size = 2
 
-[node name="OtherTargetCursor" parent="." index="4"]
+[node name="OtherTargetCursor" parent="." index="6"]
 cell_size = 2
