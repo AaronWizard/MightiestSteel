@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b53tsx1etcfq6"]
+
+[ext_resource type="Script" path="res://src/core/statuseffects/status_effect_events.gd" id="1_4k5cm"]
+
+[resource]
+script = ExtResource("1_4k5cm")

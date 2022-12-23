@@ -25,11 +25,12 @@ var _effect: StatusEffect
 var _rounds_left: int
 
 
-func _init(new_effect: StatusEffect, new_actor: Actor) -> void:
+func _init(new_effect: StatusEffect, new_actor: Actor,
+		events: StatusEffectEvents) -> void:
 	_effect = new_effect
 	_rounds_left = _effect.rounds
 	tree_exited.connect(func(): _effect.removed_from_actor(new_actor))
-	super(new_actor)
+	super(new_actor, events)
 
 
 func _get_effect() -> BaseStatusEffect:
@@ -37,7 +38,7 @@ func _get_effect() -> BaseStatusEffect:
 
 
 func round_started() -> void:
-	super()
+	await super()
 	if effect.time_type == StatusEffect.TimeType.ROUNDS:
 		_rounds_left -= 1
 		if _rounds_left == 0:
@@ -45,21 +46,21 @@ func round_started() -> void:
 
 
 func actor_started_turn(starting_actor: Actor) -> void:
-	super(starting_actor)
+	await super(starting_actor)
 	if (actor == starting_actor) \
 			and (effect.time_type == StatusEffect.TimeType.NEXT_TURN_START):
 		finished.emit()
 
 
 func actor_moved(moved_actor: Actor) -> void:
-	super(moved_actor)
+	super(moved_actor) # Movement effects are not animated
 	if (actor == moved_actor) \
 			and (effect.time_type == StatusEffect.TimeType.POSITION):
 		finished.emit()
 
 
 func actor_ended_turn(ending_actor: Actor) -> void:
-	super(ending_actor)
+	await super(ending_actor)
 	if (actor == ending_actor) \
 			and (effect.time_type == StatusEffect.TimeType.NEXT_TURN_END):
 		finished.emit()

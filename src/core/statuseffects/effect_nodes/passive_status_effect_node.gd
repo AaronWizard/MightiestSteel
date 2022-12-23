@@ -14,9 +14,10 @@ var effect: PassiveStatusEffect:
 var _effect: PassiveStatusEffect
 
 
-func _init(new_effect: PassiveStatusEffect, new_actor: Actor) -> void:
+func _init(new_effect: PassiveStatusEffect, new_actor: Actor,
+		events: StatusEffectEvents) -> void:
 	_effect = new_effect
-	super(new_actor)
+	super(new_actor, events)
 
 
 func _get_effect() -> BaseStatusEffect:

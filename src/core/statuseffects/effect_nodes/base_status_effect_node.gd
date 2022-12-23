@@ -15,15 +15,20 @@ var actor: Actor:
 
 
 var _actor: Actor
+var _events: StatusEffectEvents
 
 
-func _init(new_actor: Actor) -> void:
+func _init(new_actor: Actor, events: StatusEffectEvents) -> void:
 	_actor = new_actor
+	_events = events
 	_get_effect().added_to_actor(_actor)
+
+	_events.add_effect_node(self)
 
 
 func _exit_tree() -> void:
 	_actor = null
+	_events.remove_effect_node(self)
 
 
 func _get_effect() -> BaseStatusEffect:
@@ -32,16 +37,20 @@ func _get_effect() -> BaseStatusEffect:
 
 
 func round_started() -> void:
-	_get_effect().round_started(actor)
+	@warning_ignore(redundant_await)
+	await _get_effect().round_started(actor)
 
 
 func actor_started_turn(starting_actor: Actor) -> void:
-	_get_effect().actor_started_turn(actor, starting_actor)
+	@warning_ignore(redundant_await)
+	await _get_effect().actor_started_turn(actor, starting_actor)
 
 
 func actor_moved(moved_actor: Actor) -> void:
+	# Movement effects are not animated
 	_get_effect().actor_moved(actor, moved_actor)
 
 
 func actor_ended_turn(ending_actor: Actor) -> void:
-	_get_effect().actor_ended_turn(actor, ending_actor)
+	@warning_ignore(redundant_await)
+	await _get_effect().actor_ended_turn(actor, ending_actor)
