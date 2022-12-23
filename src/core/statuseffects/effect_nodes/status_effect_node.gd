@@ -1,47 +1,65 @@
 class_name StatusEffectNode
-extends Node
+extends BaseStatusEffectNode
 
-## A node containing a status effect applied to an actor.
+## A node for a temporary status effect.
 ##
 ## Not meant to be used in the scene editor.
 
 
-var effect: BaseStatusEffect:
+signal finished
+
+
+var effect: StatusEffect:
 	get:
 		return _effect
 
 
-## The actor the status effect is affecting
-var actor: Actor:
+## The number of rounds until the status effect ends. Only applies if time_type
+## is StatusEffect.TimeType.ROUNDS.
+var rounds_left: int:
 	get:
-		return _actor
+		return _rounds_left
 
 
-var _effect: BaseStatusEffect
-var _actor: Actor
+var _effect: StatusEffect
+var _rounds_left: int
 
 
-func _init(new_effect: BaseStatusEffect, new_actor: Actor) -> void:
+func _init(new_effect: StatusEffect, new_actor: Actor) -> void:
 	_effect = new_effect
-	_actor = new_actor
-	effect.added_to_actor(_actor)
+	_rounds_left = _effect.rounds
+	tree_exited.connect(func(): _effect.removed_from_actor(new_actor))
+	super(new_actor)
 
 
-func _exit_tree() -> void:
-	_actor = null
+func _get_effect() -> BaseStatusEffect:
+	return _effect
 
 
 func round_started() -> void:
-	effect.round_started(actor)
+	super()
+	if effect.time_type == StatusEffect.TimeType.ROUNDS:
+		_rounds_left -= 1
+		if _rounds_left == 0:
+			finished.emit()
 
 
 func actor_started_turn(starting_actor: Actor) -> void:
-	effect.actor_started_turn(actor, starting_actor)
+	super(starting_actor)
+	if (actor == starting_actor) \
+			and (effect.time_type == StatusEffect.TimeType.NEXT_TURN_START):
+		finished.emit()
 
 
 func actor_moved(moved_actor: Actor) -> void:
-	effect.actor_moved(actor, moved_actor)
+	super(moved_actor)
+	if (actor == moved_actor) \
+			and (effect.time_type == StatusEffect.TimeType.POSITION):
+		finished.emit()
 
 
 func actor_ended_turn(ending_actor: Actor) -> void:
-	effect.actor_ended_turn(actor, ending_actor)
+	super(ending_actor)
+	if (actor == ending_actor) \
+			and (effect.time_type == StatusEffect.TimeType.NEXT_TURN_END):
+		finished.emit()

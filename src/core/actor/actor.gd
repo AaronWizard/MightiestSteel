@@ -91,7 +91,8 @@ var stats: Stats:
 		return $Stats
 
 
-## The actor's current status effect nodes
+## The actor's current status effect nodes. Status effect nodes keep track of
+## the effect and the number of rounds left for it if applicable.
 var status_effect_nodes: Array[StatusEffectNode]:
 	get:
 		var result: Array[StatusEffectNode] = []
@@ -266,7 +267,7 @@ func _ready() -> void:
 				_skills[s] = s.cooldown
 
 			for p in definition.passives:
-				var passive_node := StatusEffectNode.new(p, self)
+				var passive_node := PassiveStatusEffectNode.new(p, self)
 				_passives.add_child(passive_node)
 
 		_target_cursor.cell_size = cell_size
@@ -402,9 +403,9 @@ func take_damage(attack_power: int, source_cell: Vector2i) -> void:
 	stats.current_stamina -= damage
 
 
-## Adds a temporary status effect
+## Adds a status effect
 func add_status_effect(effect: StatusEffect) -> void:
-	var effect_node := TemporaryStatusEffectNode.new(effect, self)
+	var effect_node := StatusEffectNode.new(effect, self)
 	_status_effects.add_child(effect_node)
 	effect_node.finished.connect(remove_status_effect_node.bind(effect_node))
 
@@ -412,8 +413,8 @@ func add_status_effect(effect: StatusEffect) -> void:
 	status_effect_added.emit()
 
 
-## Removes and frees a temporary status effect node
-func remove_status_effect_node(effect_node: TemporaryStatusEffectNode) -> void:
+## Removes and frees a status effect node
+func remove_status_effect_node(effect_node: StatusEffectNode) -> void:
 	assert(effect_node in _status_effects.get_children())
 	_status_effects.remove_child(effect_node)
 	effect_node.actor = null

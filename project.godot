@@ -89,6 +89,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/statuseffects/effect_resource_classes/base_status_effect.gd"
 }, {
+"base": "Node",
+"class": &"BaseStatusEffectNode",
+"language": &"GDScript",
+"path": "res://src/core/statuseffects/effect_nodes/base_status_effect_node.gd"
+}, {
 "base": "AOE",
 "class": &"CellDistanceAOE",
 "language": &"GDScript",
@@ -158,6 +163,11 @@ _global_script_classes=[{
 "class": &"PassiveStatusEffect",
 "language": &"GDScript",
 "path": "res://src/core/statuseffects/effect_resource_classes/passive_status_effect.gd"
+}, {
+"base": "BaseStatusEffectNode",
+"class": &"PassiveStatusEffectNode",
+"language": &"GDScript",
+"path": "res://src/core/statuseffects/effect_nodes/passive_status_effect_node.gd"
 }, {
 "base": "ActorControlState",
 "class": &"PlayerMoveState",
@@ -234,7 +244,7 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://src/core/statuseffects/status_effect_events.gd"
 }, {
-"base": "Node",
+"base": "BaseStatusEffectNode",
 "class": &"StatusEffectNode",
 "language": &"GDScript",
 "path": "res://src/core/statuseffects/effect_nodes/status_effect_node.gd"
@@ -253,11 +263,6 @@ _global_script_classes=[{
 "class": &"TargetRangeData",
 "language": &"GDScript",
 "path": "res://src/core/skills/target_range_data.gd"
-}, {
-"base": "StatusEffectNode",
-"class": &"TemporaryStatusEffectNode",
-"language": &"GDScript",
-"path": "res://src/core/statuseffects/effect_nodes/temporary_status_effect_node.gd"
 }, {
 "base": "RefCounted",
 "class": &"TerrainData",
@@ -326,6 +331,7 @@ _global_script_class_icons={
 "AttackStandard": "",
 "AwaitGroup": "",
 "BaseStatusEffect": "",
+"BaseStatusEffectNode": "",
 "CellDistanceAOE": "",
 "CellDistanceRange": "",
 "Constants": "",
@@ -340,6 +346,7 @@ _global_script_class_icons={
 "MoveRangeFinder": "",
 "NextTurnState": "",
 "PassiveStatusEffect": "",
+"PassiveStatusEffectNode": "",
 "PlayerMoveState": "",
 "PlayerTargetState": "",
 "PoisonStatusEffect": "",
@@ -359,7 +366,6 @@ _global_script_class_icons={
 "StatusEffectsPanel": "",
 "TargetRange": "",
 "TargetRangeData": "",
-"TemporaryStatusEffectNode": "",
 "TerrainData": "",
 "TileEffect": "",
 "TileGeometry": "",
