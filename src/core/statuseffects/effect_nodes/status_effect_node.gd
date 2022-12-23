@@ -21,6 +21,24 @@ var rounds_left: int:
 		return _rounds_left
 
 
+var time_left_description: String:
+	get:
+		var result := ""
+		match effect.time_type:
+			StatusEffect.TimeType.ROUNDS:
+				var round_plural := ""
+				if rounds_left > 1:
+					round_plural += "s"
+				result = "for %d more round%s" % [rounds_left, round_plural]
+			StatusEffect.TimeType.NEXT_TURN_START:
+				result = "until start of next turn"
+			StatusEffect.TimeType.NEXT_TURN_END:
+				result = "until end of next turn"
+			StatusEffect.TimeType.POSITION:
+				result = "at this position"
+		return result
+
+
 var _effect: StatusEffect
 var _rounds_left: int
 
