@@ -16,17 +16,18 @@ func remove_effect_node(effect_node: BaseStatusEffectNode) -> void:
 
 
 func round_started() -> void:
-	for n in _effect_nodes:
+	# Use duplicate of _effect_nodes to handle effects that end this round
+	for n in _effect_nodes.duplicate():
 		await n.round_started()
 
 
 func actor_started_turn(actor: Actor) -> void:
-	for n in _effect_nodes:
+	for n in _effect_nodes.duplicate():
 		await n.actor_started_turn(actor)
 
 
 func actor_moved(actor: Actor) -> void:
-	for n in _effect_nodes:
+	for n in _effect_nodes.duplicate():
 		# Since player actors can move freely within their movement range before
 		# commiting an action, status effects shouldn't do animations in
 		# response to movement.
@@ -34,5 +35,5 @@ func actor_moved(actor: Actor) -> void:
 
 
 func actor_ended_turn(actor: Actor) -> void:
-	for n in _effect_nodes:
+	for n in _effect_nodes.duplicate():
 		await n.actor_ended_turn(actor)

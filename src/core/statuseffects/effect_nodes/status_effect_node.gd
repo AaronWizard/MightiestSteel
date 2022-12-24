@@ -47,8 +47,13 @@ func _init(new_effect: StatusEffect, new_actor: Actor,
 		events: StatusEffectEvents) -> void:
 	_effect = new_effect
 	_rounds_left = _effect.rounds
-	tree_exited.connect(func(): _effect.removed_from_actor(new_actor))
+	tree_exited.connect(func(): )
 	super(new_actor, events)
+
+
+func _exit_tree() -> void:
+	_effect.removed_from_actor(actor)
+	super()
 
 
 func _get_effect() -> BaseStatusEffect:
