@@ -4,11 +4,11 @@ class_name MoveRangeFinder
 static func find_move_range(actor: Actor, map: Map) -> Array[Vector2i]:
 	var result := {}
 
-	var costs := { actor.origin_cell: 0 }
+	var move_costs := { actor.origin_cell: 0 }
 	var queue: Array[Vector2i] = [ actor.origin_cell ]
 
 	while not queue.is_empty():
-		var current_cell_index := _next_cell_index(queue, costs)
+		var current_cell_index := _next_cell_index(queue, move_costs)
 		var current_cell := queue[current_cell_index]
 		queue.remove_at(current_cell_index)
 
@@ -17,25 +17,27 @@ static func find_move_range(actor: Actor, map: Map) -> Array[Vector2i]:
 		var adjacent := _adjacent_cells(current_cell, actor, map)
 		for adj_cell in adjacent:
 			var adj_cost := map.get_cell_move_cost(adj_cell, actor)
-			adj_cost += costs[current_cell]
+			adj_cost += move_costs[current_cell]
 
-			if adj_cost <= actor.stats.move and ( \
-					not costs.has(adj_cell) or (adj_cost < costs[adj_cell]) ):
-				costs[adj_cell] = adj_cost
+			if (adj_cost <= actor.stats.move) \
+					and ( not move_costs.has(adj_cell) \
+					or (adj_cost < move_costs[adj_cell]) ):
+				move_costs[adj_cell] = adj_cost
 				if queue.find(adj_cell) == -1:
 					queue.append(adj_cell)
 
 	return result.keys()
 
 
-static func _next_cell_index(queue: Array[Vector2i], costs: Dictionary) -> int:
+static func _next_cell_index(queue: Array[Vector2i], move_costs: Dictionary) \
+		-> int:
 	var result := 0
 	var result_cell := queue[result]
-	var result_cost: int = costs[result_cell]
+	var result_cost: int = move_costs[result_cell]
 
 	for i in range(1, queue.size()):
 		var other_cell := queue[i]
-		var other_cost: int = costs[other_cell]
+		var other_cost: int = move_costs[other_cell]
 
 		if other_cost < result_cost:
 			result = i
