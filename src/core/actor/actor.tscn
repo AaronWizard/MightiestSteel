@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d2tmse3fwy84n"]
+[gd_scene load_steps=23 format=3 uid="uid://d2tmse3fwy84n"]
 
 [ext_resource type="PackedScene" uid="uid://bo1e1gvqkrmql" path="res://src/core/tiles/tile_object.tscn" id="1_svfmf"]
 [ext_resource type="Script" path="res://src/core/actor/actor.gd" id="2_bugic"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://sog7m5dsfeo1" path="res://src/core/tiles/target_cursor.tscn" id="5_iao12"]
 [ext_resource type="Script" path="res://src/core/ui/game/map/actor_status_effect_icons.gd" id="6_ovas0"]
 [ext_resource type="PackedScene" uid="uid://ct42d77xpks3f" path="res://src/core/tiles/other_target_cursor.tscn" id="9_rtcm0"]
+[ext_resource type="Script" path="res://src/core/statuseffects/effect_nodes/passive_status_effect_node.gd" id="10_buq4t"]
+[ext_resource type="Script" path="res://src/core/statuseffects/effect_nodes/status_effect_node.gd" id="11_p3pd8"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_bku8o"]
 
@@ -222,9 +224,13 @@ libraries = {
 [node name="Stats" type="Node" parent="." index="2"]
 script = ExtResource("4_anapf")
 
-[node name="Passives" type="Node" parent="." index="3"]
+[node name="PassiveStatusEffectNode" type="Node" parent="." index="3"]
+script = ExtResource("10_buq4t")
+status_effect_events = ExtResource("3_2cko5")
 
-[node name="StatusEffects" type="Node" parent="." index="4"]
+[node name="StatusEffectNode" type="Node" parent="." index="4"]
+script = ExtResource("11_p3pd8")
+status_effect_events = ExtResource("3_2cko5")
 
 [node name="TargetCursor" parent="." index="5" instance=ExtResource("5_iao12")]
 visible = false
@@ -237,3 +243,4 @@ position = Vector2(0, 0)
 origin_cell = Vector2i(0, -1)
 
 [connection signal="stamina_changed" from="Stats" to="." method="_on_stats_stamina_changed"]
+[connection signal="status_effect_finished" from="StatusEffectNode" to="." method="_on_status_effect_node_status_effect_finished"]

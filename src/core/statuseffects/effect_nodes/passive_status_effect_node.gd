@@ -1,24 +1,15 @@
 class_name PassiveStatusEffectNode
 extends BaseStatusEffectNode
 
-## A node for a passive status effect.
-##
-## Not meant to be used in the scene editor.
+## An actor's passive status effects.
 
 
-var effect: PassiveStatusEffect:
-	get:
-		return _effect
+var effects: Array[PassiveStatusEffect] = []:
+	set(value):
+		effects = value
+		for e in effects:
+			e.added_to_actor(actor)
 
 
-var _effect: PassiveStatusEffect
-
-
-func _init(new_effect: PassiveStatusEffect, new_actor: Actor,
-		events: StatusEffectEvents) -> void:
-	_effect = new_effect
-	super(new_actor, events)
-
-
-func _get_effect() -> BaseStatusEffect:
-	return _effect
+func _get_effects() -> Array[BaseStatusEffect]:
+	return effects

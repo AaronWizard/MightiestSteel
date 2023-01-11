@@ -92,15 +92,10 @@ var stats: Stats:
 		return $Stats
 
 
-## The actor's current status effect nodes. Status effect nodes keep track of
-## the effect and the number of rounds left for it if applicable.
-var status_effect_nodes: Array[StatusEffectNode]:
+## The actor's current status effects and the rounds left for each.
+var status_effect_nodes: Array[StatusEffectNode.EffectRoundPair]:
 	get:
-		var result: Array[StatusEffectNode] = []
-		if _status_effects:
-			for s in _status_effects.get_children():
-				result.append(s)
-		return result
+		return _status_effects.effects
 
 
 ## The map the actor is currently on.
@@ -254,8 +249,8 @@ var _is_animating := false
 @onready var _target_cursor: TileObject = $TargetCursor
 @onready var _other_target_cursor: TileObject = $OtherTargetCursor
 
-@onready var _passives: Node = $Passives
-@onready var _status_effects: Node = $StatusEffects
+@onready var _passives: PassiveStatusEffectNode = $PassiveStatusEffectNode
+@onready var _status_effects: StatusEffectNode = $StatusEffectNode
 
 
 func _ready() -> void:
@@ -267,10 +262,7 @@ func _ready() -> void:
 			for s in definition.skills:
 				_skills[s] = s.cooldown
 
-			for p in definition.passives:
-				var passive_node := PassiveStatusEffectNode.new(
-						p, self, status_effect_events)
-				_passives.add_child(passive_node)
+			_passives.effects = definition.passives
 
 		_target_cursor.cell_size = cell_size
 		_other_target_cursor.cell_size = cell_size
@@ -393,23 +385,10 @@ func take_damage(attack_power: int, source_cell: Vector2i) -> void:
 
 ## Adds a status effect
 func add_status_effect(effect: StatusEffect) -> void:
-	var effect_node := StatusEffectNode.new(effect, self, status_effect_events)
-	_status_effects.add_child(effect_node)
-	effect_node.finished.connect(remove_status_effect_node.bind(effect_node))
+	_status_effects.add_effect(effect)
 
 	_status_effect_icons.update_icons(self)
 	status_effect_added.emit()
-
-
-## Removes and frees a status effect node
-func remove_status_effect_node(effect_node: StatusEffectNode) -> void:
-	assert(effect_node in _status_effects.get_children())
-	_status_effects.remove_child(effect_node)
-	effect_node.actor = null
-	effect_node.queue_free()
-
-	_status_effect_icons.update_icons(self)
-	status_effect_removed.emit()
 
 
 func _get_origin_cell() -> Vector2i:
@@ -472,3 +451,9 @@ func _on_stats_stamina_changed(old_stamina: int, new_stamina: int) -> void:
 
 	_is_animating = false
 	animation_finished.emit()
+
+
+func _on_status_effect_node_status_effect_finished(
+		_status_effect: StatusEffect) -> void:
+	_status_effect_icons.update_icons(self)
+	status_effect_removed.emit()
