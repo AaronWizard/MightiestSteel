@@ -45,12 +45,6 @@ var effects: Array[EffectRoundPair]:
 var _effects: Array[EffectRoundPair] = []
 
 
-func _exit_tree() -> void:
-	for e in _effects:
-		e.effect.removed_from_actor(actor)
-	super()
-
-
 func _get_effects() -> Array[BaseStatusEffect]:
 	var result: Array[BaseStatusEffect] = []
 	for e in _effects:
@@ -108,4 +102,5 @@ func _processed_finished_effects(finished_effects: Array[EffectRoundPair]) \
 		-> void:
 	for e in finished_effects:
 		_effects.erase(e)
+		e.effect.removed_from_actor(actor)
 		status_effect_finished.emit(e.effect)
