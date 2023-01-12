@@ -65,19 +65,6 @@ func get_terrain_data(cell: Vector2i) -> TerrainData:
 	return result
 
 
-## Gets how many movement points an actor must spend to enter this cell
-func get_cell_move_cost(cell: Vector2i, actor: Actor) -> int:
-	var result := _MOVE_COST_CLEAR
-
-	for covered_cell in actor.get_covered_cells_at_cell(cell):
-		var terrain_data := get_terrain_data(covered_cell)
-		if terrain_data and terrain_data.slows_walk:
-			result = _MOVE_COST_ROUGH
-			break
-
-	return result
-
-
 ## Adds an effect
 func add_effect(effect: Node2D) -> void:
 	_effects.add_child(effect)
@@ -141,8 +128,7 @@ func actor_can_enter_cell(actor: Actor, cell: Vector2i,
 		ignore_allied_actors: bool = false) -> bool:
 	var result := true
 
-	var covered_cells := actor.get_covered_cells_at_cell(cell)
-	for covered_cell in covered_cells:
+	for covered_cell in actor.get_covered_cells_at_cell(cell):
 		if not _ground.get_used_rect().has_point(covered_cell):
 			result = false
 			break
@@ -161,6 +147,29 @@ func actor_can_enter_cell(actor: Actor, cell: Vector2i,
 		if is_blocking_actor:
 			result = false
 			break
+
+	return result
+
+
+## Gets how many movement points an actor must spend to enter this cell
+func get_cell_move_cost(cell: Vector2i, actor: Actor) -> int:
+	var result := _MOVE_COST_CLEAR
+
+	for covered_cell in actor.get_covered_cells_at_cell(cell):
+		var terrain_data := get_terrain_data(covered_cell)
+		if terrain_data and terrain_data.slows_walk:
+			result = _MOVE_COST_ROUGH
+			break
+
+	return result
+
+
+## Checks if actor is stopped at cell while moving
+func actor_stopped_by_cell(cell: Vector2i, actor: Actor) -> bool:
+	var result := false
+
+	for covered_cell in actor.get_covered_cells_at_cell(cell):
+		pass
 
 	return result
 
