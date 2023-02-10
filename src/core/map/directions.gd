@@ -17,7 +17,9 @@ const _VALUES := {
 
 
 static func get_all_vectors() -> Array[Vector2i]:
-	return _VALUES.values()
+	var result: Array[Vector2i] = []
+	result.assign(_VALUES.values())
+	return result
 
 
 static func get_vector(direction: Direction) -> Vector2i:

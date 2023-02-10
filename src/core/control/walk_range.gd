@@ -9,7 +9,9 @@ var origin_cell: Vector2i:
 ## Cells the actor can occupy within its move range.
 var move_range: Array[Vector2i]:
 	get:
-		return _true_move_range.keys()
+		var result: Array[Vector2i] = []
+		result.assign(_true_move_range.keys())
+		return result
 
 
 ## Cells covered by the actor within its move range.
@@ -17,7 +19,9 @@ var move_range: Array[Vector2i]:
 ## it is larger than one cell.
 var visible_move_range: Array[Vector2i]:
 	get:
-		return _visible_move_range.keys()
+		var result: Array[Vector2i] = []
+		result.assign(_visible_move_range.keys())
+		return result
 
 
 var _origin_cell: Vector2i
@@ -68,7 +72,7 @@ func get_move_path(start: Vector2i, end: Vector2i,
 
 			var new_path := _walk_grid.get_point_path(
 					start_point, end_point)
-			result = Array(new_path)
+			result.assign(new_path)
 			result.pop_front() # Remove starting cell
 			assert(result.size() > 0)
 

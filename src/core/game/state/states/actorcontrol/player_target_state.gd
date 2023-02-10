@@ -65,7 +65,7 @@ func _set_target(cell: Vector2i) -> void:
 func _show_predicted_damage() -> void:
 	_clear_predicted_damage()
 	var target_info := _target_data.get_target_info(_current_target)
-	_predicted_damage_actors = target_info.predicted_damage.keys()
+	_predicted_damage_actors.assign(target_info.predicted_damage.keys())
 	for a in _predicted_damage_actors:
 		a.stamina_bar_modifier = -target_info.predicted_damage[a]
 

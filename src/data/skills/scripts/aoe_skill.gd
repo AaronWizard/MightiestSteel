@@ -76,7 +76,7 @@ func _start_tile_effects(map: Map, aoe_data: TargetRangeData,
 				tile_effect_cells = aoe_data.valid
 			_:
 				assert(not actor_covered_cells.is_empty())
-				tile_effect_cells = actor_covered_cells.keys()
+				tile_effect_cells.assign(actor_covered_cells.keys())
 
 		animations.append(
 			Callable(TileEffect, "play_on_field").bind(

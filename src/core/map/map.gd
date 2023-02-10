@@ -110,11 +110,13 @@ func get_actor_on_cell(cell: Vector2i) -> Actor:
 
 ## Gets all actors that are covered by any cell in the given set of cells
 func get_actors_in_area(area: Array[Vector2i]) -> Array[Actor]:
-	var result := {}
+	var actor_hash := {}
 	for cell in area:
 		var actor := get_actor_on_cell(cell)
-		result[actor] = true
-	return result.keys()
+		actor_hash[actor] = true
+	var result: Array[Actor] = []
+	result.assign(actor_hash.keys())
+	return result
 
 
 func get_actor_by_node_name(node_name: String) -> Actor:

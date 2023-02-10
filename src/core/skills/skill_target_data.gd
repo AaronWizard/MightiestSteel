@@ -65,7 +65,9 @@ var target_range: Array[Vector2i]:
 ## contains only the origin cells of the actors within range.
 var valid_targets: Array[Vector2i]:
 	get:
-		return _valid_targets.keys()
+		var result: Array[Vector2i] = []
+		result.assign(_valid_targets.keys())
+		return result
 
 
 var _target_range: Array[Vector2i]

@@ -12,4 +12,6 @@ var effects: Array[PassiveStatusEffect] = []:
 
 
 func _get_effects() -> Array[BaseStatusEffect]:
-	return effects
+	var result: Array[BaseStatusEffect] = []
+	result.assign(effects)
+	return result

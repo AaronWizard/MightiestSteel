@@ -113,7 +113,7 @@ static func cells_in_range_rect(rect: Rect2i, min_dist: int, max_dist: int,
 
 static func _flood_fill(origin: Vector2i, start: Vector2i,
 		min_dist: int, max_dist: int, bounds: Rect2i) -> Array[Vector2i]:
-	var result := {}
+	var flood_fill := {}
 
 	var stack: Array[Vector2i] = [start]
 	var visited := {}
@@ -125,7 +125,7 @@ static func _flood_fill(origin: Vector2i, start: Vector2i,
 				and (manhattan_distance(origin, current) <= max_dist):
 			visited[current] = true
 			if manhattan_distance(origin, current) >= min_dist:
-				result[current] = true
+				flood_fill[current] = true
 
 			for dir in Directions.get_all_vectors():
 				var adj := current + dir
@@ -133,4 +133,6 @@ static func _flood_fill(origin: Vector2i, start: Vector2i,
 				if not visited.has(adj):
 					stack.push_back(adj)
 
-	return result.keys()
+	var result: Array[Vector2i] = []
+	result.assign(flood_fill.keys())
+	return result

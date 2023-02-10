@@ -192,7 +192,9 @@ var attack_skill: Skill:
 ## All non-attack skills regardless of cooldown
 var all_skills: Array[Skill]:
 	get:
-		return _skills.keys()
+		var result: Array[Skill] = []
+		result.assign(_skills.keys())
+		return result
 
 
 ## The actor's standard attack plus all skills that are ready
