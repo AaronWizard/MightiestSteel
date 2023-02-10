@@ -44,7 +44,7 @@ func run(source_actor: Actor, target: Vector2i) -> void:
 		source_actor.animate_attack(target)
 		await source_actor.attack_hit
 
-	@warning_ignore(redundant_await)
+	@warning_ignore("redundant_await")
 	await _run(source_actor, target)
 
 	if source_actor.is_animating:

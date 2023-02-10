@@ -20,7 +20,6 @@ var _dragging := false
 
 
 func _ready() -> void:
-	@warning_ignore(return_value_discarded)
 	get_tree().root.size_changed.connect(_update_bounds)
 
 

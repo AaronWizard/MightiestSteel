@@ -27,7 +27,7 @@ func _init(funcs: Array[Callable]):
 
 
 func _call_func(f: Callable) -> void:
-	@warning_ignore(redundant_await)
+	@warning_ignore("redundant_await")
 	await f.call()
 	_funcs_run -= 1
 	if _funcs_run == 0:
