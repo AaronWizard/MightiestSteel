@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=10 format=3 uid="uid://cmemc73vael4w"]
+[gd_resource type="Resource" script_class="AttackStandard" load_steps=10 format=3 uid="uid://cmemc73vael4w"]
 
 [ext_resource type="Texture2D" uid="uid://cat4uyeq3472n" path="res://assets/graphics/effects/poison.png" id="1_85cfr"]
 [ext_resource type="PackedScene" uid="uid://b7ac40ai2p0e3" path="res://src/data/effects/projectile_arrow.tscn" id="2_2nlk8"]
@@ -28,7 +28,7 @@ script = ExtResource("3_a2dbl")
 projectile_scene = ExtResource("2_2nlk8")
 tile_effect_scene = ExtResource("4_swt1b")
 tile_effect_range_type = 2
-status_effects = [SubResource("Resource_873nn")]
+status_effects = Array[Resource("res://src/core/statuseffects/effect_resource_classes/status_effect.gd")]([SubResource("Resource_873nn")])
 name = "Poison Shot"
 description = "Poison the target, damaging 20% of their max stamina for 5 rounds."
 icon = SubResource("AtlasTexture_clxcl")

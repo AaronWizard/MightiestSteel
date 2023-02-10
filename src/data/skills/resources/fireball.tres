@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=10 format=3 uid="uid://clrnguprxml05"]
+[gd_resource type="Resource" script_class="AttackStandard" load_steps=10 format=3 uid="uid://clrnguprxml05"]
 
 [ext_resource type="Script" path="res://src/core/skills/aoes/cell_distance_aoe.gd" id="1_6o28b"]
 [ext_resource type="Script" path="res://src/data/skills/scripts/attack_standard.gd" id="2_26hgj"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://1xuhbji3o4gb"]
+[gd_resource type="Resource" script_class="AttackStandard" load_steps=6 format=3 uid="uid://1xuhbji3o4gb"]
 
 [ext_resource type="PackedScene" uid="uid://b542k5ym7u30t" path="res://src/data/effects/projectile_fireball.tscn" id="1_ghb7d"]
 [ext_resource type="Texture2D" uid="uid://c2d7emduicf3y" path="res://assets/graphics/ui/icons/attack.png" id="1_ts8ck"]

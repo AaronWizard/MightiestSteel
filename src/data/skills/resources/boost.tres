@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=13 format=3 uid="uid://bvef8nc6uufud"]
+[gd_resource type="Resource" script_class="AOESkill" load_steps=13 format=3 uid="uid://bvef8nc6uufud"]
 
 [ext_resource type="Texture2D" uid="uid://cbeibrrdu0elo" path="res://assets/graphics/effects/heal.png" id="1_xm6s7"]
 [ext_resource type="Script" path="res://src/data/skills/scripts/aoe_skill.gd" id="2_r7ket"]
@@ -44,7 +44,7 @@ target_type = 3
 script = ExtResource("2_r7ket")
 tile_effect_scene = ExtResource("3_lam6s")
 tile_effect_range_type = 2
-status_effects = [SubResource("Resource_hudyb"), SubResource("Resource_exbfj")]
+status_effects = Array[Resource("res://src/core/statuseffects/effect_resource_classes/status_effect.gd")]([SubResource("Resource_hudyb"), SubResource("Resource_exbfj")])
 name = "Boost"
 description = "Boost the ally's attack and defence by 50% for 3 rounds."
 icon = SubResource("AtlasTexture_qp64t")
