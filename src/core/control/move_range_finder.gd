@@ -15,12 +15,12 @@ static func find_move_range(actor: Actor, map: Map) -> Array[Vector2i]:
 		result.append(current_cell)
 
 		var current_cost: int = move_costs[current_cell]
-		if (current_cost == 0) \
-				or not map.actor_stopped_by_cell(current_cell, actor):
+		if current_cost < actor.stats.move:
 			var adjacent := _adjacent_cells(current_cell, actor, map)
 			for adj_cell in adjacent:
-				var adj_cost := map.get_cell_move_cost(adj_cell, actor) \
-						+ current_cost
+				var remaining_move := actor.stats.move - current_cost
+				var adj_cost := map.get_cell_move_cost(
+						adj_cell, actor, remaining_move) + current_cost
 
 				if (adj_cost <= actor.stats.move) \
 						and ( not move_costs.has(adj_cell) \

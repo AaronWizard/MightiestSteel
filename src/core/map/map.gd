@@ -154,7 +154,8 @@ func actor_can_enter_cell(actor: Actor, cell: Vector2i,
 
 
 ## Gets how many movement points an actor must spend to enter this cell
-func get_cell_move_cost(cell: Vector2i, actor: Actor) -> int:
+func get_cell_move_cost(cell: Vector2i, actor: Actor, _remaining_move: int) \
+		-> int:
 	var result := _MOVE_COST_CLEAR
 
 	for covered_cell in actor.get_covered_cells_at_cell(cell):
@@ -162,16 +163,6 @@ func get_cell_move_cost(cell: Vector2i, actor: Actor) -> int:
 		if terrain_data and terrain_data.slows_walk:
 			result = _MOVE_COST_ROUGH
 			break
-
-	return result
-
-
-## Checks if actor is stopped at cell while moving
-func actor_stopped_by_cell(cell: Vector2i, actor: Actor) -> bool:
-	var result := false
-
-	for covered_cell in actor.get_covered_cells_at_cell(cell):
-		pass
 
 	return result
 
