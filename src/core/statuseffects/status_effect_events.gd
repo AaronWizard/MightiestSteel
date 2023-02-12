@@ -27,7 +27,6 @@ func actor_started_turn(actor: Actor) -> void:
 
 
 func actor_starting_move(actor: Actor) -> void:
-	print(actor.name, " starting move")
 	for n in _effect_nodes.duplicate():
 		# Since player actors can move freely within their movement range before
 		# commiting an action, status effects shouldn't do animations in
@@ -36,7 +35,6 @@ func actor_starting_move(actor: Actor) -> void:
 
 
 func actor_finished_move(actor: Actor) -> void:
-	print(actor.name, " finished move")
 	for n in _effect_nodes.duplicate():
 		# Since player actors can move freely within their movement range before
 		# commiting an action, status effects shouldn't do animations in
