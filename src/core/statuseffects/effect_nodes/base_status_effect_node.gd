@@ -52,6 +52,22 @@ func actor_moved(moved_actor: Actor) -> void:
 	AwaitGroup.wait(calls)
 
 
+func actor_starting_move(moved_actor: Actor) -> void:
+	# Movement effects are not animated
+	var calls: Array[Callable] = []
+	for e in _get_effects():
+		calls.append(e.actor_starting_move.bind(actor, moved_actor))
+	AwaitGroup.wait(calls)
+
+
+func actor_finished_move(moved_actor: Actor) -> void:
+	# Movement effects are not animated
+	var calls: Array[Callable] = []
+	for e in _get_effects():
+		calls.append(e.actor_finished_move.bind(actor, moved_actor))
+	AwaitGroup.wait(calls)
+
+
 func actor_ended_turn(ending_actor: Actor) -> void:
 	var calls: Array[Callable] = []
 	for e in _get_effects():

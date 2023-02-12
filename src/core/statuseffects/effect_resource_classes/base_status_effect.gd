@@ -22,11 +22,19 @@ func actor_started_turn(_affected_actor: Actor, _starting_actor: Actor) -> void:
 	pass
 
 
-## When any actor moves.
+## When an actor is about to move.
 ## Can be overriden. Should only be used for updates that require no animations
 ## such as stat modifiers, since player actors can freely move within their move
 ## range before doing an action.
-func actor_moved(_affected_actor: Actor, _moved_actor: Actor) -> void:
+func actor_starting_move(_affected_actor: Actor, _moving_actor: Actor) -> void:
+	pass
+
+
+## When an actor has finished moving.
+## Can be overriden. Should only be used for updates that require no animations
+## such as stat modifiers, since player actors can freely move within their move
+## range before doing an action.
+func actor_finished_move(_affected_actor: Actor, _moved_actor: Actor) -> void:
 	pass
 
 

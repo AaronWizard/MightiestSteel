@@ -113,6 +113,9 @@ var map: Map:
 
 		_status_effect_icons.update_icons(self)
 
+		status_effect_events.actor_starting_move(self)
+		status_effect_events.actor_finished_move(self)
+
 
 var has_cover: bool:
 	get:
@@ -306,6 +309,7 @@ func move_path(path: Array[Vector2i]) -> void:
 	_is_animating = true
 
 	_report_moves = false
+	status_effect_events.actor_starting_move(self)
 
 	for next_cell in path:
 		facing = next_cell
@@ -402,8 +406,12 @@ func _get_origin_cell() -> Vector2i:
 
 func _set_origin_cell(cell: Vector2i) -> void:
 	unset_virtual_origin_cell()
+	if map and _report_moves:
+		status_effect_events.actor_starting_move(self)
+
 	var old_cell := origin_cell
 	super(cell)
+
 	_move_done(old_cell)
 
 
@@ -426,10 +434,10 @@ func _set_offset() -> void:
 
 
 func _move_done(old_origin_cell: Vector2i) -> void:
-	if _map:
-		status_effect_events.actor_moved(self)
+	if map:
 		_status_effect_icons.update_icons(self)
 		if _report_moves:
+			status_effect_events.actor_finished_move(self)
 			moved.emit(old_origin_cell)
 
 
