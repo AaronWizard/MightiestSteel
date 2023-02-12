@@ -29,7 +29,25 @@ region = Rect2(120, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tneaw"]
 animations = [{
-"frames": [SubResource("AtlasTexture_i0wh7"), SubResource("AtlasTexture_wkeuh"), SubResource("AtlasTexture_htkn8"), SubResource("AtlasTexture_5s4b7"), SubResource("AtlasTexture_emw68"), SubResource("AtlasTexture_xju8b")],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0wh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkeuh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htkn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5s4b7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emw68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xju8b")
+}],
 "loop": true,
 "name": &"default",
 "speed": 12.0
@@ -38,4 +56,4 @@ animations = [{
 [node name="TileFireball" instance=ExtResource("1_3oc42")]
 
 [node name="AnimatedSprite2D" parent="Center" index="0"]
-frames = SubResource("SpriteFrames_tneaw")
+sprite_frames = SubResource("SpriteFrames_tneaw")

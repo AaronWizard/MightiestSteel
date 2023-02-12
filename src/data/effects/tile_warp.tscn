@@ -29,7 +29,25 @@ region = Rect2(120, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_84dtg"]
 animations = [{
-"frames": [SubResource("AtlasTexture_ei1gs"), SubResource("AtlasTexture_mxhgb"), SubResource("AtlasTexture_nw0uj"), SubResource("AtlasTexture_6vhoj"), SubResource("AtlasTexture_2p0qi"), SubResource("AtlasTexture_xci65")],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ei1gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxhgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nw0uj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vhoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2p0qi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xci65")
+}],
 "loop": true,
 "name": &"default",
 "speed": 12.0
@@ -38,4 +56,4 @@ animations = [{
 [node name="TileWarp" instance=ExtResource("1_sag6v")]
 
 [node name="AnimatedSprite2D" parent="Center" index="0"]
-frames = SubResource("SpriteFrames_84dtg")
+sprite_frames = SubResource("SpriteFrames_84dtg")
