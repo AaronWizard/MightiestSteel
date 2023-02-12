@@ -1,5 +1,5 @@
 name,stamina,attack,move,speed
-fighter,32,12,5,2
-mage,16,8,4,1
-rogue,16,4,6,3
-cleric,24,8,5,2
+fighter,32,12,4,2
+mage,16,8,3,1
+rogue,16,4,5,3
+cleric,24,8,4,2
